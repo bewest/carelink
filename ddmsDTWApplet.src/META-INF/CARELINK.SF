@@ -1,0 +1,1222 @@
+Signature-Version: 1.0
+Created-By: 1.4.2_05 (Sun Microsystems Inc.)
+SHA1-Digest-Manifest: r3SkxmGATNOfhYgxpV0jKSBcIK8=
+
+Name: minimed/ddms/text/Formats.class
+SHA1-Digest: 0Uz9qBEUTabxtpPPO0EQsQ3eE20=
+
+Name: minimed/ddms/deviceportreader/TheraSenseFreeStyle$SnapshotCreato
+ r.class
+SHA1-Digest: jcQXqEKrXxrRPvAoUq6Pni2Qkc8=
+
+Name: minimed/ddms/deviceportreader/LSMeter$1.class
+SHA1-Digest: XRC41uNdu7PUicsIpuHa9QG4yG0=
+
+Name: minimed/ddms/deviceportreader/DeviceListener.class
+SHA1-Digest: cqaydDhfv+229Sb8MrAMIAONeKE=
+
+Name: minimed/ddms/deviceportreader/MMGuardian3.class
+SHA1-Digest: iz9rJdCq8AXjRogtbKDszGfmAGQ=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$ReadGlucoseHis
+ toryCommand.class
+SHA1-Digest: aVMIYOhrZ4s3i/uwAo6q4gY5WPY=
+
+Name: Serialio/SnoopListener.class
+SHA1-Digest: 5fuAFsmJUGuNrfzgyMvB0034/eM=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBDStep.class
+SHA1-Digest: UF8FyZETAhOI2H4deyfH64EHXe8=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/othermeter/VerifyConnection
+ sStep.class
+SHA1-Digest: wMHVGGMBV8i4kAvMef0g9/v4+4w=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataCheckStep.class
+SHA1-Digest: buU//siAj4JwE9dEhNBh4obrIWc=
+
+Name: Serialio/SnoopInputStream$Token.class
+SHA1-Digest: S/wkSh5jBSZ7i1MOQxmom1xL8Wo=
+
+Name: images/SN-Screen-G3.jpg
+SHA1-Digest: SA0VvTOAPZKPYh2cwhrH6relK4o=
+
+Name: Serialio/FlowControlTask.class
+SHA1-Digest: R37GsMUUDucQmsRDrlmyIixID+M=
+
+Name: images/USBCable.jpg
+SHA1-Digest: lktmiY9xNmvevhr+SXG/YZS7yVI=
+
+Name: minimed/ddms/deviceportreader/TheraSenseFreeStyle$Command.class
+SHA1-Digest: d06Fb0Hjqr9wb4RSj2q1d8RiEsc=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationFailStep.cla
+ ss
+SHA1-Digest: DrlUk9BlGZm4/nhoP0scZDcAH9I=
+
+Name: minimed/ddms/applet/dtw/AppletResources_ru.properties
+SHA1-Digest: 8cGTH+k2Kle4zGfh8fQHa2d9+5A=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBrandStep$1.clas
+ s
+SHA1-Digest: Lnwj3Wk27jq/xG2pAyiSnPNB8AQ=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/ComLinkUSBDriver
+ InstallAuthorizationStep.class
+SHA1-Digest: uRw8C/lH9/alNV1Khaqgb17eR0A=
+
+Name: minimed/ddms/deviceportreader/BadDeviceValueException.class
+SHA1-Digest: h0GA+UsitXpFho/zPCZyEgFnYss=
+
+Name: minimed/ddms/deviceportreader/RocheMeter.class
+SHA1-Digest: 3/JrF1U03nKA/ElMqKlA1I1Np+w=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBayerStep.class
+SHA1-Digest: uOmS158Mr+sU8xeNQF+XE/LDYAI=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/bayermeter/MeterSelectSeria
+ lPortStep.class
+SHA1-Digest: N77qJ+PPTAKNNI1wj9w+WteQy4Q=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/USBDriverInstall
+ AuthorizationStep.class
+SHA1-Digest: 5wO1tPoOeV0/SqVnEuDH/Yo1v00=
+
+Name: minimed/ddms/deviceportreader/MMX54.class
+SHA1-Digest: oGZG+fhX32na8V4Wzk4n+i97ygE=
+
+Name: minimed/ddms/deviceportreader/RocheActiveAndCompact$1.class
+SHA1-Digest: IlmH08LH0Sex8QpFrLQt6BJEF8Y=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBrandStep.class
+SHA1-Digest: swBqX35f5MSE9XmRxWjhSV3epYc=
+
+Name: minimed/ddms/deviceportreader/BayerMeter$SnapshotCreator.class
+SHA1-Digest: F0lIduV5Yfzy4z3jg5iSBp6aBjo=
+
+Name: minimed/ddms/applet/dtw/AppletResources_nl.properties
+SHA1-Digest: Bwh5QiVfzmLwLYJ9TXai5Yfk8T4=
+
+Name: minimed/ddms/deviceportreader/MMParadigm2Proxy.class
+SHA1-Digest: 4spfeVnne1f4JNO/aEO0BjXTnPQ=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterLifeScanStep.cla
+ ss
+SHA1-Digest: 2t1eZPFjKsFR6CpUD+lKFEtA45Q=
+
+Name: Serialio/LookFor.class
+SHA1-Digest: JUlGK9Qreoprx9fQ5qcHJfLdRcQ=
+
+Name: minimed/ddms/applet/dtw/AppletResources_it.properties
+SHA1-Digest: 5XVWbRiyu5wGqCaB+vZraivY/II=
+
+Name: minimed/ddms/deviceportreader/MMX15.class
+SHA1-Digest: qi7T+1x+WHsnAYbvQR3wNGXN/NU=
+
+Name: minimed/ddms/applet/dtw/NetHelper$4.class
+SHA1-Digest: N3wryyYzgtivv7CRotab8SbmXm0=
+
+Name: images/SerialCable.jpg
+SHA1-Digest: +W9P1rBrnGKHhn+ZTSX3lRIrnCU=
+
+Name: minimed/ddms/deviceportreader/MMX12.class
+SHA1-Digest: b/4y0bXjKHzM9zhSQAs2QalIur0=
+
+Name: drivers/usb/ComLink2/wdreg_gui.exe
+SHA1-Digest: x+Lz8JPqKNHYRgMZUXIm6isOo6g=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/USBDriverPostIns
+ tallStep.class
+SHA1-Digest: UZz15lvwffn3bIgXXpuCquiJNHQ=
+
+Name: minimed/ddms/deviceportreader/BayerEliteXL.class
+SHA1-Digest: aRlYDniY3IIdiU1OPKkCtveeKnI=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/VerifyComLinkUSB
+ ConnectionStep.class
+SHA1-Digest: SEULOKXyxWk559fpJb6odTDckfY=
+
+Name: images/device_BayerDex2.jpg
+SHA1-Digest: r9bXTDDdOF8a73wl6e+MIw5g1WU=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataCompleteStep.cl
+ ass
+SHA1-Digest: X7PHEb6jOxhS+LwfRY8kxylBuxE=
+
+Name: minimed/ddms/deviceportreader/IntRange.class
+SHA1-Digest: kksRN19wQUReblCM+kzJr/F57PY=
+
+Name: minimed/ddms/deviceportreader/ComLink1$RS232Command.class
+SHA1-Digest: dUtfKg1MtUyG9XA79ChfqI1fSX8=
+
+Name: minimed/ddms/deviceportreader/MMX53.class
+SHA1-Digest: 6HJy3dGElvNoaWEW2JI8GE1XbAE=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterRocheStep$1.clas
+ s
+SHA1-Digest: M61+o1F0GTrQfyZ7IuRgbmYTRP8=
+
+Name: minimed/ddms/deviceportreader/Enums.class
+SHA1-Digest: 6PnNjnQs+9K5lmmlcAx6GTaPuXk=
+
+Name: images/ParadigmLink.png
+SHA1-Digest: w8k4Om9tifQKFjj43EXHKFeTu54=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/StepProvider.class
+SHA1-Digest: qq8OleyfklpaRC3PNoujL41tc6c=
+
+Name: drivers/usb/ComLink2/cl2_jni_wrapper.dll
+SHA1-Digest: Z9xka5zGF0d1Vrp3e2cxy1vrf3o=
+
+Name: images/device_MMLogicMeter.jpg
+SHA1-Digest: JkJNOw1ppOjRf+0iTetYxiNj28M=
+
+Name: minimed/ddms/deviceportreader/RocheMeter$5.class
+SHA1-Digest: 93E9GBroFqV6wPsTziIGt1FEjkQ=
+
+Name: minimed/ddms/deviceportreader/Snapshot$1.class
+SHA1-Digest: q22XYXump6Ou8/51Vmcj8ke+PZM=
+
+Name: minimed/ddms/applet/dtw/components/StepLayout.class
+SHA1-Digest: i1MeSNix0Pz0yelCgMIFtxxp9g0=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchProfile.class
+SHA1-Digest: ejGQVJC5EQTU3V3aqjbKApofVMA=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterOtherStep$1.clas
+ s
+SHA1-Digest: cHyE5LDRMMIPRL3dI93W/DYnORI=
+
+Name: minimed/ddms/deviceportreader/RocheActiveAndCompact$2.class
+SHA1-Digest: V1nuChOsT0HeVqYOpC1d1JF68To=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterOtherStep.class
+SHA1-Digest: WVhJe3LWXau0Iq3bptmxAh1rl34=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpOperationSte
+ p$1.class
+SHA1-Digest: fe0sxEP+Mq0Wp4VQMuWIu/ce+aw=
+
+Name: minimed/ddms/deviceportreader/MedicalDevice$SnapshotCreator.clas
+ s
+SHA1-Digest: Pkt7w8lnCY74+LMRIiqqCp+Dpn4=
+
+Name: minimed/ddms/deviceportreader/TheraSenseFreeStyle.class
+SHA1-Digest: 7RbjVMQj7dkXarBDrptsc8Mu4SE=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/USBDriverPostInstallStep.cl
+ ass
+SHA1-Digest: P1qzccKFjngU8Uz50TawrzOeqrM=
+
+Name: images/device_MM511.jpg
+SHA1-Digest: 1OjO2iKNVhcNp3xOVa7GUr4wees=
+
+Name: minimed/ddms/applet/dtw/DiskHelper.class
+SHA1-Digest: qxXsbh740AIuWechuMsusj7aCV0=
+
+Name: minimed/ddms/deviceportreader/LSFastTake.class
+SHA1-Digest: grw6MJeUFrzxCPiwR2rmo2lQT8g=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltra$1.class
+SHA1-Digest: JVdJbNR2CETcAHNAgHhPWcFwfPw=
+
+Name: minimed/ddms/deviceportreader/RocheMeter$Command.class
+SHA1-Digest: JrEbL6qamsMSrpD35jhVuQgzwcY=
+
+Name: minimed/ddms/applet/dtw/wizard/WizardConfig.class
+SHA1-Digest: uuMF3W0yGU5HfLSF5OhGpzCBTBA=
+
+Name: minimed/ddms/applet/dtw/AppletResources_da.properties
+SHA1-Digest: wGgIlRL5MtrH9x4T5YWQhqpYNik=
+
+Name: Serialio/SerLooker.class
+SHA1-Digest: Z8SjZVywrndkYJTyNiDtb67Nu0Q=
+
+Name: images/device_MM512.jpg
+SHA1-Digest: 4NcFOXJf9LqUWZ+UfgRfrTooa/c=
+
+Name: images/device_BayerContourLink.png
+SHA1-Digest: vvlDH4jlz8usbBjqml87PBIJ4Pw=
+
+Name: images/readWiz.gif
+SHA1-Digest: RSKcL+pu7/YPFLj4Gy8at9r+ZTM=
+
+Name: minimed/ddms/applet/dtw/components/UserEditListener.class
+SHA1-Digest: kGoRC6Z2OSFhPhAqjA/De1hwVxw=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataStep.class
+SHA1-Digest: IYrAXAuZpG0wKJztD/1DSFPn928=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmmeter/USBDriverPostInstal
+ lStep.class
+SHA1-Digest: 7SyflX9TXx5rpIwW3CmX8P7d3BI=
+
+Name: minimed/ddms/deviceportreader/Enums$TempBasalType.class
+SHA1-Digest: wXjDPQjP0jXS1F6ClqUfLvoKpYY=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/ComLinkUSBDriver
+ PostInstallStep.class
+SHA1-Digest: Fas7DmAEdYia27ygwSRXi3JHtRY=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/UnrecoverableErrorStep$1.cl
+ ass
+SHA1-Digest: Z9Fp01hW3KfOKnIW8aNVuYW9E00=
+
+Name: Serialio/SerOutputStream.class
+SHA1-Digest: pQV78S7h5gYed6YiVd0vjBUedtU=
+
+Name: minimed/ddms/deviceportreader/RocheAviva.class
+SHA1-Digest: l/7Jy2Knw+HSz1141m5d9iUq1xY=
+
+Name: Serialio/SerByteQueue.class
+SHA1-Digest: j6ExFN+kNP9vYp3ktzrXgv7hPfk=
+
+Name: images/ComLinkUSB.png
+SHA1-Digest: CRDTEZK1suR6WqtKNGADk2Ip1eU=
+
+Name: minimed/ddms/deviceportreader/MedicalDevice$Util.class
+SHA1-Digest: rwToTFZ/KPRI+En9cGBLhZUSy1k=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$2.class
+SHA1-Digest: m0KP1Ib5RiYRGKqHigXkzpbFwco=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataStep$1.class
+SHA1-Digest: YrGU6UzONJBCU5aTfCu6r2B4Ryw=
+
+Name: minimed/ddms/applet/dtw/components/NumericTextField$2.class
+SHA1-Digest: JgZ0s+GIqJH6HbU1V6AvFJ4O1fk=
+
+Name: images/device_LSUltraSmart.jpg
+SHA1-Digest: TzmPM/BHqBC1iNNJiqvot2edI3s=
+
+Name: minimed/ddms/applet/dtw/components/ClickAdapter.class
+SHA1-Digest: f6Lxhck25Cz9uz9ScgLrmGi8esw=
+
+Name: Serialio/SerialConfig.class
+SHA1-Digest: opw7m5fOej371MTcGCyIDP0ZHsg=
+
+Name: minimed/ddms/deviceportreader/TheraSenseFreeStyle$Reader.class
+SHA1-Digest: 4XgeXyBYdpto56oPT06ZQcWxnFw=
+
+Name: minimed/ddms/deviceportreader/MMLogicMeter.class
+SHA1-Digest: /E4KY5MIrXVOBBhJgPzhXIp5QP8=
+
+Name: images/device_MSXceed.png
+SHA1-Digest: svgvVjTKaRIVDvIS3bAUf8tkkVU=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/lifescanmeter/VerifyConnect
+ ionsStep.class
+SHA1-Digest: SmBlWadjJx3ugp4bLdDCQcg5CEw=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchBasic.class
+SHA1-Digest: 72TunfhPFoQmzZQSEcEjTI4CMLY=
+
+Name: minimed/ddms/deviceportreader/BayerContour.class
+SHA1-Digest: +lgc/WPJ+q27tIP4n+eOw3uaRSk=
+
+Name: minimed/ddms/deviceportreader/ComLink2.class
+SHA1-Digest: iaS+McfTEnkaa84jczED0hB9YVA=
+
+Name: images/device_LSProfile.jpg
+SHA1-Digest: yVC+UDr3x31Nk/JHKdrP447Dhdo=
+
+Name: images/device_LSFastTake.jpg
+SHA1-Digest: WErux3BKhTFCT/wyNcviAxE8qWM=
+
+Name: minimed/ddms/applet/dtw/components/NumericTextField.class
+SHA1-Digest: KU2xEYlcXy6aPbpHYRAMzQbFkFg=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/VerifyConnection
+ sStep.class
+SHA1-Digest: oV2r2vy6VGerUVnRI6nxJc7235k=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltraSmart$SnapshotCreat
+ or.class
+SHA1-Digest: bnn76zRk1ftsXSv7FGwwZ/eK7mE=
+
+Name: drivers/usb/ComLink2/wdreg.exe
+SHA1-Digest: djHF8TijjOGvyCnRsGj1QfaeBck=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/TransferPumpDataCompleteSte
+ p.class
+SHA1-Digest: CeX17Gr+wTcyifJwUFIngxfdBRI=
+
+Name: minimed/ddms/deviceportreader/MedisenseXtra.class
+SHA1-Digest: 3gr2EikqBLFc0P6+1kKySrk2wRo=
+
+Name: Serialio/SerialServerTask.class
+SHA1-Digest: 6k8w/Ncd4XjyBvD666sW2QLUsCM=
+
+Name: drivers/usb/bd/bdhidcom.inf
+SHA1-Digest: J5rv+wqyx3AULBNFPRP5KfbkaSA=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/USBDriverInstallAuthorizati
+ onStep.class
+SHA1-Digest: /KSdkNAYLU1pK2Vw4SfUKlV1G3s=
+
+Name: config/images.properties
+SHA1-Digest: PX5RzI8cylkU7nXPOWoN2qmmwcM=
+
+Name: minimed/ddms/deviceportreader/USBComm.class
+SHA1-Digest: xRuevo8vm5Yu9+bT+LQonm1gDKk=
+
+Name: Serialio/SerialPortLocal.class
+SHA1-Digest: VYDvSpVI5ujsywNE72kSuCUhYtM=
+
+Name: minimed/util/Contract.class
+SHA1-Digest: +o16G2CLRL44sIHQBtKCvNllh88=
+
+Name: minimed/ddms/deviceportreader/RocheMeter$SnapshotCreator.class
+SHA1-Digest: pZUuFlXd5pyNGK32iqc3yL8m+f0=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$6.class
+SHA1-Digest: SW/jAgLJ2qtzxyU9wdHLTA+GqTM=
+
+Name: minimed/ddms/deviceportreader/LSMeter.class
+SHA1-Digest: KQM6BBxGFheNKzX2TcVKsXOIsh0=
+
+Name: minimed/ddms/applet/dtw/InstallFileVersion.class
+SHA1-Digest: V3NE3DNL/KXG2d7+2lz4b79aogo=
+
+Name: minimed/ddms/deviceportreader/TheraSenseFreeStyle$1.class
+SHA1-Digest: dm5ugNkK2aLpFLkikjg/dRQBieE=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SerialPortDLLInstallAuthori
+ zationStep.class
+SHA1-Digest: eiHMQtxEX5bWLxGbsBJS/w0ySlc=
+
+Name: Serialio/ErrorStatusHandler.class
+SHA1-Digest: PS1uT8ePrZUaqsbMu/5gIqxR5uA=
+
+Name: minimed/ddms/applet/dtw/LogWriter.class
+SHA1-Digest: 4nTXpBEgouo9KJFmXhGXxJ6ZxBA=
+
+Name: minimed/ddms/deviceportreader/RocheMeter$7.class
+SHA1-Digest: kQsCuPaTkn/VSmMhoZUkDi7kaRU=
+
+Name: minimed/ddms/deviceportreader/LSFastTake$SnapshotCreator.class
+SHA1-Digest: zSxEsDA4vg74rCM2hu0ph+yeniA=
+
+Name: minimed/ddms/applet/dtw/wizard/Wizard.class
+SHA1-Digest: xBpPNhLOquZMH3oYx+aNvPN3UQM=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/SelectLinkDevice
+ Step$1.class
+SHA1-Digest: Bkof1gK7q+NPrT6AI4hEPrJ87oE=
+
+Name: Serialio/SerInputStream.class
+SHA1-Digest: 9+mOxQBYqaekiB+3l7Ri3Nr4YN8=
+
+Name: minimed/ddms/applet/dtw/NetHelper$ObjectExchanger.class
+SHA1-Digest: j5YeKl+KX0SJp0nmrJwNr+B4WMc=
+
+Name: minimed/ddms/applet/dtw/components/GlowBorder.class
+SHA1-Digest: I4VjF1ECxS9/kmloFnUltJM5xCA=
+
+Name: minimed/ddms/applet/dtw/CaptureResult.class
+SHA1-Digest: OXtazsZYLzWAWcJ3wVQzTaj4xwc=
+
+Name: images/device_LSBasic.jpg
+SHA1-Digest: FrVkPqBo2ehlMcl+oIIMNyM4gdk=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$SnapshotCreato
+ r.class
+SHA1-Digest: Gn8kCRQUIXmNQGJfmjT7gRgM6Kw=
+
+Name: minimed/ddms/applet/dtw/wizard/Wizard$1.class
+SHA1-Digest: 8kVfWR3aRyeLtMCIwq1OAKLPe74=
+
+Name: drivers/usb/ComLink2/windrvr6.sys
+SHA1-Digest: S6Skxdk7l+V9iNL9WxsyjqmVk/4=
+
+Name: minimed/ddms/applet/dtw/AppletResources_sv.properties
+SHA1-Digest: rgqD4VRyR582sh2zrbPw+KHksTw=
+
+Name: minimed/ddms/applet/dtw/AppletResources_fi.properties
+SHA1-Digest: GGnDlfKhsPtgF8bRw+PuZ2Ze31M=
+
+Name: minimed/ddms/deviceportreader/CommunicationsLink.class
+SHA1-Digest: 26/buGiu8Ckb+PbWU8wd4RLUg0I=
+
+Name: images/SN-Screen.jpg
+SHA1-Digest: lI54CT3RAcQKtlInTbmDTIx4Msk=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/SelectConnection
+ TypeStep.class
+SHA1-Digest: bQr4e2j7fr9tF41O3QqOu73KC2Y=
+
+Name: images/device_RocheAviva.jpg
+SHA1-Digest: v6fUJvtE/ychDmhQLbsXt2OJSW8=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$4.class
+SHA1-Digest: PCmwsP9iQzGROT5vt+0K+BLnlDk=
+
+Name: Serialio/SnoopLoopListener.class
+SHA1-Digest: iprqhyCtVCH6UrHwN+IuBKxtff8=
+
+Name: minimed/ddms/applet/dtw/IOHelper.class
+SHA1-Digest: okne36P+Lcs5kDK6ccwI1mrp9LI=
+
+Name: minimed/ddms/deviceportreader/MedisenseBGKetone$Command.class
+SHA1-Digest: 4dDXNkcI1Hkbe0GxiAScdzaaqcc=
+
+Name: minimed/ddms/deviceportreader/ComLink1.class
+SHA1-Digest: 8xxG3V2YCbYpIqbSNUXhnFqmXC4=
+
+Name: minimed/ddms/applet/dtw/AppletResources_en_US.properties
+SHA1-Digest: a5M0R1MCoA/d8uPFdzJ1GZjDAhs=
+
+Name: drivers/usb/bd/bdhidcom.cat
+SHA1-Digest: T25iJF2g5v4gGbMk1Ve2yO7Tgxo=
+
+Name: minimed/ddms/applet/dtw/OperationResult.class
+SHA1-Digest: jtAnVNINv9Gmu3R9+qU3Hlh803Y=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltraSmart$1.class
+SHA1-Digest: SkV8cxnJG0p1b3J1UhhHfA6tnZ0=
+
+Name: drivers/usb/ComLink2/wd811.cat
+SHA1-Digest: lhypVb7QrFK4m0C6V2N2FB3Vn4o=
+
+Name: minimed/ddms/applet/dtw/SaveFailedException.class
+SHA1-Digest: gVccKBUGjSv7ZVLww3XojhPBZmc=
+
+Name: images/readWizFail.gif
+SHA1-Digest: br0R1UX92ryVSVGh1aJcdcJ/DmU=
+
+Name: minimed/ddms/deviceportreader/MM508Command.class
+SHA1-Digest: 4PKS/C1/9RSbSwdCmToIeWVUkZ8=
+
+Name: minimed/ddms/deviceportreader/Enums$CarbUnits.class
+SHA1-Digest: w/5fDsH3TKfuM4CBEDrY1/+1gAQ=
+
+Name: minimed/ddms/applet/dtw/AppletResources_es.properties
+SHA1-Digest: sMFyiHL35M/pGNi+ianlKXCM/pk=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/USBDriverInstallAuthorizati
+ onStep$2.class
+SHA1-Digest: dCaTDugvPgEDQMm2namkNFu26as=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/UnrecoverableErrorStep.clas
+ s
+SHA1-Digest: 62cseuYBLFQSkSD9pUj7INGlcg0=
+
+Name: minimed/ddms/deviceportreader/BayerDEX.class
+SHA1-Digest: yPFIUuvBu+vXno0/LhFroTvT7Q8=
+
+Name: minimed/ddms/deviceportreader/TraceHistorySet.class
+SHA1-Digest: RHxu+vcGYqVykr4RXLRmYCeuLOA=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$5.class
+SHA1-Digest: M1x5YREdVVjgmoLZzVBjWqTe3wU=
+
+Name: minimed/ddms/deviceportreader/DeviceCommand.class
+SHA1-Digest: FoBDl93l1sC7vcFUi77LHgzWQCo=
+
+Name: mdt/common/device/driver/minimed/JungoUSBPort.class
+SHA1-Digest: X3giCNSxZNvrNO18CtuHxhM0hxQ=
+
+Name: minimed/ddms/applet/dtw/ExeHelper$StreamGobbler.class
+SHA1-Digest: rYmmRrnbwA5dsCY+M8ZhCUdNTvM=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectSerialPortStep.class
+SHA1-Digest: e/PXc2aEJUiTDY4zTtjovSvFAsQ=
+
+Name: drivers/usb/ComLink2/ReInstall_MDTCLUSB.cmd
+SHA1-Digest: kP+8Fxlb+oYZ7KwnLZtYMEkijP4=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mm508/PumpOperationStep.cla
+ ss
+SHA1-Digest: Hs4/Pj+0xjFYF+xwPoEEq4m9VxY=
+
+Name: minimed/ddms/deviceportreader/MMMeter$1.class
+SHA1-Digest: XR34otpDkhC0605FWDUh0h6p5Yg=
+
+Name: images/ParadigmLinkOff.png
+SHA1-Digest: Z5ydplWa7iyF8w8dTJvzDRrhBOE=
+
+Name: minimed/ddms/deviceportreader/MedisenseBGKetone$Reader.class
+SHA1-Digest: 9Ll/vMiSlkRVNA1lESD3xIt+WcA=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmmeter/USBDriverInstallAut
+ horizationStep.class
+SHA1-Digest: hMfg2GQuEMWt6PeLwcKVXjZ98Dk=
+
+Name: Serialio/SnoopLoop.class
+SHA1-Digest: ldk5OMVktoWXC+07Tz4gTJphn2I=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$Command.class
+SHA1-Digest: DEWmEzirmyfmwxKB7O1Kq6m6hUQ=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpOperationFai
+ lStep.class
+SHA1-Digest: l52iaPLOObQpJ5q1lNx3K6RfSS0=
+
+Name: minimed/ddms/deviceportreader/MedisenseBGKetone$1.class
+SHA1-Digest: xSD91lfcDscaUYlxhmAWPMJ7tl4=
+
+Name: Serialio/SnoopInputStream.class
+SHA1-Digest: e7s7h4u89gCsuR/rN5wfyBjHac0=
+
+Name: minimed/ddms/deviceportreader/Snapshot$Element.class
+SHA1-Digest: BL0bdtZJ5hH4DSBm8p3hrFsiWDc=
+
+Name: images/device_BayerBreeze.gif
+SHA1-Digest: C2mETHDq2jC1aTeoWvOy8UXrucw=
+
+Name: minimed/ddms/deviceportreader/MMX22$SnapshotCreator.class
+SHA1-Digest: vn+2DyS43ZszH5RthUG9fN9i+Ew=
+
+Name: images/SerialNumber.gif
+SHA1-Digest: hqy0VGdvb+YwbWO8sBmcA6h9S+w=
+
+Name: minimed/ddms/deviceportreader/RocheActiveAndCompact.class
+SHA1-Digest: i7AMu/9rWGe4UaX2NgYRMa1Z7N8=
+
+Name: minimed/ddms/deviceportreader/MM508Command$Command.class
+SHA1-Digest: Dqf0e1PLw/08H7g3uYgVmaGfCKs=
+
+Name: Serialio/ByteTokenizer.class
+SHA1-Digest: 7Qjm4pcUXBVHX22K6dpQUrloOiQ=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/IdentifyPumpStep
+ .class
+SHA1-Digest: OvPWIlmy3LRVOjtycAVKZTvoYOA=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmmeter/SelectConnectionTyp
+ eStep.class
+SHA1-Digest: Nf/xpz5Rim2qixSI47WHmeziklQ=
+
+Name: Serialio/LookForListener.class
+SHA1-Digest: wUa0AzQexERUacqlb2hreM+Xlxg=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectConnectionTypeStep$1.
+ class
+SHA1-Digest: qd5/YoCpOHzUaSvAkwikHmr5avs=
+
+Name: minimed/ddms/deviceportreader/USBPnPNotifier.class
+SHA1-Digest: XxiLV+XRnVIFQ7066/1vq72NH6I=
+
+Name: Serialio/NativeHandleMutex.class
+SHA1-Digest: j73PSZldgYQqTl877TkTU5tB8jo=
+
+Name: minimed/ddms/deviceportreader/MMX22.class
+SHA1-Digest: gm4i/Zh9oJt+ngCFzhBzMK93WkQ=
+
+Name: drivers/usb/ComLink2/mdtclusb.cat
+SHA1-Digest: amgo1Zrz5GdvjBjz2m2/INU14TI=
+
+Name: minimed/ddms/applet/dtw/wizard/WizardStepProvider.class
+SHA1-Digest: uS2kZtBduPNgmtp8dDKMmStRNCA=
+
+Name: images/checkMark.gif
+SHA1-Digest: nnuaIoTBEpxr1+kArjeF+P0n2UM=
+
+Name: minimed/ddms/deviceportreader/CommunicationsLinkDefault.class
+SHA1-Digest: zMS+x3ivT3akvIO7j9zUQYOgzT8=
+
+Name: minimed/ddms/applet/dtw/AppletResources_fr.properties
+SHA1-Digest: eWHQblpqOgY+xX4FglrtOSpR3Z0=
+
+Name: minimed/ddms/deviceportreader/MM511$Command.class
+SHA1-Digest: novyuYC7a2uwSnP5f95z8ecKKoM=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectConnectionTypeStep.cl
+ ass
+SHA1-Digest: pskP3h48fcylJD7wJryP9tEMCsk=
+
+Name: minimed/ddms/deviceportreader/LSMeter$AbstractCommand.class
+SHA1-Digest: RsEZJS8zVLKGm58ECnrOpjDgCO8=
+
+Name: images/device_RocheActive.jpg
+SHA1-Digest: +q2/sw7f92zftxI1fmE1z8Kz04I=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/rochemeter/VerifyConnection
+ sStep.class
+SHA1-Digest: qzbU9JdabCLWkLoqc7EOP8vrXB0=
+
+Name: minimed/ddms/deviceportreader/MMX22$CommandReadSensorHistoryData
+ .class
+SHA1-Digest: l+LD+8i4J6PBF47VmINb/rtgo2k=
+
+Name: minimed/ddms/deviceportreader/RocheMeter$2.class
+SHA1-Digest: cnpigji+YpZrSJDr3TW2tKMjIVY=
+
+Name: drivers/usb/ComLink2/MDTCLUSB.inf
+SHA1-Digest: 52Fv3SBGxMUvqQv2f9Vdm33LJ1E=
+
+Name: drivers/usb/bd/BDHidComInst.exe
+SHA1-Digest: vBorc59LFJxEJyDWQKKazmIIxA4=
+
+Name: minimed/ddms/deviceportreader/MM508c.class
+SHA1-Digest: lMDGZ9P+1cH3Pa6o8yC3ChPiYBA=
+
+Name: minimed/ddms/deviceportreader/MMMeter$Reader.class
+SHA1-Digest: dai5u6naGPplHJH0UuwJYQGz03Y=
+
+Name: minimed/ddms/deviceportreader/MMX23$SnapshotCreator.class
+SHA1-Digest: tZYfTFwiDm0Hy/+DQXEaIze2fVQ=
+
+Name: minimed/ddms/applet/dtw/AppletResources.properties
+SHA1-Digest: fA6RtyLXzPQJ5M1ZxKb++eh57Xo=
+
+Name: minimed/ddms/applet/dtw/AppletResources_de.properties
+SHA1-Digest: 0WZdPrwnS0UgiMKW0yh2FhqW7LY=
+
+Name: minimed/ddms/deviceportreader/SerialPort.class
+SHA1-Digest: M7FMfjbrjcr6o2tN6vkmOhoibLg=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$6.class
+SHA1-Digest: c/BFA/derX75WirEZjEBagPogdU=
+
+Name: minimed/ddms/applet/dtw/wizard/WizardStep$1.class
+SHA1-Digest: 6VIGhU4s0Ef2ZrjK7BJMVlgA7p4=
+
+Name: drivers/usb/bd/CCPORT.SYS
+SHA1-Digest: ExDlMq2A3GsiEKodXsKwd8zqK8s=
+
+Name: minimed/ddms/applet/dtw/UploadFailedException.class
+SHA1-Digest: TlUhwVtNwvzJKx+GdwGOIZGpGZM=
+
+Name: minimed/ddms/deviceportreader/Enums$ReservoirWarningUnits.class
+SHA1-Digest: uIUIehviMGWVbP1tTzxeqdOputk=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltraSmart.class
+SHA1-Digest: M9y0IpqfTH894h/5lofDrVCXl6E=
+
+Name: minimed/ddms/deviceportreader/RocheMeter$6.class
+SHA1-Digest: p+7dAQmfHKvfSItNKxtrFpLn0F8=
+
+Name: minimed/ddms/deviceportreader/ComLink1$1.class
+SHA1-Digest: Efh/R2Eqbnl7/5jNWNFskRX4G8c=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBayerStep$1.clas
+ s
+SHA1-Digest: 68tSY+XAqDKaxQ5//fJgP2ww3ZI=
+
+Name: minimed/ddms/applet/dtw/components/DefaultRadioButtonGroup.class
+SHA1-Digest: EjCkyQn1/lCr2EAIqefw3ahmwms=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltraSmart$HRProcedureCo
+ mmand.class
+SHA1-Digest: T732r8p97zJabN5Z91jTEKN701M=
+
+Name: minimed/ddms/applet/dtw/UploadCancelledException.class
+SHA1-Digest: 1McCSk8ooim7SmLLkA52vjXoanY=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/bayermeter/VerifyConnection
+ sStep.class
+SHA1-Digest: OyR97eUrZvJU39+fhd7kWw5dJFI=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/InitializationStep.class
+SHA1-Digest: pqFEDjKq7ZN9L8gHsGc8/nGPxfU=
+
+Name: minimed/ddms/deviceportreader/LSMeter$Reader.class
+SHA1-Digest: 4ldT6o+5KkOK+15mtb51aF7TIzE=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep.class
+SHA1-Digest: jxCoqmfvFZtV43JUxf/Du6kB7Vg=
+
+Name: images/device_LSSureStep.jpg
+SHA1-Digest: uKIZXqvKxRptEOyPV50xSmEktKY=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$1.class
+SHA1-Digest: xGKSf6FiGlCctstAY9FrRs/q87s=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/SelectLinkDevice
+ Step.class
+SHA1-Digest: gxwqQUG/fDB3p86/WsDFGH620f0=
+
+Name: minimed/ddms/applet/dtw/wizard/WizardStep.class
+SHA1-Digest: reeffoxbHMY6LOnZbjC8ZEnjbNw=
+
+Name: minimed/ddms/deviceportreader/TraceHistorySet$TraceHistory.class
+SHA1-Digest: KBh1Cfz6BKOqyOKIM4bsgxZ5x8Q=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mm508/PumpOperationFailStep
+ .class
+SHA1-Digest: O7zQ3TzHeZPHBIgSZxjlsQu+MM0=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/MeterOperationStep.class
+SHA1-Digest: nM4Zv1fIDJoVgUw/ZUbDRYsvEks=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$4.class
+SHA1-Digest: pwGxS/8rH3ZvzHYd2bVG58UlY9w=
+
+Name: minimed/ddms/applet/dtw/NetHelper.class
+SHA1-Digest: rtUgO1tG/vHhjFM+rRscva58hWA=
+
+Name: images/device_RocheCompact.jpg
+SHA1-Digest: A/UF7El+eGHwxTOubq2rhMXU4Yw=
+
+Name: mdt/common/device/driver/minimed/IDevicePnPListener.class
+SHA1-Digest: qRTrMxS7wDAn1hmsgUnISI4Fdms=
+
+Name: minimed/ddms/deviceportreader/MM508.class
+SHA1-Digest: 4ixxH4Y6WbpJZgUWE4afI/ZztK0=
+
+Name: minimed/ddms/deviceportreader/LSMeter$Command.class
+SHA1-Digest: /1IMmZAVrZ406+Hm5Z3Uzh5L/3k=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBDStep$1.class
+SHA1-Digest: zmgXGPyQjjkSBX3Ms4afwbOLuTg=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpOperationSte
+ p$LastHistoryPageReadCustomizer.class
+SHA1-Digest: 9blsE/Pwv0yNOCr5t0eZRTMw2VI=
+
+Name: minimed/ddms/deviceportreader/MMX15$SnapshotCreator.class
+SHA1-Digest: Z4UHSEACoLHc4OxpRX1pqyzto/g=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/CheckPumpStatusS
+ tep.class
+SHA1-Digest: SYefwR2/gIfu0sjzISsW6x/EwL4=
+
+Name: images/device_MM508.jpg
+SHA1-Digest: 593pvJg2Y34mU/1eojY713d4yv4=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectDeviceStep.class
+SHA1-Digest: /z+KnvomMHV/gfw+pq/Ot4O4BMo=
+
+Name: minimed/ddms/deviceportreader/Enums$1.class
+SHA1-Digest: UTizCEJOHhGwnNVZGDRITLB/aB4=
+
+Name: minimed/ddms/applet/dtw/DeviceID.class
+SHA1-Digest: h+fPk8Azt6jDpv3OHi98WfEiKyQ=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterRocheStep.class
+SHA1-Digest: zvVOcA8F+5PYCSip1YqCJK3bwDY=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$5.class
+SHA1-Digest: iqEffUsgrWMuzJ0ygCmPEJkJ/xc=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmmeter/MeterSelectSerialPo
+ rtStep.class
+SHA1-Digest: 54+GgbuE9Unh2be5+Yc3gpMEkmI=
+
+Name: minimed/ddms/deviceportreader/Enums$InsulinActionType.class
+SHA1-Digest: MpTTfYOSOa6bOdAbQ4Drc9nsz40=
+
+Name: minimed/ddms/deviceportreader/MMPump$Command.class
+SHA1-Digest: IqQFIHFF5DLdWqfUlMMJYVON4O0=
+
+Name: drivers/usb/bd/WDMMDMLD.VXD
+SHA1-Digest: nXMykGj9OLxhAYwvVQGCsP/a+Wk=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mm508/PumpSelectSerialPortS
+ tep.class
+SHA1-Digest: VfZ73ATGRT91tptdgX3zpOSAt3k=
+
+Name: minimed/ddms/deviceportreader/MM511$CommandHistoryData.class
+SHA1-Digest: 6nyuh+rmfzsUs17cs6uEaRQp/Fc=
+
+Name: minimed/ddms/deviceportreader/DevicePortReaderFactory.class
+SHA1-Digest: LGU4/f1T65HCQupWosevWolXDZs=
+
+Name: minimed/ddms/deviceportreader/MMMeter.class
+SHA1-Digest: FkfhVKWCnI16fWnU9KPung4jPHE=
+
+Name: minimed/ddms/deviceportreader/BayerMeter$Command.class
+SHA1-Digest: Dii8DMYVsYCG3rB5u4T8Nkqcxw4=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$1.class
+SHA1-Digest: KO5jYO9GDNjERcwKNFoT+1vSXvk=
+
+Name: minimed/util/ContractException.class
+SHA1-Digest: E+1epozCUyd6YuZxQUltgr2C4gk=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectDeviceStep$1.class
+SHA1-Digest: QesO0FT6Cg885+xl1ExIg9SPXaU=
+
+Name: minimed/ddms/applet/dtw/NetHelper$1.class
+SHA1-Digest: q0NnK695YFuYYFrgOULd/t+1pB0=
+
+Name: Serialio/SnoopInputStream$Snoop.class
+SHA1-Digest: mF7JC3LgaXW9C5wiPxMfDf7Xygc=
+
+Name: minimed/ddms/deviceportreader/DevicePortReader.class
+SHA1-Digest: 2pmmgPBaLyifVP+4HF1NzU1HJjg=
+
+Name: minimed/ddms/deviceportreader/CommunicationsLinkRS232.class
+SHA1-Digest: P9P4cbPnk2ysntJfJKQdmVw8ols=
+
+Name: minimed/ddms/deviceportreader/Snapshot$SnapshotOutputStream.clas
+ s
+SHA1-Digest: E25RKl6/mziFse9qdpUE9pqmMCA=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/InitializationFailStep.clas
+ s
+SHA1-Digest: 2OPU4Y6recMLFcY9FDJ7KWSoX7M=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$3.class
+SHA1-Digest: LLUhetBUphGR8mrdU/AMm/Zg8SE=
+
+Name: minimed/ddms/deviceportreader/RocheMeter$1.class
+SHA1-Digest: gqCCZ3X/eNRMWzSHIAdEA3bJ3BU=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpOperationSte
+ p$2.class
+SHA1-Digest: mfm9G/yPmYn5cHsHtat9zBrHjQ8=
+
+Name: minimed/ddms/applet/dtw/wizard/Wizard$USBDriverInstallNeededDeci
+ der.class
+SHA1-Digest: tBoZfJHpIAhWOrKyVweze6NuZMQ=
+
+Name: drivers/usb/ComLink2/Install_MDTCLUSB.cmd
+SHA1-Digest: GalEYZ3kefVhMIMxoc5lvQvpZh0=
+
+Name: images/device_BayerEliteXL.jpg
+SHA1-Digest: EYYJTA0fXozPRjztxXlJ+dEYXzc=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mm508/VerifyConnectionsStep
+ .class
+SHA1-Digest: X+3OAFB+k/RfRIMB5CqOYD9mqUU=
+
+Name: images/device_RocheCompactPlus.jpg
+SHA1-Digest: mdHqywdFZ/of1OZnzmtUAi5bIM4=
+
+Name: minimed/ddms/deviceportreader/RocheMeter$ReplyDecoder.class
+SHA1-Digest: 0OtAsYuGgRWl5fPixjx6UZRh1XE=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltra$SnapshotCreator.cl
+ ass
+SHA1-Digest: UkyuISj/NwHmxpep9NMOZDsbgEk=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/USBDriverInstallAuthorizati
+ onStep$1.class
+SHA1-Digest: 6NESjX0w/bBCA/EA8E6CQvlUqpY=
+
+Name: minimed/ddms/applet/dtw/wizard/WizardSelections.class
+SHA1-Digest: FEoT1e30zkPGE8VJPfNmsB7um3g=
+
+Name: minimed/ddms/applet/dtw/MessageListener.class
+SHA1-Digest: nA8aA3J8KPkUahLRadpxDqI8XZg=
+
+Name: minimed/ddms/applet/dtw/ExeHelper$1.class
+SHA1-Digest: xiz7UTP239/JGtCVmG4d5+SOoYo=
+
+Name: minimed/ddms/deviceportreader/CommPort.class
+SHA1-Digest: momozMZHp2FeixG19peWAMEGDMw=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltraSmart$HRCommand.cla
+ ss
+SHA1-Digest: poBkLXj9SC1kpfMacHeoQlshiyA=
+
+Name: minimed/ddms/applet/dtw/components/NumericTextField$1.class
+SHA1-Digest: /DIEUqKHt5yLzY7aJHTuWKG+e/A=
+
+Name: minimed/ddms/deviceportreader/MMMeter$SnapshotCreator.class
+SHA1-Digest: uvpNwiRIIny7djZ0gnWOoFm0eD4=
+
+Name: minimed/ddms/applet/dtw/wizard/Wizard$2.class
+SHA1-Digest: MXgcYO+FwnIka2qRtgGRl8nAO48=
+
+Name: minimed/ddms/applet/dtw/NetHelper$5.class
+SHA1-Digest: WLo6zOxpz6AUOVU+hMaCu7GG5sA=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpOperationSte
+ p.class
+SHA1-Digest: n1qznUWPTvfK6P9oWKcCi37Yrxk=
+
+Name: minimed/ddms/deviceportreader/RocheMeter$Reader.class
+SHA1-Digest: 9QxzRZqeFZmkhHuB9lkoh5kgccM=
+
+Name: minimed/ddms/deviceportreader/MMParadigmLinkMeter.class
+SHA1-Digest: OcywlGNT+6VcF7ViC0V8OdX0vfs=
+
+Name: minimed/ddms/deviceportreader/BayerMeter$CommandGetData.class
+SHA1-Digest: V6kl58Al8Kub6yQGKUhp19GDfqs=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/TransferMeterDataCompleteSt
+ ep.class
+SHA1-Digest: YiNoydNYOo7i+edNW+NjCPYyHmQ=
+
+Name: Serialio/SerialPort.class
+SHA1-Digest: 57uWjHHsWL/yLb8d7p6eZeXpRPs=
+
+Name: minimed/ddms/applet/dtw/PropertyWriter.class
+SHA1-Digest: vg3VA0KMeKAhJNmnV/ILvpPZFVw=
+
+Name: minimed/ddms/applet/dtw/PreferencesHelper.class
+SHA1-Digest: l2w/S490Ar1ucBcaSmilp6lsX/U=
+
+Name: minimed/ddms/deviceportreader/MM511.class
+SHA1-Digest: TQqKa21k2uCIWRfva5pEKWdImQQ=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mm508/CheckPumpStatusStep.c
+ lass
+SHA1-Digest: bwXArwaa0ShHTtws6fDfv4bdEKk=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterLifeScanStep$1.c
+ lass
+SHA1-Digest: yGUjOLpWr6oN8+LlWmb13BiqyPM=
+
+Name: minimed/ddms/applet/dtw/NetHelper$3.class
+SHA1-Digest: KeiNCDHJXPpHK37LtYIwB3wCuh8=
+
+Name: images/device_TSFreeStyle.png
+SHA1-Digest: VFx9GzAYBkS3VUXRm38FkmOtZmA=
+
+Name: drivers/usb/ComLink2/windrvr6.inf
+SHA1-Digest: JLpCNS18QC2ykO0I3ZCynA5ctKg=
+
+Name: minimed/ddms/deviceportreader/RocheMeter$4.class
+SHA1-Digest: XsV06y2gDC7mKc+gw8YtRrJN0oA=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$3.class
+SHA1-Digest: Sv3wd/xaLdHHWMIycUc63vROytU=
+
+Name: minimed/ddms/deviceportreader/ConnectToPumpException.class
+SHA1-Digest: 619AU01BvkdNglpwmaXPF01y3H8=
+
+Name: drivers/usb/ComLink2/Autorun.inf
+SHA1-Digest: l5elTMsFYz7NcV+o0NQBPCBkiYk=
+
+Name: minimed/ddms/deviceportreader/ReplyDecoder.class
+SHA1-Digest: WvsKrDDWk4WsGbOF2QSKC+r9MdM=
+
+Name: minimed/ddms/applet/dtw/ExeHelper.class
+SHA1-Digest: oa7ZomHVohxQpF8VpHykJSHvKxY=
+
+Name: minimed/ddms/deviceportreader/TraceHistorySet$1.class
+SHA1-Digest: XGcxECElxNSAYrQB4Efdkj3w1FE=
+
+Name: minimed/ddms/applet/dtw/ControlCodeParser.class
+SHA1-Digest: BFIte/uXrDBVQYkcyX5Mt5M3uMM=
+
+Name: minimed/ddms/deviceportreader/BayerMeter$Reader.class
+SHA1-Digest: BcWczvSkJl/iOdD3q+O7c/8s4mk=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$DisconnectComm
+ and.class
+SHA1-Digest: F+OGwzvDCu9VC2a9bF2h56nIsGM=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataStep$TransferRe
+ sult.class
+SHA1-Digest: kPWm9z7l7GS8IzaT4tyuApztahA=
+
+Name: minimed/ddms/deviceportreader/LSMeter$SnapshotCreator.class
+SHA1-Digest: gjsm/E8j0Wk0a6och4i8QD0U2uM=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpSelectSerial
+ PortStep.class
+SHA1-Digest: LeWmnUV8HfS8tzaPiN5771ZPFQU=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/othermeter/MeterSelectSeria
+ lPortStep.class
+SHA1-Digest: sDGfxhq1N5h725SBuLyM2Dop+1I=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/InitializationStep$1.class
+SHA1-Digest: aeEkpA37Dyq4QMso0b+qnMZVvDg=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/MeterOperationFailStep.clas
+ s
+SHA1-Digest: kZtfcUpmwJTNwUa0nFTcwbhg0LU=
+
+Name: minimed/ddms/deviceportreader/MM508c$SnapshotCreator.class
+SHA1-Digest: hvf72J0NeeXKmCXHrKuHOPf+xWI=
+
+Name: minimed/ddms/deviceportreader/BadDeviceCommException.class
+SHA1-Digest: c493FnWNuwZ+WHZk9xcwdHVPNa8=
+
+Name: minimed/ddms/applet/dtw/NetHelper$2.class
+SHA1-Digest: e0nXdzyhRuZR70ST8fSEXOSCnrc=
+
+Name: minimed/ddms/applet/dtw/AppletResources_el.properties
+SHA1-Digest: W19nsVCVSnDyBapOPRWfrsJGwko=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmmeter/VerifyConnectionsSt
+ ep.class
+SHA1-Digest: EbJP/vfSvgpbLWN36PPLPyjJTjU=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltra.class
+SHA1-Digest: 57TRwgKDebhmhKSawxRRYP0oi60=
+
+Name: minimed/ddms/deviceportreader/MMMeter$Command.class
+SHA1-Digest: 5ghA1HM5TuNob1hSHXnNiyxmQ9E=
+
+Name: minimed/ddms/deviceportreader/ComLink2$1.class
+SHA1-Digest: sWgxaCIbHbY+Xw96s4Lg9kIiuFg=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/lifescanmeter/MeterSelectSe
+ rialPortStep.class
+SHA1-Digest: QDqjU4ml4Et1ULw2YUXdAqzF+oc=
+
+Name: minimed/ddms/text/Formats$DatePatternKey.class
+SHA1-Digest: BIVgaDDyx8C5i/bUUaVHnIvnA0g=
+
+Name: Serialio/ExTokenOverflow.class
+SHA1-Digest: gOOktEkCtXLWzBhssWi3NIXXP2M=
+
+Name: minimed/ddms/deviceportreader/MMPump.class
+SHA1-Digest: jQRWsUdlA+jmhlxqB858Za5YCVU=
+
+Name: minimed/ddms/applet/dtw/wizard/WizardConfig$USBConfig.class
+SHA1-Digest: /w9hn/KqZydtYRc7faaau4jwzxo=
+
+Name: minimed/ddms/deviceportreader/Enums$BGUnits.class
+SHA1-Digest: gLwcu3MgIudG0LmJTYbgCXJI2Cc=
+
+Name: images/device_LSUltraMini.jpg
+SHA1-Digest: R16uAjJga+MuNZISahCRHueqez8=
+
+Name: minimed/ddms/deviceportreader/MM511$SnapshotCreator.class
+SHA1-Digest: yCLu+GnnhBkIHWkedIQrqWTKSE0=
+
+Name: minimed/ddms/deviceportreader/MedisenseBGKetone.class
+SHA1-Digest: YJkCo9qc1HC+nEip6K0kwRJKJGw=
+
+Name: minimed/ddms/deviceportreader/Snapshot.class
+SHA1-Digest: ZZUBABUk/aXL+QfRbAzRSiKfBLs=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterMiniMedStep$1.cl
+ ass
+SHA1-Digest: um7eIM71/0LYpazaF/fJpPXzaF4=
+
+Name: minimed/ddms/applet/dtw/components/UserEditListenerList.class
+SHA1-Digest: dmFUTq1/tBYz6uJIuTET8iS7iE0=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$2.class
+SHA1-Digest: 8YEIty6KHL6q7G88Yv/vU3laqQI=
+
+Name: config/SystemVariables.properties
+SHA1-Digest: dfT6LqCakC8MvEKVd0qbJZ5lAt0=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectPumpStep$1.class
+SHA1-Digest: he9tNqYb57DwGNw5p+UR6Heqq+Y=
+
+Name: minimed/ddms/applet/dtw/AppletResources_en.properties
+SHA1-Digest: taW7fwuAjg98jW14HGUdvKFu4N8=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterMiniMedStep.clas
+ s
+SHA1-Digest: r04BFSwipiBxEcZXBUI2Qsof9Rs=
+
+Name: minimed/ddms/deviceportreader/LSSureStep.class
+SHA1-Digest: aGW/oz6RiAL9HYedBwvFXEs1bqk=
+
+Name: minimed/ddms/deviceportreader/MMGuardian3$SnapshotCreator.class
+SHA1-Digest: yt0Vv2CaNaVp4ZJJrAyRmdI3msg=
+
+Name: minimed/ddms/deviceportreader/RocheMeter$8.class
+SHA1-Digest: wQUfi6eSkyfkFnwtORvcLV6Vs5M=
+
+Name: drivers/serial/ddmsDTWSerialPort.dll
+SHA1-Digest: 0qboqBeePeSmkgjfjdaL/hJbj58=
+
+Name: minimed/ddms/deviceportreader/BayerBreeze.class
+SHA1-Digest: M++hNEBay5kYTjxBXYD1OKGyuHs=
+
+Name: drivers/usb/ComLink2/difxapi.dll
+SHA1-Digest: WkOBUSWioB0TmzA2N3rtwA+PWiE=
+
+Name: minimed/ddms/applet/dtw/InstallTestResult.class
+SHA1-Digest: cyIYhdZi14h/hcNBvA/zGzL+l+Y=
+
+Name: Serialio/ExTimeout.class
+SHA1-Digest: EULyKKcBYU71Cyk+K7tYJIcSAZg=
+
+Name: minimed/ddms/deviceportreader/BayerMeter$1.class
+SHA1-Digest: uJBeXsjyFif6yf+ccrbC3bUE6fE=
+
+Name: images/rightArrow.gif
+SHA1-Digest: X8+rFs3BAd+kj0EEXui2NsyUMCg=
+
+Name: images/device_MMLinkMeter.jpg
+SHA1-Digest: XJOJa0WpXb09oPL8vseqayByOhM=
+
+Name: minimed/ddms/deviceportreader/MMX22$CommandHistoryDataFilter.cla
+ ss
+SHA1-Digest: tW5Wxhe0LRO7xHF1FYkLljElSv8=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataFailStep.class
+SHA1-Digest: qWZnlkk9ZupwAXz5yF0ZXKMvYIk=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/rochemeter/MeterSelectSeria
+ lPortStep.class
+SHA1-Digest: f0BmBgET7+sFBMItZhiRgLzPRy8=
+
+Name: minimed/ddms/deviceportreader/MM508u.class
+SHA1-Digest: QQoqKIAqkAgXscT4pJV6ol2dGqk=
+
+Name: minimed/ddms/deviceportreader/ComLink2$USBCommand.class
+SHA1-Digest: jTYuXmv7F080Lq4L5yOrelQqQ9Q=
+
+Name: minimed/ddms/deviceportreader/MM508u$SnapshotCreator.class
+SHA1-Digest: Xugm6Yq/EjwqEeywnSn2kZ8hp/M=
+
+Name: minimed/ddms/deviceportreader/MedicalDevice.class
+SHA1-Digest: PFC5GQgI2SBgO87YUqmTHg3dcj4=
+
+Name: Serialio/SnoopTokenListener.class
+SHA1-Digest: MT30cXWGYG5uJ3/2gi06P0MsXPo=
+
+Name: images/ComLink.png
+SHA1-Digest: 2LpRa6enb1ac2586GkNE75Ut3Wo=
+
+Name: minimed/ddms/deviceportreader/RocheMeter$3.class
+SHA1-Digest: YwFAivYqRqotZmsBIykNpNQjCh4=
+
+Name: minimed/ddms/deviceportreader/MMX23.class
+SHA1-Digest: B6Wjuq8w4WL7CNg7a7UzKZ7QcJk=
+
+Name: minimed/ddms/deviceportreader/LSFastTake$1.class
+SHA1-Digest: X18gDy4m/YJamx8M+NlG+FmqHE4=
+
+Name: minimed/ddms/deviceportreader/SerialIOHaltedException.class
+SHA1-Digest: /z9RKtf11J42/ld7HnAt95kV69U=
+
+Name: minimed/ddms/applet/dtw/DTWApplet.class
+SHA1-Digest: LkeH3nCPFZp7i2fYg8w106Xi/Hw=
+
+Name: minimed/ddms/deviceportreader/RocheActiveAndCompact$SnapshotCrea
+ tor.class
+SHA1-Digest: NoD7lOimOd3FvYrEsDmXMZ5/5CE=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectPumpStep.class
+SHA1-Digest: Pj+TTh8M1cvxKWJ8jxJb1a0Woy8=
+
+Name: drivers/usb/bd/BdHidCom.sys
+SHA1-Digest: k9wBUxBWRZhCdSLMFI2S3J3qf3Q=
+
+Name: minimed/ddms/deviceportreader/MMPump$1.class
+SHA1-Digest: 00QUgxITB2EZh7zE+FGdosnk0Kc=
+
+Name: minimed/ddms/applet/dtw/MessageHelper.class
+SHA1-Digest: F0IvUrREfjfNVlZCi9WHmkOYDYM=
+
+Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini.class
+SHA1-Digest: gfv87dcvz4VrAvKEKyenhRy+IiU=
+
+Name: images/device_LSUltraLink.png
+SHA1-Digest: sSvaBobBqq1YHyOWvL/CH9c6AI8=
+
+Name: minimed/ddms/deviceportreader/MMX12$SnapshotCreator.class
+SHA1-Digest: gl4kFPf8AxAjOLvcnYovGvq7v0A=
+
+Name: minimed/ddms/applet/dtw/AppletResources_no.properties
+SHA1-Digest: LFARCpROvW6zJJ2Kqajl3i+RLz8=
+
+Name: minimed/ddms/deviceportreader/MMPump$Reader.class
+SHA1-Digest: fbwV9oCL+/veru7q2UBQXmr3Fhc=
+
+Name: minimed/ddms/deviceportreader/ComStation1.class
+SHA1-Digest: Na175QUX+8YkwtigxvJQmzsLnn0=
+
+Name: minimed/ddms/deviceportreader/MedisenseBGKetone$SnapshotCreator.
+ class
+SHA1-Digest: 4Wp9AK3W+gmlfrKAPOjsAa09pCU=
+
+Name: minimed/ddms/deviceportreader/Snapshot$Header.class
+SHA1-Digest: J1SJ6S1cv3NWAvMn8Vs5HXEm/yA=
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/TurnOffParadigmL
+ inkStep.class
+SHA1-Digest: BQTfNAKGHWbUJCSzckXagMGTOqI=
+
+Name: minimed/ddms/deviceportreader/MedisenseSofTact.class
+SHA1-Digest: 8EuofQjPGGEmgV2uqSO8xrEml5Y=
+
+Name: minimed/ddms/deviceportreader/BayerMeter.class
+SHA1-Digest: tiivtOi9TzoAZ7TqWSaZh9t1mBw=
+

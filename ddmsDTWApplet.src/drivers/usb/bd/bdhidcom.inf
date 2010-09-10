@@ -1,0 +1,153 @@
+; BDHIDCOM.INF
+; Copyright (c) 2003 Becton, Dickinson and Company
+; USB-HID -> Serial driver system
+; 
+
+[Version]
+Signature=$Chicago$
+Class = Ports
+ClassGuid = {4d36e978-e325-11ce-bfc1-08002be10318} 
+Provider=%MFG%
+CatalogFile = BdHidCom.cat
+DriverVer=03/31/2003,1.0.0.29
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Common parts of the installation
+
+[SourceDisksNames]
+1=%DiskName_Desc%,,0
+
+[SourceDisksFiles]
+BdHidCom.sys=1
+ccport.sys=1
+wdmmdmld.vxd=1
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[DestinationDirs]
+DefaultDestDir = 12
+NTDriverCopyFiles = 12
+Win9xDriverCopyFiles = 10,system32\drivers
+Win9xVxDCopyFiles = 11
+
+[Manufacturer]
+%MFG% = MfgInstall
+
+[MfgInstall]
+; On Win9x, this is the 'physical' (actually, USB) device which we bind CCPORT onto
+; On NT, we hook this directly to BdHidCom.sys
+%MfgDevice%=HidComInst, USB\VID_3552&PID_5500
+%MfgDevice%=HidComInst, USB\VID_3552&PID_5501
+%MfgDevice%=HidComInst, USB\VID_3552&PID_5502
+
+; These are no longer installed, but are here to help the uninstaller
+;%OldDevice%=OldInst, HID\VID_3552&PID_5500
+;%OldDevice%=OldInst, HID\VID_3552&PID_5501
+;%OldDevice%=OldInst, HID\VID_3552&PID_5502
+;%OldDevice%=OldInst, HID\CYP0001
+
+; This is Win9x only, it's the virtual device created by CCPORT for us
+%MfgDevicePort%=HidComPortInst, USB\BDP0001
+
+
+[strings]
+MFG	      = "Becton, Dickinson and Company"
+MfgDevice     = "BD USB Interface Cable"
+MfgDevicePort = "BD USB Interface Cable (Virtual Port)"
+DisplayName   = "USB-HID -> COM Driver Service"
+DiskName_Desc = "BD USB Driver Installation"
+; This string is just here to let our powerful uninstaller know that 
+; this is one of our .INF files, even when we're names OEMxxxx.INF in the INF directory
+CypressHidcomDummyUninstallString = "DummyUninstallString"
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 9x installation
+
+; The 0x00000020 flags says that version checking should be silently performed and acted on
+[Win9xDriverCopyFiles]
+BdHidCom.sys,,,0x00000004
+ccport.sys,,,0x00000020
+
+[Win9xVxDCopyFiles]
+wdmmdmld.vxd,,,0x00000020
+
+[HidComInst]
+; This is the 9x installation of CCPORT, etc
+AddReg = CCPORTAddReg
+Copyfiles = Win9xDriverCopyFiles,Win9xVxDCopyFiles
+
+[HidComPortInst]
+AddReg = Win9xAddReg
+Copyfiles = Win9xVxDCopyFiles
+
+[Win9xAddReg]
+HKR,,DevLoader,,*vcomm
+HKR,,PortDriver,,wdmmdmld.vxd
+HKR,,Contention,0,
+HKR,,ConfigDialog,,serialui.dll
+HKR,,DCB,3,1C,00,00,00, 80,25,00,00, 11,33,00,00, 00,00, 0a,00, 0a,00, 08, 00, 00, 11, 13, 00, 00, 00, 00, 00
+HKR,,PortSubClass,1,01
+HKR,,EnumPropPages,,"serialui.dll,EnumPropPages"
+HKR,,DeviceType,1,01
+
+[CCPORTAddReg]
+HKR,,DevLoader,0,*ntkern
+HKR,,NTMPDriver,,"BdHidCom.sys,ccport.sys"
+; HKR,,Enumerator,,serenum.vxd 
+
+; On 9x, we add HW entries for CCPORT, to tell it the name of the virtual device to create
+[HidComInst.HW]
+AddReg=CCPORTAddHWReg.HW
+
+[CCPORTAddHWReg.HW]
+HKR,,ChildID,2,"USB\BDP0001"
+
+[HidComPortInst.HW]
+AddReg=MdmLdrAddReg.HW
+
+[MdmLdrAddReg.HW]
+;HKR,,FriendlyName,2,"BD Virtual Port"
+HKR,,FriendlyName,0,"BD Virtual Port"
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; NT installation
+
+[NTDriverCopyFiles]
+BdHidCom.sys
+
+[HidComInst.NT]
+; This is the straightforward NT installation of HIDCOM
+AddReg = NTAddReg
+Copyfiles = NTDriverCopyFiles
+; addreg and copy files for serenum.sys
+Include=msports.inf
+Needs=SerialEnumerator.NT
+
+[HidComInst.NT.HW]
+AddReg=HidComInstHWAddReg
+
+[HidComInstHWAddReg]
+HKR,,"UpperFilters",0x00010000,"serenum"
+
+[NTAddReg]
+; Tell NT that this is a 'serial port' so that the correct class property sheet is shown in devmgr
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+HKR,,PortSubClass,1,01
+
+[HidComInst.NT.Services]
+; 0x00000002 == SPSVCINST_ASSOCSERVICE
+AddService = HidCom,0x00000002,HidCom_Service_Inst
+; install the serenum service itself
+Include=msports.inf
+Needs=SerialEnumerator.NT.Services
+
+
+[HidCom_Service_Inst]
+DisplayName    = %DisplayName% 
+ServiceType    = 1                      ; SERVICE_KERNEL_DRIVER
+StartType      = 3                      ; SERVICE_DEMAND_START
+ErrorControl   = 0                      ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\BdHidCom.sys
+LoadOrderGroup = extended base
+
