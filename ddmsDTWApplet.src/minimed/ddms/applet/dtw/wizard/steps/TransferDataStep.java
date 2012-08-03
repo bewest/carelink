@@ -8,6 +8,8 @@
 /*     */ import javax.swing.JButton;
 /*     */ import javax.swing.JLabel;
 /*     */ import javax.swing.JPanel;
+/*     */ import minimed.ddms.A.EA;
+/*     */ import minimed.ddms.A.G;
 /*     */ import minimed.ddms.applet.dtw.CaptureResult;
 /*     */ import minimed.ddms.applet.dtw.LogWriter;
 /*     */ import minimed.ddms.applet.dtw.NetHelper;
@@ -18,8 +20,6 @@
 /*     */ import minimed.ddms.applet.dtw.wizard.WizardConfig;
 /*     */ import minimed.ddms.applet.dtw.wizard.WizardSelections;
 /*     */ import minimed.ddms.applet.dtw.wizard.WizardStep;
-/*     */ import minimed.ddms.deviceportreader.DevicePortReader;
-/*     */ import minimed.ddms.deviceportreader.TraceHistorySet;
 /*     */ import minimed.util.Contract;
 /*     */ 
 /*     */ public class TransferDataStep extends WizardStep
@@ -68,18 +68,18 @@
 /*     */   protected void nextRequest()
 /*     */   {
 /* 105 */     String str = getWizardSelections().getDeviceType();
-/*     */     Class localClass;
+/*     */     Object localObject;
 /* 107 */     if ((str.equals("wizard.selections.SELECTION_DEVICE_PUMP")) || (str.equals("wizard.selections.SELECTION_DEVICE_CGM")))
 /*     */     {
-/* 109 */       localClass = TransferPumpDataCompleteStep.class;
+/* 109 */       localObject = TransferPumpDataCompleteStep.class;
 /* 110 */     } else if (str.equals("wizard.selections.SELECTION_DEVICE_METER")) {
-/* 111 */       localClass = TransferMeterDataCompleteStep.class;
+/* 111 */       localObject = TransferMeterDataCompleteStep.class;
 /*     */     } else {
 /* 113 */       Contract.unreachable();
-/* 114 */       localClass = null;
+/* 114 */       localObject = null;
 /*     */     }
 /*     */ 
-/* 117 */     getWizard().showNextStep(localClass);
+/* 117 */     getWizard().showNextStep((Class)localObject);
 /*     */   }
 /*     */ 
 /*     */   private Thread createTransferThread()
@@ -140,52 +140,59 @@
 /*     */ 
 /* 190 */     logInfo("Send the following to " + str1);
 /*     */ 
-/* 192 */     DeviceOperationStep localDeviceOperationStep = (DeviceOperationStep)getWizard().getStep(DeviceOperationStep.class);
+/* 192 */     CaptureResult localCaptureResult = getWizard().getCaptureResult();
+/* 193 */     long l1 = localCaptureResult.getServerTimeAtDeviceRead();
+/* 194 */     long l2 = localCaptureResult.getClientTimeAtDeviceRead();
+/* 195 */     String str2 = getWizard().getConfig().getClientTimeZoneID();
+/* 196 */     byte[] arrayOfByte = localCaptureResult.getSnapshotData();
+/* 197 */     boolean bool = getWizard().getConfig().getKeepSnapshotOnServer();
 /*     */ 
-/* 194 */     CaptureResult localCaptureResult = localDeviceOperationStep.getCaptureResult();
-/* 195 */     long l1 = localCaptureResult.getServerTimeAtDeviceRead();
-/* 196 */     long l2 = localCaptureResult.getClientTimeAtDeviceRead();
-/* 197 */     String str2 = getWizard().getConfig().getClientTimeZoneID();
-/* 198 */     byte[] arrayOfByte = localCaptureResult.getSnapshotData();
-/* 199 */     boolean bool = getWizard().getConfig().getKeepSnapshotOnServer();
-/*     */ 
-/* 201 */     logInfo("Send server time " + l1);
-/* 202 */     logInfo("Send client time " + l2);
-/* 203 */     logInfo("Send client time zone id " + str2);
-/* 204 */     logInfo("Send " + arrayOfByte.length + " bytes of snapshot data");
-/* 205 */     if (bool) {
-/* 206 */       logInfo("Request that the server keep the snapshot");
+/* 199 */     logInfo("Send server time " + l1);
+/* 200 */     logInfo("Send client time " + l2);
+/* 201 */     logInfo("Send client time zone id " + str2);
+/* 202 */     logInfo("Send " + arrayOfByte.length + " bytes of snapshot data");
+/* 203 */     if (bool) {
+/* 204 */       logInfo("Request that the server keep the snapshot");
 /*     */     }
 /*     */ 
-/* 210 */     TraceHistorySet localTraceHistorySet = localCaptureResult.getDevicePortReader().getTraceHistorySet();
-/* 211 */     int i = localTraceHistorySet == null ? 0 : localTraceHistorySet.getTotalBytes();
-/* 212 */     logInfo("Send " + i + " bytes of trace history data");
-/*     */     String str3;
-/* 215 */     if (getWizard().getConfig().getLogToServer())
-/* 216 */       str3 = getWizard().getConfig().getLogWriter().getBackingStore();
+/* 208 */     EA localEA = null;
+/* 209 */     if (localCaptureResult.getDevicePortReader() != null) {
+/* 210 */       localEA = localCaptureResult.getDevicePortReader().J();
+/*     */     }
+/* 212 */     int i = localEA == null ? 0 : localEA.A();
+/* 213 */     logInfo("Send " + i + " bytes of trace history data");
+/*     */ 
+/* 216 */     if (getWizard().getConfig().getLogToServer())
+/* 217 */       str3 = getWizard().getConfig().getLogWriter().getBackingStore();
 /*     */     else {
-/* 218 */       str3 = getWizard().getConfig().getNoLogMessage();
+/* 219 */       str3 = getWizard().getConfig().getNoLogMessage();
 /*     */     }
 /*     */ 
-/* 221 */     logInfo("Send approximately " + str3.getBytes().length + " bytes of log messages");
-/* 222 */     if (getWizard().getConfig().getLogToServer()) {
-/* 223 */       str3 = localLogWriter.getBackingStore();
+/* 222 */     logInfo("Send approximately " + str3.getBytes().length + " bytes of log messages");
+/* 223 */     if (getWizard().getConfig().getLogToServer()) {
+/* 224 */       str3 = localLogWriter.getBackingStore();
 /*     */     }
-/*     */ 
+/* 226 */     String str4 = "snapshot file";
+/* 227 */     String str5 = "";
+/* 228 */     if (localCaptureResult.getDevicePortReader() != null) {
+/* 229 */       str4 = localCaptureResult.getDevicePortReader().R();
+/* 230 */       str5 = localCaptureResult.getDevicePortReader().S();
+/*     */     }
+/* 232 */     String str3 = str3 + ". DEVICE INFO: description=" + str4 + "; modelNumber=" + str5 + "; readTimeSeconds=" + localCaptureResult.getReadTimeSeconds() + "; retryCount=" + localCaptureResult.getRetryCount() + "; snapshotByteCount=" + arrayOfByte.length + ";";
 /*     */     try
 /*     */     {
-/* 230 */       NetHelper localNetHelper = new NetHelper();
-/* 231 */       localNetHelper.uploadData(localContainer, str1, str3, l1, l2, str2, arrayOfByte, bool, localLogWriter, localTraceHistorySet);
+/* 243 */       NetHelper localNetHelper = new NetHelper();
+/* 244 */       localNetHelper.uploadData(localContainer, str1, str3, l1, l2, str2, arrayOfByte, bool, localLogWriter, localEA);
 /*     */     }
 /*     */     catch (UploadFailedException localUploadFailedException) {
-/* 234 */       localUploadFailedException.printStackTrace(localLogWriter);
-/* 235 */       return new TransferResult(1, localUploadFailedException.getMessage());
+/* 247 */       localUploadFailedException.printStackTrace(localLogWriter);
+/* 248 */       return new TransferResult(1, localUploadFailedException.getMessage());
 /*     */     } catch (UploadCancelledException localUploadCancelledException) {
-/* 237 */       return new TransferResult(2, "cancelled by user");
+/* 250 */       return new TransferResult(2, "cancelled by user");
 /*     */     }
 /*     */ 
-/* 240 */     TransferResult localTransferResult = new TransferResult(0, null);
-/* 241 */     return localTransferResult;
+/* 253 */     TransferResult localTransferResult = new TransferResult(0, null);
+/* 254 */     return localTransferResult;
 /*     */   }
 /*     */ 
 /*     */   private static final class TransferResult extends OperationResult
@@ -194,18 +201,18 @@
 /*     */ 
 /*     */     TransferResult(int paramInt, String paramString)
 /*     */     {
-/* 264 */       this(paramInt, paramString, null);
+/* 277 */       this(paramInt, paramString, null);
 /*     */     }
 /*     */ 
 /*     */     TransferResult(int paramInt, String paramString, Exception paramException)
 /*     */     {
-/* 275 */       super(paramString);
-/* 276 */       this.m_warning = paramException;
+/* 288 */       super(paramString);
+/* 289 */       this.m_warning = paramException;
 /*     */     }
 /*     */ 
 /*     */     Exception getWarning()
 /*     */     {
-/* 287 */       return this.m_warning;
+/* 300 */       return this.m_warning;
 /*     */     }
 /*     */   }
 /*     */ }

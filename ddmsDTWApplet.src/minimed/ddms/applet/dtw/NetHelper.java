@@ -14,8 +14,8 @@
 /*     */ import java.util.ResourceBundle;
 /*     */ import javax.swing.ProgressMonitor;
 /*     */ import javax.swing.ProgressMonitorInputStream;
-/*     */ import minimed.ddms.deviceportreader.TraceHistorySet;
-/*     */ import minimed.ddms.deviceportreader.TraceHistorySet.TraceHistory;
+/*     */ import minimed.ddms.A.EA;
+/*     */ import minimed.ddms.A.EA._A;
 /*     */ 
 /*     */ public final class NetHelper extends IOHelper
 /*     */ {
@@ -25,6 +25,7 @@
 /*     */   private static final int REQ_GET_LAST_PUMP_HISTORY_PAGE_READ = 24;
 /*     */   private static final int REQ_GET_LAST_GLUCOSE_HISTORY_PAGE_READ = 26;
 /*     */   private static final int REQ_NOTIFY = 25;
+/*     */   private static final int REQ_GET_CONTROL_CODE = 27;
 /*     */   private static final int RSP_OK = 46;
 /*     */   private static final int RSP_SERVER_ERROR = 47;
 /*     */   private static final int RSP_CLIENT_ERROR = 48;
@@ -33,222 +34,254 @@
 /*     */   public long getLastGlucoseHistoryPageRead(String paramString1, String paramString2, String paramString3)
 /*     */     throws IOException
 /*     */   {
-/*  66 */     Object localObject = exchange(paramString1, new ObjectExchanger(paramString2, paramString3) { private final String val$model;
-/*     */       private final String val$serialNumber;
+/*  67 */     Object localObject = exchange(paramString1, new ObjectExchanger(paramString2, paramString3) {
+/*     */       public void writeRequest(ObjectOutputStream paramObjectOutputStream) throws IOException {
+/*  69 */         paramObjectOutputStream.writeInt(26);
+/*  70 */         paramObjectOutputStream.writeObject(this.val$model);
+/*  71 */         paramObjectOutputStream.writeObject(this.val$serialNumber);
+/*     */       }
 /*     */ 
-/*  68 */       public void writeRequest(ObjectOutputStream paramObjectOutputStream) throws IOException { paramObjectOutputStream.writeInt(26);
-/*  69 */         paramObjectOutputStream.writeObject(this.val$model);
-/*  70 */         paramObjectOutputStream.writeObject(this.val$serialNumber); }
-/*     */ 
-/*     */       public Object readResponse(ObjectInputStream paramObjectInputStream) throws IOException
-/*     */       {
-/*  74 */         long l = paramObjectInputStream.readLong();
-/*  75 */         return new Long(l);
+/*     */       public Object readResponse(ObjectInputStream paramObjectInputStream) throws IOException {
+/*  75 */         long l = paramObjectInputStream.readLong();
+/*  76 */         return new Long(l);
 /*     */       }
 /*     */     });
-/*  78 */     long l = ((Long)localObject).longValue();
-/*  79 */     return l;
+/*  79 */     long l = ((Long)localObject).longValue();
+/*  80 */     return l;
 /*     */   }
 /*     */ 
 /*     */   public long getLastPumpHistoryPageRead(String paramString1, String paramString2, String paramString3)
 /*     */     throws IOException
 /*     */   {
-/*  95 */     Object localObject = exchange(paramString1, new ObjectExchanger(paramString2, paramString3) { private final String val$model;
-/*     */       private final String val$serialNumber;
+/*  96 */     Object localObject = exchange(paramString1, new ObjectExchanger(paramString2, paramString3) {
+/*     */       public void writeRequest(ObjectOutputStream paramObjectOutputStream) throws IOException {
+/*  98 */         paramObjectOutputStream.writeInt(24);
+/*  99 */         paramObjectOutputStream.writeObject(this.val$model);
+/* 100 */         paramObjectOutputStream.writeObject(this.val$serialNumber);
+/*     */       }
 /*     */ 
-/*  97 */       public void writeRequest(ObjectOutputStream paramObjectOutputStream) throws IOException { paramObjectOutputStream.writeInt(24);
-/*  98 */         paramObjectOutputStream.writeObject(this.val$model);
-/*  99 */         paramObjectOutputStream.writeObject(this.val$serialNumber); }
-/*     */ 
-/*     */       public Object readResponse(ObjectInputStream paramObjectInputStream) throws IOException
-/*     */       {
-/* 103 */         long l = paramObjectInputStream.readLong();
-/* 104 */         return new Long(l);
+/*     */       public Object readResponse(ObjectInputStream paramObjectInputStream) throws IOException {
+/* 104 */         long l = paramObjectInputStream.readLong();
+/* 105 */         return new Long(l);
 /*     */       }
 /*     */     });
-/* 107 */     long l = ((Long)localObject).longValue();
-/* 108 */     return l;
+/* 108 */     long l = ((Long)localObject).longValue();
+/* 109 */     return l;
 /*     */   }
 /*     */ 
 /*     */   public long getServerTime(String paramString)
 /*     */     throws IOException
 /*     */   {
-/* 120 */     Object localObject = exchange(paramString, new ObjectExchanger() {
+/* 121 */     Object localObject = exchange(paramString, new ObjectExchanger() {
 /*     */       public void writeRequest(ObjectOutputStream paramObjectOutputStream) throws IOException {
-/* 122 */         paramObjectOutputStream.writeInt(23);
+/* 123 */         paramObjectOutputStream.writeInt(23);
 /*     */       }
 /*     */ 
 /*     */       public Object readResponse(ObjectInputStream paramObjectInputStream) throws IOException {
-/* 126 */         long l = paramObjectInputStream.readLong();
-/* 127 */         return new Long(l);
+/* 127 */         long l = paramObjectInputStream.readLong();
+/* 128 */         return new Long(l);
 /*     */       }
 /*     */     });
-/* 130 */     return ((Long)localObject).longValue();
+/* 131 */     return ((Long)localObject).longValue();
+/*     */   }
+/*     */ 
+/*     */   public String getControlCode(String paramString)
+/*     */     throws IOException
+/*     */   {
+/* 143 */     Object localObject = exchange(paramString, new ObjectExchanger() {
+/*     */       public void writeRequest(ObjectOutputStream paramObjectOutputStream) throws IOException {
+/* 145 */         paramObjectOutputStream.writeInt(27);
+/*     */       }
+/*     */ 
+/*     */       public Object readResponse(ObjectInputStream paramObjectInputStream) throws IOException {
+/*     */         try {
+/* 150 */           return paramObjectInputStream.readObject(); } catch (ClassNotFoundException localClassNotFoundException) {
+/*     */         }
+/* 152 */         throw new IOException(localClassNotFoundException.getMessage());
+/*     */       }
+/*     */     });
+/* 156 */     return (String)localObject;
 /*     */   }
 /*     */ 
 /*     */   public void uploadNotification(String paramString1, String paramString2)
 /*     */   {
-/* 143 */     4 local4 = new Runnable(paramString1, paramString2) {
-/*     */       private final String val$remoteURL;
-/*     */       private final String val$msg;
+/* 169 */     5 local5 = new Runnable(paramString1, paramString2)
+/*     */     {
+/*     */       public void run()
+/*     */       {
+/*     */         try
+/*     */         {
+/* 176 */           NetHelper.this.exchange(this.val$remoteURL, new NetHelper.ObjectExchanger()
+/*     */           {
+/*     */             public void writeRequest(ObjectOutputStream paramObjectOutputStream)
+/*     */               throws IOException
+/*     */             {
+/* 184 */               paramObjectOutputStream.writeInt(25);
+/* 185 */               paramObjectOutputStream.writeObject(NetHelper.5.this.val$msg);
+/*     */             }
 /*     */ 
-/*     */       public void run() {
-/*     */         try { NetHelper.this.exchange(this.val$remoteURL, new NetHelper.5(this));
+/*     */             public Object readResponse(ObjectInputStream paramObjectInputStream)
+/*     */               throws IOException
+/*     */             {
+/* 196 */               int i = paramObjectInputStream.readInt();
+/* 197 */               return new Integer(i);
+/*     */             }
+/*     */           });
 /*     */         }
 /*     */         catch (IOException localIOException)
 /*     */         {
 /*     */         }
 /*     */       }
 /*     */     };
-/* 178 */     Thread localThread = new Thread(local4);
-/* 179 */     localThread.setDaemon(true);
-/* 180 */     localThread.start();
+/* 204 */     Thread localThread = new Thread(local5);
+/* 205 */     localThread.setDaemon(true);
+/* 206 */     localThread.start();
 /*     */   }
 /*     */ 
-/*     */   public void uploadData(Component paramComponent, String paramString1, String paramString2, long paramLong1, long paramLong2, String paramString3, byte[] paramArrayOfByte, boolean paramBoolean, LogWriter paramLogWriter, TraceHistorySet paramTraceHistorySet)
+/*     */   public void uploadData(Component paramComponent, String paramString1, String paramString2, long paramLong1, long paramLong2, String paramString3, byte[] paramArrayOfByte, boolean paramBoolean, LogWriter paramLogWriter, EA paramEA)
 /*     */     throws UploadFailedException, UploadCancelledException, IllegalStateException
 /*     */   {
-/* 207 */     ResourceBundle localResourceBundle = DTWApplet.getResourceBundle();
+/* 233 */     ResourceBundle localResourceBundle = DTWApplet.getResourceBundle();
 /*     */     ByteArrayOutputStream localByteArrayOutputStream;
-/* 210 */     if (paramArrayOfByte != null)
-/* 211 */       localByteArrayOutputStream = new ByteArrayOutputStream(paramArrayOfByte.length);
+/* 236 */     if (paramArrayOfByte != null)
+/* 237 */       localByteArrayOutputStream = new ByteArrayOutputStream(paramArrayOfByte.length);
 /*     */     else
-/* 213 */       localByteArrayOutputStream = new ByteArrayOutputStream(paramString2.getBytes().length);
+/* 239 */       localByteArrayOutputStream = new ByteArrayOutputStream(paramString2.getBytes().length);
 /*     */     Object localObject2;
 /*     */     int i;
 /*     */     ByteArrayInputStream localByteArrayInputStream;
 /*     */     try
 /*     */     {
-/* 222 */       ObjectOutputStream localObjectOutputStream = new ObjectOutputStream(localByteArrayOutputStream);
+/* 248 */       ObjectOutputStream localObjectOutputStream = new ObjectOutputStream(localByteArrayOutputStream);
 /*     */       try {
-/* 224 */         if (paramArrayOfByte != null) {
-/* 225 */           localObjectOutputStream.writeInt(21);
-/* 226 */           localObjectOutputStream.writeObject(paramString2);
-/* 227 */           localObjectOutputStream.writeLong(paramLong1);
-/* 228 */           localObjectOutputStream.writeLong(paramLong2);
-/* 229 */           localObjectOutputStream.writeObject(paramString3);
-/* 230 */           localObjectOutputStream.writeBoolean(paramBoolean);
-/* 231 */           localObjectOutputStream.writeInt(paramArrayOfByte.length);
-/* 232 */           localObjectOutputStream.write(paramArrayOfByte);
+/* 250 */         if (paramArrayOfByte != null) {
+/* 251 */           localObjectOutputStream.writeInt(21);
+/* 252 */           localObjectOutputStream.writeObject(paramString2);
+/* 253 */           localObjectOutputStream.writeLong(paramLong1);
+/* 254 */           localObjectOutputStream.writeLong(paramLong2);
+/* 255 */           localObjectOutputStream.writeObject(paramString3);
+/* 256 */           localObjectOutputStream.writeBoolean(paramBoolean);
+/* 257 */           localObjectOutputStream.writeInt(paramArrayOfByte.length);
+/* 258 */           localObjectOutputStream.write(paramArrayOfByte);
 /*     */ 
-/* 236 */           if (paramTraceHistorySet == null) {
-/* 237 */             localObjectOutputStream.writeBoolean(false);
+/* 262 */           if (paramEA == null) {
+/* 263 */             localObjectOutputStream.writeBoolean(false);
 /*     */           } else {
-/* 239 */             localObjectOutputStream.writeBoolean(true);
-/* 240 */             writeTraceHistory(localObjectOutputStream, paramTraceHistorySet.getPumpTraceHistory());
-/* 241 */             writeTraceHistory(localObjectOutputStream, paramTraceHistorySet.getDetailTraceHistory());
-/* 242 */             writeTraceHistory(localObjectOutputStream, paramTraceHistorySet.getNewAlarmTraceHistory());
-/* 243 */             writeTraceHistory(localObjectOutputStream, paramTraceHistorySet.getOldAlarmTraceHistory());
+/* 265 */             localObjectOutputStream.writeBoolean(true);
+/* 266 */             writeTraceHistory(localObjectOutputStream, paramEA.C());
+/* 267 */             writeTraceHistory(localObjectOutputStream, paramEA.E());
+/* 268 */             writeTraceHistory(localObjectOutputStream, paramEA.D());
+/* 269 */             writeTraceHistory(localObjectOutputStream, paramEA.B());
 /*     */           }
 /*     */         } else {
-/* 246 */           localObjectOutputStream.writeInt(22);
-/* 247 */           localObjectOutputStream.writeObject(paramString2);
+/* 272 */           localObjectOutputStream.writeInt(22);
+/* 273 */           localObjectOutputStream.writeObject(paramString2);
 /*     */         }
-/* 249 */         localObjectOutputStream.flush();
+/* 275 */         localObjectOutputStream.flush();
 /*     */       } finally {
-/* 251 */         localObjectOutputStream.close();
+/* 277 */         localObjectOutputStream.close();
 /*     */       }
-/* 253 */       localObject2 = localByteArrayOutputStream.toByteArray();
-/* 254 */       i = localObject2.length;
-/* 255 */       localByteArrayInputStream = new ByteArrayInputStream(localObject2);
+/* 279 */       localObject2 = localByteArrayOutputStream.toByteArray();
+/* 280 */       i = localObject2.length;
+/* 281 */       localByteArrayInputStream = new ByteArrayInputStream(localObject2);
 /*     */     } catch (IOException localIOException1) {
-/* 257 */       localIOException1.printStackTrace(paramLogWriter);
-/* 258 */       throw new UploadFailedException(localResourceBundle.getString("error.MSG_UPLOAD_IO"));
+/* 283 */       localIOException1.printStackTrace(paramLogWriter);
+/* 284 */       throw new UploadFailedException(localResourceBundle.getString("error.MSG_UPLOAD_IO"));
 /*     */     }URLConnection localURLConnection;
 /*     */     Object localObject3;
 /*     */     Object localObject4;
 /*     */     try { localObject2 = new URL(paramString1);
-/* 266 */       localURLConnection = ((URL)localObject2).openConnection();
-/* 267 */       localURLConnection.setRequestProperty("Content-Type", "application/octet-stream");
-/* 268 */       localURLConnection.setDoOutput(true);
-/* 269 */       localURLConnection.setDoInput(true);
-/* 270 */       localURLConnection.setUseCaches(false);
-/* 271 */       localObject3 = localURLConnection.getOutputStream();
+/* 292 */       localURLConnection = ((URL)localObject2).openConnection();
+/* 293 */       localURLConnection.setRequestProperty("Content-Type", "application/octet-stream");
+/* 294 */       localURLConnection.setDoOutput(true);
+/* 295 */       localURLConnection.setDoInput(true);
+/* 296 */       localURLConnection.setUseCaches(false);
+/* 297 */       localObject3 = localURLConnection.getOutputStream();
 /*     */ 
-/* 273 */       localObject4 = new ProgressMonitorInputStream(paramComponent, localResourceBundle.getString("wizard.upload.sending"), localByteArrayInputStream);
+/* 299 */       localObject4 = new ProgressMonitorInputStream(paramComponent, localResourceBundle.getString("wizard.upload.sending"), localByteArrayInputStream);
 /*     */ 
-/* 275 */       ProgressMonitor localProgressMonitor = ((ProgressMonitorInputStream)localObject4).getProgressMonitor();
-/* 276 */       localProgressMonitor.setMaximum(i);
+/* 301 */       ProgressMonitor localProgressMonitor = ((ProgressMonitorInputStream)localObject4).getProgressMonitor();
+/* 302 */       localProgressMonitor.setMaximum(i);
 /*     */ 
-/* 278 */       writeToStream((InputStream)localObject4, (OutputStream)localObject3);
+/* 304 */       writeToStream((InputStream)localObject4, (OutputStream)localObject3);
 /*     */     } catch (InterruptedIOException localInterruptedIOException) {
-/* 280 */       localInterruptedIOException.printStackTrace(paramLogWriter);
-/* 281 */       throw new UploadCancelledException(localResourceBundle.getString("error.MSG_UPLOAD_CANCELLED"));
+/* 306 */       localInterruptedIOException.printStackTrace(paramLogWriter);
+/* 307 */       throw new UploadCancelledException(localResourceBundle.getString("error.MSG_UPLOAD_CANCELLED"));
 /*     */     } catch (IOException localIOException2) {
-/* 283 */       localIOException2.printStackTrace(paramLogWriter);
-/* 284 */       throw new UploadFailedException(localResourceBundle.getString("error.MSG_UPLOAD_IO_SEND"));
+/* 309 */       localIOException2.printStackTrace(paramLogWriter);
+/* 310 */       throw new UploadFailedException(localResourceBundle.getString("error.MSG_UPLOAD_IO_SEND"));
 /*     */     }
 /*     */ 
 /*     */     int j;
 /*     */     try
 /*     */     {
-/* 294 */       localObject3 = localURLConnection.getInputStream();
-/* 295 */       localObject4 = new ObjectInputStream((InputStream)localObject3);
+/* 320 */       localObject3 = localURLConnection.getInputStream();
+/* 321 */       localObject4 = new ObjectInputStream((InputStream)localObject3);
 /*     */       try {
-/* 297 */         j = ((ObjectInputStream)localObject4).readInt();
+/* 323 */         j = ((ObjectInputStream)localObject4).readInt();
 /*     */       } finally {
-/* 299 */         ((ObjectInputStream)localObject4).close();
+/* 325 */         ((ObjectInputStream)localObject4).close();
 /*     */       }
 /*     */     } catch (IOException localIOException3) {
-/* 302 */       localIOException3.printStackTrace(paramLogWriter);
-/* 303 */       throw new UploadFailedException(localResourceBundle.getString("error.MSG_UPLOAD_IO_RESPONSE"));
+/* 328 */       localIOException3.printStackTrace(paramLogWriter);
+/* 329 */       throw new UploadFailedException(localResourceBundle.getString("error.MSG_UPLOAD_IO_RESPONSE"));
 /*     */     }
 /*     */ 
-/* 307 */     if (paramArrayOfByte == null) {
-/* 308 */       return;
+/* 333 */     if (paramArrayOfByte == null) {
+/* 334 */       return;
 /*     */     }
 /*     */ 
-/* 311 */     switch (j) {
+/* 337 */     switch (j) {
 /*     */     case 46:
-/* 313 */       return;
+/* 339 */       return;
 /*     */     case 49:
-/* 315 */       throw new UploadFailedException(localResourceBundle.getString("error.MSG_RESPONSE_TRANSMIT"));
+/* 341 */       throw new UploadFailedException(localResourceBundle.getString("error.MSG_RESPONSE_TRANSMIT"));
 /*     */     case 47:
-/* 317 */       throw new UploadFailedException(localResourceBundle.getString("error.MSG_RESPONSE_SERVER"));
+/* 343 */       throw new UploadFailedException(localResourceBundle.getString("error.MSG_RESPONSE_SERVER"));
 /*     */     case 48:
-/* 319 */       throw new UploadFailedException(localResourceBundle.getString("error.MSG_RESPONSE_CLIENT"));
+/* 345 */       throw new UploadFailedException(localResourceBundle.getString("error.MSG_RESPONSE_CLIENT"));
 /*     */     }
-/* 321 */     throw new UploadFailedException(localResourceBundle.getString("error.MSG_RESPONSE"));
+/* 347 */     throw new UploadFailedException(localResourceBundle.getString("error.MSG_RESPONSE"));
 /*     */   }
 /*     */ 
 /*     */   public void uploadData(Component paramComponent, String paramString1, String paramString2, LogWriter paramLogWriter)
 /*     */     throws UploadFailedException, UploadCancelledException
 /*     */   {
-/* 337 */     uploadData(paramComponent, paramString1, paramString2, 0L, 0L, null, null, false, paramLogWriter, null);
+/* 363 */     uploadData(paramComponent, paramString1, paramString2, 0L, 0L, null, null, false, paramLogWriter, null);
 /*     */   }
 /*     */ 
-/*     */   private void writeTraceHistory(ObjectOutputStream paramObjectOutputStream, TraceHistorySet.TraceHistory paramTraceHistory)
+/*     */   private void writeTraceHistory(ObjectOutputStream paramObjectOutputStream, EA._A param_A)
 /*     */     throws IOException
 /*     */   {
-/* 349 */     paramObjectOutputStream.writeObject(paramTraceHistory.getFileID());
-/* 350 */     paramObjectOutputStream.writeInt(paramTraceHistory.getData().length);
-/* 351 */     paramObjectOutputStream.write(paramTraceHistory.getData());
+/* 375 */     paramObjectOutputStream.writeObject(param_A.A());
+/* 376 */     paramObjectOutputStream.writeInt(param_A.B().length);
+/* 377 */     paramObjectOutputStream.write(param_A.B());
 /*     */   }
 /*     */ 
 /*     */   private Object exchange(String paramString, ObjectExchanger paramObjectExchanger)
 /*     */     throws IOException
 /*     */   {
-/* 364 */     URL localURL = new URL(paramString);
-/* 365 */     URLConnection localURLConnection = localURL.openConnection();
-/* 366 */     localURLConnection.setRequestProperty("Content-Type", "application/octet-stream");
-/* 367 */     localURLConnection.setDoOutput(true);
-/* 368 */     localURLConnection.setDoInput(true);
-/* 369 */     localURLConnection.setUseCaches(false);
-/* 370 */     OutputStream localOutputStream = localURLConnection.getOutputStream();
-/* 371 */     ObjectOutputStream localObjectOutputStream = new ObjectOutputStream(localOutputStream);
+/* 390 */     URL localURL = new URL(paramString);
+/* 391 */     URLConnection localURLConnection = localURL.openConnection();
+/* 392 */     localURLConnection.setRequestProperty("Content-Type", "application/octet-stream");
+/* 393 */     localURLConnection.setDoOutput(true);
+/* 394 */     localURLConnection.setDoInput(true);
+/* 395 */     localURLConnection.setUseCaches(false);
+/* 396 */     OutputStream localOutputStream = localURLConnection.getOutputStream();
+/* 397 */     ObjectOutputStream localObjectOutputStream = new ObjectOutputStream(localOutputStream);
 /*     */     try {
-/* 373 */       paramObjectExchanger.writeRequest(localObjectOutputStream);
-/* 374 */       localObjectOutputStream.flush();
+/* 399 */       paramObjectExchanger.writeRequest(localObjectOutputStream);
+/* 400 */       localObjectOutputStream.flush();
 /*     */     } finally {
-/* 376 */       localObjectOutputStream.close(); } 
+/* 402 */       localObjectOutputStream.close(); } 
 /*     */ InputStream localInputStream = localURLConnection.getInputStream();
-/* 380 */     ObjectInputStream localObjectInputStream = new ObjectInputStream(localInputStream);
+/* 406 */     ObjectInputStream localObjectInputStream = new ObjectInputStream(localInputStream);
 /*     */     Object localObject2;
 /*     */     try { localObject2 = paramObjectExchanger.readResponse(localObjectInputStream);
 /*     */     } finally {
-/* 385 */       localObjectInputStream.close();
+/* 411 */       localObjectInputStream.close();
 /*     */     }
-/* 387 */     return localObject2;
+/* 413 */     return localObject2;
 /*     */   }
 /*     */ 
 /*     */   private static abstract interface ObjectExchanger

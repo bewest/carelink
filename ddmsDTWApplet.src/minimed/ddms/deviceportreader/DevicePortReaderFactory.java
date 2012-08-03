@@ -1,174 +1,173 @@
-/*     */ package minimed.ddms.deviceportreader;
+/*     */ package minimed.ddms.A;
 /*     */ 
 /*     */ import java.io.PrintWriter;
 /*     */ import minimed.util.Contract;
 /*     */ 
-/*     */ public final class DevicePortReaderFactory
+/*     */ public final class I
 /*     */ {
-/*     */   public static final int ID_MINIMED_508 = 0;
-/*     */   public static final int ID_MINIMED_511 = 1;
-/*     */   public static final int ID_LIFESCAN_OTPROFILE = 2;
-/*     */   public static final int ID_LIFESCAN_OTBASIC = 4;
-/*     */   public static final int ID_LIFESCAN_OTULTRA = 5;
-/*     */   public static final int ID_LIFESCAN_FASTTAKE = 6;
-/*     */   public static final int ID_LIFESCAN_SURESTEP = 7;
-/*     */   public static final int ID_BAYER_DEX = 8;
-/*     */   public static final int ID_BAYER_ELITE_XL = 9;
-/*     */   public static final int ID_MEDISENSE_XTRA = 10;
-/*     */   public static final int ID_MEDISENSE_SOFTACT = 11;
-/*     */   public static final int ID_THERASENSE_FREESTYLE = 12;
-/*     */   public static final int ID_MINIMED_PARADIGM2 = 13;
-/*     */   public static final int LINK_DEVICE_COMLINK = 14;
-/*     */   public static final int LINK_DEVICE_PARADIGMLINK = 15;
-/*     */   public static final int LINK_DEVICE_COMLINKUSB = 19;
-/*     */   public static final int ID_MINIMED_PARADIGMLINK_METER = 16;
-/*     */   public static final int ID_MINIMED_LOGIC_METER = 17;
-/*     */   public static final int LINK_DEVICE_COMSTATION = 18;
-/*     */   public static final int ID_BAYER_BREEZE = 19;
-/*     */   public static final int ID_BAYER_CONTOUR = 20;
-/*     */   public static final int ID_LIFESCAN_OTULTRASMART = 21;
-/*     */   public static final int ID_ROCHE_AVIVA = 22;
-/*     */   public static final int ID_ROCHE_ACTIVE = 23;
-/*     */   public static final int ID_ROCHE_COMPACT = 24;
-/*     */   public static final int ID_ROCHE_COMPACTPLUS = 25;
-/*     */   public static final int ID_LIFESCAN_OTULTRAMINI = 26;
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_512 = "512";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_712 = "712";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_515 = "515";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_715 = "715";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_522 = "522";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_722 = "722";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_522K = "522K";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_722K = "722K";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_GUARDIAN3 = "7100";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_GUARDIAN3B = "7100B";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_GUARDIAN3_7200 = "7200";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_GUARDIAN3K = "7100K";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_523 = "523";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_723 = "723";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_523K = "523K";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_723K = "723K";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_553 = "553";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_753 = "753";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_554 = "554";
-/*     */   public static final String MINIMED_PARADIGM2_MODEL_754 = "754";
+/*     */   public static final int o = 2;
+/*     */   public static final int E = 4;
+/*     */   public static final int R = 5;
+/*     */   public static final int W = 6;
+/*     */   public static final int S = 7;
+/*     */   public static final int C = 8;
+/*     */   public static final int Q = 9;
+/*     */   public static final int Y = 10;
+/*     */   public static final int F = 11;
+/*     */   public static final int G = 12;
+/*     */   public static final int X = 13;
+/*     */   public static final int f = 14;
+/*     */   public static final int d = 15;
+/*     */   public static final int r = 19;
+/*     */   public static final int l = 20;
+/*     */   public static final int p = 16;
+/*     */   public static final int h = 17;
+/*     */   public static final int I = 19;
+/*     */   public static final int K = 20;
+/*     */   public static final int t = 21;
+/*     */   public static final int A = 22;
+/*     */   public static final int J = 23;
+/*     */   public static final int Z = 24;
+/*     */   public static final int P = 25;
+/*     */   public static final int g = 26;
+/*     */   public static final int H = 27;
+/*     */   public static final int B = 28;
+/*     */   public static final String O = "512";
+/*     */   public static final String s = "712";
+/*     */   public static final String L = "515";
+/*     */   public static final String q = "715";
+/*     */   public static final String m = "522";
+/*     */   public static final String b = "722";
+/*     */   public static final String T = "522K";
+/*     */   public static final String N = "722K";
+/*     */   public static final String M = "7100";
+/*     */   public static final String V = "7100B";
+/*     */   public static final String e = "7200";
+/*     */   public static final String U = "7100K";
+/*     */   public static final String j = "523";
+/*     */   public static final String _ = "723";
+/*     */   public static final String D = "523K";
+/*     */   public static final String i = "723K";
+/*     */   public static final String n = "553";
+/*     */   public static final String c = "753";
+/*     */   public static final String k = "554";
+/*     */   public static final String a = "754";
 /*     */ 
-/*     */   public static DevicePortReader makeDevice(int paramInt1, PrintWriter paramPrintWriter, int paramInt2, int paramInt3)
+/*     */   public static G A(int paramInt1, PrintWriter paramPrintWriter, int paramInt2, int paramInt3)
 /*     */   {
 /* 328 */     Object localObject = null;
 /*     */ 
 /* 331 */     if (paramPrintWriter != null) {
-/* 332 */       MedicalDevice.setLogBuffer(paramPrintWriter);
+/* 332 */       O.A(paramPrintWriter);
 /*     */     }
+/* 334 */     O.D(paramInt2);
 /*     */ 
-/* 335 */     switch (paramInt1) {
-/*     */     case 0:
-/* 337 */       localObject = new MM508();
-/* 338 */       break;
-/*     */     case 1:
-/* 340 */       localObject = new MM511(paramInt3);
-/* 341 */       break;
+/* 336 */     switch (paramInt1)
+/*     */     {
 /*     */     case 13:
-/* 344 */       localObject = new MMParadigm2Proxy(paramInt3);
-/* 345 */       break;
+/* 339 */       localObject = new X(paramInt3);
+/* 340 */       break;
 /*     */     case 16:
-/* 347 */       localObject = new MMParadigmLinkMeter();
-/* 348 */       break;
+/* 342 */       localObject = new F();
+/* 343 */       break;
 /*     */     case 17:
-/* 350 */       localObject = new MMLogicMeter();
-/* 351 */       break;
+/* 345 */       localObject = new T();
+/* 346 */       break;
 /*     */     case 2:
-/* 353 */       localObject = new LSOneTouchProfile();
-/* 354 */       break;
+/* 348 */       localObject = new V();
+/* 349 */       break;
 /*     */     case 4:
-/* 356 */       localObject = new LSOneTouchBasic();
-/* 357 */       break;
+/* 351 */       localObject = new q();
+/* 352 */       break;
 /*     */     case 6:
-/* 359 */       localObject = new LSFastTake();
-/* 360 */       break;
+/* 354 */       localObject = new s();
+/* 355 */       break;
 /*     */     case 7:
-/* 362 */       localObject = new LSSureStep();
-/* 363 */       break;
+/* 357 */       localObject = new i();
+/* 358 */       break;
 /*     */     case 5:
-/* 365 */       localObject = new LSOneTouchUltra();
-/* 366 */       break;
+/* 360 */       localObject = new B();
+/* 361 */       break;
 /*     */     case 21:
-/* 368 */       localObject = new LSOneTouchUltraSmart();
-/* 369 */       break;
+/* 363 */       localObject = new R();
+/* 364 */       break;
 /*     */     case 26:
-/* 371 */       localObject = new LSOneTouchUltraMini();
-/* 372 */       break;
+/* 366 */       localObject = new h();
+/* 367 */       break;
 /*     */     case 10:
-/* 374 */       localObject = new MedisenseXtra();
-/* 375 */       break;
+/* 369 */       localObject = new L();
+/* 370 */       break;
 /*     */     case 11:
-/* 377 */       localObject = new MedisenseSofTact();
-/* 378 */       break;
+/* 372 */       localObject = new U();
+/* 373 */       break;
 /*     */     case 8:
-/* 380 */       localObject = new BayerDEX();
-/* 381 */       break;
+/* 375 */       localObject = new o();
+/* 376 */       break;
 /*     */     case 9:
-/* 383 */       localObject = new BayerEliteXL();
-/* 384 */       break;
+/* 378 */       localObject = new g();
+/* 379 */       break;
 /*     */     case 19:
-/* 386 */       localObject = new BayerBreeze();
-/* 387 */       break;
+/* 381 */       localObject = new Y();
+/* 382 */       break;
 /*     */     case 20:
-/* 389 */       localObject = new BayerContour();
-/* 390 */       break;
+/* 384 */       localObject = new r();
+/* 385 */       break;
+/*     */     case 27:
+/* 387 */       localObject = new k();
+/* 388 */       break;
+/*     */     case 28:
+/* 390 */       localObject = new j();
+/* 391 */       break;
 /*     */     case 12:
-/* 392 */       localObject = new TheraSenseFreeStyle();
-/* 393 */       break;
+/* 393 */       localObject = new A();
+/* 394 */       break;
 /*     */     case 22:
-/* 395 */       localObject = new RocheAviva();
-/* 396 */       break;
+/* 396 */       localObject = new S();
+/* 397 */       break;
 /*     */     case 23:
 /*     */     case 24:
 /*     */     case 25:
-/* 400 */       localObject = new RocheActiveAndCompact(paramInt1);
-/* 401 */       break;
+/* 401 */       localObject = new C(paramInt1);
+/* 402 */       break;
 /*     */     case 3:
 /*     */     case 14:
 /*     */     case 15:
 /*     */     case 18:
 /*     */     default:
-/* 404 */       Contract.unreachable();
+/* 405 */       Contract.unreachable();
 /*     */     }
 /*     */ 
-/* 408 */     if (localObject != null) {
-/* 409 */       ((DevicePortReader)localObject).setMessageLevel(paramInt2);
-/*     */     }
-/*     */ 
-/* 412 */     return (DevicePortReader)localObject;
+/* 409 */     return (G)localObject;
 /*     */   }
 /*     */ 
-/*     */   static String mapLinkDeviceID(int paramInt)
+/*     */   static String A(int paramInt)
 /*     */   {
 /*     */     String str;
-/* 424 */     switch (paramInt) {
+/* 421 */     switch (paramInt) {
 /*     */     case 14:
-/* 426 */       str = "ComLink";
-/* 427 */       break;
+/* 423 */       str = "ComLink";
+/* 424 */       break;
 /*     */     case 19:
-/* 429 */       str = "ComLink2";
-/* 430 */       break;
+/* 426 */       str = "ComLink2";
+/* 427 */       break;
 /*     */     case 15:
-/* 432 */       str = "ParadigmLink";
+/* 429 */       str = "ParadigmLink";
+/* 430 */       break;
+/*     */     case 20:
+/* 432 */       str = "Bayer Contour XT Link";
 /* 433 */       break;
-/*     */     case 18:
-/* 435 */       str = "ComStation";
-/* 436 */       break;
 /*     */     case 16:
 /*     */     case 17:
+/*     */     case 18:
 /*     */     default:
-/* 438 */       str = "UNKNOWN";
+/* 435 */       str = "UNKNOWN";
 /*     */     }
 /*     */ 
-/* 442 */     return str;
+/* 439 */     return str;
 /*     */   }
 /*     */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.DevicePortReaderFactory
+ * Qualified Name:     minimed.ddms.A.I
  * JD-Core Version:    0.6.0
  */

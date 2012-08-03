@@ -125,7 +125,7 @@
 /* 228 */       if ((paramVector.elementAt(i) instanceof String))
 /* 229 */         addLookFor((String)paramVector.elementAt(i), paramInt, false);
 /* 230 */       else if ((paramVector.elementAt(i) instanceof byte[]))
-/* 231 */         addLookFor((byte[])paramVector.elementAt(i), paramInt, false);
+/* 231 */         addLookFor((byte[])(byte[])paramVector.elementAt(i), paramInt, false);
 /*     */       else
 /* 233 */         throw new IOException("waitFor elements must be String or byte[]");
 /*     */     }
@@ -253,12 +253,13 @@
 /* 369 */     return paramSerialPort;
 /*     */   }
 /*     */ 
-/*     */   /** @deprecated */
-/*     */   public void setAbortCheck(int paramInt) {
+/*     */   public void setAbortCheck(int paramInt)
+/*     */   {
 /* 375 */     this.abortCheckPeriod = paramInt;
 /*     */   }
-/*     */   /** @deprecated */
-/*     */   public int getAbortCheck() {
+/*     */ 
+/*     */   public int getAbortCheck()
+/*     */   {
 /* 380 */     return this.abortCheckPeriod;
 /*     */   }
 /*     */ 
@@ -289,18 +290,21 @@
 /*     */ 
 /*     */   public byte[] getData()
 /*     */   {
+/*     */     byte[] arrayOfByte;
+/*     */     int i;
 /* 427 */     if (this.rcvCount <= this.saveBuf.length) {
 /* 428 */       arrayOfByte = new byte[this.rcvCount];
-/* 429 */       for (i = 0; i < this.rcvCount; i++) {
+/* 429 */       for (i = 0; i < this.rcvCount; i++)
 /* 430 */         arrayOfByte[i] = this.saveBuf[i];
-/*     */       }
 /*     */     }
-/* 433 */     byte[] arrayOfByte = new byte[this.saveBuf.length];
-/* 434 */     int i = this.ringIndex;
-/* 435 */     if (i < 0) i = this.saveBuf.length - 1;
-/* 436 */     for (int j = 0; j < this.saveBuf.length; j++) {
-/* 437 */       arrayOfByte[j] = this.saveBuf[(i++)];
-/* 438 */       if (i != this.saveBuf.length) continue; i = 0;
+/*     */     else {
+/* 433 */       arrayOfByte = new byte[this.saveBuf.length];
+/* 434 */       i = this.ringIndex;
+/* 435 */       if (i < 0) i = this.saveBuf.length - 1;
+/* 436 */       for (int j = 0; j < this.saveBuf.length; j++) {
+/* 437 */         arrayOfByte[j] = this.saveBuf[(i++)];
+/* 438 */         if (i != this.saveBuf.length) continue; i = 0;
+/*     */       }
 /*     */     }
 /*     */ 
 /* 442 */     return arrayOfByte;

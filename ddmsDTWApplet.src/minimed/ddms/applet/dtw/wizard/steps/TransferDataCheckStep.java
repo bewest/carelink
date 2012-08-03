@@ -19,7 +19,6 @@
 /*     */ import minimed.ddms.applet.dtw.wizard.WizardConfig;
 /*     */ import minimed.ddms.applet.dtw.wizard.WizardSelections;
 /*     */ import minimed.ddms.applet.dtw.wizard.WizardStep;
-/*     */ import minimed.ddms.deviceportreader.DevicePortReader;
 /*     */ import minimed.ddms.text.Formats;
 /*     */ import minimed.util.Contract;
 /*     */ 
@@ -167,175 +166,180 @@
 /*     */       else {
 /* 243 */         localObject4 = this.m_resources.getString((String)localObject4);
 /*     */       }
+/* 245 */       localObject4 = fixForDisplay((String)localObject4);
 /*     */ 
-/* 246 */       localObject4 = ((String)localObject4).replaceAll("<br>", " ");
-/*     */ 
-/* 248 */       str4 = Wizard.mapToWizardDeviceSelection((String)localObject3);
-/* 249 */       if (getWizard().isDeviceSelectionAPump())
-/* 250 */         str4 = formatPumpDevice(str4);
-/* 251 */       else if (getWizard().isDeviceSelectionAMeter()) {
-/* 252 */         str4 = formatMeterDevice(str4);
+/* 247 */       str4 = Wizard.mapToWizardDeviceSelection((String)localObject3);
+/* 248 */       if (getWizard().isDeviceSelectionAPump())
+/* 249 */         str4 = formatPumpDevice(str4);
+/* 250 */       else if (getWizard().isDeviceSelectionAMeter()) {
+/* 251 */         str4 = formatMeterDevice(str4);
 /*     */       }
 /*     */       else {
-/* 255 */         str4 = this.m_resources.getString(str4);
+/* 254 */         str4 = this.m_resources.getString(str4);
+/*     */       }
+/* 256 */       str4 = fixForDisplay(str4);
+/* 257 */       String str5 = "wizard.transferstep.check.devicediff.meter";
+/* 258 */       if (bool3)
+/* 259 */         str5 = "wizard.transferstep.check.devicediff.cgm";
+/* 260 */       else if (bool1) {
+/* 261 */         str5 = "wizard.transferstep.check.devicediff.pump";
 /*     */       }
 /*     */ 
-/* 258 */       str4 = str4.replaceAll("<br>", " ");
-/* 259 */       String str5 = "wizard.transferstep.check.devicediff.meter";
-/* 260 */       if (bool3)
-/* 261 */         str5 = "wizard.transferstep.check.devicediff.cgm";
-/* 262 */       else if (bool1) {
-/* 263 */         str5 = "wizard.transferstep.check.devicediff.pump";
-/*     */       }
-/*     */ 
-/* 266 */       localStringBuffer.append(MessageHelper.format(this.m_resources.getString(str5), new Object[] { localObject4, localObject1, str4, localObject2 }));
+/* 264 */       localStringBuffer.append(MessageHelper.format(this.m_resources.getString(str5), new Object[] { localObject4, localObject1, str4, localObject2 }));
 /*     */     }
 /*     */ 
-/* 273 */     if (i != 0) {
-/* 274 */       localStringBuffer.append(this.m_resources.getString("wizard.transferstep.check.failed"));
+/* 271 */     if (i != 0) {
+/* 272 */       localStringBuffer.append(this.m_resources.getString("wizard.transferstep.check.failed"));
 /*     */ 
-/* 276 */       displayStep(str1 + localStringBuffer.toString());
+/* 274 */       displayStep(str1 + localStringBuffer.toString());
 /*     */     }
 /*     */     else {
-/* 279 */       nextRequest();
+/* 277 */       nextRequest();
 /*     */     }
 /*     */   }
 /*     */ 
 /*     */   protected final void backRequest()
 /*     */   {
-/* 288 */     getWizard().showPreviousStep(2);
+/* 286 */     getWizard().showPreviousStep(2);
+/*     */   }
+/*     */ 
+/*     */   private String fixForDisplay(String paramString)
+/*     */   {
+/* 296 */     String str = "/";
+/* 297 */     WizardSelections localWizardSelections = getWizard().getConfig().getWizardSelections();
+/*     */ 
+/* 299 */     if (localWizardSelections.isRocheMeter()) {
+/* 300 */       str = " ";
+/*     */     }
+/* 302 */     return paramString.replaceAll("<br>", str);
 /*     */   }
 /*     */ 
 /*     */   private void displayStep(String paramString)
 /*     */   {
-/* 298 */     getLeftBannerLabel().setText(this.m_resources.getString("wizard.transferstep.check.conditions"));
-/* 299 */     Object localObject = new ImageIcon(getImage("wizard.read.icon"));
-/* 300 */     getRightBannerLabel().setIcon((Icon)localObject);
+/* 312 */     getLeftBannerLabel().setText(this.m_resources.getString("wizard.transferstep.check.conditions"));
+/* 313 */     Object localObject = new ImageIcon(getImage("wizard.read.icon"));
+/* 314 */     getRightBannerLabel().setIcon((Icon)localObject);
 /*     */ 
-/* 303 */     localObject = getQuestionIcon();
-/* 304 */     getTopImageLabel().setIcon((Icon)localObject);
+/* 317 */     localObject = getQuestionIcon();
+/* 318 */     getTopImageLabel().setIcon((Icon)localObject);
 /*     */ 
-/* 307 */     super.stepShown();
-/* 308 */     getFinishButton().setEnabled(false);
+/* 321 */     super.stepShown();
+/* 322 */     getFinishButton().setEnabled(false);
 /*     */ 
-/* 310 */     this.m_label.setText("<html>" + paramString + "</html>");
+/* 324 */     this.m_label.setText("<html>" + paramString + "</html>");
 /*     */   }
 /*     */ 
 /*     */   private boolean isTimeMismatch()
 /*     */   {
-/* 321 */     DeviceOperationStep localDeviceOperationStep = (DeviceOperationStep)getWizard().getStep(DeviceOperationStep.class);
+/* 335 */     CaptureResult localCaptureResult = getWizard().getCaptureResult();
+/* 336 */     Date localDate = new Date(localCaptureResult.getClientTimeAtDeviceRead());
+/* 337 */     this.m_deviceTime = localCaptureResult.getClock();
 /*     */ 
-/* 323 */     CaptureResult localCaptureResult = localDeviceOperationStep.getCaptureResult();
-/* 324 */     Date localDate = new Date(localCaptureResult.getClientTimeAtDeviceRead());
-/* 325 */     this.m_deviceTime = localCaptureResult.getDevicePortReader().getClock();
+/* 340 */     long l = Math.abs(localDate.getTime() - this.m_deviceTime.getTime());
 /*     */ 
-/* 328 */     long l = Math.abs(localDate.getTime() - this.m_deviceTime.getTime());
+/* 343 */     boolean bool = l > 600000L;
 /*     */ 
-/* 331 */     boolean bool = l > 600000L;
+/* 345 */     logInfo("isTimeMismatch: client time = " + localDate + ", device time = " + this.m_deviceTime + "; outsideWindow = " + bool);
 /*     */ 
-/* 333 */     logInfo("isTimeMismatch: client time = " + localDate + ", device time = " + this.m_deviceTime + "; outsideWindow = " + bool);
-/*     */ 
-/* 335 */     return bool;
+/* 347 */     return bool;
 /*     */   }
 /*     */ 
 /*     */   private boolean isDifferentPump()
 /*     */   {
-/* 346 */     Contract.preNonNull(this.m_currentPumpUniqueID);
+/* 358 */     Contract.preNonNull(this.m_currentPumpUniqueID);
 /*     */ 
-/* 350 */     if (this.m_lastPumpUniqueID == null)
+/* 362 */     if (this.m_lastPumpUniqueID == null)
 /*     */     {
-/* 352 */       String str1 = getWizard().getConfig().getLastPumpUniqueID();
-/* 353 */       if (str1 != null)
+/* 364 */       String str1 = getWizard().getConfig().getLastPumpUniqueID();
+/* 365 */       if (str1 != null)
 /*     */       {
-/* 359 */         DeviceID localDeviceID = new DeviceID(str1);
+/* 371 */         DeviceID localDeviceID = new DeviceID(str1);
 /*     */ 
-/* 361 */         String str2 = Wizard.resolveServerClassName(localDeviceID.getClassName());
+/* 373 */         String str2 = Wizard.resolveServerClassName(localDeviceID.getClassName());
 /*     */ 
-/* 364 */         this.m_lastPumpUniqueID = new DeviceID(str2, localDeviceID.getSerialNumber());
+/* 376 */         this.m_lastPumpUniqueID = new DeviceID(str2, localDeviceID.getSerialNumber());
 /*     */       }
 /*     */     }
 /*     */     boolean bool;
-/* 369 */     if (this.m_lastPumpUniqueID != null)
+/* 381 */     if (this.m_lastPumpUniqueID != null)
 /*     */     {
-/* 371 */       bool = !this.m_currentPumpUniqueID.equals(this.m_lastPumpUniqueID);
+/* 383 */       bool = !this.m_currentPumpUniqueID.equals(this.m_lastPumpUniqueID);
 /*     */     }
 /*     */     else {
-/* 374 */       bool = false;
+/* 386 */       bool = false;
 /*     */     }
 /*     */ 
-/* 377 */     logInfo("isDifferentPump: last pump ID = " + this.m_lastPumpUniqueID + ", current pump ID = " + this.m_currentPumpUniqueID + "; different = " + bool);
+/* 389 */     logInfo("isDifferentPump: last pump ID = " + this.m_lastPumpUniqueID + ", current pump ID = " + this.m_currentPumpUniqueID + "; different = " + bool);
 /*     */ 
-/* 380 */     return bool;
+/* 392 */     return bool;
 /*     */   }
 /*     */ 
 /*     */   private boolean isDifferentMeter()
 /*     */   {
-/* 391 */     Contract.preNonNull(this.m_currentMeterUniqueID);
+/* 403 */     Contract.preNonNull(this.m_currentMeterUniqueID);
 /*     */ 
-/* 395 */     if (this.m_lastMeterUniqueID == null)
+/* 407 */     if (this.m_lastMeterUniqueID == null)
 /*     */     {
-/* 397 */       String str1 = getWizard().getConfig().getLastMeterUniqueID();
-/* 398 */       if (str1 != null) {
-/* 399 */         DeviceID localDeviceID = new DeviceID(str1);
+/* 409 */       String str1 = getWizard().getConfig().getLastMeterUniqueID();
+/* 410 */       if (str1 != null) {
+/* 411 */         DeviceID localDeviceID = new DeviceID(str1);
 /*     */ 
-/* 401 */         String str2 = Wizard.resolveServerClassName(localDeviceID.getClassName());
+/* 413 */         String str2 = Wizard.resolveServerClassName(localDeviceID.getClassName());
 /*     */ 
-/* 403 */         this.m_lastMeterUniqueID = new DeviceID(str2, localDeviceID.getSerialNumber());
+/* 415 */         this.m_lastMeterUniqueID = new DeviceID(str2, localDeviceID.getSerialNumber());
 /*     */       }
 /*     */     }
 /*     */     boolean bool;
-/* 408 */     if (this.m_lastMeterUniqueID != null)
+/* 420 */     if (this.m_lastMeterUniqueID != null)
 /*     */     {
-/* 410 */       bool = !this.m_currentMeterUniqueID.equals(this.m_lastMeterUniqueID);
+/* 422 */       bool = !this.m_currentMeterUniqueID.equals(this.m_lastMeterUniqueID);
 /*     */     }
 /*     */     else {
-/* 413 */       bool = false;
+/* 425 */       bool = false;
 /*     */     }
 /*     */ 
-/* 416 */     logInfo("isDifferentMeter: last meter ID = " + this.m_lastMeterUniqueID + ", current meter ID = " + this.m_currentMeterUniqueID + "; different = " + bool);
+/* 428 */     logInfo("isDifferentMeter: last meter ID = " + this.m_lastMeterUniqueID + ", current meter ID = " + this.m_currentMeterUniqueID + "; different = " + bool);
 /*     */ 
-/* 419 */     return bool;
+/* 431 */     return bool;
 /*     */   }
 /*     */ 
 /*     */   private boolean isDifferentCGM()
 /*     */   {
-/* 430 */     Contract.preNonNull(this.m_currentCGMUniqueID);
+/* 442 */     Contract.preNonNull(this.m_currentCGMUniqueID);
 /*     */ 
-/* 434 */     if (this.m_lastCGMUniqueID == null)
+/* 446 */     if (this.m_lastCGMUniqueID == null)
 /*     */     {
-/* 436 */       String str1 = getWizard().getConfig().getLastCGMUniqueID();
-/* 437 */       if (str1 != null)
+/* 448 */       String str1 = getWizard().getConfig().getLastCGMUniqueID();
+/* 449 */       if (str1 != null)
 /*     */       {
-/* 443 */         DeviceID localDeviceID = new DeviceID(str1);
+/* 455 */         DeviceID localDeviceID = new DeviceID(str1);
 /*     */ 
-/* 445 */         String str2 = Wizard.resolveServerClassName(localDeviceID.getClassName());
+/* 457 */         String str2 = Wizard.resolveServerClassName(localDeviceID.getClassName());
 /*     */ 
-/* 448 */         this.m_lastCGMUniqueID = new DeviceID(str2, localDeviceID.getSerialNumber());
+/* 460 */         this.m_lastCGMUniqueID = new DeviceID(str2, localDeviceID.getSerialNumber());
 /*     */       }
 /*     */     }
 /*     */     boolean bool;
-/* 453 */     if (this.m_lastCGMUniqueID != null)
+/* 465 */     if (this.m_lastCGMUniqueID != null)
 /*     */     {
-/* 455 */       bool = !this.m_currentCGMUniqueID.equals(this.m_lastCGMUniqueID);
+/* 467 */       bool = !this.m_currentCGMUniqueID.equals(this.m_lastCGMUniqueID);
 /*     */     }
 /*     */     else {
-/* 458 */       bool = false;
+/* 470 */       bool = false;
 /*     */     }
 /*     */ 
-/* 461 */     logInfo("isDifferentCGM: last CGM ID = " + this.m_lastCGMUniqueID + ", current CGM ID = " + this.m_currentCGMUniqueID + "; different = " + bool);
+/* 473 */     logInfo("isDifferentCGM: last CGM ID = " + this.m_lastCGMUniqueID + ", current CGM ID = " + this.m_currentCGMUniqueID + "; different = " + bool);
 /*     */ 
-/* 464 */     return bool;
+/* 476 */     return bool;
 /*     */   }
 /*     */ 
 /*     */   private DeviceID createUniqueID()
 /*     */   {
-/* 475 */     String str1 = Wizard.mapToServerClassName(getWizardSelections().getDeviceSelection());
+/* 487 */     String str1 = Wizard.mapToServerClassName(getWizardSelections().getDeviceSelection());
 /*     */ 
-/* 477 */     DeviceOperationStep localDeviceOperationStep = (DeviceOperationStep)getWizard().getStep(DeviceOperationStep.class);
-/*     */ 
-/* 479 */     CaptureResult localCaptureResult = localDeviceOperationStep.getCaptureResult();
-/* 480 */     String str2 = localCaptureResult.getDevicePortReader().getSerialNumber();
-/* 481 */     return new DeviceID(str1, str2);
+/* 489 */     CaptureResult localCaptureResult = getWizard().getCaptureResult();
+/* 490 */     String str2 = localCaptureResult.getSerialNumber();
+/* 491 */     return new DeviceID(str1, str2);
 /*     */   }
 /*     */ }
 

@@ -11,6 +11,7 @@
 /*     */ import minimed.ddms.applet.dtw.wizard.Wizard;
 /*     */ import minimed.ddms.applet.dtw.wizard.WizardSelections;
 /*     */ import minimed.ddms.applet.dtw.wizard.WizardStep;
+/*     */ import minimed.ddms.applet.dtw.wizard.steps.USBDriverPostInstallStep;
 /*     */ import minimed.util.Contract;
 /*     */ 
 /*     */ public class VerifyConnectionsStep extends WizardStep
@@ -55,28 +56,52 @@
 /*     */   {
 /*  97 */     String str1 = getWizardSelections().getMeterDevice();
 /*  98 */     String str2 = getWizardSelections().getMeterBrand();
+/*     */     String str4;
 /*     */     String str3;
-/* 100 */     if (str2.equals("wizard.selections.SELECTION_BRAND_MINIMED_BD"))
-/* 101 */       str3 = getWizardSelections().m_selectionDeviceAscensiaContourLink;
-/*     */     else {
-/* 103 */       str3 = formatMeterDevice(str1).replaceAll("<br>", " / ");
-/*     */     }
+/* 101 */     if (str2.equals("wizard.selections.SELECTION_BRAND_MINIMED_BD")) {
+/* 102 */       if (str1.equals("wizard.selections.SELECTION_DEVICE_XTLINKMETER"))
+/*     */       {
+/* 104 */         str4 = "wizard.ascensia.contour_xtlink.ul_instructions";
+/* 105 */         str3 = getWizardSelections().m_selectionDeviceAscensiaContourXTLink;
+/*     */       } else {
+/* 107 */         str4 = "wizard.ascensia.contour_link.ul_instructions";
+/* 108 */         str3 = getWizardSelections().m_selectionDeviceAscensiaContourLink;
+/*     */       }
+/*     */     } else {
+/* 111 */       str3 = formatMeterDevice(str1).replaceAll("<br>", " / ");
 /*     */ 
-/* 106 */     if (str1.equals("wizard.selections.SELECTION_DEVICE_ASCENSIA_DEX_METER")) {
-/* 107 */       this.m_labelMainText.setText(MessageHelper.format(this.m_resources.getString("wizard.ascensia.dex.ul_instructions"), new Object[] { str3 }));
+/* 113 */       if (str1.equals("wizard.selections.SELECTION_DEVICE_ASCENSIA_DEX_METER")) {
+/* 114 */         str4 = "wizard.ascensia.dex.ul_instructions";
+/* 115 */       } else if (str1.equals("wizard.selections.SELECTION_DEVICE_ASCENSIA_ELITE_METER"))
+/*     */       {
+/* 117 */         str4 = "wizard.ascensia.elite.ul_instructions";
+/* 118 */       } else if (str1.equals("wizard.selections.SELECTION_DEVICE_ASCENSIA_BREEZE_METER"))
+/*     */       {
+/* 120 */         str4 = "wizard.ascensia.breeze_or_contour.ul_instructions";
+/* 121 */       } else if (str1.equals("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER"))
+/*     */       {
+/* 123 */         str4 = "wizard.ascensia.contour_link.ul_instructions";
+/* 124 */       } else if (str1.equals("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_USB_METER"))
+/*     */       {
+/* 126 */         str4 = "wizard.ascensia.contour_usb.ul_instructions";
+/* 127 */       } else if (str1.equals("wizard.selections.SELECTION_DEVICE_XTLINKMETER"))
+/*     */       {
+/* 129 */         str4 = "wizard.ascensia.contour_xtlink.ul_instructions";
+/*     */       } else {
+/* 131 */         str4 = null;
+/* 132 */         Contract.unreachable();
+/*     */       }
 /*     */     }
-/* 110 */     else if (str1.equals("wizard.selections.SELECTION_DEVICE_ASCENSIA_ELITE_METER"))
+/* 135 */     this.m_labelMainText.setText(MessageHelper.format(this.m_resources.getString(str4), new Object[] { str3 }));
+/*     */   }
+/*     */ 
+/*     */   protected void backRequest()
+/*     */   {
+/* 145 */     if ((getWizard().getPreviousStep() instanceof USBDriverPostInstallStep))
 /*     */     {
-/* 112 */       this.m_labelMainText.setText(MessageHelper.format(this.m_resources.getString("wizard.ascensia.elite.ul_instructions"), new Object[] { str3 }));
+/* 147 */       getWizard().showPreviousStep(3);
 /*     */     }
-/* 115 */     else if ((str1.equals("wizard.selections.SELECTION_DEVICE_ASCENSIA_BREEZE_METER")) || (str1.equals("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER")))
-/*     */     {
-/* 119 */       this.m_labelMainText.setText(MessageHelper.format(this.m_resources.getString("wizard.ascensia.breeze_or_contour.ul_instructions"), new Object[] { str3 }));
-/*     */     }
-/*     */     else
-/*     */     {
-/* 123 */       Contract.unreachable();
-/*     */     }
+/* 149 */     else getWizard().showPreviousStep();
 /*     */   }
 /*     */ }
 

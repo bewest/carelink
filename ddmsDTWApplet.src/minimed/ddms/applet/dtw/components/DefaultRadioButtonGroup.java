@@ -150,9 +150,10 @@
 /*     */ 
 /* 296 */     while ((localEnumeration.hasMoreElements()) && (localObject == null)) {
 /* 297 */       JRadioButton localJRadioButton = (JRadioButton)localEnumeration.nextElement();
-/* 298 */       if (!MessageHelper.removeHtmlDocumentTags(localJRadioButton.getText()).equals(MessageHelper.removeHtmlDocumentTags(paramString)))
-/*     */         continue;
-/* 300 */       localObject = localJRadioButton;
+/* 298 */       if (MessageHelper.removeHtmlDocumentTags(localJRadioButton.getText()).equals(MessageHelper.removeHtmlDocumentTags(paramString)))
+/*     */       {
+/* 300 */         localObject = localJRadioButton;
+/*     */       }
 /*     */     }
 /*     */ 
 /* 304 */     return localObject;

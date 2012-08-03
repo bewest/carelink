@@ -12,12 +12,12 @@
 /*    */ 
 /*    */   protected String getMainText()
 /*    */   {
-/* 50 */     return this.m_resources.getString("wizard.usb.postinstall");
+/* 50 */     return this.m_resources.getString("wizard.driver.postinstall");
 /*    */   }
 /*    */ 
 /*    */   protected String getMainText98SE()
 /*    */   {
-/* 59 */     return this.m_resources.getString("wizard.usb.postinstall.98se");
+/* 59 */     return this.m_resources.getString("wizard.driver.postinstall.98se");
 /*    */   }
 /*    */ }
 

@@ -1,17 +1,17 @@
-/*    */ package minimed.ddms.deviceportreader;
+/*    */ package minimed.ddms.A;
 /*    */ 
-/*    */ final class MedisenseSofTact extends MedisenseBGKetone
+/*    */ final class U extends m
 /*    */ {
-/*    */   public static final int SNAPSHOT_FORMAT_ID = 132;
-/*    */   private static final String PRODUCT_CODE = "AST1";
+/*    */   public static final int ш = 132;
+/*    */   private static final String ч = "AST1";
 /*    */ 
-/*    */   MedisenseSofTact()
+/*    */   U()
 /*    */   {
 /* 43 */     super("Medisense SofTact Meter", 132, 11, "AST1");
 /*    */   }
 /*    */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.MedisenseSofTact
+ * Qualified Name:     minimed.ddms.A.U
  * JD-Core Version:    0.6.0
  */

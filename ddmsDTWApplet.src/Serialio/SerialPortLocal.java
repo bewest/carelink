@@ -1,251 +1,326 @@
 /*      */ package Serialio;
 /*      */ 
+/*      */ import Serialio.tool.SortVector;
+/*      */ import Serialio.tool.StringCompare;
 /*      */ import java.io.File;
+/*      */ import java.io.FileNotFoundException;
 /*      */ import java.io.IOException;
 /*      */ import java.io.PrintStream;
+/*      */ import java.util.ArrayList;
+/*      */ import java.util.Collections;
 /*      */ import java.util.Enumeration;
+/*      */ import java.util.List;
 /*      */ import java.util.StringTokenizer;
 /*      */ import java.util.Vector;
+/*      */ import minimed.util.OSInfo;
 /*      */ 
 /*      */ public class SerialPortLocal
 /*      */   implements SerialPort
 /*      */ {
-/*   41 */   protected static int buildNum = 9139;
-/*   42 */   private static String banner1 = "Serialio.SerialPortLocal: version 9.4: build " + buildNum;
-/*   43 */   private static String banner2 = "Copyright (c) 1996-2003 Serialio.com, All Rights Reserved.";
-/*   44 */   protected static Vector portList = new Vector();
-/*   45 */   protected static String jspLib = null;
-/*   46 */   protected static boolean jspLibLoaded = false;
-/*   47 */   protected static int maxBitRate = 115200;
+/*      */   public static final String DRIVER_INSTALLATION_ERROR = "Driver Installation Error";
+/*      */   public static final String UNSUPPORTED_PLATFORM_ERROR = "Unsupported Platform Error";
+/*   73 */   public static final String LIB_PATH = OSInfo.getAllUserPath() + File.separator + OSInfo.getUserData() + File.separator + "Medtronic" + File.separator + "ddmsDTWserial" + File.separator;
+/*      */   public static final String WINDOWS_LIB_NAME_32 = "ddmsDTWSerialPort.dll";
+/*      */   public static final String WINDOWS_LIB_NAME_64 = "ddmsDTWSerialPort-64.dll";
+/*      */   public static final String MAC_LIB_NAME_32 = "ddmsDTWSerialPort.jnilib";
+/*      */   public static final String MAC_LIB_NAME_64 = "ddmsDTWSerialPort-64.jnilib";
+/*      */   public static final String INSTALL_SERIALIO_WINDOWS = "Install_serialio.cmd";
+/*      */   public static final String INSTALL_SERIALIO_MAC = "Install_serialio.sh";
+/*  111 */   protected static int buildNum = 9212;
+/*  112 */   private static String banner1 = "Serialio Library: version 10.0.4: build " + buildNum;
+/*  113 */   private static String banner2 = "Copyright (c) 1996-2009 Serialio.com, All Rights Reserved.";
+/*  114 */   protected static StringCompare stringCompare = new StringCompare();
+/*  115 */   protected static SortVector svPortList = new SortVector(stringCompare);
+/*  116 */   protected static Vector portList = new Vector();
+/*  117 */   protected static Vector portListInfo = new Vector();
+/*      */   protected static PortDriverInfo portInfo;
+/*  119 */   protected static String[] comPortNums = null;
+/*  120 */   protected static List portNumList = null;
+/*  121 */   protected static String jspLib = null;
+/*  122 */   protected static boolean jspLibLoaded = false;
+/*  123 */   protected static int maxBitRate = 115200;
+/*  124 */   private static int portListMode = 0;
 /*      */   protected ErrorStatusHandler esh;
-/*   49 */   private String nativeLib = null;
-/*   50 */   private int port = -1;
-/*   51 */   private boolean isOpen = false;
-/*   52 */   private String name = "Serial Port";
+/*  126 */   private String nativeLib = null;
+/*  127 */   private int port = -1;
+/*  128 */   private boolean isOpen = false;
+/*  129 */   private boolean isReady = false;
+/*  130 */   private String name = "Serial Port";
 /*      */   private SerialConfig config;
 /*      */   private FlowControlTask flowControl;
 /*      */   private SerialServerTask ssTask;
 /*      */   private boolean wrSinceTxBufEmpty;
 /*      */   private boolean rdSinceRxBufCheck;
-/*   57 */   private boolean tex = true;
+/*  135 */   private boolean tex = true;
 /*      */ 
-/*   59 */   private static String osName = ""; private static String osArch = ""; private static String vendor = ""; private static String jdkVer = "";
-/*   60 */   private static String devName = "";
-/*   61 */   private static boolean supGetPortList = false;
-/*   62 */   private static boolean javaGetDataTimeout = false;
-/*   63 */   private static boolean supSendBreak = true;
-/*   64 */   private static boolean supSigBreak = false;
-/*   65 */   private static boolean supSigFrameErr = false;
-/*   66 */   private static boolean supSigOverrun = false;
-/*   67 */   private static boolean supSigParityErr = false;
-/*   68 */   private static boolean supRxOverflow = false;
-/*   69 */   private static boolean supSigRing = false;
-/*   70 */   private static boolean supSigCTS = false;
-/*   71 */   private static boolean supSigDSR = false;
-/*   72 */   private static boolean supSigCD = false;
-/*   73 */   private static boolean supSetRTS = false;
-/*   74 */   private static boolean supSetDTR = false;
-/*   75 */   private static boolean supRxReadyCount = false;
-/*   76 */   private static boolean supTxBufCount = false;
-/*   77 */   private static boolean supSetTimeoutTx = false;
-/*   78 */   private static boolean supGetTimeoutTx = false;
-/*   79 */   private static boolean supSetPowerMode = false;
-/*   80 */   private static boolean supGetResumeState = false;
-/*   81 */   private static boolean supGetStatusAPM = false;
+/*  137 */   private static String osName = ""; private static String osArch = ""; private static String vendor = ""; private static String jdkVer = "";
+/*  138 */   private static String devName = "";
+/*  139 */   private static boolean supGetPortList = false;
+/*  140 */   private static boolean javaGetDataTimeout = false;
+/*  141 */   private static boolean supSendBreak = true;
+/*  142 */   private static boolean supSigBreak = false;
+/*  143 */   private static boolean supSigFrameErr = false;
+/*  144 */   private static boolean supSigOverrun = false;
+/*  145 */   private static boolean supSigParityErr = false;
+/*  146 */   private static boolean supRxOverflow = false;
+/*  147 */   private static boolean supSigRing = false;
+/*  148 */   private static boolean supSigCTS = false;
+/*  149 */   private static boolean supSigDSR = false;
+/*  150 */   private static boolean supSigCD = false;
+/*  151 */   private static boolean supSetRTS = false;
+/*  152 */   private static boolean supSetDTR = false;
+/*  153 */   private static boolean supRxReadyCount = false;
+/*  154 */   private static boolean supTxBufCount = false;
+/*  155 */   private static boolean supSetTimeoutTx = false;
+/*  156 */   private static boolean supGetTimeoutTx = false;
+/*  157 */   private static boolean supGetStatusAPM = false;
+/*  158 */   private static boolean supSetPowerMode = false;
+/*  159 */   private static boolean supGetResumeState = false;
+/*  160 */   private static boolean supInstanceLock = false;
+/*  161 */   private static boolean supParityMarkSpace = false;
 /*      */ 
-/*   83 */   private static boolean supNoIndexBitRate = false;
+/*  163 */   private static boolean supNoIndexBitRate = false;
+/*  164 */   private static boolean supDriverInfo = false;
 /*      */   private static NativeHandleMutex mutExSem;
+/*  166 */   private static boolean osFamilyWindows = false;
+/*      */ 
+/*      */   public static String getLibAndPath64()
+/*      */   {
+/*  218 */     return LIB_PATH + (OSInfo.isMac() ? "ddmsDTWSerialPort-64.jnilib" : "ddmsDTWSerialPort-64.dll");
+/*      */   }
+/*      */ 
+/*      */   public static String getLibAndPath32()
+/*      */   {
+/*  227 */     return LIB_PATH + (OSInfo.isMac() ? "ddmsDTWSerialPort.jnilib" : "ddmsDTWSerialPort.dll");
+/*      */   }
+/*      */ 
+/*      */   private static void loadLibrary(String paramString)
+/*      */     throws UnsatisfiedLinkError, FileNotFoundException
+/*      */   {
+/*  240 */     displayMsg("loading library " + paramString);
+/*  241 */     if (new File(paramString).exists()) {
+/*  242 */       System.load(paramString);
+/*      */     } else {
+/*  244 */       displayMsg("ERROR: cannot locate library " + paramString);
+/*  245 */       throw new FileNotFoundException("Cannot find native library: " + jspLib);
+/*      */     }
+/*      */ 
+/*  248 */     jspLibLoaded = true;
+/*  249 */     displayMsg("SerialPort class loaded: " + jspLib);
+/*      */   }
 /*      */ 
 /*      */   private static void setNativeLibName()
 /*      */   {
-/*  129 */     String str1 = System.getProperty("JSP_OSNAME");
-/*  130 */     String str2 = System.getProperty("JSP_OSARCH");
-/*  131 */     if ((str1 != null) && (str2 != null)) {
-/*  132 */       osName = str1;
-/*  133 */       osArch = str2;
+/*  254 */     String str1 = System.getProperty("JSP_OSNAME");
+/*  255 */     String str2 = System.getProperty("JSP_OSARCH");
+/*  256 */     if ((str1 != null) && (str2 != null)) {
+/*  257 */       osName = str1;
+/*  258 */       osArch = str2;
 /*      */     }
 /*      */ 
-/*  136 */     if ((osName.equals("Windows 95")) || (osName.equals("Windows 98")) || (osName.equals("Windows Me")) || (osName.startsWith("Windows NT")) || (osName.equals("Windows XP")) || (osName.equals("Windows Vista")) || (osName.equals("Windows 7")) || (osName.equals("Windows 2000")))
+/*  262 */     if ((osName.equals("Windows 95")) || (osName.equals("Windows 98")) || (osName.equals("Windows Me")) || (osName.startsWith("Windows NT")) || (osName.equals("Windows XP")) || (osName.equals("Windows 2000")) || (osName.equals("Windows 2003")) || (osName.equals("Windows 2008")) || (osName.equals("Windows Vista")) || (osName.equals("Windows Server 2008")) || (osName.equals("Windows 7")) || (osName.equals("Windows NT (unknown)")))
 /*      */     {
-/*  144 */       jspLib = "ddmsDTWSerialPort";
-/*  145 */       if ((jdkVer.equals("1.0.2")) || (jdkVer.equals("102"))) {
-/*  146 */         jspLib = "jspWinNm";
+/*  276 */       osFamilyWindows = true;
+/*  277 */       jspLib = "ddmsDTWSerialPort.dll";
+/*  278 */       if ((jdkVer.equals("1.0.2")) || (jdkVer.equals("102"))) {
+/*  279 */         jspLib = "jspWinNm";
 /*      */       }
 /*      */ 
 /*      */     }
 /*      */ 
-/*  155 */     if (osName.equals("EPOC")) {
-/*  156 */       if (osArch.equals("x86")) jspLib = "jspEpocx86";
-/*  157 */       if (osArch.equals("arm")) jspLib = "jspEpocArm";
+/*  288 */     if (osName.equals("EPOC")) {
+/*  289 */       if (osArch.equals("x86")) jspLib = "jspEpocx86";
+/*  290 */       if (osArch.equals("arm")) jspLib = "jspEpocArm";
 /*      */     }
 /*      */ 
-/*  160 */     if ((osName.equals("Windows CE")) || (osName.equals("WindowsCE")) || (osName.equals("Windows CE  Java")))
+/*  293 */     if ((osName.equals("Windows CE")) || (osName.equals("WindowsCE")) || (osName.equals("Windows CE  Java")))
 /*      */     {
-/*  164 */       if (osArch.equalsIgnoreCase("MIPS"))
-/*  165 */         jspLib = "jspWceMips";
-/*  166 */       if (osArch.equalsIgnoreCase("SH3"))
-/*  167 */         jspLib = "jspWceSh3";
-/*  168 */       if (osArch.equalsIgnoreCase("SH4"))
-/*  169 */         jspLib = "jspWceSh4";
-/*  170 */       if ((osArch.equalsIgnoreCase("ARM")) || (osArch.equalsIgnoreCase("Strong ARM")))
+/*  297 */       if (osArch.equalsIgnoreCase("MIPS"))
+/*  298 */         jspLib = "jspWceMips";
+/*  299 */       if (osArch.equalsIgnoreCase("SH3"))
+/*  300 */         jspLib = "jspWceSh3";
+/*  301 */       if (osArch.equalsIgnoreCase("SH4"))
+/*  302 */         jspLib = "jspWceSh4";
+/*  303 */       if ((osArch.equalsIgnoreCase("ARM")) || (osArch.equalsIgnoreCase("Strong ARM")) || (osArch.equalsIgnoreCase("XSCALE")))
 /*      */       {
-/*  172 */         jspLib = "jspWceArm";
-/*  173 */       }if (osArch.equalsIgnoreCase("x86")) {
-/*  174 */         jspLib = "jspWceX86";
+/*  306 */         jspLib = "jspWceArm";
+/*  307 */       }if (osArch.equalsIgnoreCase("x86")) {
+/*  308 */         jspLib = "jspWceX86";
 /*      */       }
 /*      */     }
-/*  177 */     if (osName.equals("OS/2")) {
-/*  178 */       jspLib = "jspos2j";
+/*  311 */     if (osName.equals("OS/2")) {
+/*  312 */       jspLib = "jspos2j";
 /*      */     }
-/*  180 */     if (osName.equals("Mac OS")) {
-/*  181 */       jspLib = "jspMac";
+/*  314 */     if (osName.equals("Mac OS")) {
+/*  315 */       jspLib = "jspMac";
 /*      */     }
-/*  183 */     if (osName.equals("Mac OS X")) {
-/*  184 */       jspLib = "jspMacOSX";
+/*  317 */     if (osName.equals("Mac OS X")) {
+/*  318 */       jspLib = "jspMacOSX";
 /*      */     }
-/*  186 */     if (osName.equals("Linux")) {
-/*  187 */       if ((osArch.equals("x86")) || (osArch.equals("i386")) || (osArch.equals("i486")) || (osArch.equals("i586")) || (osArch.equals("i686")))
+/*  320 */     if (osName.equals("Linux")) {
+/*  321 */       if ((osArch.equals("x86")) || (osArch.equals("i386")) || (osArch.equals("i486")) || (osArch.equals("i586")) || (osArch.equals("i686")))
 /*      */       {
-/*  190 */         jspLib = "jspLux86";
-/*  191 */       }if ((osArch.equals("armv4l")) || (osArch.equals("arm")))
-/*  192 */         jspLib = "jspLuxArm";
+/*  324 */         jspLib = "jspLux86";
+/*  325 */       }if ((osArch.equals("armv4l")) || (osArch.equals("arm")) || (osArch.equals("armv5tel")) || (osArch.equals("armv5l")))
+/*      */       {
+/*  327 */         jspLib = "jspLuxArm";
+/*  328 */       }if (osArch.equals("amd64"))
+/*  329 */         jspLib = "libLux86_64bit";
 /*      */     }
-/*  194 */     if ((osName.equals("FreeBSD")) && (
-/*  195 */       (osArch.equals("i386")) || (osArch.equals("x86"))))
-/*  196 */       jspLib = "jspBsdx86";
-/*  197 */     if ((osName.equals("Solaris")) || (osName.equals("SunOS"))) {
-/*  198 */       if (osArch.equals("x86")) jspLib = "jspSolx86";
-/*  199 */       if (osArch.equals("sparc")) jspLib = "jspSolSparc";
+/*  331 */     if ((osName.equals("FreeBSD")) && (
+/*  332 */       (osArch.equals("i386")) || (osArch.equals("x86"))))
+/*  333 */       jspLib = "jspBsdx86";
+/*  334 */     if ((osName.equals("Solaris")) || (osName.equals("SunOS"))) {
+/*  335 */       if (osArch.equals("x86")) jspLib = "jspSolx86";
+/*  336 */       if (osArch.equals("sparc")) jspLib = "jspSolSparc";
 /*      */     }
-/*  201 */     if ((osName.equals("HP-UX")) && ((osArch.equals("PA-RISC")) || (osArch.equals("PA_RISC")) || (osArch.equals("PA_RISC2.0"))))
+/*  338 */     if ((osName.equals("HP-UX")) && ((osArch.equals("PA-RISC")) || (osArch.equals("PA_RISC")) || (osArch.equals("PA_RISC2.0"))))
 /*      */     {
-/*  204 */       jspLib = "jspHpxPaRisc";
+/*  341 */       jspLib = "jspHpxPaRisc";
 /*      */     }
-/*  206 */     if ((osName.equals("Irix")) && (osArch.equals("mips"))) {
-/*  207 */       jspLib = "jspIrxMips";
+/*  343 */     if ((osName.equals("Irix")) && (osArch.equals("mips"))) {
+/*  344 */       jspLib = "jspIrxMips";
 /*      */     }
-/*  209 */     if ((osName.equals("AIX")) && (
-/*  210 */       (osArch.equals("POWER_PC")) || (osArch.equals("ppc")))) {
-/*  211 */       jspLib = "jspAixPpc";
+/*  346 */     if ((osName.equals("AIX")) && (
+/*  347 */       (osArch.equals("POWER_PC")) || (osArch.equals("ppc")))) {
+/*  348 */       jspLib = "jspAixPpc";
 /*      */     }
-/*  213 */     if (((osName.equals("UnixWare")) || (osName.equals("OpenServer"))) && (osArch.equals("IA32")))
+/*  350 */     if (((osName.equals("UnixWare")) || (osName.equals("OpenServer"))) && (osArch.equals("IA32")))
 /*      */     {
-/*  215 */       jspLib = "jspUxWareIA32";
+/*  352 */       jspLib = "jspUxWareIA32";
 /*      */     }
-/*  217 */     if ((osName.equals("OSF1")) && (osArch.equals("alpha"))) {
-/*  218 */       jspLib = "jspTru64Alpha";
+/*  354 */     if ((osName.equals("OSF1")) && (osArch.equals("alpha"))) {
+/*  355 */       jspLib = "jspTru64Alpha";
 /*      */     }
-/*  220 */     if (osName.toLowerCase().indexOf("netware") != -1)
-/*  221 */       jspLib = "JspNw";
+/*  357 */     if (osName.toLowerCase().indexOf("netware") != -1)
+/*  358 */       jspLib = "JspNw";
+/*      */   }
+/*      */ 
+/*      */   static void displayMsg(String paramString)
+/*      */   {
+/*  371 */     System.out.println("SerialPortLocal-" + paramString);
 /*      */   }
 /*      */ 
 /*      */   public SerialPortLocal()
 /*      */   {
-/*  236 */     if (!jspLibLoaded) {
-/*  237 */       if (jspLib == null) setNativeLibName();
-/*  238 */       System.out.println("SerialPortLocal: Attempt to load: " + jspLib);
-/*  239 */       System.loadLibrary(jspLib);
-/*  240 */       System.out.println("SerialPortLocal: SerialPort class loaded: " + jspLib);
+/*  384 */     if (!jspLibLoaded) {
+/*  385 */       if (jspLib == null) setNativeLibName();
+/*  386 */       displayMsg("Attempt to load: " + jspLib);
+/*  387 */       System.loadLibrary(jspLib);
+/*      */ 
+/*  389 */       displayMsg("SerialPort class loaded: " + jspLib);
 /*      */     }
-/*  242 */     osName = System.getProperty("os.name");
-/*  243 */     this.config = new SerialConfig(devName);
+/*  391 */     osName = System.getProperty("os.name");
+/*  392 */     this.config = new SerialConfig(devName);
 /*      */   }
 /*      */ 
 /*      */   public SerialPortLocal(SerialConfig paramSerialConfig)
 /*      */     throws IOException
 /*      */   {
-/*  255 */     osName = System.getProperty("os.name");
-/*  256 */     this.config = paramSerialConfig;
-/*  257 */     open();
+/*  404 */     osName = System.getProperty("os.name");
+/*  405 */     this.config = paramSerialConfig;
+/*  406 */     open();
 /*      */   }
 /*      */ 
 /*      */   public void open()
 /*      */     throws IOException
 /*      */   {
-/*  282 */     if (!osName.equals("Windows 95")) {
-/*  283 */       this.config.setHardFlow(false);
+/*  431 */     if (!osName.equals("Windows 95")) {
+/*  432 */       this.config.setHardFlow(false);
 /*      */     }
 /*      */ 
-/*  286 */     srvTaskCheck();
+/*  435 */     srvTaskCheck();
 /*      */     int i;
-/*  287 */     synchronized (mutExSem) { i = SerOpenPort(this.config);
+/*  436 */     synchronized (mutExSem) { i = SerOpenPort(this.config);
 /*      */     }
-/*  289 */     if (i != 0) {
-/*  290 */       ??? = this.config.getPortNameString() + ": SerOpenPort failed: ";
+/*  438 */     if (i != 0) {
+/*  439 */       ??? = this.config.getPortNameString() + ": SerOpenPort failed: ";
 /*      */       String str;
-/*  291 */       if (i == 1000)
-/*  292 */         str = (String)??? + "Port is already open";
-/*  293 */       else if (i == 1002)
-/*  294 */         str = (String)??? + "Port is in use";
-/*  295 */       else if (i == 1003)
-/*  296 */         str = (String)??? + "Port not valid";
-/*  297 */       else if (i == 1004)
-/*  298 */         str = (String)??? + "No such device";
-/*  299 */       else if (i == 1006)
-/*  300 */         str = (String)??? + "Permission denied";
+/*  440 */       if (i == 1000)
+/*  441 */         str = (String)??? + "Port is already open";
+/*  442 */       else if (i == 1002)
+/*  443 */         str = (String)??? + "Port is in use";
+/*  444 */       else if (i == 1003)
+/*  445 */         str = (String)??? + "Port not valid";
+/*  446 */       else if (i == 1004)
+/*  447 */         str = (String)??? + "2: No such device";
+/*  448 */       else if (i == 1006)
+/*  449 */         str = (String)??? + "Permission denied";
+/*  450 */       else if (i == 1007)
+/*  451 */         str = (String)??? + "Device busy";
+/*  452 */       else if (i == 1008)
+/*  453 */         str = (String)??? + "19: No such device";
 /*      */       else {
-/*  302 */         str = (String)??? + ": " + i;
+/*  455 */         str = (String)??? + ": " + i;
 /*      */       }
-/*  304 */       throw new IOException(str);
+/*  457 */       throw new IOException(str);
 /*      */     }
 /*      */ 
-/*  311 */     this.isOpen = true;
-/*  312 */     this.wrSinceTxBufEmpty = false;
-/*  313 */     this.rdSinceRxBufCheck = false;
-/*  314 */     this.port = (this.config.getPort() - 1);
+/*  464 */     this.isOpen = true;
+/*  465 */     this.wrSinceTxBufEmpty = false;
+/*  466 */     this.rdSinceRxBufCheck = false;
+/*  467 */     this.port = (this.config.getPort() - 1);
 /*      */ 
-/*  316 */     configure(this.config);
+/*  469 */     configure(this.config);
 /*      */ 
-/*  330 */     if (osName.equals("Mac OS")) {
-/*  331 */       setTimeoutRx(2000);
-/*  332 */       setTimeoutTx(2000);
+/*  483 */     if (osName.equals("Mac OS")) {
+/*  484 */       setTimeoutRx(2000);
+/*  485 */       setTimeoutTx(2000);
 /*      */     } else {
-/*  334 */       setTimeoutRx(0);
-/*  335 */       int j = 0;
+/*  487 */       setTimeoutRx(0);
+/*  488 */       int j = 0;
 /*      */ 
-/*  337 */       int k = this.config.getTxLen();
-/*  338 */       int m = this.config.getBitRateNumber(getBitRate()) / 10;
-/*  339 */       int n = 1000000 / m;
-/*  340 */       j = k * n / 1000 * 100;
+/*  490 */       int k = this.config.getTxLen();
+/*  491 */       int m = this.config.getBitRateNumber(getBitRate()) / 10;
+/*  492 */       int n = 1000000 / m;
+/*  493 */       j = k * n / 1000 * 100;
 /*      */ 
-/*  342 */       if (supSetTimeoutTx) setTimeoutTx(j);
+/*  495 */       if (supSetTimeoutTx) setTimeoutTx(j);
 /*      */     }
 /*      */   }
 /*      */ 
 /*      */   public void configure()
 /*      */     throws IOException
 /*      */   {
-/*  353 */     configure(this.config);
+/*  506 */     configure(this.config);
 /*      */   }
 /*      */ 
 /*      */   public void configure(SerialConfig paramSerialConfig)
 /*      */     throws IOException
 /*      */   {
-/*  365 */     if (this.flowControl != null) { this.flowControl.abort(); this.flowControl = null;
+/*  518 */     if (!this.isOpen) {
+/*  519 */       throw new IOException("configure: Port is not open");
 /*      */     }
-/*  367 */     if (!supNoIndexBitRate)
+/*  521 */     if (this.flowControl != null) { this.flowControl.abort(); this.flowControl = null;
+/*      */     }
+/*  523 */     if (!supNoIndexBitRate)
 /*      */     {
-/*  369 */       i = paramSerialConfig.getBitRateIndex(paramSerialConfig.getBitRate());
-/*  370 */       if (i > 0) paramSerialConfig.setBitRate(i);
-/*  371 */       else if (!paramSerialConfig.validBitRateIndex()) {
-/*  372 */         throw new IOException("Unsupported Serial Port Bit Rate");
-/*      */       }
+/*  525 */       i = paramSerialConfig.getBitRateIndex(paramSerialConfig.getBitRate());
+/*  526 */       if (i >= 0) paramSerialConfig.setBitRate(i);
+/*  527 */       else if (!paramSerialConfig.validBitRateIndex())
+/*  528 */         throw new IOException("Unsupported Serial Port Bit Rate");
 /*      */     }
-/*  375 */     int i = SerConfigure(paramSerialConfig);
-/*      */ 
-/*  377 */     if (i != 0) {
-/*  378 */       Integer localInteger = new Integer(i);
-/*  379 */       throw new IOException("Configure failed: " + localInteger.toString());
+/*  530 */     if ((!supParityMarkSpace) && 
+/*  531 */       (paramSerialConfig.getParity() > 2)) {
+/*  532 */       throw new IOException("Unsupported Mark/Space parity");
 /*      */     }
 /*      */ 
-/*  382 */     boolean bool = paramSerialConfig.getHardFlow();
-/*  383 */     if ((bool) && (osName.equals("Windows 95"))) {
-/*  384 */       int j = paramSerialConfig.getHandshake();
-/*  385 */       if ((j == 2) || (j == 3))
+/*  535 */     int i = 0;
+/*  536 */     synchronized (mutExSem) { i = SerConfigure(paramSerialConfig);
+/*      */     }
+/*  538 */     if (i != 0) {
+/*  539 */       ??? = new Integer(i);
+/*  540 */       throw new IOException("Configure failed: " + ((Integer)???).toString());
+/*      */     }
+/*      */ 
+/*  543 */     boolean bool = paramSerialConfig.getHardFlow();
+/*  544 */     if ((bool) && (osName.equals("Windows 95"))) {
+/*  545 */       int j = paramSerialConfig.getHandshake();
+/*  546 */       if ((j == 2) || (j == 3))
 /*      */       {
-/*  387 */         if (this.flowControl == null) {
-/*  388 */           this.flowControl = new FlowControlTask(this);
-/*  389 */           this.flowControl.start();
+/*  548 */         if (this.flowControl == null) {
+/*  549 */           this.flowControl = new FlowControlTask(this);
+/*  550 */           this.flowControl.start();
 /*      */         }
 /*      */       }
 /*      */     }
@@ -253,807 +328,953 @@
 /*      */ 
 /*      */   public void setConfig(SerialConfig paramSerialConfig)
 /*      */   {
-/*  404 */     if (!this.isOpen) paramSerialConfig.setPortNum(this.port + 1);
-/*  405 */     this.config = paramSerialConfig;
-/*  406 */     devName = paramSerialConfig.getPortNameString();
+/*  565 */     if (!this.isOpen) paramSerialConfig.setPortNum(this.port + 1);
+/*  566 */     this.config = paramSerialConfig;
+/*  567 */     devName = paramSerialConfig.getPortNameString();
 /*      */   }
 /*      */ 
 /*      */   public SerialConfig getConfig()
 /*      */   {
-/*  413 */     return this.config;
+/*  574 */     return this.config;
 /*      */   }
 /*      */ 
 /*      */   public void close()
 /*      */     throws IOException
 /*      */   {
-/*  433 */     this.wrSinceTxBufEmpty = false;
-/*  434 */     this.rdSinceRxBufCheck = false;
-/*  435 */     if (this.flowControl != null) this.flowControl.abort();
+/*  594 */     this.wrSinceTxBufEmpty = false;
+/*  595 */     this.rdSinceRxBufCheck = false;
+/*  596 */     if (this.flowControl != null) this.flowControl.abort();
 /*      */ 
-/*  437 */     if (this.isOpen) {
-/*  438 */       this.isOpen = false;
+/*  598 */     if (this.isOpen) {
+/*  599 */       this.isOpen = false;
 /*      */       int i;
-/*  439 */       synchronized (mutExSem) { i = SerClosePort(this.port); }
-/*  440 */       this.port = -1;
+/*  600 */       synchronized (mutExSem) { i = SerClosePort(this.port); }
+/*  601 */       this.port = -1;
 /*      */ 
-/*  442 */       if (i != 0)
-/*  443 */         throw new IOException("ClosePort failed");
+/*  603 */       if (i != 0)
+/*  604 */         throw new IOException("ClosePort failed");
 /*      */     }
 /*      */   }
 /*      */ 
 /*      */   public void reset()
 /*      */     throws IOException
 /*      */   {
-/*  452 */     int j = 0;
+/*  613 */     int j = 0;
 /*      */ 
-/*  454 */     if (!this.isOpen) {
-/*  455 */       throw new IOException("reset: Port is not open");
+/*  615 */     if (!this.isOpen) {
+/*  616 */       throw new IOException("reset: Port is not open");
 /*      */     }
-/*  457 */     if (supSetTimeoutTx) j = getTimeoutTx();
-/*  458 */     close();
+/*  618 */     if (supSetTimeoutTx) j = getTimeoutTx();
+/*  619 */     close();
 /*      */ 
-/*  461 */     srvTaskCheck();
+/*  622 */     srvTaskCheck();
 /*      */     int i;
-/*  462 */     synchronized (mutExSem) { i = SerOpenPort(this.config); }
-/*  463 */     if (i != 0) {
-/*  464 */       i = checkBusy(i);
-/*  465 */       if (i != 0)
-/*  466 */         throw new IOException("reset: SerOpenPort failed: " + i);
+/*  623 */     synchronized (mutExSem) { i = SerOpenPort(this.config); }
+/*  624 */     if (i != 0) {
+/*  625 */       i = checkBusy(i);
+/*  626 */       if (i != 0)
+/*  627 */         throw new IOException("reset: SerOpenPort failed: " + i);
 /*      */     }
-/*  468 */     this.isOpen = true;
-/*  469 */     this.port = (this.config.getPort() - 1);
-/*  470 */     if (supSetTimeoutTx) setTimeoutTx(j);
+/*  629 */     this.isOpen = true;
+/*  630 */     this.port = (this.config.getPort() - 1);
+/*  631 */     if (supSetTimeoutTx) setTimeoutTx(j);
 /*      */ 
-/*  472 */     configure(this.config);
+/*  633 */     configure(this.config);
 /*      */   }
 /*      */ 
 /*      */   private int checkBusy(int paramInt)
 /*      */   {
-/*  479 */     if ((!osName.equals("Solaris")) && (!osName.equals("SunOS")))
+/*  640 */     if ((!osName.equals("Solaris")) && (!osName.equals("SunOS")))
 /*      */     {
-/*  481 */       return paramInt;
+/*  642 */       return paramInt;
 /*      */     }
-/*  483 */     int i = 16;
-/*  484 */     long l1 = System.currentTimeMillis();
-/*  485 */     long l2 = l1 + 3000L;
-/*  486 */     while (System.currentTimeMillis() < l2) {
+/*  644 */     int i = 16;
+/*  645 */     long l1 = System.currentTimeMillis();
+/*  646 */     long l2 = l1 + 3000L;
+/*  647 */     while (System.currentTimeMillis() < l2) {
 /*      */       try { Thread.sleep(500L); } catch (InterruptedException localInterruptedException) {
-/*  488 */       }synchronized (mutExSem) { paramInt = SerOpenPort(this.config); }
-/*  489 */       if (paramInt == 0) break; if (paramInt == i) continue;
+/*  649 */       }synchronized (mutExSem) { paramInt = SerOpenPort(this.config); }
+/*  650 */       if (paramInt == 0) break; if (paramInt == i) continue;
 /*      */     }
-/*  491 */     return paramInt;
+/*  652 */     return paramInt;
+/*      */   }
+/*      */ 
+/*      */   public void resetPortDriver(SerialConfig paramSerialConfig)
+/*      */     throws IOException
+/*      */   {
+/*  668 */     if (!supDriverInfo) {
+/*  669 */       throw new IOException("resetPortDriver not supported on " + osName);
+/*      */     }
+/*  671 */     if (this.isOpen == true) {
+/*  672 */       throw new IOException("resetPortDriver: Port must be closed");
+/*      */     }
+/*  674 */     int i = 0;
+/*  675 */     synchronized (mutExSem) { i = SerResetPortDriver(paramSerialConfig);
+/*      */     }
+/*  677 */     if (i != 0) {
+/*  678 */       ??? = new Integer(i);
+/*  679 */       throw new IOException("Reset port driver failed: " + ((Integer)???).toString());
+/*      */     }
 /*      */   }
 /*      */ 
 /*      */   public void putByte(byte paramByte)
 /*      */     throws IOException
 /*      */   {
-/*  504 */     int i = SerPutByte(this.port, paramByte);
-/*  505 */     this.wrSinceTxBufEmpty = true;
+/*  693 */     int i = SerPutByte(this.port, paramByte);
+/*  694 */     this.wrSinceTxBufEmpty = true;
 /*      */ 
-/*  507 */     if (i != 0) throw new IOException("PutByte failed: " + i);
+/*  696 */     if (i != 0) throw new IOException("PutByte failed: " + i);
 /*      */   }
 /*      */ 
 /*      */   public void putString(String paramString)
 /*      */     throws IOException
 /*      */   {
-/*  522 */     byte[] arrayOfByte = paramString.getBytes();
+/*  711 */     byte[] arrayOfByte = paramString.getBytes();
 /*      */ 
-/*  524 */     int i = arrayOfByte.length;
-/*  525 */     if (i == 0)
+/*  713 */     int i = arrayOfByte.length;
+/*  714 */     if (i == 0)
 /*      */     {
-/*  527 */       return;
+/*  716 */       return;
 /*      */     }
 /*      */ 
-/*  530 */     int j = SerPutData(this.port, arrayOfByte, i);
-/*  531 */     this.wrSinceTxBufEmpty = true;
+/*  719 */     int j = SerPutData(this.port, arrayOfByte, i);
+/*  720 */     this.wrSinceTxBufEmpty = true;
 /*      */ 
-/*  533 */     if (j != i) {
-/*  534 */       String str = new String("PutString: sent only " + j + " of " + i + " bytes");
-/*  535 */       throw new IOException(str);
+/*  722 */     if (j != i) {
+/*  723 */       String str = new String("PutString: sent only " + j + " of " + i + " bytes");
+/*  724 */       throw new IOException(str);
 /*      */     }
 /*      */   }
 /*      */ 
 /*      */   public void putData(byte[] paramArrayOfByte)
 /*      */     throws IOException
 /*      */   {
-/*  562 */     int i = paramArrayOfByte.length;
-/*  563 */     if (i == 0)
+/*  752 */     int i = paramArrayOfByte.length;
+/*  753 */     if (i == 0)
 /*      */     {
-/*  565 */       return;
+/*  755 */       return;
 /*      */     }
 /*      */ 
-/*  568 */     int j = SerPutData(this.port, paramArrayOfByte, i);
-/*  569 */     this.wrSinceTxBufEmpty = true;
+/*  758 */     int j = SerPutData(this.port, paramArrayOfByte, i);
+/*  759 */     this.wrSinceTxBufEmpty = true;
 /*      */ 
-/*  571 */     if (j != i)
+/*  761 */     if (j != i)
 /*      */     {
-/*  573 */       String str = new String("PutData1: Sent only " + j + " of " + i + " bytes");
-/*  574 */       throw new IOException(str);
+/*  763 */       String str = new String("PutData1: Sent only " + j + " of " + i + " bytes");
+/*  764 */       throw new IOException(str);
 /*      */     }
 /*      */   }
 /*      */ 
-/*      */   /** @deprecated */
 /*      */   public void putData(byte[] paramArrayOfByte, int paramInt)
 /*      */     throws IOException
 /*      */   {
-/*  593 */     if (paramInt > paramArrayOfByte.length) {
-/*  594 */       throw new IOException("putData: count out of bounds");
+/*  783 */     if (paramInt > paramArrayOfByte.length) {
+/*  784 */       throw new IOException("putData: count out of bounds");
 /*      */     }
-/*  596 */     int i = SerPutData(this.port, paramArrayOfByte, paramInt);
-/*  597 */     this.wrSinceTxBufEmpty = true;
+/*  786 */     int i = SerPutData(this.port, paramArrayOfByte, paramInt);
+/*  787 */     this.wrSinceTxBufEmpty = true;
 /*      */ 
-/*  599 */     if (i != paramInt) {
-/*  600 */       String str = new String("PutData2: Sent only " + i + " of " + paramInt + " bytes");
-/*  601 */       throw new IOException(str);
+/*  789 */     if (i != paramInt) {
+/*  790 */       String str = new String("PutData2: Sent only " + i + " of " + paramInt + " bytes");
+/*  791 */       throw new IOException(str);
 /*      */     }
 /*      */   }
 /*      */ 
 /*      */   public void putData(byte[] paramArrayOfByte, int paramInt1, int paramInt2)
 /*      */     throws IOException
 /*      */   {
-/*  616 */     if (paramInt1 + paramInt2 > paramArrayOfByte.length) {
-/*  617 */       throw new IOException("putData3: count out of bounds");
+/*  806 */     if (paramInt1 + paramInt2 > paramArrayOfByte.length) {
+/*  807 */       throw new IOException("putData3: count out of bounds");
 /*      */     }
-/*  619 */     byte[] arrayOfByte = new byte[paramInt2];
-/*  620 */     System.arraycopy(paramArrayOfByte, paramInt1, arrayOfByte, 0, paramInt2);
-/*  621 */     int i = SerPutData(this.port, arrayOfByte, paramInt2);
-/*  622 */     this.wrSinceTxBufEmpty = true;
+/*  809 */     byte[] arrayOfByte = new byte[paramInt2];
+/*  810 */     System.arraycopy(paramArrayOfByte, paramInt1, arrayOfByte, 0, paramInt2);
+/*  811 */     int i = SerPutData(this.port, arrayOfByte, paramInt2);
+/*  812 */     this.wrSinceTxBufEmpty = true;
 /*      */ 
-/*  624 */     if (i != paramInt2) {
-/*  625 */       String str = new String("putData3: Sent only " + i + " of " + paramInt2 + " bytes");
-/*  626 */       throw new IOException(str);
+/*  814 */     if (i != paramInt2) {
+/*  815 */       String str = new String("putData3: Sent only " + i + " of " + paramInt2 + " bytes");
+/*  816 */       throw new IOException(str);
 /*      */     }
 /*      */   }
 /*      */ 
 /*      */   public int getByte()
 /*      */     throws IOException
 /*      */   {
-/*  638 */     if ((javaGetDataTimeout) && (SerGetTimeoutRx(this.port) > 0)) { long l1 = System.currentTimeMillis() + SerGetTimeoutRx(this.port);
+/*  829 */     if ((javaGetDataTimeout) && (SerGetTimeoutRx(this.port) > 0)) { long l1 = System.currentTimeMillis() + SerGetTimeoutRx(this.port);
 /*      */       long l2;
 /*      */       do { if (SerRxReadyCount(this.port) > 0) {
-/*  643 */           this.rdSinceRxBufCheck = true;
-/*  644 */           return SerGetByte(this.port);
+/*  834 */           this.rdSinceRxBufCheck = true;
+/*  835 */           return SerGetByte(this.port);
 /*      */         }
-/*  646 */         l2 = System.currentTimeMillis();
-/*  647 */         Thread.yield(); }
-/*  648 */       while (l2 < l1);
-/*  649 */       return -1;
+/*  837 */         l2 = System.currentTimeMillis();
+/*  838 */         Thread.yield(); }
+/*  839 */       while (l2 < l1);
+/*  840 */       return -1;
 /*      */     }
 /*      */ 
-/*  652 */     int i = SerGetByte(this.port);
-/*  653 */     this.rdSinceRxBufCheck = true;
+/*  843 */     int i = SerGetByte(this.port);
+/*  844 */     this.rdSinceRxBufCheck = true;
 /*      */ 
-/*  655 */     return i;
+/*  846 */     return i;
 /*      */   }
 /*      */ 
 /*      */   public int getData(byte[] paramArrayOfByte)
 /*      */     throws IOException
 /*      */   {
-/*  671 */     int i = getData(paramArrayOfByte, 0, paramArrayOfByte.length);
-/*  672 */     this.rdSinceRxBufCheck = true;
+/*  862 */     int i = getData(paramArrayOfByte, 0, paramArrayOfByte.length);
+/*  863 */     this.rdSinceRxBufCheck = true;
 /*      */ 
-/*  674 */     return i;
+/*  865 */     return i;
 /*      */   }
 /*      */ 
 /*      */   public int getData(byte[] paramArrayOfByte, int paramInt1, int paramInt2)
 /*      */     throws IOException
 /*      */   {
-/*  691 */     int i = 0;
-/*  692 */     if (paramInt2 > paramArrayOfByte.length) paramInt2 = paramArrayOfByte.length;
-/*  693 */     if ((javaGetDataTimeout) && (SerGetTimeoutRx(this.port) > 0)) { long l1 = System.currentTimeMillis() + SerGetTimeoutRx(this.port);
+/*  882 */     int i = 0;
+/*  883 */     if (paramInt2 > paramArrayOfByte.length) paramInt2 = paramArrayOfByte.length;
+/*  884 */     if ((javaGetDataTimeout) && (SerGetTimeoutRx(this.port) > 0)) { long l1 = System.currentTimeMillis() + SerGetTimeoutRx(this.port);
 /*      */       long l2;
 /*      */       do { i = SerRxReadyCount(this.port);
-/*  698 */         if (i >= paramInt2)
+/*  889 */         if (i >= paramInt2)
 /*      */           break;
-/*  700 */         l2 = System.currentTimeMillis();
-/*  701 */         Thread.yield(); }
-/*  702 */       while (l2 < l1);
-/*  703 */       if (i < paramInt2) return 0;
+/*  891 */         l2 = System.currentTimeMillis();
+/*  892 */         Thread.yield(); }
+/*  893 */       while (l2 < l1);
+/*  894 */       if (i < paramInt2) return 0;
 /*      */     }
 /*      */     Object localObject;
-/*  706 */     if (paramInt1 != 0) {
-/*  707 */       localObject = new byte[paramInt2];
-/*  708 */       i = SerGetData(this.port, localObject, paramInt2);
-/*  709 */       if (i > 0) System.arraycopy(localObject, 0, paramArrayOfByte, paramInt1, i); 
+/*  897 */     if (paramInt1 != 0) {
+/*  898 */       localObject = new byte[paramInt2];
+/*  899 */       i = SerGetData(this.port, localObject, paramInt2);
+/*  900 */       if (i > 0) System.arraycopy(localObject, 0, paramArrayOfByte, paramInt1, i); 
 /*      */     }
 /*      */     else
 /*      */     {
-/*  712 */       i = SerGetData(this.port, paramArrayOfByte, paramInt2);
+/*  903 */       i = SerGetData(this.port, paramArrayOfByte, paramInt2);
 /*      */     }
-/*  714 */     this.rdSinceRxBufCheck = true;
-/*  715 */     if (i == -1) {
-/*  716 */       localObject = new String("getData: failed");
-/*  717 */       throw new IOException((String)localObject);
+/*  905 */     this.rdSinceRxBufCheck = true;
+/*  906 */     if (i == -1) {
+/*  907 */       localObject = new String("getData: failed");
+/*  908 */       throw new IOException((String)localObject);
 /*      */     }
 /*      */ 
-/*  720 */     return i;
+/*  911 */     return i;
 /*      */   }
 /*      */ 
 /*      */   public int rxFlush()
 /*      */     throws IOException
 /*      */   {
-/*  729 */     int i = SerRxFlush(this.port);
+/*  920 */     int i = SerRxFlush(this.port);
 /*      */ 
-/*  731 */     if (i == -1) throw new IOException("rxFlush failed");
+/*  922 */     if (i == -1) throw new IOException("rxFlush failed");
 /*      */ 
-/*  733 */     return i;
+/*  924 */     return i;
 /*      */   }
 /*      */ 
 /*      */   public int txFlush()
 /*      */     throws IOException
 /*      */   {
-/*  742 */     int i = SerTxFlush(this.port);
+/*  933 */     int i = SerTxFlush(this.port);
 /*      */ 
-/*  744 */     if (i == -1) throw new IOException("txFlush failed");
+/*  935 */     if (i == -1) throw new IOException("txFlush failed");
 /*      */ 
-/*  746 */     return i;
+/*  937 */     return i;
 /*      */   }
 /*      */ 
 /*      */   public int txDrain()
 /*      */     throws IOException
 /*      */   {
-/*  757 */     int i = SerTxDrain(this.port);
+/*  948 */     int i = SerTxDrain(this.port);
 /*      */ 
-/*  759 */     if (i == -1) throw new IOException("txDrain failed");
+/*  950 */     if (i == -1) throw new IOException("txDrain failed");
 /*      */ 
-/*  761 */     return i;
+/*  952 */     return i;
 /*      */   }
 /*      */ 
 /*      */   public int rxReadyCount()
 /*      */     throws IOException
 /*      */   {
-/*  770 */     if (!supRxReadyCount) {
-/*  771 */       throw new IOException("rxReadyCount not supported on " + osName);
+/*  961 */     if (!supRxReadyCount) {
+/*  962 */       throw new IOException("rxReadyCount not supported on " + osName);
 /*      */     }
 /*      */ 
-/*  775 */     int i = SerRxReadyCount(this.port);
+/*  966 */     int i = SerRxReadyCount(this.port);
 /*      */ 
-/*  778 */     if (i == -1) {
-/*  779 */       if (this.esh != null) this.esh.sioErrorEvent(10); else
-/*  780 */         throw new IOException("rxReadyCount failed");
+/*  977 */     if (i == -1) {
+/*  978 */       if (this.esh != null) this.esh.sioErrorEvent(10); else
+/*  979 */         throw new IOException("rxReadyCount failed");
 /*      */     }
-/*  782 */     return i;
+/*  981 */     return i;
 /*      */   }
 /*      */ 
 /*      */   public int txBufCount()
 /*      */     throws IOException
 /*      */   {
-/*  795 */     if (!supTxBufCount) {
-/*  796 */       throw new IOException("txBufCount not supported on " + osName);
+/*  994 */     if (!supTxBufCount) {
+/*  995 */       throw new IOException("txBufCount not supported on " + osName);
 /*      */     }
-/*  798 */     if (this.port < 0) throw new IOException("txBufCount: Port not open");
+/*  997 */     if (this.port < 0) throw new IOException("txBufCount: Port not open");
 /*      */ 
-/*  800 */     int i = SerTxBufCount(this.port);
+/*  999 */     int i = SerTxBufCount(this.port);
 /*      */ 
-/*  803 */     if (i == -1) throw new IOException("txBufCount failed");
+/* 1002 */     if (i == -1) throw new IOException("txBufCount failed");
 /*      */ 
-/*  805 */     return i;
+/* 1004 */     return i;
 /*      */   }
 /*      */ 
 /*      */   public void clearReadSinceRxBufCheck()
 /*      */   {
-/*  813 */     this.rdSinceRxBufCheck = false;
+/* 1012 */     this.rdSinceRxBufCheck = false;
 /*      */   }
 /*      */ 
 /*      */   public boolean sendSinceTxBufEmpty()
 /*      */   {
-/*  821 */     return this.wrSinceTxBufEmpty;
+/* 1020 */     return this.wrSinceTxBufEmpty;
 /*      */   }
 /*      */ 
 /*      */   public void clearSendSinceTxBufEmpty()
 /*      */   {
-/*  837 */     this.wrSinceTxBufEmpty = false;
+/* 1036 */     this.wrSinceTxBufEmpty = false;
 /*      */   }
 /*      */ 
 /*      */   public boolean readSinceRxBufCheck()
 /*      */   {
-/*  845 */     return this.rdSinceRxBufCheck;
+/* 1044 */     return this.rdSinceRxBufCheck;
 /*      */   }
 /*      */ 
 /*      */   public boolean rxOverflow()
 /*      */     throws IOException
 /*      */   {
-/*  856 */     if (!supRxOverflow) {
-/*  857 */       throw new IOException("rxOverflow not supported on " + osName);
+/* 1055 */     if (!supRxOverflow) {
+/* 1056 */       throw new IOException("rxOverflow not supported on " + osName);
 /*      */     }
-/*  859 */     if (this.port < 0) throw new IOException("rxOverflow: Port not open");
+/* 1058 */     if (this.port < 0) throw new IOException("rxOverflow: Port not open");
 /*      */ 
-/*  861 */     int i = SerRxOverflow(this.port);
+/* 1060 */     int i = SerRxOverflow(this.port);
 /*      */ 
-/*  863 */     if (i == -1) throw new IOException("rxOverflow failed");
+/* 1062 */     if (i == -1) throw new IOException("rxOverflow failed");
 /*      */ 
-/*  865 */     return i == 1;
+/* 1064 */     return i == 1;
 /*      */   }
 /*      */ 
 /*      */   public boolean sigDSR()
 /*      */     throws IOException
 /*      */   {
-/*  874 */     if (this.port < 0) throw new IOException("sigDSR: Port not open");
+/* 1073 */     if (this.port < 0) throw new IOException("sigDSR: Port not open");
 /*      */ 
-/*  876 */     int i = SerSigDSR(this.port);
+/* 1075 */     int i = SerSigDSR(this.port);
 /*      */ 
-/*  878 */     if (i == -1) throw new IOException("sigDSR failed");
+/* 1077 */     if (i == -1) throw new IOException("sigDSR failed");
 /*      */ 
-/*  880 */     return i == 1;
+/* 1079 */     return i == 1;
 /*      */   }
 /*      */ 
 /*      */   public boolean sigCTS()
 /*      */     throws IOException
 /*      */   {
-/*  889 */     if (this.port < 0) throw new IOException("sigCTS: Port not open");
+/* 1088 */     if (this.port < 0) throw new IOException("sigCTS: Port not open");
 /*      */ 
-/*  891 */     int i = SerSigCTS(this.port);
+/* 1090 */     int i = SerSigCTS(this.port);
 /*      */ 
-/*  893 */     if (i == -1) throw new IOException("sigCTS failed");
+/* 1092 */     if (i == -1) throw new IOException("sigCTS failed");
 /*      */ 
-/*  895 */     return i == 1;
+/* 1094 */     return i == 1;
 /*      */   }
 /*      */ 
 /*      */   public boolean sigCD()
 /*      */     throws IOException
 /*      */   {
-/*  905 */     if (!supSigCD) {
-/*  906 */       throw new IOException("sigCD not supported on " + osName);
+/* 1104 */     if (!supSigCD) {
+/* 1105 */       throw new IOException("sigCD not supported on " + osName);
 /*      */     }
-/*  908 */     if (this.port < 0) throw new IOException("sigCD: Port not open");
+/* 1107 */     if (this.port < 0) throw new IOException("sigCD: Port not open");
 /*      */ 
-/*  910 */     int i = SerSigCD(this.port);
+/* 1109 */     int i = SerSigCD(this.port);
 /*      */ 
-/*  912 */     if (i == -1) throw new IOException("sigCD failed");
+/* 1111 */     if (i == -1) throw new IOException("sigCD failed");
 /*      */ 
-/*  914 */     return i == 1;
+/* 1113 */     return i == 1;
 /*      */   }
 /*      */ 
 /*      */   public boolean sigFrameErr()
 /*      */     throws IOException
 /*      */   {
-/*  925 */     if (!supSigFrameErr) {
-/*  926 */       throw new IOException("sigFrameErr not supported on " + osName);
+/* 1124 */     if (!supSigFrameErr) {
+/* 1125 */       throw new IOException("sigFrameErr not supported on " + osName);
 /*      */     }
-/*  928 */     if (this.port < 0) throw new IOException("sigFrameErr: Port not open");
+/* 1127 */     if (this.port < 0) throw new IOException("sigFrameErr: Port not open");
 /*      */ 
-/*  930 */     int i = SerSigFrameErr(this.port);
+/* 1129 */     int i = SerSigFrameErr(this.port);
 /*      */ 
-/*  932 */     if (i == -1) throw new IOException("sigFrameErr failed");
+/* 1131 */     if (i == -1) throw new IOException("sigFrameErr failed");
 /*      */ 
-/*  934 */     return i == 1;
+/* 1133 */     return i == 1;
 /*      */   }
 /*      */ 
 /*      */   public boolean sigOverrun()
 /*      */     throws IOException
 /*      */   {
-/*  945 */     if (!supSigOverrun) {
-/*  946 */       throw new IOException("sigOverrun not supported on " + osName);
+/* 1144 */     if (!supSigOverrun) {
+/* 1145 */       throw new IOException("sigOverrun not supported on " + osName);
 /*      */     }
-/*  948 */     if (this.port < 0) throw new IOException("sigOverrun: Port not open");
+/* 1147 */     if (this.port < 0) throw new IOException("sigOverrun: Port not open");
 /*      */ 
-/*  950 */     int i = SerSigOverrun(this.port);
+/* 1149 */     int i = SerSigOverrun(this.port);
 /*      */ 
-/*  952 */     if (i == -1) throw new IOException("sigOverrun failed");
+/* 1151 */     if (i == -1) throw new IOException("sigOverrun failed");
 /*      */ 
-/*  954 */     return i == 1;
+/* 1153 */     return i == 1;
 /*      */   }
 /*      */ 
 /*      */   public boolean sigParityErr()
 /*      */     throws IOException
 /*      */   {
-/*  965 */     if (!supSigParityErr) {
-/*  966 */       throw new IOException("sigParityErr not supported on " + osName);
+/* 1164 */     if (!supSigParityErr) {
+/* 1165 */       throw new IOException("sigParityErr not supported on " + osName);
 /*      */     }
-/*  968 */     if (this.port < 0) throw new IOException("sigParityErr: Port not open");
+/* 1167 */     if (this.port < 0) throw new IOException("sigParityErr: Port not open");
 /*      */ 
-/*  970 */     int i = SerSigParityErr(this.port);
+/* 1169 */     int i = SerSigParityErr(this.port);
 /*      */ 
-/*  972 */     return i == 1;
+/* 1171 */     return i == 1;
 /*      */   }
 /*      */ 
 /*      */   public boolean sigRing()
 /*      */     throws IOException
 /*      */   {
-/*  982 */     if (!supSigRing) {
-/*  983 */       throw new IOException("sigRing not supported on " + osName);
+/* 1181 */     if (!supSigRing) {
+/* 1182 */       throw new IOException("sigRing not supported on " + osName);
 /*      */     }
-/*  985 */     if (this.port < 0) throw new IOException("sigRing: Port not open");
+/* 1184 */     if (this.port < 0) throw new IOException("sigRing: Port not open");
 /*      */ 
-/*  987 */     int i = SerSigRing(this.port);
+/* 1186 */     int i = SerSigRing(this.port);
 /*      */ 
-/*  989 */     return i == 1;
+/* 1188 */     return i == 1;
 /*      */   }
 /*      */ 
 /*      */   public boolean sigBreak()
 /*      */     throws IOException
 /*      */   {
-/* 1000 */     if (!supSigBreak) {
-/* 1001 */       throw new IOException("sigBreak not supported on " + osName);
+/* 1199 */     if (!supSigBreak) {
+/* 1200 */       throw new IOException("sigBreak not supported on " + osName);
 /*      */     }
-/* 1003 */     if (this.port < 0) throw new IOException("sigBreak: Port not open");
+/* 1202 */     if (this.port < 0) throw new IOException("sigBreak: Port not open");
 /*      */ 
-/* 1005 */     int i = SerSigBreak(this.port);
+/* 1204 */     int i = SerSigBreak(this.port);
 /*      */ 
-/* 1007 */     return i == 1;
+/* 1206 */     return i == 1;
 /*      */   }
 /*      */ 
 /*      */   public void setDTR(boolean paramBoolean)
 /*      */     throws IOException
 /*      */   {
-/* 1017 */     if (!supSetDTR) {
-/* 1018 */       throw new IOException("setDTR not supported on " + osName);
+/* 1217 */     if (!supSetDTR) {
+/* 1218 */       throw new IOException("setDTR not supported on " + osName);
 /*      */     }
-/* 1020 */     if (this.port < 0) throw new IOException("setDTR: Port not open");
+/* 1220 */     if (this.port < 0) throw new IOException("setDTR: Port not open");
 /*      */ 
-/* 1022 */     int i = SerSetDTR(this.port, paramBoolean);
+/* 1222 */     int i = SerSetDTR(this.port, paramBoolean);
 /*      */ 
-/* 1024 */     if (i == -1) throw new IOException("setDTR failed");
+/* 1224 */     if (i == -1) throw new IOException("setDTR failed");
 /*      */   }
 /*      */ 
 /*      */   public void setRTS(boolean paramBoolean)
 /*      */     throws IOException
 /*      */   {
-/* 1037 */     if (!supSetRTS) {
-/* 1038 */       throw new IOException("setRts not supported on " + osName);
+/* 1237 */     if (!supSetRTS) {
+/* 1238 */       throw new IOException("setRts not supported on " + osName);
 /*      */     }
-/* 1040 */     if (this.port < 0) throw new IOException("setRTS: Port not open");
+/* 1240 */     if (this.port < 0) throw new IOException("setRTS: Port not open");
 /*      */ 
-/* 1042 */     int i = SerSetRTS(this.port, paramBoolean);
+/* 1242 */     int i = SerSetRTS(this.port, paramBoolean);
 /*      */ 
-/* 1044 */     if (i == -1) throw new IOException("setRTS failed");
+/* 1244 */     if (i == -1) throw new IOException("setRTS failed");
 /*      */   }
 /*      */ 
 /*      */   public void sendBreak(int paramInt)
 /*      */     throws IOException
 /*      */   {
-/* 1054 */     if (!supSendBreak) {
-/* 1055 */       throw new IOException("sendBreak not supported on " + osName);
+/* 1254 */     if (!supSendBreak) {
+/* 1255 */       throw new IOException("sendBreak not supported on " + osName);
 /*      */     }
-/* 1057 */     if (this.port < 0) throw new IOException("sendBreak: Port not open");
+/* 1257 */     if (this.port < 0) throw new IOException("sendBreak: Port not open");
 /*      */ 
-/* 1059 */     int i = SerSendBreak(this.port, paramInt);
+/* 1259 */     int i = SerSendBreak(this.port, paramInt);
 /*      */ 
-/* 1061 */     if (i == -1) throw new IOException("sendBreak failed");
+/* 1261 */     if (i == -1) throw new IOException("sendBreak failed");
 /*      */   }
 /*      */ 
 /*      */   public int getTimeoutRx()
 /*      */     throws IOException
 /*      */   {
-/* 1070 */     int i = SerGetTimeoutRx(this.port);
+/* 1270 */     int i = SerGetTimeoutRx(this.port);
 /*      */ 
-/* 1072 */     return i;
+/* 1272 */     return i;
 /*      */   }
 /*      */ 
 /*      */   public int getTimeoutTx()
 /*      */     throws IOException
 /*      */   {
-/* 1081 */     int i = SerGetTimeoutTx(this.port);
+/* 1281 */     int i = SerGetTimeoutTx(this.port);
 /*      */ 
-/* 1083 */     return i;
+/* 1283 */     return i;
 /*      */   }
 /*      */ 
 /*      */   public void setTimeoutRx(int paramInt)
 /*      */     throws IOException
 /*      */   {
-/* 1095 */     int i = SerSetTimeoutRx(this.port, paramInt);
+/* 1295 */     int i = SerSetTimeoutRx(this.port, paramInt);
 /*      */ 
-/* 1097 */     if (i == -1) throw new IOException("setTimeoutRx failed");
+/* 1297 */     if (i == -1) throw new IOException("setTimeoutRx failed");
 /*      */   }
 /*      */ 
 /*      */   public void setTimeoutTx(int paramInt)
 /*      */     throws IOException
 /*      */   {
-/* 1109 */     int i = SerSetTimeoutTx(this.port, paramInt);
+/* 1309 */     int i = SerSetTimeoutTx(this.port, paramInt);
 /*      */ 
-/* 1111 */     if (i == -1) throw new IOException("setTimeoutTx failed");
+/* 1311 */     if (i == -1) throw new IOException("setTimeoutTx failed");
 /*      */   }
 /*      */ 
 /*      */   public void setErrorStatusHandler(ErrorStatusHandler paramErrorStatusHandler)
 /*      */   {
-/* 1128 */     this.esh = paramErrorStatusHandler;
+/* 1328 */     this.esh = paramErrorStatusHandler;
 /*      */   }
 /*      */ 
 /*      */   public static void setPowerMode(int paramInt1, int paramInt2)
 /*      */     throws IOException
 /*      */   {
-/* 1142 */     if (!supSetPowerMode) return;
+/* 1342 */     if (!supSetPowerMode) return;
 /*      */ 
-/* 1144 */     int i = 0;
-/* 1145 */     synchronized (mutExSem) {
-/* 1146 */       i = SerSetPowerMode(paramInt1, paramInt2);
+/* 1344 */     int i = 0;
+/* 1345 */     synchronized (mutExSem) {
+/* 1346 */       i = SerSetPowerMode(paramInt1, paramInt2);
 /*      */     }
 /*      */ 
-/* 1149 */     if (i != 0) throw new IOException("setPowerMode failed: " + i);
+/* 1349 */     if (i != 0) throw new IOException("setPowerMode failed: " + i);
 /*      */   }
 /*      */ 
 /*      */   public static int getPowerMode(int paramInt)
 /*      */     throws IOException
 /*      */   {
-/* 1163 */     if (!supSetPowerMode) return -1;
+/* 1363 */     if (!supSetPowerMode) return -1;
 /*      */ 
-/* 1165 */     int i = 0;
-/* 1166 */     synchronized (mutExSem) {
-/* 1167 */       i = SerGetPowerMode(paramInt);
+/* 1365 */     int i = 0;
+/* 1366 */     synchronized (mutExSem) {
+/* 1367 */       i = SerGetPowerMode(paramInt);
 /*      */     }
 /*      */ 
-/* 1170 */     if (i >= 5000) throw new IOException("getPowerMode failed: " + i);
-/* 1171 */     return i;
+/* 1370 */     if (i >= 5000) throw new IOException("getPowerMode failed: " + i);
+/* 1371 */     return i;
 /*      */   }
 /*      */ 
 /*      */   public static int getResumeState(boolean paramBoolean)
 /*      */   {
-/* 1183 */     if (!supGetResumeState) return -1;
+/* 1383 */     if (!supGetResumeState) return -1;
 /*      */ 
-/* 1185 */     return SerGetResumeState(paramBoolean);
+/* 1385 */     return SerGetResumeState(paramBoolean);
 /*      */   }
 /*      */ 
 /*      */   public static int getStatusAPM()
 /*      */   {
-/* 1204 */     if (!supGetStatusAPM) return -1;
+/* 1404 */     if (!supGetStatusAPM) return -1;
 /*      */ 
-/* 1206 */     int i = SerGetStatusAPM();
+/* 1406 */     int i = SerGetStatusAPM();
 /*      */ 
-/* 1209 */     return i;
+/* 1409 */     return i;
 /*      */   }
 /*      */ 
 /*      */   public int getPortNum()
 /*      */   {
-/* 1216 */     return this.port;
+/* 1416 */     return this.port;
 /*      */   }
 /*      */ 
 /*      */   public void setName(String paramString)
 /*      */   {
-/* 1223 */     this.name = paramString;
+/* 1423 */     this.name = paramString;
 /*      */   }
 /*      */ 
 /*      */   public String getName()
 /*      */   {
-/* 1230 */     return this.name;
+/* 1430 */     return this.name;
 /*      */   }
 /*      */ 
 /*      */   public String getDevName()
 /*      */   {
-/* 1237 */     return new String(this.config.getPortName());
+/* 1437 */     return new String(this.config.getPortName());
+/*      */   }
+/*      */ 
+/*      */   public static PortDriverInfo[] getDriverInfoList()
+/*      */     throws IOException
+/*      */   {
+/* 1444 */     if (!supDriverInfo)
+/* 1445 */       throw new IOException("Not supported on this platform");
+/* 1446 */     if (portList.size() < 1) {
+/* 1447 */       throw new IOException("Must call SerialPortLocal.getPortList method first");
+/*      */     }
+/*      */ 
+/* 1450 */     PortDriverInfo[] arrayOfPortDriverInfo = new PortDriverInfo[portListInfo.size()];
+/* 1451 */     Enumeration localEnumeration = portListInfo.elements();
+/*      */ 
+/* 1453 */     int i = 0;
+/* 1454 */     while (localEnumeration.hasMoreElements()) {
+/* 1455 */       arrayOfPortDriverInfo[(i++)] = ((PortDriverInfo)localEnumeration.nextElement());
+/*      */     }
+/*      */ 
+/* 1458 */     return arrayOfPortDriverInfo;
 /*      */   }
 /*      */ 
 /*      */   public String getName(int paramInt)
 /*      */   {
-/* 1244 */     String str = "Not implemented";
-/* 1245 */     if ((osName.equals("Mac OS") == true) || (osName.equals("Mac OS X") == true)) {
-/* 1246 */       str = SerGetName(paramInt);
+/* 1465 */     String str = "Not implemented";
+/* 1466 */     if ((osName.equals("Mac OS") == true) || (osName.equals("Mac OS X") == true)) {
+/* 1467 */       str = SerGetName(paramInt);
 /*      */     }
 /*      */ 
-/* 1250 */     return str;
+/* 1471 */     return str;
 /*      */   }
 /*      */ 
 /*      */   public int getBuildNum()
 /*      */   {
-/* 1259 */     return buildNum;
+/* 1480 */     return buildNum;
 /*      */   }
 /*      */ 
 /*      */   public int getLibVer()
 /*      */   {
-/* 1269 */     return SerGetLibVer();
+/* 1490 */     return SerGetLibVer();
+/*      */   }
+/*      */ 
+/*      */   public static int setInstanceLock(int paramInt)
+/*      */   {
+/* 1507 */     if (!supInstanceLock) return -1;
+/*      */ 
+/* 1509 */     int i = SerSetInstanceLock(paramInt);
+/* 1510 */     return i;
+/*      */   }
+/*      */ 
+/*      */   public static int getInstanceLock()
+/*      */   {
+/* 1519 */     if (!supInstanceLock) return -1;
+/*      */ 
+/* 1521 */     int i = SerGetInstanceLock();
+/*      */ 
+/* 1523 */     return i;
 /*      */   }
 /*      */ 
 /*      */   public boolean isOpen()
 /*      */   {
-/* 1276 */     return this.isOpen;
+/* 1530 */     return this.isOpen;
 /*      */   }
 /*      */ 
 /*      */   private static void featureSetup()
 /*      */   {
-/* 1283 */     mutExSem = NativeHandleMutex.getInstance();
+/* 1537 */     mutExSem = NativeHandleMutex.getInstance();
 /*      */ 
-/* 1285 */     if ((osName.equals("Windows 95")) || (osName.startsWith("Windows NT")) || (osName.equals("Windows Vista")) || (osName.equals("Windows 7")) || (osName.equals("Windows 2000")) || (osName.equals("Windows XP")) || (osName.equals("Windows 98")) || (osName.equals("Windows Me")) || (osName.equals("Windows CE")) || (osName.equals("WindowsCE")) || (osName.equals("OS/2")) || (osName.toLowerCase().indexOf("netware") != -1))
+/* 1539 */     if ((osName.equals("Windows 95")) || (osName.startsWith("Windows NT")) || (osName.equals("Windows 2000")) || (osName.equals("Windows 2003")) || (osName.equals("Windows Vista")) || (osName.equals("Windows Server 2008")) || (osName.equals("Windows 7")) || (osName.equals("Windows XP")) || (osName.equals("Windows 98")) || (osName.equals("Windows Me")) || (osName.equals("Windows CE")) || (osName.equals("WindowsCE")) || (osName.equals("OS/2")) || (osName.toLowerCase().indexOf("netware") != -1))
 /*      */     {
-/* 1298 */       if ((osName.equals("Windows Vista")) || (osName.equals("Windows 7")) || (osName.equals("Windows 2000")) || (osName.equals("Windows XP")))
-/* 1299 */         maxBitRate = 460800;
-/* 1300 */       supGetPortList = true;
-/* 1301 */       supGetStatusAPM = true;
-/* 1302 */       supSigBreak = true;
-/* 1303 */       supSigFrameErr = true;
-/* 1304 */       supSigParityErr = true;
-/* 1305 */       supSigOverrun = true;
-/* 1306 */       supRxOverflow = true;
-/* 1307 */       supRxReadyCount = true;
-/* 1308 */       supTxBufCount = true;
-/* 1309 */       supSetTimeoutTx = true;
-/* 1310 */       supGetTimeoutTx = true;
-/* 1311 */       supSigRing = true;
-/* 1312 */       supSetRTS = true;
-/* 1313 */       supSetDTR = true;
-/* 1314 */       supSigCD = true;
-/* 1315 */       supSigCTS = true;
-/* 1316 */       supSigDSR = true;
-/* 1317 */       javaGetDataTimeout = false;
-/*      */ 
-/* 1319 */       supNoIndexBitRate = true;
-/* 1320 */       if (osName.equals("OS/2")) supNoIndexBitRate = false;
-/* 1321 */       if (osName.toLowerCase().indexOf("netware") != -1) {
-/* 1322 */         javaGetDataTimeout = true;
-/* 1323 */         supGetPortList = false;
+/* 1556 */       if ((osName.equals("Windows 7")) || (osName.equals("Windows Server 2008")) || (osName.equals("Windows Vista")) || (osName.equals("Windows 2003")) || (osName.equals("Windows 2000")) || (osName.equals("Windows XP")))
+/*      */       {
+/* 1563 */         maxBitRate = 921600;
+/* 1564 */         supDriverInfo = true;
 /*      */       }
 /*      */ 
-/* 1326 */       devName = "COM1";
+/* 1567 */       supParityMarkSpace = true;
+/* 1568 */       supInstanceLock = true;
+/* 1569 */       supGetPortList = true;
+/* 1570 */       supGetStatusAPM = true;
+/* 1571 */       supSigBreak = true;
+/* 1572 */       supSigFrameErr = true;
+/* 1573 */       supSigParityErr = true;
+/* 1574 */       supSigOverrun = true;
+/* 1575 */       supRxOverflow = true;
+/* 1576 */       supRxReadyCount = true;
+/* 1577 */       supTxBufCount = true;
+/* 1578 */       supSetTimeoutTx = true;
+/* 1579 */       supGetTimeoutTx = true;
+/* 1580 */       supSigRing = true;
+/* 1581 */       supSetRTS = true;
+/* 1582 */       supSetDTR = true;
+/* 1583 */       supSigCD = true;
+/* 1584 */       supSigCTS = true;
+/* 1585 */       supSigDSR = true;
+/* 1586 */       javaGetDataTimeout = false;
+/*      */ 
+/* 1588 */       supNoIndexBitRate = true;
+/* 1589 */       if (osName.equals("OS/2")) supNoIndexBitRate = false;
+/* 1590 */       if (osName.toLowerCase().indexOf("netware") != -1) {
+/* 1591 */         javaGetDataTimeout = true;
+/* 1592 */         supGetPortList = false;
+/*      */       }
+/*      */ 
+/* 1595 */       devName = "COM1";
 /*      */     }
 /*      */ 
-/* 1329 */     if (osName.equals("Mac OS"))
+/* 1598 */     if (osName.equals("Mac OS"))
 /*      */     {
-/* 1331 */       maxBitRate = 230400;
-/* 1332 */       supGetPortList = true;
-/* 1333 */       supSigBreak = true;
-/* 1334 */       supSigFrameErr = true;
-/* 1335 */       supSigParityErr = true;
-/* 1336 */       supSigOverrun = true;
-/* 1337 */       supRxOverflow = true;
-/* 1338 */       supRxReadyCount = true;
-/* 1339 */       supTxBufCount = true;
-/* 1340 */       supSetTimeoutTx = true;
-/* 1341 */       supGetTimeoutTx = true;
-/* 1342 */       supSigCTS = true;
-/* 1343 */       supSetDTR = true;
-/* 1344 */       javaGetDataTimeout = true;
-/* 1345 */       devName = "Modem Port";
+/* 1600 */       maxBitRate = 921600;
+/* 1601 */       supNoIndexBitRate = true;
+/* 1602 */       supGetPortList = true;
+/* 1603 */       supSigBreak = true;
+/* 1604 */       supSigFrameErr = true;
+/* 1605 */       supSigParityErr = true;
+/* 1606 */       supSigOverrun = true;
+/* 1607 */       supRxOverflow = true;
+/* 1608 */       supRxReadyCount = true;
+/* 1609 */       supTxBufCount = true;
+/* 1610 */       supSetTimeoutTx = true;
+/* 1611 */       supGetTimeoutTx = true;
+/* 1612 */       supSigCTS = true;
+/* 1613 */       supSetDTR = true;
+/* 1614 */       javaGetDataTimeout = true;
+/* 1615 */       devName = "Modem Port";
 /*      */     }
 /*      */ 
-/* 1348 */     if (osName.equals("Mac OS X"))
+/* 1618 */     if (osName.equals("Mac OS X"))
 /*      */     {
-/* 1350 */       maxBitRate = 230400;
-/* 1351 */       supGetStatusAPM = true;
-/* 1352 */       supGetPortList = true;
+/* 1620 */       maxBitRate = 230400;
+/* 1621 */       supParityMarkSpace = true;
+/* 1622 */       supGetStatusAPM = true;
+/* 1623 */       supGetPortList = true;
 /*      */ 
-/* 1358 */       supRxReadyCount = true;
-/* 1359 */       supTxBufCount = true;
+/* 1629 */       supRxReadyCount = true;
+/* 1630 */       supTxBufCount = true;
 /*      */ 
-/* 1362 */       supSigCTS = true;
-/* 1363 */       supSetDTR = true;
-/* 1364 */       javaGetDataTimeout = true;
-/* 1365 */       devName = "";
+/* 1633 */       supSigCTS = true;
+/* 1634 */       supSigDSR = true;
+/* 1635 */       supSigCD = true;
+/* 1636 */       supSetDTR = true;
+/* 1637 */       supSetRTS = true;
+/* 1638 */       javaGetDataTimeout = true;
+/* 1639 */       devName = "";
 /*      */     }
 /*      */ 
-/* 1368 */     if ((osName.equals("Linux")) || (osName.equals("FreeBSD")) || (osName.equals("Solaris")) || (osName.equals("SunOS")) || (osName.equals("HP-UX")) || (osName.equals("Irix")) || (osName.equals("AIX")) || (osName.equals("OSF1")) || (osName.equals("UnixWare")))
+/* 1642 */     if ((osName.equals("Linux")) || (osName.equals("FreeBSD")) || (osName.equals("Solaris")) || (osName.equals("SunOS")) || (osName.equals("HP-UX")) || (osName.equals("Irix")) || (osName.equals("AIX")) || (osName.equals("OSF1")) || (osName.equals("UnixWare")))
 /*      */     {
-/* 1378 */       supSigRing = true;
-/* 1379 */       supSetRTS = true;
-/* 1380 */       supSetDTR = true;
-/* 1381 */       supSigCD = true;
-/* 1382 */       supRxReadyCount = true;
-/* 1383 */       supTxBufCount = true;
-/* 1384 */       supSigCTS = true;
-/* 1385 */       supSigDSR = true;
-/* 1386 */       javaGetDataTimeout = true;
+/* 1652 */       supParityMarkSpace = true;
+/* 1653 */       supSigRing = true;
+/* 1654 */       supSetRTS = true;
+/* 1655 */       supSetDTR = true;
+/* 1656 */       supSigCD = true;
+/* 1657 */       supRxReadyCount = true;
+/* 1658 */       supTxBufCount = true;
+/* 1659 */       supSigCTS = true;
+/* 1660 */       supSigDSR = true;
+/* 1661 */       javaGetDataTimeout = true;
 /*      */ 
-/* 1391 */       devName = "/dev/tty0";
+/* 1666 */       devName = "/dev/tty0";
 /*      */ 
-/* 1393 */       if (osName.equals("Linux")) {
-/* 1394 */         devName = "/dev/ttyS0";
-/* 1395 */         supGetStatusAPM = true;
-/* 1396 */         if ((osArch.equals("armv4l")) || (osArch.equals("arm"))) {
-/* 1397 */           supSetPowerMode = true;
-/* 1398 */           supGetResumeState = true;
+/* 1668 */       if (osName.equals("Linux")) {
+/* 1669 */         devName = "/dev/ttyS0";
+/* 1670 */         supGetStatusAPM = true;
+/* 1671 */         if ((osArch.equals("armv4l")) || (osArch.equals("arm"))) {
+/* 1672 */           supSetPowerMode = true;
+/* 1673 */           supGetResumeState = true;
 /*      */         }
 /*      */       }
-/* 1401 */       if ((osName.equals("Solaris")) || (osName.equals("SunOS")))
+/* 1676 */       if ((osName.equals("Solaris")) || (osName.equals("SunOS")))
 /*      */       {
-/* 1404 */         devName = "/dev/ttya";
+/* 1679 */         devName = "/dev/ttya";
 /*      */       }
 /*      */ 
-/* 1407 */       if (osName.equals("Irix")) {
-/* 1408 */         supSetRTS = false;
-/* 1409 */         supSetDTR = false;
-/* 1410 */         supSigCTS = false;
+/* 1682 */       if (osName.equals("Irix")) {
+/* 1683 */         supSetRTS = false;
+/* 1684 */         supSetDTR = false;
+/* 1685 */         supSigCTS = false;
 /*      */       }
-/* 1412 */       if (osName.equals("UnixWare")) {
-/* 1413 */         supSetRTS = false;
+/* 1687 */       if (osName.equals("UnixWare")) {
+/* 1688 */         supSetRTS = false;
 /*      */       }
-/* 1415 */       if (osName.equals("OSF1")) {
-/* 1416 */         devName = "/dev/tty00";
+/* 1690 */       if (osName.equals("OSF1")) {
+/* 1691 */         devName = "/dev/tty00";
 /*      */       }
 /*      */     }
 /*      */ 
-/* 1420 */     if (osName.equals("EPOC")) {
-/* 1421 */       supGetPortList = true;
-/* 1422 */       supSendBreak = false;
-/* 1423 */       supTxBufCount = true;
-/* 1424 */       supSigFrameErr = true;
-/* 1425 */       supSigParityErr = true;
-/* 1426 */       supSigOverrun = true;
-/* 1427 */       supRxReadyCount = true;
-/* 1428 */       supSetTimeoutTx = true;
-/* 1429 */       supGetTimeoutTx = true;
-/* 1430 */       supSetRTS = true;
-/* 1431 */       supSetDTR = true;
-/* 1432 */       supSigCD = true;
-/* 1433 */       supSigCTS = true;
-/* 1434 */       supSigDSR = true;
-/* 1435 */       javaGetDataTimeout = false;
-/* 1436 */       supNoIndexBitRate = true;
-/* 1437 */       devName = "COMM::0";
+/* 1695 */     if (osName.equals("EPOC")) {
+/* 1696 */       supGetPortList = true;
+/* 1697 */       supSendBreak = false;
+/* 1698 */       supTxBufCount = true;
+/* 1699 */       supSigFrameErr = true;
+/* 1700 */       supSigParityErr = true;
+/* 1701 */       supSigOverrun = true;
+/* 1702 */       supRxReadyCount = true;
+/* 1703 */       supSetTimeoutTx = true;
+/* 1704 */       supGetTimeoutTx = true;
+/* 1705 */       supSetRTS = true;
+/* 1706 */       supSetDTR = true;
+/* 1707 */       supSigCD = true;
+/* 1708 */       supSigCTS = true;
+/* 1709 */       supSigDSR = true;
+/* 1710 */       javaGetDataTimeout = false;
+/* 1711 */       supNoIndexBitRate = true;
+/* 1712 */       devName = "COMM::0";
 /*      */     }
 /*      */   }
 /*      */ 
 /*      */   public int getMaxBitRate()
 /*      */   {
-/* 1445 */     return maxBitRate;
+/* 1719 */     return maxBitRate;
 /*      */   }
 /*      */ 
 /*      */   public boolean isSupported(String paramString)
 /*      */   {
-/* 1451 */     if (paramString.equals("sigBreak")) return supSigBreak;
-/* 1452 */     if (paramString.equals("sendBreak")) return supSendBreak;
-/* 1453 */     if (paramString.equals("sigFrameErr")) return supSigFrameErr;
-/* 1454 */     if (paramString.equals("sigOverrun")) return supSigOverrun;
-/* 1455 */     if (paramString.equals("sigParityErr")) return supSigParityErr;
-/* 1456 */     if (paramString.equals("rxOverflow")) return supRxOverflow;
-/* 1457 */     if (paramString.equals("sigRing")) return supSigRing;
-/* 1458 */     if (paramString.equals("sigCTS")) return supSigCTS;
-/* 1459 */     if (paramString.equals("sigDSR")) return supSigDSR;
-/* 1460 */     if (paramString.equals("sigCD")) return supSigCD;
-/* 1461 */     if (paramString.equals("setRTS")) return supSetRTS;
-/* 1462 */     if (paramString.equals("setDTR")) return supSetDTR;
-/* 1463 */     if (paramString.equals("rxReadyCount")) return supRxReadyCount;
-/* 1464 */     if (paramString.equals("txBufCount")) return supTxBufCount;
-/* 1465 */     if (paramString.equals("setTimeoutTx")) return supSetTimeoutTx;
-/* 1466 */     if (paramString.equals("noIndexBitRate")) return supNoIndexBitRate;
-/* 1467 */     if (paramString.equals("getPortList")) return supGetPortList;
-/* 1468 */     if (paramString.equals("setPowerMode")) return supSetPowerMode;
-/* 1469 */     if (paramString.equals("getStatusAPM")) return supGetStatusAPM;
-/* 1470 */     return false;
+/* 1725 */     if (paramString.equals("sigBreak")) return supSigBreak;
+/* 1726 */     if (paramString.equals("sendBreak")) return supSendBreak;
+/* 1727 */     if (paramString.equals("sigFrameErr")) return supSigFrameErr;
+/* 1728 */     if (paramString.equals("sigOverrun")) return supSigOverrun;
+/* 1729 */     if (paramString.equals("sigParityErr")) return supSigParityErr;
+/* 1730 */     if (paramString.equals("rxOverflow")) return supRxOverflow;
+/* 1731 */     if (paramString.equals("sigRing")) return supSigRing;
+/* 1732 */     if (paramString.equals("sigCTS")) return supSigCTS;
+/* 1733 */     if (paramString.equals("sigDSR")) return supSigDSR;
+/* 1734 */     if (paramString.equals("sigCD")) return supSigCD;
+/* 1735 */     if (paramString.equals("setRTS")) return supSetRTS;
+/* 1736 */     if (paramString.equals("setDTR")) return supSetDTR;
+/* 1737 */     if (paramString.equals("rxReadyCount")) return supRxReadyCount;
+/* 1738 */     if (paramString.equals("txBufCount")) return supTxBufCount;
+/* 1739 */     if (paramString.equals("setTimeoutTx")) return supSetTimeoutTx;
+/* 1740 */     if (paramString.equals("noIndexBitRate")) return supNoIndexBitRate;
+/* 1741 */     if (paramString.equals("getPortList")) return supGetPortList;
+/* 1742 */     if (paramString.equals("setPowerMode")) return supSetPowerMode;
+/* 1743 */     if (paramString.equals("getStatusAPM")) return supGetStatusAPM;
+/* 1744 */     if (paramString.equals("InstanceLock")) return supInstanceLock;
+/* 1745 */     if (paramString.equals("ParityMarkSpace")) return supParityMarkSpace;
+/* 1746 */     if (paramString.equals("supDriverInfo")) return supDriverInfo;
+/* 1747 */     return false;
 /*      */   }
 /*      */ 
 /*      */   public static String[] getPortList()
 /*      */     throws IOException
 /*      */   {
-/* 1490 */     String str = System.getProperty("SERIAL_PORT_LIST");
-/*      */     StringTokenizer localStringTokenizer;
-/* 1491 */     if ((str != null) && (str.trim().length() > 4))
-/* 1492 */       localStringTokenizer = new StringTokenizer(str, ";:");
-/* 1493 */     while (localStringTokenizer.hasMoreTokens()) {
-/* 1494 */       addPortName(localStringTokenizer.nextToken()); continue;
-/*      */ 
-/* 1497 */       if (supGetPortList) {
-/* 1498 */         int i = SerGetPortList();
-/*      */       }
-/* 1501 */       else if (portList.size() > 0) {
-/* 1502 */         System.out.println("getPortList: using list created with addPortName");
-/*      */       }
-/*      */       else {
-/* 1505 */         System.out.println("getPortList: port discovery not currently supported on this platform.");
-/* 1506 */         System.out.println("Options:");
-/* 1507 */         System.out.println("A) addPortName can be used to build a list of device names ");
-/* 1508 */         System.out.println("B) java -DSERIAL_PORT_LIST=COM1;COM2;COM3");
-/* 1509 */         System.out.println("or java -DSERIAL_PORT_LIST=/dev/ttyS0:/dev/ttyS1");
-/*      */       }
+/*      */     String[] arrayOfString;
+/*      */     try
+/*      */     {
+/* 1771 */       arrayOfString = getPortListIO();
+/*      */     } catch (UnsatisfiedLinkError localUnsatisfiedLinkError) {
+/* 1773 */       throw new IOException("Driver Installation Error-" + localUnsatisfiedLinkError.getMessage());
 /*      */     }
 /*      */ 
-/* 1513 */     String[] arrayOfString = new String[portList.size()];
+/* 1776 */     return arrayOfString;
+/*      */   }
 /*      */ 
-/* 1515 */     Enumeration localEnumeration = portList.elements();
-/* 1516 */     int j = 0;
-/* 1517 */     while (localEnumeration.hasMoreElements()) {
-/* 1518 */       arrayOfString[(j++)] = ((String)localEnumeration.nextElement());
+/*      */   private static String[] getPortListIO()
+/*      */     throws IOException
+/*      */   {
+/* 1796 */     String str = System.getProperty("SERIAL_PORT_LIST");
+/* 1797 */     if ((str != null) && (str.trim().length() > 4)) {
+/* 1798 */       StringTokenizer localStringTokenizer = new StringTokenizer(str, ";:");
+/* 1799 */       while (localStringTokenizer.hasMoreTokens()) {
+/* 1800 */         addPortName(localStringTokenizer.nextToken());
+/*      */       }
+/*      */     }
+/* 1803 */     else if (supGetPortList) {
+/* 1804 */       portList = new Vector();
+/* 1805 */       int i = SerGetPortList();
+/* 1806 */       if ((osFamilyWindows) || (OSInfo.isMac())) {
+/* 1807 */         int j = portList.size();
+/* 1808 */         comPortNums = new String[j];
+/* 1809 */         for (int k = 0; k < j; k++) {
+/* 1810 */           comPortNums[k] = ((String)portList.elementAt(k));
+/*      */         }
+/* 1812 */         portNumList = stripCOM(comPortNums);
+/* 1813 */         Collections.sort(portNumList);
+/* 1814 */         String[] arrayOfString2 = new String[j];
+/* 1815 */         int n = portNumList.size();
+/* 1816 */         for (int i1 = 0; i1 < n; i1++) {
+/* 1817 */           arrayOfString2[i1] = ("COM" + portNumList.get(i1));
+/*      */         }
+/*      */ 
+/* 1820 */         i1 = 0; for (int i2 = n; i1 < j; i1++) {
+/* 1821 */           if (!comPortNums[i1].substring(0, 3).equals("COM")) {
+/* 1822 */             arrayOfString2[(i2++)] = comPortNums[i1];
+/*      */           }
+/*      */         }
+/* 1825 */         return arrayOfString2;
+/*      */       }
+/*      */ 
+/*      */     }
+/* 1829 */     else if (portList.size() > 0) {
+/* 1830 */       displayMsg("getPortList: using list created with addPortName");
+/*      */     }
+/*      */     else {
+/* 1833 */       displayMsg("getPortList: port discovery not currently supported on this platform.");
+/* 1834 */       displayMsg("Options:");
+/* 1835 */       displayMsg("A) addPortName can be used to build a list of device names ");
+/* 1836 */       displayMsg("B) java -DSERIAL_PORT_LIST=COM1;COM2;COM3");
+/* 1837 */       displayMsg("or java -DSERIAL_PORT_LIST=/dev/ttyS0:/dev/ttyS1");
 /*      */     }
 /*      */ 
-/* 1521 */     return arrayOfString;
+/* 1841 */     String[] arrayOfString1 = new String[portList.size()];
+/*      */ 
+/* 1843 */     Enumeration localEnumeration = portList.elements();
+/* 1844 */     int m = 0;
+/* 1845 */     while (localEnumeration.hasMoreElements()) {
+/* 1846 */       arrayOfString1[(m++)] = ((String)localEnumeration.nextElement());
+/*      */     }
+/*      */ 
+/* 1849 */     return arrayOfString1;
 /*      */   }
 /*      */ 
 /*      */   public static void addPortName(String paramString)
 /*      */   {
-/* 1528 */     Enumeration localEnumeration = portList.elements();
+/* 1855 */     Enumeration localEnumeration = portList.elements();
 /*      */ 
-/* 1530 */     while (localEnumeration.hasMoreElements()) {
-/* 1531 */       String str = (String)localEnumeration.nextElement();
-/* 1532 */       if (str.equalsIgnoreCase(paramString)) {
-/* 1533 */         return;
+/* 1858 */     while (localEnumeration.hasMoreElements()) {
+/* 1859 */       String str = (String)localEnumeration.nextElement();
+/* 1860 */       if (str.equalsIgnoreCase(paramString)) {
+/* 1861 */         return;
 /*      */       }
 /*      */     }
 /*      */ 
-/* 1537 */     portList.addElement(paramString);
+/* 1865 */     portList.addElement(paramString);
+/*      */   }
+/*      */ 
+/*      */   public static void addPortInfo(String paramString1, String paramString2, String paramString3)
+/*      */   {
+/* 1876 */     Enumeration localEnumeration = portListInfo.elements();
+/*      */ 
+/* 1880 */     while (localEnumeration.hasMoreElements()) {
+/* 1881 */       String str = ((PortDriverInfo)localEnumeration.nextElement()).getPortName();
+/*      */ 
+/* 1883 */       if (str.equalsIgnoreCase(paramString1)) {
+/* 1884 */         return;
+/*      */       }
+/*      */     }
+/*      */ 
+/* 1888 */     portInfo = new PortDriverInfo(paramString1, paramString2, paramString3);
+/* 1889 */     portListInfo.addElement(portInfo);
+/*      */   }
+/*      */ 
+/*      */   public static void setPortListMode(int paramInt)
+/*      */   {
+/* 1898 */     portListMode = paramInt; } 
+/* 1899 */   public static int getPortListMode() { return portListMode;
+/*      */   }
+/*      */ 
+/*      */   public static ArrayList stripCOM(String[] paramArrayOfString)
+/*      */   {
+/* 1908 */     ArrayList localArrayList = new ArrayList();
+/*      */ 
+/* 1910 */     for (int i = 0; i < paramArrayOfString.length; i++) {
+/* 1911 */       String str = paramArrayOfString[i].substring(3);
+/* 1912 */       int j = 1;
+/* 1913 */       for (int k = 0; k < str.length(); k++) {
+/* 1914 */         if (!Character.isDigit(str.charAt(k)))
+/* 1915 */           j = 0;
+/*      */       }
+/* 1917 */       if (j != 0) {
+/* 1918 */         localArrayList.add(new Integer(str));
+/*      */       }
+/*      */     }
+/*      */ 
+/* 1922 */     return localArrayList;
 /*      */   }
 /*      */ 
 /*      */   protected void finalize()
 /*      */   {
 /*      */     try
 /*      */     {
-/* 1545 */       if (this.flowControl != null) this.flowControl.abort();
-/* 1546 */       close();
+/* 1930 */       if (this.flowControl != null) this.flowControl.abort();
+/* 1931 */       close();
 /*      */     }
 /*      */     catch (Exception localException)
 /*      */     {
@@ -1062,47 +1283,47 @@
 /*      */ 
 /*      */   private void srvTaskCheck() throws IOException
 /*      */   {
-/* 1555 */     if (osName.equals("EPOC")) {
-/* 1556 */       if ((this.ssTask != null) && 
-/* 1557 */         (this.ssTask.isAlive())) {
-/* 1558 */         return;
+/* 1940 */     if (osName.equals("EPOC")) {
+/* 1941 */       if ((this.ssTask != null) && 
+/* 1942 */         (this.ssTask.isAlive())) {
+/* 1943 */         return;
 /*      */       }
-/* 1560 */       this.config.setPortNum(0);
-/* 1561 */       this.ssTask = new SerialServerTask(this);
-/* 1562 */       this.ssTask.start();
-/* 1563 */       while (this.config.getPort() == 0) try {
-/* 1564 */           Thread.sleep(100L);
+/* 1945 */       this.config.setPortNum(0);
+/* 1946 */       this.ssTask = new SerialServerTask(this);
+/* 1947 */       this.ssTask.start();
+/* 1948 */       while (this.config.getPort() == 0) try {
+/* 1949 */           Thread.sleep(100L);
 /*      */         } catch (InterruptedException localInterruptedException) {
 /*      */         } if (this.config.getPort() == -1) {
-/* 1567 */         String str = "srvTaskCheck: " + this.ssTask.eMsg;
-/* 1568 */         throw new IOException(str);
+/* 1952 */         String str = "srvTaskCheck: " + this.ssTask.eMsg;
+/* 1953 */         throw new IOException(str);
 /*      */       }
 /*      */ 
-/* 1572 */       this.port = (this.config.getPort() - 1);
+/* 1957 */       this.port = (this.config.getPort() - 1);
 /*      */     }
 /*      */   }
 /*      */ 
 /*      */   public void setPortName(String paramString)
 /*      */   {
-/* 1585 */     this.config.setPortName(paramString);
-/* 1586 */     devName = paramString;
+/* 1970 */     this.config.setPortName(paramString);
+/* 1971 */     devName = paramString;
 /*      */   }
-/* 1588 */   public String getPortName() { return new String(this.config.getPortName()); } 
+/* 1973 */   public String getPortName() { return new String(this.config.getPortName()); } 
 /*      */   public void setBitRate(int paramInt) {
-/* 1590 */     this.config.setBitRate(paramInt); } 
-/* 1591 */   public int getBitRate() { return this.config.getBitRate(); } 
+/* 1975 */     this.config.setBitRate(paramInt); } 
+/* 1976 */   public int getBitRate() { return this.config.getBitRate(); } 
 /*      */   public void setDataBits(int paramInt) {
-/* 1593 */     this.config.setDataBits(paramInt); } 
-/* 1594 */   public int getDataBits() { return this.config.getDataBits(); } 
+/* 1978 */     this.config.setDataBits(paramInt); } 
+/* 1979 */   public int getDataBits() { return this.config.getDataBits(); } 
 /*      */   public void setStopBits(int paramInt) {
-/* 1596 */     this.config.setStopBits(paramInt); } 
-/* 1597 */   public int getStopBits() { return this.config.getStopBits(); } 
+/* 1981 */     this.config.setStopBits(paramInt); } 
+/* 1982 */   public int getStopBits() { return this.config.getStopBits(); } 
 /*      */   public void setParity(int paramInt) {
-/* 1599 */     this.config.setParity(paramInt); } 
-/* 1600 */   public int getParity() { return this.config.getParity(); } 
+/* 1984 */     this.config.setParity(paramInt); } 
+/* 1985 */   public int getParity() { return this.config.getParity(); } 
 /*      */   public void setHandshake(int paramInt) {
-/* 1602 */     this.config.setHandshake(paramInt); } 
-/* 1603 */   public int getHandshake() { return this.config.getHandshake();
+/* 1987 */     this.config.setHandshake(paramInt); } 
+/* 1988 */   public int getHandshake() { return this.config.getHandshake();
 /*      */   }
 /*      */ 
 /*      */   native int SerGetLibVer();
@@ -1110,6 +1331,8 @@
 /*      */   native int SerOpenPort(SerialConfig paramSerialConfig);
 /*      */ 
 /*      */   native int SerConfigure(SerialConfig paramSerialConfig);
+/*      */ 
+/*      */   native int SerResetPortDriver(SerialConfig paramSerialConfig);
 /*      */ 
 /*      */   native int SerClosePort(int paramInt);
 /*      */ 
@@ -1174,6 +1397,12 @@
 /*      */   static native int SerGetPortList()
 /*      */     throws IOException;
 /*      */ 
+/*      */   static native int SerGetPortMfgr(int paramInt);
+/*      */ 
+/*      */   static native int SerSetInstanceLock(int paramInt);
+/*      */ 
+/*      */   static native int SerGetInstanceLock();
+/*      */ 
 /*      */   native int SerFlowTask(int paramInt);
 /*      */ 
 /*      */   native String SerGetName(int paramInt);
@@ -1185,36 +1414,38 @@
 /*      */   {
 /*      */     try
 /*      */     {
-/*   89 */       osName = System.getProperty("os.name");
-/*   90 */       jdkVer = System.getProperty("java.version");
-/*   91 */       vendor = System.getProperty("java.vendor");
-/*   92 */       osArch = System.getProperty("os.arch");
+/*  171 */       osName = System.getProperty("os.name");
+/*  172 */       jdkVer = System.getProperty("java.version");
+/*  173 */       vendor = System.getProperty("java.vendor");
+/*  174 */       osArch = System.getProperty("os.arch");
 /*      */ 
-/*   98 */       System.out.println(banner1 + "\r\n" + banner2);
-/*   99 */       System.out.println("os.name=\"" + osName + "\"  os.arch=\"" + osArch + "\"");
-/*  100 */       featureSetup();
+/*  180 */       displayMsg(banner1 + "\r\n" + banner2);
+/*  181 */       displayMsg("os.name=\"" + osName + "\"  os.arch=\"" + osArch + "\"");
+/*  182 */       featureSetup();
 /*      */ 
-/*  102 */       setNativeLibName();
+/*  184 */       setNativeLibName();
 /*      */ 
-/*  104 */       if (jspLib == null) {
-/*  105 */         System.out.println("osName=" + osName + " osArch=" + osArch);
-/*  106 */         str1 = "Platform not supported, check VM properties os.name & os.arch";
-/*  107 */         System.out.println(str1);
-/*  108 */         System.exit(-1);
-/*      */       }
-/*  110 */       String str1 = System.getProperty("java.home") + "\\bin\\" + jspLib + ".dll";
-/*  111 */       String str2 = System.getProperty("user.home") + "\\Medtronic\\" + jspLib + ".dll";
-/*  112 */       if (new File(str2).exists())
-/*  113 */         System.load(str2);
-/*      */       else {
-/*  115 */         System.load(str1);
+/*  186 */       if (jspLib == null) {
+/*  187 */         str1 = "osName=" + osName + " osArch=" + osArch;
+/*  188 */         String str2 = "Platform '" + str1 + "' not supported, check VM properties os.name & os.arch";
+/*      */ 
+/*  190 */         displayMsg(str2);
+/*  191 */         throw new IOException("Unsupported Platform Error: " + str2);
 /*      */       }
 /*      */ 
-/*  118 */       jspLibLoaded = true;
-/*  119 */       System.out.println("SerialPort class loaded: " + jspLib);
+/*  195 */       String str1 = getLibAndPath32();
+/*      */       try
+/*      */       {
+/*  198 */         loadLibrary(str1);
+/*      */       }
+/*      */       catch (UnsatisfiedLinkError localUnsatisfiedLinkError2) {
+/*  201 */         displayMsg("load library failed: " + localUnsatisfiedLinkError2.getMessage());
+/*  202 */         str1 = getLibAndPath64();
+/*  203 */         loadLibrary(str1);
+/*      */       }
 /*      */     }
-/*      */     catch (UnsatisfiedLinkError localUnsatisfiedLinkError) {
-/*  122 */       System.out.println(localUnsatisfiedLinkError + ": Check that native library " + jspLib + " is in proper directory");
+/*      */     catch (UnsatisfiedLinkError localUnsatisfiedLinkError1) {
+/*  207 */       displayMsg(localUnsatisfiedLinkError1 + ": Check that native library " + jspLib + " is in proper directory");
 /*      */     }
 /*      */     catch (Exception localException)
 /*      */     {

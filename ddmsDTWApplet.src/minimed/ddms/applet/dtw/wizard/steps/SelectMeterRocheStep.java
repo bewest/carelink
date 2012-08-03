@@ -5,7 +5,6 @@
 /*     */ import java.awt.Insets;
 /*     */ import java.awt.event.ActionEvent;
 /*     */ import java.awt.event.ActionListener;
-/*     */ import java.util.Locale;
 /*     */ import java.util.ResourceBundle;
 /*     */ import javax.swing.Icon;
 /*     */ import javax.swing.ImageIcon;
@@ -61,82 +60,63 @@
 /*  93 */     localJRadioButton1.addActionListener(this.m_radioButtonListener);
 /*     */ 
 /*  95 */     JRadioButton localJRadioButton2 = null;
-/*  96 */     if (showMeter()) {
-/*  97 */       localJRadioButton2 = this.m_buttonGroup.add("wizard.selections.SELECTION_DEVICE_ROCHE_AVIVA_METER", 1, 2);
+/*  96 */     localJRadioButton2 = this.m_buttonGroup.add("wizard.selections.SELECTION_DEVICE_ROCHE_AVIVA_METER", 1, 2);
 /*     */ 
-/*  99 */       localJRadioButton2.addActionListener(this.m_radioButtonListener);
-/*     */     }
-/* 101 */     JRadioButton localJRadioButton3 = this.m_buttonGroup.add("wizard.selections.SELECTION_DEVICE_ROCHE_COMPACT_METER", 3, 1);
+/*  98 */     localJRadioButton2.addActionListener(this.m_radioButtonListener);
+/*  99 */     JRadioButton localJRadioButton3 = this.m_buttonGroup.add("wizard.selections.SELECTION_DEVICE_ROCHE_COMPACT_METER", 3, 1);
 /*     */ 
-/* 103 */     localJRadioButton3.addActionListener(this.m_radioButtonListener);
+/* 101 */     localJRadioButton3.addActionListener(this.m_radioButtonListener);
 /*     */ 
-/* 105 */     JRadioButton localJRadioButton4 = null;
-/* 106 */     if (showMeter()) {
-/* 107 */       localJRadioButton4 = this.m_buttonGroup.add("wizard.selections.SELECTION_DEVICE_ROCHE_COMPACTPLUS_METER", 3, 2);
+/* 103 */     JRadioButton localJRadioButton4 = null;
+/* 104 */     localJRadioButton4 = this.m_buttonGroup.add("wizard.selections.SELECTION_DEVICE_ROCHE_COMPACTPLUS_METER", 3, 2);
 /*     */ 
-/* 109 */       localJRadioButton4.addActionListener(this.m_radioButtonListener);
-/*     */     }
+/* 106 */     localJRadioButton4.addActionListener(this.m_radioButtonListener);
 /*     */ 
-/* 115 */     localGridBagConstraints = new GridBagConstraints();
-/* 116 */     localGridBagConstraints.gridx = 0;
-/* 117 */     localGridBagConstraints.gridy = 1;
-/* 118 */     localGridBagConstraints.anchor = 13;
-/* 119 */     localJPanel.add(createImageButton("wizard.rocheactive.pic", localJRadioButton1), localGridBagConstraints);
+/* 111 */     localGridBagConstraints = new GridBagConstraints();
+/* 112 */     localGridBagConstraints.gridx = 0;
+/* 113 */     localGridBagConstraints.gridy = 1;
+/* 114 */     localGridBagConstraints.anchor = 13;
+/* 115 */     localJPanel.add(createImageButton("wizard.rocheactive.pic", localJRadioButton1), localGridBagConstraints);
 /*     */ 
-/* 122 */     if (showMeter()) {
-/* 123 */       localGridBagConstraints = new GridBagConstraints();
-/* 124 */       localGridBagConstraints.gridx = 0;
-/* 125 */       localGridBagConstraints.gridy = 2;
-/* 126 */       localGridBagConstraints.insets = new Insets(10, 0, 0, 0);
-/* 127 */       localGridBagConstraints.anchor = 13;
-/* 128 */       localJPanel.add(createImageButton("wizard.rocheaviva.pic", localJRadioButton2), localGridBagConstraints);
-/*     */     }
+/* 118 */     localGridBagConstraints = new GridBagConstraints();
+/* 119 */     localGridBagConstraints.gridx = 0;
+/* 120 */     localGridBagConstraints.gridy = 2;
+/* 121 */     localGridBagConstraints.insets = new Insets(10, 0, 0, 0);
+/* 122 */     localGridBagConstraints.anchor = 13;
+/* 123 */     localJPanel.add(createImageButton("wizard.rocheaviva.pic", localJRadioButton2), localGridBagConstraints);
 /*     */ 
-/* 133 */     localGridBagConstraints = new GridBagConstraints();
-/* 134 */     localGridBagConstraints.gridx = 2;
-/* 135 */     localGridBagConstraints.gridy = 1;
-/* 136 */     localGridBagConstraints.insets = new Insets(0, 20, 0, 0);
-/* 137 */     localGridBagConstraints.anchor = 13;
-/* 138 */     localJPanel.add(createImageButton("wizard.rochecompact.pic", localJRadioButton3), localGridBagConstraints);
+/* 127 */     localGridBagConstraints = new GridBagConstraints();
+/* 128 */     localGridBagConstraints.gridx = 2;
+/* 129 */     localGridBagConstraints.gridy = 1;
+/* 130 */     localGridBagConstraints.insets = new Insets(0, 20, 0, 0);
+/* 131 */     localGridBagConstraints.anchor = 13;
+/* 132 */     localJPanel.add(createImageButton("wizard.rochecompact.pic", localJRadioButton3), localGridBagConstraints);
 /*     */ 
-/* 141 */     if (showMeter()) {
-/* 142 */       localGridBagConstraints = new GridBagConstraints();
-/* 143 */       localGridBagConstraints.gridx = 2;
-/* 144 */       localGridBagConstraints.gridy = 2;
-/* 145 */       localGridBagConstraints.insets = new Insets(10, 20, 0, 0);
-/* 146 */       localGridBagConstraints.anchor = 13;
-/* 147 */       localJPanel.add(createImageButton("wizard.rochecompactplus.pic", localJRadioButton4), localGridBagConstraints);
-/*     */     }
+/* 135 */     localGridBagConstraints = new GridBagConstraints();
+/* 136 */     localGridBagConstraints.gridx = 2;
+/* 137 */     localGridBagConstraints.gridy = 2;
+/* 138 */     localGridBagConstraints.insets = new Insets(10, 20, 0, 0);
+/* 139 */     localGridBagConstraints.anchor = 13;
+/* 140 */     localJPanel.add(createImageButton("wizard.rochecompactplus.pic", localJRadioButton4), localGridBagConstraints);
 /*     */ 
-/* 152 */     this.m_buttonGroup.selectButton(getWizardSelections().getMeterDevice(), "wizard.selections.SELECTION_DEVICE_ROCHE_ACTIVE_METER");
+/* 144 */     this.m_buttonGroup.selectButton(getWizardSelections().getMeterDevice(), "wizard.selections.SELECTION_DEVICE_ROCHE_ACTIVE_METER");
 /*     */   }
 /*     */ 
 /*     */   protected void stepShown()
 /*     */   {
-/* 162 */     super.stepShown();
-/* 163 */     updateButtonStates();
+/* 154 */     super.stepShown();
+/* 155 */     updateButtonStates();
 /*     */   }
 /*     */ 
 /*     */   protected void rememberUserSelections()
 /*     */   {
-/* 171 */     getWizardSelections().setMeterDevice(this.m_buttonGroup.getSelectedButton());
+/* 163 */     getWizardSelections().setMeterDevice(this.m_buttonGroup.getSelectedButton());
 /*     */   }
 /*     */ 
 /*     */   protected void updateButtonStates()
 /*     */   {
-/* 178 */     rememberUserSelections();
-/* 179 */     getFinishButton().setEnabled(getWizard().canFinish());
-/*     */   }
-/*     */ 
-/*     */   private boolean showMeter()
-/*     */   {
-/* 189 */     String str = getLocale().getCountry();
-/* 190 */     int i = 0;
-/* 191 */     if ((Locale.US.getCountry().equals(str)) || (Locale.CANADA.getCountry().equals(str)))
-/*     */     {
-/* 193 */       i = 1;
-/*     */     }
-/* 195 */     return i;
+/* 170 */     rememberUserSelections();
+/* 171 */     getFinishButton().setEnabled(getWizard().canFinish());
 /*     */   }
 /*     */ }
 

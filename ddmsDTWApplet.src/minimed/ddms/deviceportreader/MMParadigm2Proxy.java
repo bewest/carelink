@@ -1,277 +1,275 @@
-/*     */ package minimed.ddms.deviceportreader;
+/*     */ package minimed.ddms.A;
 /*     */ 
 /*     */ import java.io.FileNotFoundException;
 /*     */ import java.io.IOException;
 /*     */ import java.io.InputStream;
 /*     */ import java.util.Date;
 /*     */ 
-/*     */ class MMParadigm2Proxy extends MedicalDevice
+/*     */ class X extends O
 /*     */ {
-/*     */   private MMX12 m_pumpDetector;
-/*     */   private MMX12 m_pumpInstance;
-/*     */   private MMX12 m_currentPump;
+/*     */   private u б;
+/*     */   private u Я;
+/*     */   private u а;
 /*     */ 
-/*     */   MMParadigm2Proxy(int paramInt)
+/*     */   X(int paramInt)
 /*     */   {
-/*  61 */     this.m_linkDevice = paramInt;
+/*  61 */     this.đ = paramInt;
 /*     */ 
-/*  64 */     this.m_pumpDetector = new MMX12(paramInt);
-/*  65 */     setCurrentPump(this.m_pumpDetector);
+/*  64 */     this.б = new u(paramInt, 0L);
+/*  65 */     A(this.б);
 /*     */   }
 /*     */ 
-/*     */   public void readClock(DeviceListener paramDeviceListener, int paramInt, String paramString)
-/*     */     throws BadDeviceCommException, BadDeviceValueException, IOException, ConnectToPumpException
+/*     */   public void B(v paramv, String paramString1, String paramString2)
+/*     */     throws t, Z, IOException, P
 /*     */   {
-/*  90 */     this.m_pumpDetector.readClock(paramDeviceListener, paramInt, paramString);
-/*  91 */     setCurrentPump(this.m_pumpDetector);
+/*  90 */     this.б.B(paramv, paramString1, paramString2);
+/*  91 */     A(this.б);
 /*     */   }
 /*     */ 
-/*     */   public void readData(DeviceListener paramDeviceListener, int paramInt, String paramString, boolean paramBoolean)
-/*     */     throws BadDeviceCommException, BadDeviceValueException, IOException, ConnectToPumpException
+/*     */   public void A(v paramv, String paramString1, String paramString2, boolean paramBoolean)
+/*     */     throws t, Z, IOException, P
 /*     */   {
-/* 117 */     this.m_pumpInstance = createPumpInstance(paramDeviceListener, paramInt, paramString);
-/* 118 */     setCurrentPump(this.m_pumpInstance);
+/* 117 */     this.Я = E(paramv, paramString1, paramString2);
+/* 118 */     A(this.Я);
 /*     */ 
-/* 121 */     this.m_pumpInstance.readData(paramDeviceListener, paramInt, paramString, false, paramBoolean);
+/* 121 */     this.Я.A(paramv, paramString1, paramString2, false, paramBoolean);
 /*     */   }
 /*     */ 
-/*     */   public void readData(DeviceListener paramDeviceListener, int paramInt, String paramString)
-/*     */     throws BadDeviceCommException, BadDeviceValueException, IOException, ConnectToPumpException
+/*     */   public void A(v paramv, String paramString1, String paramString2)
+/*     */     throws t, Z, IOException, P
 /*     */   {
-/* 145 */     readData(paramDeviceListener, paramInt, paramString, false);
+/* 145 */     A(paramv, paramString1, paramString2, false);
 /*     */   }
 /*     */ 
-/*     */   public void readGlucoseDataRange(DeviceListener paramDeviceListener, int paramInt, String paramString, Date paramDate1, Date paramDate2)
-/*     */     throws BadDeviceCommException, BadDeviceValueException, IOException, ConnectToPumpException
+/*     */   public void B(v paramv, String paramString1, String paramString2, Date paramDate1, Date paramDate2)
+/*     */     throws t, Z, IOException, P
 /*     */   {
-/* 180 */     this.m_pumpInstance = createPumpInstance(paramDeviceListener, paramInt, paramString);
-/* 181 */     setCurrentPump(this.m_pumpInstance);
+/* 180 */     this.Я = E(paramv, paramString1, paramString2);
+/* 181 */     A(this.Я);
 /*     */ 
-/* 184 */     this.m_pumpInstance.readGlucoseDataRange(paramDeviceListener, paramInt, paramString, paramDate1, paramDate2);
+/* 184 */     this.Я.B(paramv, paramString1, paramString2, paramDate1, paramDate2);
 /*     */   }
 /*     */ 
-/*     */   public void readIsigDataRange(DeviceListener paramDeviceListener, int paramInt, String paramString, Date paramDate1, Date paramDate2)
-/*     */     throws BadDeviceCommException, BadDeviceValueException, IOException, ConnectToPumpException
+/*     */   public void A(v paramv, String paramString1, String paramString2, Date paramDate1, Date paramDate2)
+/*     */     throws t, Z, IOException, P
 /*     */   {
-/* 220 */     this.m_pumpInstance = createPumpInstance(paramDeviceListener, paramInt, paramString);
-/* 221 */     setCurrentPump(this.m_pumpInstance);
+/* 220 */     this.Я = E(paramv, paramString1, paramString2);
+/* 221 */     A(this.Я);
 /*     */ 
-/* 224 */     this.m_pumpInstance.readIsigDataRange(paramDeviceListener, paramInt, paramString, paramDate1, paramDate2);
+/* 224 */     this.Я.A(paramv, paramString1, paramString2, paramDate1, paramDate2);
 /*     */   }
 /*     */ 
-/*     */   public InputStream createSnapshot()
-/*     */     throws BadDeviceValueException, IOException
+/*     */   public InputStream C()
+/*     */     throws Z, IOException
 /*     */   {
-/* 242 */     InputStream localInputStream = this.m_pumpInstance.m_snapshotCreator.createSnapshot();
-/* 243 */     setCurrentPump(this.m_pumpInstance);
+/* 242 */     InputStream localInputStream = this.Я.Ė.B();
+/* 243 */     A(this.Я);
 /* 244 */     return localInputStream;
 /*     */   }
 /*     */ 
-/*     */   public final Date getClock()
+/*     */   public final Date N()
 /*     */   {
-/* 253 */     return getCurrentPump().getClock();
+/* 253 */     return À().N();
 /*     */   }
 /*     */ 
-/*     */   public final String getDescription()
+/*     */   public final String R()
 /*     */   {
-/* 262 */     return getCurrentPump().getDescription();
+/* 262 */     return À().R();
 /*     */   }
 /*     */ 
-/*     */   public String getModelNumber()
+/*     */   public String S()
 /*     */   {
-/* 271 */     return getCurrentPump().getModelNumber();
+/* 271 */     return À().S();
 /*     */   }
 /*     */ 
-/*     */   public final String getLastCommandDescription()
+/*     */   public final String D()
 /*     */   {
-/* 280 */     return getCurrentPump().getLastCommandDescription();
+/* 280 */     return À().D();
 /*     */   }
 /*     */ 
-/*     */   public long getLastHistoryPageNumber()
+/*     */   public long E()
 /*     */   {
-/* 291 */     return getCurrentPump().getLastHistoryPageNumber();
+/* 291 */     return À().E();
 /*     */   }
 /*     */ 
-/*     */   public long getLastGlucoseHistoryPageNumber()
+/*     */   public long G()
 /*     */   {
-/* 302 */     return getCurrentPump().getLastGlucoseHistoryPageNumber();
+/* 302 */     return À().G();
 /*     */   }
 /*     */ 
-/*     */   public TraceHistorySet getTraceHistorySet()
+/*     */   public EA J()
 /*     */   {
-/* 314 */     return getCurrentPump().getTraceHistorySet();
+/* 314 */     return À().J();
 /*     */   }
 /*     */ 
-/*     */   public final synchronized int getPhase()
+/*     */   public final synchronized int I()
 /*     */   {
-/* 323 */     return getCurrentPump().getPhase();
+/* 323 */     return À().I();
 /*     */   }
 /*     */ 
-/*     */   public final String getPhaseText()
+/*     */   public final String O()
 /*     */   {
-/* 332 */     return getCurrentPump().getPhaseText();
+/* 332 */     return À().O();
 /*     */   }
 /*     */ 
-/*     */   public String getSerialNumber()
+/*     */   public String Q()
 /*     */   {
-/* 341 */     return getCurrentPump().getSerialNumber();
+/* 341 */     return À().Q();
 /*     */   }
 /*     */ 
-/*     */   public int getSerialPortNumber()
+/*     */   public String L()
 /*     */   {
-/* 350 */     return getCurrentPump().getSerialPortNumber();
+/* 350 */     return À().L();
 /*     */   }
 /*     */ 
-/*     */   public final int getSnapshotVersion()
+/*     */   public final int F()
 /*     */   {
-/* 359 */     return getCurrentPump().getSnapshotVersion();
+/* 359 */     return À().F();
 /*     */   }
 /*     */ 
-/*     */   public void storeSnapshot(String paramString)
+/*     */   public void A(String paramString)
 /*     */     throws FileNotFoundException, IOException
 /*     */   {
-/* 373 */     getCurrentPump().storeSnapshot(paramString);
+/* 373 */     À().A(paramString);
 /*     */   }
 /*     */ 
-/*     */   int getDeviceType()
+/*     */   int Z()
 /*     */   {
 /* 382 */     return 1;
 /*     */   }
 /*     */ 
-/*     */   void findDevice(DeviceListener paramDeviceListener)
-/*     */     throws BadDeviceCommException, IOException
+/*     */   void C(v paramv)
+/*     */     throws t, IOException
 /*     */   {
-/* 390 */     this.m_pumpDetector.findDevice(paramDeviceListener);
+/* 390 */     this.б.C(paramv);
 /*     */   }
 /*     */ 
-/*     */   void initSerialPort(int paramInt)
+/*     */   void D(String paramString)
 /*     */     throws IOException
 /*     */   {
-/* 397 */     this.m_pumpDetector.initSerialPort(paramInt);
+/* 397 */     this.б.D(paramString);
 /*     */   }
 /*     */ 
-/*     */   void shutDownSerialPort()
+/*     */   void _()
 /*     */     throws IOException
 /*     */   {
-/* 404 */     this.m_pumpDetector.shutDownSerialPort();
+/* 404 */     this.б._();
 /*     */   }
 /*     */ 
-/*     */   private MMX12 createPumpInstance(DeviceListener paramDeviceListener, int paramInt, String paramString)
-/*     */     throws BadDeviceCommException, BadDeviceValueException, IOException, ConnectToPumpException
+/*     */   private u E(v paramv, String paramString1, String paramString2)
+/*     */     throws t, Z, IOException, P
 /*     */   {
-/* 427 */     logInfo(this, "createPumpInstance: determining Paradigm2 pump model...");
+/* 427 */     A(this, "createPumpInstance: determining Paradigm2 pump model...");
 /*     */ 
-/* 431 */     String str = this.m_pumpDetector.readModelNumber(paramDeviceListener, paramInt, paramString);
+/* 431 */     String str = this.б.D(paramv, paramString1, paramString2);
 /*     */ 
-/* 433 */     logInfo(this, "createPumpInstance: Paradigm2 pump model is " + str);
+/* 433 */     A(this, "createPumpInstance: Paradigm2 pump model is " + str);
 /*     */     Object localObject;
-/* 438 */     if (MMX12.isModelNumberSupported(str)) {
-/* 439 */       localObject = new MMX12(this.m_linkDevice);
-/* 440 */     } else if (MMX15.isModelNumberSupported(str))
+/* 438 */     if (u.G(str))
 /*     */     {
-/* 442 */       this.m_lastHistoryPageNumber = paramDeviceListener.getLastHistoryPageNumber(str, paramString);
+/* 440 */       this.¤ = paramv.getLastHistoryPageNumber(str, paramString2);
 /*     */ 
-/* 444 */       localObject = new MMX15(this.m_linkDevice, this.m_lastHistoryPageNumber);
-/* 445 */     } else if (MMX22.isModelNumberSupported(str))
+/* 442 */       localObject = new u(this.đ, this.¤);
+/* 443 */     } else if (b.G(str))
 /*     */     {
-/* 448 */       this.m_lastHistoryPageNumber = paramDeviceListener.getLastHistoryPageNumber(str, paramString);
+/* 446 */       this.¤ = paramv.getLastHistoryPageNumber(str, paramString2);
 /*     */ 
-/* 450 */       this.m_lastGlucoseHistoryPageNumber = paramDeviceListener.getLastGlucoseHistoryPageNumber(str, paramString);
+/* 448 */       this.Ñ = paramv.getLastGlucoseHistoryPageNumber(str, paramString2);
 /*     */ 
-/* 452 */       localObject = new MMX22(this.m_linkDevice, this.m_lastHistoryPageNumber, this.m_lastGlucoseHistoryPageNumber);
+/* 450 */       localObject = new b(this.đ, this.¤, this.Ñ);
 /*     */     }
-/* 454 */     else if (MMGuardian3.isModelNumberSupported(str))
+/* 452 */     else if (H.G(str))
 /*     */     {
-/* 457 */       this.m_lastHistoryPageNumber = paramDeviceListener.getLastHistoryPageNumber(str, paramString);
+/* 455 */       this.¤ = paramv.getLastHistoryPageNumber(str, paramString2);
 /*     */ 
-/* 459 */       this.m_lastGlucoseHistoryPageNumber = paramDeviceListener.getLastGlucoseHistoryPageNumber(str, paramString);
+/* 457 */       this.Ñ = paramv.getLastGlucoseHistoryPageNumber(str, paramString2);
 /*     */ 
-/* 461 */       localObject = new MMGuardian3(this.m_linkDevice, this.m_lastHistoryPageNumber, this.m_lastGlucoseHistoryPageNumber);
+/* 459 */       localObject = new H(this.đ, this.¤, this.Ñ);
 /*     */     }
-/* 463 */     else if (MMX23.isModelNumberSupported(str))
+/* 461 */     else if (_.G(str))
 /*     */     {
-/* 466 */       this.m_lastHistoryPageNumber = paramDeviceListener.getLastHistoryPageNumber(str, paramString);
+/* 464 */       this.¤ = paramv.getLastHistoryPageNumber(str, paramString2);
 /*     */ 
-/* 468 */       this.m_lastGlucoseHistoryPageNumber = paramDeviceListener.getLastGlucoseHistoryPageNumber(str, paramString);
+/* 466 */       this.Ñ = paramv.getLastGlucoseHistoryPageNumber(str, paramString2);
 /*     */ 
-/* 470 */       localObject = new MMX23(this.m_linkDevice, this.m_lastHistoryPageNumber, this.m_lastGlucoseHistoryPageNumber);
+/* 468 */       localObject = new _(this.đ, this.¤, this.Ñ);
 /*     */     }
-/* 472 */     else if (MMX53.isModelNumberSupported(str))
+/* 470 */     else if (e.G(str))
 /*     */     {
-/* 475 */       this.m_lastHistoryPageNumber = paramDeviceListener.getLastHistoryPageNumber(str, paramString);
+/* 473 */       this.¤ = paramv.getLastHistoryPageNumber(str, paramString2);
 /*     */ 
-/* 477 */       this.m_lastGlucoseHistoryPageNumber = paramDeviceListener.getLastGlucoseHistoryPageNumber(str, paramString);
+/* 475 */       this.Ñ = paramv.getLastGlucoseHistoryPageNumber(str, paramString2);
 /*     */ 
-/* 479 */       localObject = new MMX53(this.m_linkDevice, this.m_lastHistoryPageNumber, this.m_lastGlucoseHistoryPageNumber);
+/* 477 */       localObject = new e(this.đ, this.¤, this.Ñ);
 /*     */     }
-/* 481 */     else if (MMX54.isModelNumberSupported(str))
+/* 479 */     else if (a.G(str))
 /*     */     {
-/* 484 */       this.m_lastHistoryPageNumber = paramDeviceListener.getLastHistoryPageNumber(str, paramString);
+/* 482 */       this.¤ = paramv.getLastHistoryPageNumber(str, paramString2);
 /*     */ 
-/* 486 */       this.m_lastGlucoseHistoryPageNumber = paramDeviceListener.getLastGlucoseHistoryPageNumber(str, paramString);
+/* 484 */       this.Ñ = paramv.getLastGlucoseHistoryPageNumber(str, paramString2);
 /*     */ 
-/* 488 */       localObject = new MMX54(this.m_linkDevice, this.m_lastHistoryPageNumber, this.m_lastGlucoseHistoryPageNumber);
+/* 486 */       localObject = new a(this.đ, this.¤, this.Ñ);
 /*     */     }
 /*     */     else {
-/* 491 */       localObject = null;
-/* 492 */       throw new ConnectToPumpException("Unsupported Pump Model", 1000, str);
+/* 489 */       localObject = null;
+/* 490 */       throw new P("Unsupported Pump Model", 1000, str);
 /*     */     }
 /*     */ 
-/* 498 */     ((MMX12)localObject).m_serialNumber = paramString;
-/* 499 */     ((MMX12)localObject).m_modelNumber = str;
+/* 496 */     ((u)localObject).ă = paramString2;
+/* 497 */     ((u)localObject).À = str;
 /*     */     try
 /*     */     {
-/* 504 */       paramDeviceListener.allowDeviceOperation((DevicePortReader)localObject);
+/* 502 */       paramv.allowDeviceOperation((G)localObject);
 /*     */     }
-/*     */     catch (ConnectToPumpException localConnectToPumpException) {
-/* 507 */       forceShutDown();
-/* 508 */       throw localConnectToPumpException;
+/*     */     catch (P localP) {
+/* 505 */       º();
+/* 506 */       throw localP;
 /*     */     }
 /*     */ 
-/* 512 */     setCommunicationsLink(this.m_pumpDetector.getCommunicationsLink());
-/* 513 */     ((MMX12)localObject).setCommunicationsLink(this.m_pumpDetector.getCommunicationsLink());
+/* 510 */     A(this.б.W());
+/* 511 */     ((u)localObject).A(this.б.W());
 /*     */ 
-/* 516 */     ((MMX12)localObject).initDeviceAfterModelNumberKnown();
-/* 517 */     return (MMX12)localObject;
+/* 514 */     ((u)localObject).p();
+/* 515 */     return (u)localObject;
 /*     */   }
 /*     */ 
-/*     */   private void forceShutDown()
+/*     */   private void º()
 /*     */   {
 /*     */     try
 /*     */     {
-/* 527 */       this.m_pumpDetector.shutDownPump();
-/*     */     } catch (BadDeviceCommException localBadDeviceCommException) {
+/* 525 */       this.б.e();
+/*     */     } catch (t localIOException6) {
 /*     */     }
-/*     */     catch (IOException localIOException1) {
+/*     */     catch (IOException localIOException10) {
 /*     */     }
 /*     */     finally {
 /*     */       try {
-/* 534 */         this.m_pumpDetector.shutDownComStation();
-/*     */       } catch (IOException localIOException4) {
+/* 532 */         this.б.f();
+/*     */       } catch (IOException localIOException16) {
 /*     */       }
 /*     */       finally {
 /*     */         try {
-/* 539 */           this.m_pumpDetector.shutDownSerialPort();
+/* 537 */           this.б._();
 /*     */         }
-/*     */         catch (IOException localIOException5)
+/*     */         catch (IOException localIOException17)
 /*     */         {
 /*     */         }
 /*     */       }
 /*     */     }
 /*     */   }
 /*     */ 
-/*     */   private MMX12 getCurrentPump()
+/*     */   private u À()
 /*     */   {
-/* 553 */     return this.m_currentPump;
+/* 551 */     return this.а;
 /*     */   }
 /*     */ 
-/*     */   private void setCurrentPump(MMX12 paramMMX12)
+/*     */   private void A(u paramu)
 /*     */   {
-/* 562 */     this.m_currentPump = paramMMX12;
+/* 560 */     this.а = paramu;
 /*     */   }
 /*     */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.MMParadigm2Proxy
+ * Qualified Name:     minimed.ddms.A.X
  * JD-Core Version:    0.6.0
  */

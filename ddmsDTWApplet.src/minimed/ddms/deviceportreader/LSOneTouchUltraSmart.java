@@ -1,369 +1,362 @@
-/*     */ package minimed.ddms.deviceportreader;
+/*     */ package minimed.ddms.A;
 /*     */ 
 /*     */ import java.io.IOException;
 /*     */ import java.io.InputStream;
 /*     */ import java.util.Vector;
 /*     */ import minimed.util.Contract;
 /*     */ 
-/*     */ final class LSOneTouchUltraSmart extends LSMeter
+/*     */ final class R extends w
 /*     */ {
-/*     */   static final int SNAPSHOT_FORMAT_ID = 156;
-/*     */   private static final String CMD_GET_SERIAL_NUMBER = "DM@\r";
-/*     */   private static final String CMD_READ_CLOCK = "DMF\r";
-/*     */   private static final String CMD_GET_FIRMWARE_VERSION = "DM?\r";
-/*     */   private static final int READ_TO_MS = 1500;
-/*     */   private static final int IO_DELAY_MS = 5;
-/*     */   private static final int IO_DELAY_LIMIT = 100;
-/*     */   private static final int IO_DELAY_INCREMENT = 5;
-/*  83 */   private int m_ioDelay = 5;
+/*     */   static final int ӕ = 156;
+/*     */   private static final String ӛ = "DM@\r";
+/*     */   private static final String ә = "DMF\r";
+/*     */   private static final String Ӛ = "DM?\r";
+/*     */   private static final int Ӗ = 1500;
+/*     */   private static final int ӗ = 5;
+/*     */   private static final int ӝ = 100;
+/*     */   private static final int Ӝ = 5;
+/*  83 */   private int Ә = 5;
 /*     */ 
-/*     */   LSOneTouchUltraSmart()
+/*     */   R()
 /*     */   {
-/*  91 */     this.m_description = "LifeScan One Touch UltraSmart Meter";
-/*  92 */     logInfo(this, "creating interface to the '" + this.m_description + "', package version " + getPackageVersion());
+/*  91 */     this.ć = "LifeScan One Touch UltraSmart Meter";
+/*  92 */     A(this, "creating interface to the '" + this.ć + "', package version " + K());
 /*     */ 
-/*  94 */     this.m_deviceClassID = 21;
-/*  95 */     this.m_snapshotFormatID = 156;
-/*  96 */     this.m_snapshotCreator = new SnapshotCreator(null);
-/*  97 */     this.m_baudRate = 9;
+/*  94 */     this.ā = 21;
+/*  95 */     this.Þ = 156;
+/*  96 */     this.Ė = new _B(null);
+/*  97 */     this.Ҧ = 9;
 /*     */ 
-/* 100 */     this.m_cmdReadRealTimeClock = new LSMeter.Command(this, "DMF\r", "Read Real Time Clock", 50);
+/* 100 */     this.Ҷ = new w._C(this, "DMF\r", "Read Real Time Clock", 50);
 /*     */ 
-/* 102 */     this.m_cmdGetFirmwareVersion = new LSMeter.Command(this, "DM?\r", "Read Firmware Version", 50);
+/* 102 */     this.ҭ = new w._C(this, "DM?\r", "Read Firmware Version", 50);
 /*     */ 
-/* 104 */     this.m_cmdGetSerialNumber = new LSMeter.Command(this, "DM@\r", "Read Serial Number", 50);
+/* 104 */     this.ѳ = new w._C(this, "DM@\r", "Read Serial Number", 50);
 /*     */ 
-/* 108 */     this.m_cmdGetDatalog = new HRProcedureCommand();
+/* 108 */     this.ѵ = new _C();
 /*     */   }
 /*     */ 
-/*     */   void initSerialPort(int paramInt)
+/*     */   void D(String paramString)
 /*     */     throws IOException
 /*     */   {
-/* 121 */     super.initSerialPort(paramInt);
+/* 121 */     super.D(paramString);
 /*     */ 
-/* 123 */     getRS232Port().setReadTimeOut(1500);
-/* 124 */     getRS232Port().setIODelay(this.m_ioDelay);
+/* 123 */     Y().B(1500);
+/* 124 */     Y().A(this.Ә);
 /*     */   }
 /*     */ 
-/*     */   Vector createCommandList()
+/*     */   Vector É()
 /*     */   {
 /* 133 */     Vector localVector = new Vector();
 /*     */ 
-/* 137 */     localVector.addElement(this.m_cmdReadRealTimeClock);
-/* 138 */     localVector.addElement(this.m_cmdGetFirmwareVersion);
-/* 139 */     localVector.addElement(this.m_cmdGetSerialNumber);
-/* 140 */     localVector.addElement(this.m_cmdGetDatalog);
+/* 137 */     localVector.addElement(this.Ҷ);
+/* 138 */     localVector.addElement(this.ҭ);
+/* 139 */     localVector.addElement(this.ѳ);
+/* 140 */     localVector.addElement(this.ѵ);
 /* 141 */     return localVector;
 /*     */   }
 /*     */ 
-/*     */   void decodeCurrentSettings()
-/*     */     throws BadDeviceValueException
+/*     */   void Ë()
+/*     */     throws Z
 /*     */   {
 /*     */   }
 /*     */ 
-/*     */   int[] removeControlBytesTestAccess(int[] paramArrayOfInt)
+/*     */   int[] V(int[] paramArrayOfInt)
 /*     */   {
-/* 162 */     return new HRCommand(1).removeControlBytes(paramArrayOfInt);
+/* 162 */     return _A.A(new _A(1), paramArrayOfInt);
 /*     */   }
 /*     */ 
-/*     */   private class SnapshotCreator extends LSMeter.SnapshotCreator
+/*     */   private class _B extends w._A
 /*     */   {
-/*     */     static final int SNAPCODE_HR_DATA = 1;
-/*     */     static final int LAST_SNAPCODE = 1;
-/*     */     static final int SNAPSHOT_BYTES = 169;
-/*     */     private final LSOneTouchUltraSmart this$0;
+/*     */     static final int ï = 1;
+/*     */     static final int ç = 1;
+/*     */     static final int è = 169;
 /*     */ 
-/*     */     private SnapshotCreator()
+/*     */     private _B()
 /*     */     {
-/* 623 */       super(); this.this$0 = this$1;
+/* 617 */       super();
 /*     */     }
 /*     */ 
-/*     */     InputStream createSnapshot()
-/*     */       throws BadDeviceValueException, IOException
+/*     */     InputStream B()
+/*     */       throws Z, IOException
 /*     */     {
-/* 649 */       this.this$0.m_snapshot = new Snapshot(this.this$0.m_snapshotFormatID, 1, pad(this.this$0.m_firmwareVersion), pad(this.this$0.m_serialNumber), pad(this.this$0.m_realTimeClock));
+/* 643 */       R.this.Î = new CA(R.this.Þ, 1, B(R.this.Ă), B(R.this.ă), B(R.this.ѻ));
 /*     */ 
-/* 652 */       MedicalDevice.logInfo(this, "createSnapshot: creating snapshot");
+/* 646 */       O.A(this, "createSnapshot: creating snapshot");
 /*     */ 
-/* 658 */       this.this$0.m_snapshot.addElement(1, this.this$0.m_cmdGetDatalog.getRawData());
+/* 652 */       R.this.Î.A(1, R.this.ѵ.d());
 /*     */ 
-/* 661 */       int i = this.this$0.m_snapshot.write();
-/* 662 */       MedicalDevice.logInfo(this, "createSnapshot: wrote " + i + " bytes.");
+/* 655 */       int i = R.this.Î.D();
+/* 656 */       O.A(this, "createSnapshot: wrote " + i + " bytes.");
 /*     */ 
-/* 664 */       if (i < 169) {
-/* 665 */         throw new BadDeviceValueException("Resulting snapshot size is invalid: " + i + "; must be at least " + 169 + " bytes.");
+/* 658 */       if (i < 169) {
+/* 659 */         throw new Z("Resulting snapshot size is invalid: " + i + "; must be at least " + 169 + " bytes.");
 /*     */       }
 /*     */ 
-/* 668 */       return this.this$0.m_snapshot.toInputStream();
-/*     */     }
-/*     */ 
-/*     */     SnapshotCreator(LSOneTouchUltraSmart.1 arg2)
-/*     */     {
-/* 623 */       this();
+/* 662 */       return R.this.Î.E();
 /*     */     }
 /*     */   }
 /*     */ 
-/*     */   private class HRCommand extends LSMeter.Command
+/*     */   private class _A extends w._C
 /*     */   {
-/*     */     private static final int RETRY_COUNT = 10;
-/*     */     private static final int LEN_GET_ONE_HR_DATA = 17;
-/*     */     private static final int LEN_GET_ONE_HR_DATA_LAST_REC = 7;
-/*     */     private static final int LEN_CONTROL = 5;
-/*     */     private static final String CMD_GET_HR_DATA = "HR";
-/*     */     private int m_recNumber;
-/*     */     private boolean m_lastRecord;
+/*     */     private static final int à = 10;
+/*     */     private static final int Ü = 17;
+/*     */     private static final int Û = 7;
+/*     */     private static final int ß = 5;
+/*     */     private static final String Ú = "HR";
+/*     */     private int Þ;
+/*     */     private boolean Ý;
 /*     */ 
-/*     */     HRCommand(int arg2)
+/*     */     _A(int arg2)
 /*     */     {
 /* 275 */       super("HR" + i, "Read HR Data-" + i, 17);
 /* 276 */       Contract.pre(i > 0);
-/* 277 */       this.m_recNumber = i;
-/* 278 */       this.m_lastRecord = false;
+/* 277 */       this.Þ = i;
+/* 278 */       this.Ý = false;
 /*     */ 
-/* 280 */       this.m_maxRetryCount = 10;
+/* 280 */       this.Ç = 10;
 /*     */     }
 /*     */ 
-/*     */     void sendAndRead()
-/*     */       throws BadDeviceCommException, BadDeviceValueException
+/*     */     void c()
+/*     */       throws t, Z
 /*     */     {
-/* 293 */       if (LSOneTouchUltraSmart.this.getState() != 7) {
-/* 294 */         LSOneTouchUltraSmart.this.setState(4);
+/* 293 */       if (R.this.T() != 7) {
+/* 294 */         R.this.B(4);
 /*     */       }
-/* 296 */       sendCommand();
+/* 296 */       m();
 /*     */ 
-/* 299 */       if (!LSOneTouchUltraSmart.this.isHaltRequested())
+/* 299 */       if (!R.this.isHaltRequested())
 /*     */       {
-/* 301 */         LSOneTouchUltraSmart.this.setState(5);
-/* 302 */         readDeviceData();
+/* 301 */         R.this.B(5);
+/* 302 */         r();
 /*     */       }
 /*     */ 
-/* 306 */       LSOneTouchUltraSmart.this.notifyDeviceUpdateProgress();
+/* 306 */       R.this.Ì();
 /*     */     }
 /*     */ 
-/*     */     void sendCommand()
-/*     */       throws BadDeviceCommException
+/*     */     void m()
+/*     */       throws t
 /*     */     {
 /*     */       try
 /*     */       {
-/* 316 */         sendCommandIO();
-/*     */       } catch (BadDeviceCommException localBadDeviceCommException) {
-/* 318 */         incIODelay("sendCommand");
-/* 319 */         throw localBadDeviceCommException;
+/* 316 */         o();
+/*     */       } catch (t localt) {
+/* 318 */         E("sendCommand");
+/* 319 */         throw localt;
 /*     */       }
 /*     */     }
 /*     */ 
-/*     */     private void sendCommandIO()
-/*     */       throws BadDeviceCommException
+/*     */     private void o()
+/*     */       throws t
 /*     */     {
-/* 332 */       Contract.pre(LSOneTouchUltraSmart.this.getRS232Port() != null);
-/* 333 */       Contract.pre(LSOneTouchUltraSmart.this.getRS232Port().isOpen());
+/* 330 */       R.this.Y().E();
 /*     */ 
-/* 335 */       MedicalDevice.logInfo(this, "sendCommandIO: sending cmd " + getCommand() + " (" + getDescription() + ")");
+/* 332 */       O.A(this, "sendCommandIO: sending cmd " + k() + " (" + b() + ")");
 /*     */       try
 /*     */       {
-/* 339 */         LSOneTouchUltraSmart.this.getRS232Port().write(createFrame());
+/* 336 */         R.this.Y().A(u());
 /*     */       } catch (IOException localIOException) {
-/* 341 */         throw new BadDeviceCommException("sendCommandIO: ERROR - an IOException  has occurred processing cmd " + getCommand() + " (" + getDescription() + ")");
+/* 338 */         throw new t("sendCommandIO: ERROR - an IOException  has occurred processing cmd " + k() + " (" + b() + ")");
 /*     */       }
 /*     */     }
 /*     */ 
-/*     */     boolean isLastRecord()
+/*     */     boolean n()
 /*     */     {
-/* 353 */       return this.m_lastRecord;
+/* 350 */       return this.Ý;
 /*     */     }
 /*     */ 
-/*     */     private void readDeviceData()
-/*     */       throws BadDeviceCommException, BadDeviceValueException
+/*     */     private void r()
+/*     */       throws t, Z
 /*     */     {
 /*     */       try
 /*     */       {
-/* 364 */         readDeviceDataIO();
-/*     */       } catch (BadDeviceCommException localBadDeviceCommException) {
-/* 366 */         incIODelay("readDeviceData");
-/* 367 */         throw localBadDeviceCommException;
-/*     */       } catch (BadDeviceValueException localBadDeviceValueException) {
-/* 369 */         incIODelay("readDeviceData");
-/* 370 */         throw localBadDeviceValueException;
+/* 361 */         q();
+/*     */       } catch (t localt) {
+/* 363 */         E("readDeviceData");
+/* 364 */         throw localt;
+/*     */       } catch (Z localZ) {
+/* 366 */         E("readDeviceData");
+/* 367 */         throw localZ;
 /*     */       }
 /*     */     }
 /*     */ 
-/*     */     private void readDeviceDataIO() throws BadDeviceCommException, BadDeviceValueException
+/*     */     private void q() throws t, Z
 /*     */     {
-/* 384 */       Contract.pre(LSOneTouchUltraSmart.this.getRS232Port() != null);
-/* 385 */       Contract.pre(LSOneTouchUltraSmart.this.getRS232Port().isOpen());
+/* 379 */       R.this.Y().E();
 /*     */ 
-/* 387 */       MedicalDevice.logInfo(this, "readDeviceDataIO: reading reply to cmd " + getCommand() + " (" + getDescription() + ")");
+/* 381 */       O.A(this, "readDeviceDataIO: reading reply to cmd " + k() + " (" + b() + ")");
 /*     */       int[] arrayOfInt;
-/*     */       try {
-/* 393 */         arrayOfInt = LSOneTouchUltraSmart.this.getRS232Port().readAvailableBytes();
+/*     */       try
+/*     */       {
+/* 387 */         arrayOfInt = R.this.Y().I();
 /*     */       } catch (IOException localIOException) {
-/* 395 */         throw new BadDeviceCommException("readDeviceDataIO: ERROR - an IOException  has occurred processing cmd " + getCommand() + " (" + getDescription() + ")");
+/* 389 */         throw new t("readDeviceDataIO: ERROR - an IOException  has occurred processing cmd " + k() + " (" + b() + ")");
 /*     */       }
 /*     */ 
-/* 401 */       setRawData(removeControlBytes(arrayOfInt));
+/* 395 */       B(E(arrayOfInt));
 /*     */ 
-/* 404 */       verifyLength();
-/* 405 */       verifyCRC();
-/* 406 */       verifyFrame();
+/* 398 */       t();
+/* 399 */       s();
+/* 400 */       p();
 /*     */ 
-/* 409 */       this.m_lastRecord = (getRawData().length == 7);
+/* 403 */       this.Ý = (d().length == 7);
 /*     */ 
-/* 411 */       MedicalDevice.logInfo(this, "readDeviceDataIO: cmd " + getCommand() + " (" + getDescription() + ") returned " + getRawData().length + " data bytes: " + "<" + MedicalDevice.Util.getHex(getRawData()) + ">");
+/* 405 */       O.A(this, "readDeviceDataIO: cmd " + k() + " (" + b() + ") returned " + d().length + " data bytes: " + "<" + O._B.D(d()) + ">");
 /*     */     }
 /*     */ 
-/*     */     private void incIODelay(String paramString)
+/*     */     private void E(String paramString)
 /*     */     {
-/* 422 */       LSOneTouchUltraSmart.access$202(LSOneTouchUltraSmart.this, Math.min(LSOneTouchUltraSmart.this.m_ioDelay + 5, 100));
-/* 423 */       MedicalDevice.logInfo(this, paramString + ": increasing m_ioDelay to " + LSOneTouchUltraSmart.this.m_ioDelay);
-/* 424 */       LSOneTouchUltraSmart.this.getRS232Port().setIODelay(LSOneTouchUltraSmart.this.m_ioDelay);
+/* 416 */       R.A(R.this, Math.min(R.A(R.this) + 5, 100));
+/* 417 */       O.A(this, paramString + ": increasing m_ioDelay to " + R.A(R.this));
+/* 418 */       R.this.Y().A(R.A(R.this));
 /*     */     }
 /*     */ 
-/*     */     private int[] removeControlBytes(int[] paramArrayOfInt)
+/*     */     private int[] E(int[] paramArrayOfInt)
 /*     */     {
-/* 436 */       Contract.preNonNull(paramArrayOfInt);
-/* 437 */       int[] arrayOfInt1 = new int[paramArrayOfInt.length];
+/* 430 */       Contract.preNonNull(paramArrayOfInt);
+/* 431 */       int[] arrayOfInt1 = new int[paramArrayOfInt.length];
 /*     */ 
-/* 442 */       int i = 0;
-/* 443 */       for (int j = 0; j < paramArrayOfInt.length; j++) {
-/* 444 */         arrayOfInt1[(i++)] = paramArrayOfInt[j];
-/* 445 */         if ((j <= 1) || (j >= paramArrayOfInt.length - 4))
+/* 436 */       int i = 0;
+/* 437 */       for (int j = 0; j < paramArrayOfInt.length; j++) {
+/* 438 */         arrayOfInt1[(i++)] = paramArrayOfInt[j];
+/* 439 */         if ((j <= 1) || (j >= paramArrayOfInt.length - 4))
 /*     */           continue;
-/* 447 */         if ((paramArrayOfInt[j] == 16) && (paramArrayOfInt[(j + 1)] == 16)) {
-/* 448 */           j++;
+/* 441 */         if ((paramArrayOfInt[j] == 16) && (paramArrayOfInt[(j + 1)] == 16)) {
+/* 442 */           j++;
 /*     */         }
 /*     */ 
 /*     */       }
 /*     */ 
-/* 454 */       int[] arrayOfInt2 = new int[i];
-/* 455 */       System.arraycopy(arrayOfInt1, 0, arrayOfInt2, 0, arrayOfInt2.length);
-/* 456 */       return arrayOfInt2;
+/* 448 */       int[] arrayOfInt2 = new int[i];
+/* 449 */       System.arraycopy(arrayOfInt1, 0, arrayOfInt2, 0, arrayOfInt2.length);
+/* 450 */       return arrayOfInt2;
 /*     */     }
 /*     */ 
-/*     */     private int[] addControlBytes(int[] paramArrayOfInt)
+/*     */     private int[] D(int[] paramArrayOfInt)
 /*     */     {
-/* 468 */       Contract.preNonNull(paramArrayOfInt);
-/* 469 */       int[] arrayOfInt1 = new int[paramArrayOfInt.length * 2];
+/* 462 */       Contract.preNonNull(paramArrayOfInt);
+/* 463 */       int[] arrayOfInt1 = new int[paramArrayOfInt.length * 2];
 /*     */ 
-/* 472 */       int i = 0;
-/* 473 */       for (int j = 0; j < paramArrayOfInt.length; j++)
+/* 466 */       int i = 0;
+/* 467 */       for (int j = 0; j < paramArrayOfInt.length; j++)
 /*     */       {
-/* 475 */         arrayOfInt1[(i++)] = paramArrayOfInt[j];
+/* 469 */         arrayOfInt1[(i++)] = paramArrayOfInt[j];
 /*     */ 
-/* 477 */         if (paramArrayOfInt[j] == 16) {
-/* 478 */           arrayOfInt1[(i++)] = paramArrayOfInt[j];
+/* 471 */         if (paramArrayOfInt[j] == 16) {
+/* 472 */           arrayOfInt1[(i++)] = paramArrayOfInt[j];
 /*     */         }
 /*     */ 
 /*     */       }
 /*     */ 
-/* 483 */       int[] arrayOfInt2 = new int[i];
-/* 484 */       System.arraycopy(arrayOfInt1, 0, arrayOfInt2, 0, arrayOfInt2.length);
-/* 485 */       return arrayOfInt2;
+/* 477 */       int[] arrayOfInt2 = new int[i];
+/* 478 */       System.arraycopy(arrayOfInt1, 0, arrayOfInt2, 0, arrayOfInt2.length);
+/* 479 */       return arrayOfInt2;
 /*     */     }
 /*     */ 
-/*     */     private int[] createFrame()
+/*     */     private int[] u()
 /*     */     {
-/* 495 */       int i = this.m_recNumber - 1;
-/* 496 */       int[] arrayOfInt1 = { getCommand().charAt(0), getCommand().charAt(1), MedicalDevice.Util.getHighByte(i), MedicalDevice.Util.getLowByte(i) };
+/* 489 */       int i = this.Þ - 1;
+/* 490 */       int[] arrayOfInt1 = { k().charAt(0), k().charAt(1), O._B.J(i), O._B.K(i) };
 /*     */ 
-/* 504 */       int j = calcCRC(arrayOfInt1);
+/* 498 */       int j = F(arrayOfInt1);
 /*     */ 
-/* 507 */       int[] arrayOfInt2 = addControlBytes(arrayOfInt1);
+/* 501 */       int[] arrayOfInt2 = D(arrayOfInt1);
 /*     */ 
-/* 510 */       int[] arrayOfInt3 = { 16, 2 };
-/* 511 */       int[] arrayOfInt4 = { 16, 3, j };
-/* 512 */       int[] arrayOfInt5 = new int[0];
-/* 513 */       arrayOfInt5 = MedicalDevice.Util.concat(arrayOfInt5, arrayOfInt3);
-/* 514 */       arrayOfInt5 = MedicalDevice.Util.concat(arrayOfInt5, arrayOfInt2);
-/* 515 */       arrayOfInt5 = MedicalDevice.Util.concat(arrayOfInt5, arrayOfInt4);
-/* 516 */       return arrayOfInt5;
+/* 504 */       int[] arrayOfInt3 = { 16, 2 };
+/* 505 */       int[] arrayOfInt4 = { 16, 3, j };
+/* 506 */       int[] arrayOfInt5 = new int[0];
+/* 507 */       arrayOfInt5 = O._B.A(arrayOfInt5, arrayOfInt3);
+/* 508 */       arrayOfInt5 = O._B.A(arrayOfInt5, arrayOfInt2);
+/* 509 */       arrayOfInt5 = O._B.A(arrayOfInt5, arrayOfInt4);
+/* 510 */       return arrayOfInt5;
 /*     */     }
 /*     */ 
-/*     */     private void verifyLength()
-/*     */       throws BadDeviceValueException
+/*     */     private void t()
+/*     */       throws Z
 /*     */     {
-/* 526 */       int[] arrayOfInt = getRawData();
-/* 527 */       if ((arrayOfInt.length != 17) && (arrayOfInt.length != 7))
+/* 520 */       int[] arrayOfInt = d();
+/* 521 */       if ((arrayOfInt.length != 17) && (arrayOfInt.length != 7))
 /*     */       {
-/* 529 */         throw new BadDeviceValueException("verifyLength: ERROR - incorrect data length for HR command " + getCommand() + " (" + getDescription() + "); reply=<" + MedicalDevice.Util.getHex(arrayOfInt) + ">");
+/* 523 */         throw new Z("verifyLength: ERROR - incorrect data length for HR command " + k() + " (" + b() + "); reply=<" + O._B.D(arrayOfInt) + ">");
 /*     */       }
 /*     */     }
 /*     */ 
-/*     */     private void verifyFrame()
-/*     */       throws BadDeviceCommException
+/*     */     private void p()
+/*     */       throws t
 /*     */     {
-/* 544 */       int[] arrayOfInt = getRawData();
+/* 538 */       int[] arrayOfInt = d();
 /*     */ 
-/* 549 */       int i = (arrayOfInt[0] == 16) && (arrayOfInt[1] == 2) && (arrayOfInt[(arrayOfInt.length - 3)] == 16) && (arrayOfInt[(arrayOfInt.length - 2)] == 3) ? 1 : 0;
+/* 543 */       int i = (arrayOfInt[0] == 16) && (arrayOfInt[1] == 2) && (arrayOfInt[(arrayOfInt.length - 3)] == 16) && (arrayOfInt[(arrayOfInt.length - 2)] == 3) ? 1 : 0;
 /*     */ 
-/* 555 */       if (i == 0)
-/* 556 */         throw new BadDeviceCommException("verifyFrame: ERROR - bad frame read for HR command " + getCommand() + " (" + getDescription() + "); reply=<" + MedicalDevice.Util.getHex(arrayOfInt) + ">" + (arrayOfInt[0] == 16 ? "" : "; reply[0] != DLE") + (arrayOfInt[1] == 2 ? "" : "; reply[1] != STX") + (arrayOfInt[(arrayOfInt.length - 3)] == 16 ? "" : "; reply[reply.length - 3] != DLE") + (arrayOfInt[(arrayOfInt.length - 2)] == 3 ? "" : "; reply[reply.length - 2] != EXT"));
+/* 549 */       if (i == 0)
+/* 550 */         throw new t("verifyFrame: ERROR - bad frame read for HR command " + k() + " (" + b() + "); reply=<" + O._B.D(arrayOfInt) + ">" + (arrayOfInt[0] == 16 ? "" : "; reply[0] != DLE") + (arrayOfInt[1] == 2 ? "" : "; reply[1] != STX") + (arrayOfInt[(arrayOfInt.length - 3)] == 16 ? "" : "; reply[reply.length - 3] != DLE") + (arrayOfInt[(arrayOfInt.length - 2)] == 3 ? "" : "; reply[reply.length - 2] != EXT"));
 /*     */     }
 /*     */ 
-/*     */     private int calcCRC(int[] paramArrayOfInt)
+/*     */     private int F(int[] paramArrayOfInt)
 /*     */     {
-/* 574 */       Contract.preNonNull(paramArrayOfInt);
+/* 568 */       Contract.preNonNull(paramArrayOfInt);
 /*     */ 
-/* 576 */       int[] arrayOfInt = MedicalDevice.Util.concat(paramArrayOfInt, new int[1]);
-/* 577 */       return MedicalDevice.Util.computeCRC7(arrayOfInt, 0, arrayOfInt.length);
+/* 570 */       int[] arrayOfInt = O._B.A(paramArrayOfInt, new int[1]);
+/* 571 */       return O._B.E(arrayOfInt, 0, arrayOfInt.length);
 /*     */     }
 /*     */ 
-/*     */     private int verifyCRC()
-/*     */       throws BadDeviceValueException
+/*     */     private int s()
+/*     */       throws Z
 /*     */     {
-/* 588 */       int[] arrayOfInt1 = getRawData();
+/* 582 */       int[] arrayOfInt1 = d();
 /*     */ 
-/* 593 */       int i = arrayOfInt1.length - 1;
-/* 594 */       int j = arrayOfInt1[i];
+/* 587 */       int i = arrayOfInt1.length - 1;
+/* 588 */       int j = arrayOfInt1[i];
 /*     */ 
-/* 597 */       int[] arrayOfInt2 = new int[arrayOfInt1.length - 5 + 1];
+/* 591 */       int[] arrayOfInt2 = new int[arrayOfInt1.length - 5 + 1];
 /*     */ 
-/* 600 */       System.arraycopy(arrayOfInt1, 2, arrayOfInt2, 0, arrayOfInt2.length - 1);
+/* 594 */       System.arraycopy(arrayOfInt1, 2, arrayOfInt2, 0, arrayOfInt2.length - 1);
 /*     */ 
-/* 603 */       arrayOfInt2[(arrayOfInt2.length - 1)] = 0;
+/* 597 */       arrayOfInt2[(arrayOfInt2.length - 1)] = 0;
 /*     */ 
-/* 605 */       int k = MedicalDevice.Util.computeCRC7(arrayOfInt2, 0, arrayOfInt2.length) & 0xFF;
+/* 599 */       int k = O._B.E(arrayOfInt2, 0, arrayOfInt2.length) & 0xFF;
 /*     */ 
-/* 607 */       if (j != k) {
-/* 608 */         throw new BadDeviceValueException("verifyCRC: cmd " + getCommand() + " (" + getDescription() + ")" + " resulted in bad CRC value of " + MedicalDevice.Util.getHex(j) + " (expected " + MedicalDevice.Util.getHex(k) + ") " + "(byte data = " + "<" + MedicalDevice.Util.getHex(arrayOfInt1) + ">)");
+/* 601 */       if (j != k) {
+/* 602 */         throw new Z("verifyCRC: cmd " + k() + " (" + b() + ")" + " resulted in bad CRC value of " + O._B.H(j) + " (expected " + O._B.H(k) + ") " + "(byte data = " + "<" + O._B.D(arrayOfInt1) + ">)");
 /*     */       }
 /*     */ 
-/* 614 */       return j;
+/* 608 */       return j;
 /*     */     }
 /*     */   }
 /*     */ 
-/*     */   private class HRProcedureCommand extends LSMeter.Command
+/*     */   private class _C extends w._C
 /*     */   {
-/*     */     private static final int MAX_RECORDS = 3064;
-/*     */     private static final int LEN_HR_PROCEDURE = 52088;
+/*     */     private static final int â = 3064;
+/*     */     private static final int á = 52088;
 /*     */ 
-/*     */     HRProcedureCommand()
+/*     */     _C()
 /*     */     {
 /* 187 */       super("HRHR Procedure", "Read All HR Data", 52088);
 /*     */     }
 /*     */ 
-/*     */     void execute()
-/*     */       throws BadDeviceCommException, BadDeviceValueException
+/*     */     void A()
+/*     */       throws t, Z
 /*     */     {
 /* 203 */       int i = 0;
 /* 204 */       int[] arrayOfInt = new int[0];
 /*     */ 
 /* 206 */       for (int j = 1; (j <= 3064) && (i == 0); j++)
 /*     */       {
-/* 208 */         LSOneTouchUltraSmart.HRCommand localHRCommand = new LSOneTouchUltraSmart.HRCommand(LSOneTouchUltraSmart.this, j);
-/* 209 */         localHRCommand.execute();
+/* 208 */         R._A local_A = new R._A(R.this, j);
+/* 209 */         local_A.A();
 /*     */ 
-/* 212 */         arrayOfInt = MedicalDevice.Util.concat(arrayOfInt, localHRCommand.getRawData());
-/* 213 */         LSOneTouchUltraSmart.this.incBytesReadThusFar(localHRCommand.getRawData().length);
+/* 212 */         arrayOfInt = O._B.A(arrayOfInt, local_A.d());
+/* 213 */         R.this.N(local_A.d().length);
 /*     */ 
-/* 216 */         i = (localHRCommand.isLastRecord()) || (LSOneTouchUltraSmart.this.isHaltRequested()) ? 1 : 0;
+/* 216 */         i = (local_A.n()) || (R.this.isHaltRequested()) ? 1 : 0;
 /*     */       }
 /*     */ 
-/* 220 */       setRawData(arrayOfInt);
+/* 220 */       B(arrayOfInt);
 /*     */     }
 /*     */   }
 /*     */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.LSOneTouchUltraSmart
+ * Qualified Name:     minimed.ddms.A.R
  * JD-Core Version:    0.6.0
  */

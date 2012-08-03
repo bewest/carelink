@@ -1,8 +1,6 @@
 /*     */ package minimed.ddms.applet.dtw.wizard.steps;
 /*     */ 
-/*     */ import Serialio.SerialPortLocal;
 /*     */ import java.awt.BorderLayout;
-/*     */ import java.io.File;
 /*     */ import java.io.IOException;
 /*     */ import java.text.MessageFormat;
 /*     */ import java.util.ResourceBundle;
@@ -11,10 +9,8 @@
 /*     */ import javax.swing.JButton;
 /*     */ import javax.swing.JLabel;
 /*     */ import javax.swing.JPanel;
+/*     */ import javax.swing.text.html.parser.ParserDelegator;
 /*     */ import minimed.ddms.applet.dtw.DTWApplet;
-/*     */ import minimed.ddms.applet.dtw.DiskHelper;
-/*     */ import minimed.ddms.applet.dtw.InstallFileVersion;
-/*     */ import minimed.ddms.applet.dtw.InstallTestResult;
 /*     */ import minimed.ddms.applet.dtw.LogWriter;
 /*     */ import minimed.ddms.applet.dtw.NetHelper;
 /*     */ import minimed.ddms.applet.dtw.PropertyWriter;
@@ -29,266 +25,178 @@
 /*     */ 
 /*  49 */   private final String m_msgRecordDdmsTimeFailed = this.m_resources.getString("error.MSG_RECORD_DDMS_TIME_FAILED");
 /*     */ 
-/*  55 */   private final String m_msgNativeLibrarySanityCheckFailed = this.m_resources.getString("error.MSG_NATIVE_LIBRARY_SANITY_CHECK_FAILED");
+/*  55 */   private final String m_msgPatternIncompatibleWithDdms = this.m_resources.getString("error.MSG_PATTERN_INCOMPATIBLE_WITH_DDMS");
 /*     */ 
-/*  61 */   private final String m_msgPatternIncompatibleWithDdms = this.m_resources.getString("error.MSG_PATTERN_INCOMPATIBLE_WITH_DDMS");
-/*     */ 
-/*  67 */   private final String m_msgBadJavaToJavascriptComm = this.m_resources.getString("error.MSG_BAD_JAVA_TO_JAVASCRIPT_COMM");
+/*  61 */   private final String m_msgBadJavaToJavascriptComm = this.m_resources.getString("error.MSG_BAD_JAVA_TO_JAVASCRIPT_COMM");
 /*     */   private final JLabel m_stepMsg;
-/*     */   private InstallTestResult m_installSerialPortDLLTestResult;
 /*     */   private Long m_serverTime;
 /*     */ 
 /*     */   public InitializationStep(Wizard paramWizard)
 /*     */   {
-/*  91 */     super(paramWizard, null);
+/*  80 */     super(paramWizard, null);
 /*     */ 
-/*  93 */     getLeftBannerLabel().setText(this.m_resources.getString("wizard.init.message"));
-/*  94 */     Object localObject = new ImageIcon(getImage("wizard.read.icon"));
-/*  95 */     getRightBannerLabel().setIcon((Icon)localObject);
+/*  83 */     new ParserDelegator();
 /*     */ 
-/*  98 */     localObject = getInfoIcon();
-/*  99 */     getTopImageLabel().setIcon((Icon)localObject);
+/*  86 */     getLeftBannerLabel().setText(this.m_resources.getString("wizard.init.message"));
+/*  87 */     Object localObject = new ImageIcon(getImage("wizard.read.icon"));
+/*  88 */     getRightBannerLabel().setIcon((Icon)localObject);
 /*     */ 
-/* 102 */     this.m_stepMsg = new JLabel();
-/* 103 */     this.m_stepMsg.setHorizontalAlignment(0);
-/* 104 */     setMsgText(this.m_resources.getString("wizard.init.message2"));
+/*  91 */     localObject = getInfoIcon();
+/*  92 */     getTopImageLabel().setIcon((Icon)localObject);
 /*     */ 
-/* 107 */     JPanel localJPanel = getContentArea();
-/* 108 */     localJPanel.setLayout(new BorderLayout());
-/* 109 */     localJPanel.add(this.m_stepMsg, "Center");
+/*  95 */     this.m_stepMsg = new JLabel();
+/*  96 */     this.m_stepMsg.setHorizontalAlignment(0);
+/*  97 */     setMsgText(this.m_resources.getString("wizard.init.message2"));
+/*     */ 
+/* 100 */     JPanel localJPanel = getContentArea();
+/* 101 */     localJPanel.setLayout(new BorderLayout());
+/* 102 */     localJPanel.add(this.m_stepMsg, "Center");
 /*     */   }
 /*     */ 
 /*     */   public String toString()
 /*     */   {
-/* 120 */     PropertyWriter localPropertyWriter = new PropertyWriter(super.toString());
-/* 121 */     localPropertyWriter.add("serverTime", this.m_serverTime);
-/* 122 */     localPropertyWriter.add("installSerialPortDLLTestResult", this.m_installSerialPortDLLTestResult);
-/* 123 */     return localPropertyWriter.toString();
+/* 113 */     PropertyWriter localPropertyWriter = new PropertyWriter(super.toString());
+/* 114 */     localPropertyWriter.add("serverTime", this.m_serverTime);
+/* 115 */     return localPropertyWriter.toString();
 /*     */   }
 /*     */ 
 /*     */   protected void stepShown()
 /*     */   {
-/* 130 */     this.m_installSerialPortDLLTestResult = null;
-/* 131 */     LogWriter localLogWriter = getWizard().getConfig().getLogWriter();
+/* 122 */     LogWriter localLogWriter = getWizard().getConfig().getLogWriter();
 /*     */ 
-/* 134 */     getNextButton().setEnabled(false);
-/* 135 */     getBackButton().setEnabled(false);
-/* 136 */     getFinishButton().setEnabled(false);
-/* 137 */     getCancelButton().setEnabled(false);
+/* 125 */     getNextButton().setEnabled(false);
+/* 126 */     getBackButton().setEnabled(false);
+/* 127 */     getFinishButton().setEnabled(false);
+/* 128 */     getCancelButton().setEnabled(false);
 /*     */ 
-/* 139 */     disableCursor();
+/* 130 */     disableCursor();
 /*     */ 
-/* 142 */     1 local1 = new Runnable(localLogWriter)
+/* 133 */     1 local1 = new Runnable(localLogWriter)
 /*     */     {
-/*     */       private final LogWriter val$log;
-/*     */ 
 /*     */       public void run()
 /*     */       {
-/*     */         try {
-/* 150 */           if ((InitializationStep.this.compatibleWithProtocolCheck()) && (InitializationStep.this.compatibleWithDDMSCheck()) && (InitializationStep.this.recordDDMSTime()) && (InitializationStep.this.javaToJavascriptCheck()))
+/*     */         try
+/*     */         {
+/* 141 */           if ((InitializationStep.this.compatibleWithProtocolCheck()) && (InitializationStep.this.compatibleWithDDMSCheck()) && (InitializationStep.this.recordDDMSTime()) && (InitializationStep.this.javaToJavascriptCheck()))
 /*     */           {
-/* 155 */             if (InitializationStep.this.serialPortDLLInstallCheck())
+/* 146 */             if (InitializationStep.this.isSerialDriverInstallNeeded())
 /*     */             {
-/* 157 */               InitializationStep.this.getWizard().showNextStep(SerialPortDLLInstallAuthorizationStep.class);
-/*     */             }
-/* 160 */             else if (InitializationStep.this.nativeLibrarySanityCheck())
-/*     */             {
-/* 162 */               InitializationStep.this.getWizard().showNextStep(SelectDeviceStep.class);
+/* 148 */               InitializationStep.this.getWizard().showNextStep(SerialPortDLLInstallAuthorizationStep.class);
 /*     */             }
 /*     */             else {
-/* 165 */               InitializationStep.this.getWizard().showNextStep(InitializationFailStep.class);
+/* 151 */               InitializationStep.this.getWizard().showNextStep(SelectDeviceStep.class);
 /*     */             }
 /*     */           }
 /*     */           else
-/*     */           {
-/* 170 */             InitializationStep.this.getWizard().showNextStep(InitializationFailStep.class);
-/*     */           }
-/*     */         } catch (RuntimeException localRuntimeException) {
-/* 173 */           localRuntimeException.printStackTrace(this.val$log);
-/* 174 */           InitializationStep.this.getWizard().setFailureReason(InitializationStep.this.m_unexpectedErrorMsg);
-/* 175 */           InitializationStep.this.getWizard().showNextStep(UnrecoverableErrorStep.class);
+/* 155 */             InitializationStep.this.getWizard().showNextStep(InitializationFailStep.class);
+/*     */         }
+/*     */         catch (RuntimeException localRuntimeException) {
+/* 158 */           localRuntimeException.printStackTrace(this.val$log);
+/* 159 */           InitializationStep.this.getWizard().setFailureReason(InitializationStep.this.m_unexpectedErrorMsg);
+/* 160 */           InitializationStep.this.getWizard().showNextStep(UnrecoverableErrorStep.class);
 /*     */         }
 /*     */       }
 /*     */     };
-/* 180 */     Thread localThread = new Thread(local1);
-/* 181 */     localThread.setDaemon(true);
-/* 182 */     localThread.setName("InitTests");
-/* 183 */     localThread.start();
+/* 165 */     Thread localThread = new Thread(local1);
+/* 166 */     localThread.setDaemon(true);
+/* 167 */     localThread.setName("InitTests");
+/* 168 */     localThread.start();
 /*     */   }
 /*     */ 
 /*     */   public long getServerTime()
 /*     */   {
-/* 193 */     Contract.preNonNull(this.m_serverTime);
-/* 194 */     return this.m_serverTime.longValue();
-/*     */   }
-/*     */ 
-/*     */   public InstallTestResult getInstallSerialPortDLLTestResult()
-/*     */   {
-/* 204 */     Contract.preNonNull(this.m_installSerialPortDLLTestResult);
-/* 205 */     return this.m_installSerialPortDLLTestResult;
-/*     */   }
-/*     */ 
-/*     */   private void setInstallSerialPortDLLTestResult(InstallTestResult paramInstallTestResult)
-/*     */   {
-/* 216 */     Contract.pre(this.m_installSerialPortDLLTestResult == null);
-/* 217 */     Contract.preNonNull(paramInstallTestResult);
-/* 218 */     this.m_installSerialPortDLLTestResult = paramInstallTestResult;
+/* 178 */     Contract.preNonNull(this.m_serverTime);
+/* 179 */     return this.m_serverTime.longValue();
 /*     */   }
 /*     */ 
 /*     */   private boolean javaToJavascriptCheck()
 /*     */   {
-/* 231 */     DTWApplet localDTWApplet = getWizard().getConfig().getApplet();
-/* 232 */     LogWriter localLogWriter = getWizard().getConfig().getLogWriter();
+/* 192 */     DTWApplet localDTWApplet = getWizard().getConfig().getApplet();
+/* 193 */     LogWriter localLogWriter = getWizard().getConfig().getLogWriter();
 /*     */ 
-/* 235 */     int i = 0;
+/* 196 */     int i = 0;
 /*     */     try
 /*     */     {
-/* 241 */       localDTWApplet.enableUnloadMessage(true);
-/* 242 */       localDTWApplet.enableUnloadMessage(false);
-/* 243 */       i = 1;
+/* 202 */       localDTWApplet.enableUnloadMessage(true);
+/* 203 */       localDTWApplet.enableUnloadMessage(false);
+/* 204 */       i = 1;
 /*     */     }
 /*     */     catch (RuntimeException localRuntimeException) {
-/* 246 */       localRuntimeException.printStackTrace(localLogWriter);
-/* 247 */       getWizard().setFailureReason(this.m_msgBadJavaToJavascriptComm);
+/* 207 */       localRuntimeException.printStackTrace(localLogWriter);
+/* 208 */       getWizard().setFailureReason(this.m_msgBadJavaToJavascriptComm);
 /*     */     }
-/* 249 */     return i;
+/* 210 */     return i;
 /*     */   }
 /*     */ 
-/*     */   private boolean nativeLibrarySanityCheck()
+/*     */   private boolean isSerialDriverInstallNeeded()
 /*     */   {
-/* 263 */     int i = 0;
-/*     */     try {
-/* 265 */       SerialPortLocal.getPortList();
-/* 266 */       i = 1;
-/*     */     }
-/*     */     catch (IOException localIOException) {
-/* 269 */       i = 1;
-/*     */     }
-/*     */     catch (UnsatisfiedLinkError localUnsatisfiedLinkError) {
-/* 272 */       getWizard().setFailureReason(this.m_msgNativeLibrarySanityCheckFailed);
-/*     */     }
-/* 274 */     return i;
+/* 219 */     return getWizard().isSerialDriverInstallNeeded();
 /*     */   }
 /*     */ 
 /*     */   private boolean compatibleWithProtocolCheck()
 /*     */   {
-/* 283 */     LogWriter localLogWriter = getWizard().getConfig().getLogWriter();
-/* 284 */     String str = getWizard().getConfig().getProtocol();
-/* 285 */     localLogWriter.logInfo("Am I compatible with protocol " + str + "?...");
+/* 228 */     LogWriter localLogWriter = getWizard().getConfig().getLogWriter();
+/* 229 */     String str = getWizard().getConfig().getProtocol();
+/* 230 */     localLogWriter.logInfo("Am I compatible with protocol " + str + "?...");
 /*     */ 
-/* 288 */     boolean bool = str.startsWith("http");
-/* 289 */     if (bool) {
-/* 290 */       localLogWriter.logInfo("yes!");
+/* 233 */     boolean bool = str.startsWith("http");
+/* 234 */     if (bool) {
+/* 235 */       localLogWriter.logInfo("yes!");
 /*     */     } else {
-/* 292 */       localLogWriter.logWarning("no!");
-/* 293 */       getWizard().setFailureReason(this.m_msgIncompatibleWithProtocol);
+/* 237 */       localLogWriter.logWarning("no!");
+/* 238 */       getWizard().setFailureReason(this.m_msgIncompatibleWithProtocol);
 /*     */     }
 /*     */ 
-/* 296 */     return bool;
+/* 241 */     return bool;
 /*     */   }
 /*     */ 
 /*     */   private boolean compatibleWithDDMSCheck()
 /*     */   {
-/* 305 */     LogWriter localLogWriter = getWizard().getConfig().getLogWriter();
-/* 306 */     String str1 = getWizard().getConfig().getClientSysVer();
-/* 307 */     String str2 = getWizard().getConfig().getServerSysVer();
+/* 250 */     LogWriter localLogWriter = getWizard().getConfig().getLogWriter();
+/* 251 */     String str1 = getWizard().getConfig().getClientSysVer();
+/* 252 */     String str2 = getWizard().getConfig().getServerSysVer();
 /*     */ 
-/* 309 */     localLogWriter.logInfo("Is my version " + str1 + " compatible with server version " + str2 + "?...");
+/* 254 */     localLogWriter.logInfo("Is my version " + str1 + " compatible with server version " + str2 + "?...");
 /*     */ 
-/* 311 */     boolean bool = str1.equals(str2);
+/* 256 */     boolean bool = str1.equals(str2);
 /*     */ 
-/* 313 */     if (bool) {
-/* 314 */       localLogWriter.logInfo("yes!");
+/* 258 */     if (bool) {
+/* 259 */       localLogWriter.logInfo("yes!");
 /*     */     } else {
-/* 316 */       localLogWriter.logWarning("no!");
-/* 317 */       String[] arrayOfString = { str1, str2 };
-/* 318 */       MessageFormat localMessageFormat = new MessageFormat(this.m_msgPatternIncompatibleWithDdms);
-/* 319 */       getWizard().setFailureReason(localMessageFormat.format(arrayOfString));
+/* 261 */       localLogWriter.logWarning("no!");
+/* 262 */       String[] arrayOfString = { str1, str2 };
+/* 263 */       MessageFormat localMessageFormat = new MessageFormat(this.m_msgPatternIncompatibleWithDdms);
+/* 264 */       getWizard().setFailureReason(localMessageFormat.format(arrayOfString));
 /*     */     }
-/* 321 */     return bool;
+/* 266 */     return bool;
 /*     */   }
 /*     */ 
 /*     */   private boolean recordDDMSTime()
 /*     */   {
-/* 330 */     int i = 0;
-/* 331 */     String str = getWizard().getConfig().getTransferRemoteURL();
-/* 332 */     LogWriter localLogWriter = getWizard().getConfig().getLogWriter();
+/* 275 */     int i = 0;
+/* 276 */     String str = getWizard().getConfig().getTransferRemoteURL();
+/* 277 */     LogWriter localLogWriter = getWizard().getConfig().getLogWriter();
 /*     */ 
-/* 334 */     localLogWriter.logInfo("Recording server time...");
-/* 335 */     NetHelper localNetHelper = new NetHelper();
+/* 279 */     localLogWriter.logInfo("Recording server time...");
+/* 280 */     NetHelper localNetHelper = new NetHelper();
 /*     */     try
 /*     */     {
-/* 339 */       this.m_serverTime = new Long(localNetHelper.getServerTime(str));
-/* 340 */       localLogWriter.logInfo("Server time is " + this.m_serverTime);
-/* 341 */       i = 1;
+/* 284 */       this.m_serverTime = new Long(localNetHelper.getServerTime(str));
+/* 285 */       localLogWriter.logInfo("Server time is " + this.m_serverTime);
+/* 286 */       i = 1;
 /*     */     }
 /*     */     catch (IOException localIOException)
 /*     */     {
-/* 352 */       localIOException.printStackTrace(localLogWriter);
-/* 353 */       getWizard().setFailureReason(this.m_msgRecordDdmsTimeFailed);
+/* 297 */       localIOException.printStackTrace(localLogWriter);
+/* 298 */       getWizard().setFailureReason(this.m_msgRecordDdmsTimeFailed);
 /*     */     }
 /*     */ 
-/* 356 */     return i;
-/*     */   }
-/*     */ 
-/*     */   private boolean serialPortDLLInstallCheck()
-/*     */   {
-/* 365 */     int i = 0;
-/*     */ 
-/* 367 */     InstallTestResult localInstallTestResult = performSerialPortDLLInstallTest();
-/* 368 */     setInstallSerialPortDLLTestResult(localInstallTestResult);
-/* 369 */     if (localInstallTestResult.getResult() == 1) {
-/* 370 */       i = 1;
-/* 371 */       getWizard().getConfig().getLogWriter().logWarning("install is required");
-/*     */     } else {
-/* 373 */       getWizard().getConfig().getLogWriter().logInfo("install not required");
-/*     */     }
-/*     */ 
-/* 376 */     return i;
-/*     */   }
-/*     */ 
-/*     */   private InstallTestResult performSerialPortDLLInstallTest()
-/*     */   {
-/* 386 */     String str1 = getWizard().getConfig().getInstallSerialPortDLLDir();
-/* 387 */     String str2 = getWizard().getConfig().getInstallSerialPortDLL();
-/* 388 */     String str3 = getWizard().getConfig().getInstallSerialPortDLLDigest();
-/* 389 */     String str4 = getWizard().getConfig().getInstallMessageDigestAlgorithm();
-/* 390 */     String str5 = "serial port driver";
-/*     */ 
-/* 392 */     DiskHelper localDiskHelper = new DiskHelper();
-/*     */ 
-/* 394 */     int i = !localDiskHelper.doesFileExist(str1, str2) ? 1 : 0;
-/* 395 */     if (i != 0) {
-/* 396 */       str1 = System.getProperty("java.home") + File.separator + "bin";
-/* 397 */       i = !localDiskHelper.doesFileExist(str1, str2) ? 1 : 0;
-/*     */     }
-/*     */ 
-/* 400 */     int j = (i == 0) && (localDiskHelper.doesFileDigestMatch(str1, str2, str3, str4, getWizard().getConfig().getLogWriter())) ? 1 : 0;
-/*     */ 
-/* 404 */     int k = 0;
-/* 405 */     if (i != 0) {
-/* 406 */       getWizard().getConfig().getLogWriter().logWarning(str2 + " is missing");
-/* 407 */       k = 1;
-/*     */     }
-/*     */ 
-/* 410 */     if ((i == 0) && (j == 0)) {
-/* 411 */       getWizard().getConfig().getLogWriter().logWarning(str2 + " is not the latest version");
-/* 412 */       k = 1;
-/*     */     }
-/*     */ 
-/* 415 */     if (k != 0) {
-/* 416 */       InstallFileVersion localInstallFileVersion = new InstallFileVersion(str2, str5);
-/* 417 */       InstallTestResult localInstallTestResult = new InstallTestResult(1, localInstallFileVersion);
-/*     */ 
-/* 419 */       return localInstallTestResult;
-/*     */     }
-/*     */ 
-/* 422 */     return new InstallTestResult(0);
+/* 301 */     return i;
 /*     */   }
 /*     */ 
 /*     */   private void setMsgText(String paramString)
 /*     */   {
-/* 432 */     this.m_stepMsg.setText(centerLabelText(paramString));
+/* 310 */     this.m_stepMsg.setText(centerLabelText(paramString));
 /*     */   }
 /*     */ }
 

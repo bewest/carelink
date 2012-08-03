@@ -1,17 +1,17 @@
-/*     */ package minimed.ddms.deviceportreader;
+/*     */ package minimed.ddms.A;
 /*     */ 
 /*     */ import java.io.Serializable;
 /*     */ import minimed.util.Contract;
 /*     */ 
-/*     */ public class Enums
+/*     */ public class GA
 /*     */   implements Serializable
 /*     */ {
-/*     */   private static final long serialVersionUID = 1L;
-/*     */   private final String m_name;
+/*     */   private static final long B = 1L;
+/*     */   private final String A;
 /*     */ 
-/*     */   private Enums(String paramString)
+/*     */   private GA(String paramString)
 /*     */   {
-/*  54 */     this.m_name = paramString;
+/*  54 */     this.A = paramString;
 /*     */   }
 /*     */ 
 /*     */   public int hashCode()
@@ -21,21 +21,16 @@
 /*     */ 
 /*     */   public String toString()
 /*     */   {
-/*  75 */     return this.m_name;
+/*  75 */     return this.A;
 /*     */   }
 /*     */ 
-/*     */   Enums(String paramString, 1 param1)
+/*     */   public static final class _C extends GA
 /*     */   {
-/*  31 */     this(paramString);
-/*     */   }
+/* 389 */     public static final _C F = new _C("TIME");
 /*     */ 
-/*     */   public static final class ReservoirWarningUnits extends Enums
-/*     */   {
-/* 389 */     public static final ReservoirWarningUnits TIME = new ReservoirWarningUnits("TIME");
+/* 394 */     public static final _C G = new _C("INSULIN");
 /*     */ 
-/* 394 */     public static final ReservoirWarningUnits INSULIN = new ReservoirWarningUnits("INSULIN");
-/*     */ 
-/*     */     private ReservoirWarningUnits(String paramString)
+/*     */     private _C(String paramString)
 /*     */     {
 /* 406 */       super(null);
 /*     */     }
@@ -44,21 +39,21 @@
 /*     */     {
 /* 417 */       boolean bool = false;
 /*     */ 
-/* 419 */       if ((paramObject != null) && ((paramObject instanceof ReservoirWarningUnits))) {
-/* 420 */         ReservoirWarningUnits localReservoirWarningUnits = (ReservoirWarningUnits)paramObject;
-/* 421 */         bool = toString().equals(localReservoirWarningUnits.toString());
+/* 419 */       if ((paramObject != null) && ((paramObject instanceof _C))) {
+/* 420 */         _C local_C = (_C)paramObject;
+/* 421 */         bool = toString().equals(local_C.toString());
 /*     */       }
 /*     */ 
 /* 424 */       return bool;
 /*     */     }
 /*     */ 
-/*     */     public int intValue()
+/*     */     public int B()
 /*     */     {
 /*     */       int i;
-/* 435 */       if (equals(INSULIN)) {
+/* 435 */       if (equals(G)) {
 /* 436 */         i = 0;
 /*     */       }
-/* 438 */       else if (equals(TIME)) {
+/* 438 */       else if (equals(F)) {
 /* 439 */         i = 1;
 /*     */       }
 /*     */       else {
@@ -70,13 +65,13 @@
 /*     */     }
 /*     */   }
 /*     */ 
-/*     */   public static final class TempBasalType extends Enums
+/*     */   public static final class _A extends GA
 /*     */   {
-/* 318 */     public static final TempBasalType INSULIN_RATE = new TempBasalType("INSULIN_RATE");
+/* 318 */     public static final _A N = new _A("INSULIN_RATE");
 /*     */ 
-/* 323 */     public static final TempBasalType PERCENTAGE = new TempBasalType("PERCENTAGE");
+/* 323 */     public static final _A M = new _A("PERCENTAGE");
 /*     */ 
-/*     */     private TempBasalType(String paramString)
+/*     */     private _A(String paramString)
 /*     */     {
 /* 335 */       super(null);
 /*     */     }
@@ -85,21 +80,21 @@
 /*     */     {
 /* 346 */       boolean bool = false;
 /*     */ 
-/* 348 */       if ((paramObject != null) && ((paramObject instanceof TempBasalType))) {
-/* 349 */         TempBasalType localTempBasalType = (TempBasalType)paramObject;
-/* 350 */         bool = toString().equals(localTempBasalType.toString());
+/* 348 */       if ((paramObject != null) && ((paramObject instanceof _A))) {
+/* 349 */         _A local_A = (_A)paramObject;
+/* 350 */         bool = toString().equals(local_A.toString());
 /*     */       }
 /*     */ 
 /* 353 */       return bool;
 /*     */     }
 /*     */ 
-/*     */     public int intValue()
+/*     */     public int E()
 /*     */     {
 /*     */       int i;
-/* 364 */       if (equals(INSULIN_RATE)) {
+/* 364 */       if (equals(N)) {
 /* 365 */         i = 0;
 /*     */       }
-/* 367 */       else if (equals(PERCENTAGE)) {
+/* 367 */       else if (equals(M)) {
 /* 368 */         i = 1;
 /*     */       }
 /*     */       else {
@@ -111,13 +106,13 @@
 /*     */     }
 /*     */   }
 /*     */ 
-/*     */   public static final class InsulinActionType extends Enums
+/*     */   public static final class _E extends GA
 /*     */   {
-/* 247 */     public static final InsulinActionType FAST_ACTING = new InsulinActionType("FAST_ACTING");
+/* 247 */     public static final _E L = new _E("FAST_ACTING");
 /*     */ 
-/* 252 */     public static final InsulinActionType REGULAR = new InsulinActionType("REGULAR");
+/* 252 */     public static final _E K = new _E("REGULAR");
 /*     */ 
-/*     */     private InsulinActionType(String paramString)
+/*     */     private _E(String paramString)
 /*     */     {
 /* 264 */       super(null);
 /*     */     }
@@ -126,21 +121,21 @@
 /*     */     {
 /* 275 */       boolean bool = false;
 /*     */ 
-/* 277 */       if ((paramObject != null) && ((paramObject instanceof InsulinActionType))) {
-/* 278 */         InsulinActionType localInsulinActionType = (InsulinActionType)paramObject;
-/* 279 */         bool = toString().equals(localInsulinActionType.toString());
+/* 277 */       if ((paramObject != null) && ((paramObject instanceof _E))) {
+/* 278 */         _E local_E = (_E)paramObject;
+/* 279 */         bool = toString().equals(local_E.toString());
 /*     */       }
 /*     */ 
 /* 282 */       return bool;
 /*     */     }
 /*     */ 
-/*     */     public int intValue()
+/*     */     public int D()
 /*     */     {
 /*     */       int i;
-/* 293 */       if (equals(FAST_ACTING)) {
+/* 293 */       if (equals(L)) {
 /* 294 */         i = 0;
 /*     */       }
-/* 296 */       else if (equals(REGULAR)) {
+/* 296 */       else if (equals(K)) {
 /* 297 */         i = 1;
 /*     */       }
 /*     */       else {
@@ -152,15 +147,15 @@
 /*     */     }
 /*     */   }
 /*     */ 
-/*     */   public static final class CarbUnits extends Enums
+/*     */   public static final class _D extends GA
 /*     */   {
-/* 167 */     public static final CarbUnits UNSET = new CarbUnits("UNSET");
+/* 167 */     public static final _D I = new _D("UNSET");
 /*     */ 
-/* 172 */     public static final CarbUnits GRAMS = new CarbUnits("GRAMS");
+/* 172 */     public static final _D H = new _D("GRAMS");
 /*     */ 
-/* 177 */     public static final CarbUnits EXCHANGES = new CarbUnits("EXCHANGES");
+/* 177 */     public static final _D J = new _D("EXCHANGES");
 /*     */ 
-/*     */     private CarbUnits(String paramString)
+/*     */     private _D(String paramString)
 /*     */     {
 /* 189 */       super(null);
 /*     */     }
@@ -169,24 +164,24 @@
 /*     */     {
 /* 200 */       boolean bool = false;
 /*     */ 
-/* 202 */       if ((paramObject != null) && ((paramObject instanceof CarbUnits))) {
-/* 203 */         CarbUnits localCarbUnits = (CarbUnits)paramObject;
-/* 204 */         bool = toString().equals(localCarbUnits.toString());
+/* 202 */       if ((paramObject != null) && ((paramObject instanceof _D))) {
+/* 203 */         _D local_D = (_D)paramObject;
+/* 204 */         bool = toString().equals(local_D.toString());
 /*     */       }
 /*     */ 
 /* 207 */       return bool;
 /*     */     }
 /*     */ 
-/*     */     public int intValue()
+/*     */     public int C()
 /*     */     {
 /*     */       int i;
-/* 218 */       if (equals(UNSET)) {
+/* 218 */       if (equals(I)) {
 /* 219 */         i = 0;
 /*     */       }
-/* 221 */       else if (equals(GRAMS)) {
+/* 221 */       else if (equals(H)) {
 /* 222 */         i = 1;
 /*     */       }
-/* 224 */       else if (equals(EXCHANGES)) {
+/* 224 */       else if (equals(J)) {
 /* 225 */         i = 2;
 /*     */       }
 /*     */       else {
@@ -198,15 +193,15 @@
 /*     */     }
 /*     */   }
 /*     */ 
-/*     */   public static final class BGUnits extends Enums
+/*     */   public static final class _B extends GA
 /*     */   {
-/*  87 */     public static final BGUnits UNSET = new BGUnits("UNSET");
+/*  87 */     public static final _B E = new _B("UNSET");
 /*     */ 
-/*  92 */     public static final BGUnits MG_DL = new BGUnits("MG_DL");
+/*  92 */     public static final _B D = new _B("MG_DL");
 /*     */ 
-/*  97 */     public static final BGUnits MMOL_L = new BGUnits("MMOL_L");
+/*  97 */     public static final _B C = new _B("MMOL_L");
 /*     */ 
-/*     */     private BGUnits(String paramString)
+/*     */     private _B(String paramString)
 /*     */     {
 /* 109 */       super(null);
 /*     */     }
@@ -215,24 +210,24 @@
 /*     */     {
 /* 120 */       boolean bool = false;
 /*     */ 
-/* 122 */       if ((paramObject != null) && ((paramObject instanceof BGUnits))) {
-/* 123 */         BGUnits localBGUnits = (BGUnits)paramObject;
-/* 124 */         bool = toString().equals(localBGUnits.toString());
+/* 122 */       if ((paramObject != null) && ((paramObject instanceof _B))) {
+/* 123 */         _B local_B = (_B)paramObject;
+/* 124 */         bool = toString().equals(local_B.toString());
 /*     */       }
 /*     */ 
 /* 127 */       return bool;
 /*     */     }
 /*     */ 
-/*     */     public int intValue()
+/*     */     public int A()
 /*     */     {
 /*     */       int i;
-/* 138 */       if (equals(UNSET)) {
+/* 138 */       if (equals(E)) {
 /* 139 */         i = 0;
 /*     */       }
-/* 141 */       else if (equals(MG_DL)) {
+/* 141 */       else if (equals(D)) {
 /* 142 */         i = 1;
 /*     */       }
-/* 144 */       else if (equals(MMOL_L)) {
+/* 144 */       else if (equals(C)) {
 /* 145 */         i = 2;
 /*     */       }
 /*     */       else {
@@ -246,6 +241,6 @@
 /*     */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.Enums
+s * Qualified Name:     minimed.ddms.A.GA
  * JD-Core Version:    0.6.0
  */

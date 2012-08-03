@@ -97,9 +97,9 @@
 /* 182 */       Component localComponent = (Component)localIterator.next();
 /* 183 */       if (paramClass.isInstance(localComponent)) {
 /* 184 */         localObject = localComponent;
+/* 185 */         break;
 /*     */       }
 /*     */     }
-/*     */ 
 /* 188 */     return localObject;
 /*     */   }
 /*     */ 

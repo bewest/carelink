@@ -53,11 +53,6 @@
 /*     */       {
 /*     */       }
 /*     */     }
-/*     */ 
-/*     */     StreamGobbler(InputStream paramInputStream, ExeHelper.1 param1)
-/*     */     {
-/*  83 */       this(paramInputStream);
-/*     */     }
 /*     */   }
 /*     */ }
 

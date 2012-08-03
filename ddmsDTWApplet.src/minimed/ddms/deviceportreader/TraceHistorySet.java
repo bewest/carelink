@@ -1,24 +1,24 @@
-/*     */ package minimed.ddms.deviceportreader;
+/*     */ package minimed.ddms.A;
 /*     */ 
 /*     */ import java.text.SimpleDateFormat;
 /*     */ import java.util.Date;
 /*     */ import minimed.util.Contract;
 /*     */ 
-/*     */ public class TraceHistorySet
+/*     */ public class EA
 /*     */ {
-/*     */   private static final int PUMP_TRACE_ID = 1;
-/*     */   private static final int DETAIL_TRACE_ID = 2;
-/*     */   private static final int NEW_ALARM_TRACE_ID = 3;
-/*     */   private static final int OLD_ALARM_TRACE_ID = 4;
-/*     */   private final String m_serialNum;
-/*     */   private final String m_fwVersion;
-/*     */   private final Date m_timeStamp;
-/*     */   private final TraceHistory m_pumpTraceHistory;
-/*     */   private final TraceHistory m_detailTraceHistory;
-/*     */   private final TraceHistory m_newAlarmTraceHistory;
-/*     */   private final TraceHistory m_oldAlarmTraceHistory;
+/*     */   private static final int C = 1;
+/*     */   private static final int G = 2;
+/*     */   private static final int F = 3;
+/*     */   private static final int A = 4;
+/*     */   private final String J;
+/*     */   private final String E;
+/*     */   private final Date I;
+/*     */   private final _A K;
+/*     */   private final _A D;
+/*     */   private final _A B;
+/*     */   private final _A H;
 /*     */ 
-/*     */   public TraceHistorySet(String paramString1, String paramString2, Date paramDate, int[] paramArrayOfInt1, int[] paramArrayOfInt2, int[] paramArrayOfInt3, int[] paramArrayOfInt4)
+/*     */   public EA(String paramString1, String paramString2, Date paramDate, int[] paramArrayOfInt1, int[] paramArrayOfInt2, int[] paramArrayOfInt3, int[] paramArrayOfInt4)
 /*     */   {
 /*  83 */     Contract.preNonNull(paramString1);
 /*  84 */     Contract.preNonNull(paramString2);
@@ -28,105 +28,98 @@
 /*  88 */     Contract.preNonNull(paramArrayOfInt2);
 /*  89 */     Contract.preNonNull(paramArrayOfInt4);
 /*     */ 
-/*  91 */     this.m_serialNum = paramString1;
-/*  92 */     this.m_fwVersion = paramString2;
-/*  93 */     this.m_timeStamp = paramDate;
-/*  94 */     this.m_pumpTraceHistory = new TraceHistory("PumpTrace", paramArrayOfInt1, 1, null);
+/*  91 */     this.J = paramString1;
+/*  92 */     this.E = paramString2;
+/*  93 */     this.I = paramDate;
+/*  94 */     this.K = new _A("PumpTrace", paramArrayOfInt1, 1, null);
 /*     */ 
-/*  96 */     this.m_detailTraceHistory = new TraceHistory("DetailTrace", paramArrayOfInt2, 2, null);
+/*  96 */     this.D = new _A("DetailTrace", paramArrayOfInt2, 2, null);
 /*     */ 
-/*  98 */     this.m_newAlarmTraceHistory = new TraceHistory("NewAlarmTrace", paramArrayOfInt3, 3, null);
+/*  98 */     this.B = new _A("NewAlarmTrace", paramArrayOfInt3, 3, null);
 /*     */ 
-/* 100 */     this.m_oldAlarmTraceHistory = new TraceHistory("OldAlarmTrace", paramArrayOfInt4, 4, null);
+/* 100 */     this.H = new _A("OldAlarmTrace", paramArrayOfInt4, 4, null);
 /*     */   }
 /*     */ 
-/*     */   public TraceHistory getPumpTraceHistory()
+/*     */   public _A C()
 /*     */   {
-/* 113 */     return this.m_pumpTraceHistory;
+/* 113 */     return this.K;
 /*     */   }
 /*     */ 
-/*     */   public TraceHistory getDetailTraceHistory()
+/*     */   public _A E()
 /*     */   {
-/* 122 */     return this.m_detailTraceHistory;
+/* 122 */     return this.D;
 /*     */   }
 /*     */ 
-/*     */   public TraceHistory getNewAlarmTraceHistory()
+/*     */   public _A D()
 /*     */   {
-/* 131 */     return this.m_newAlarmTraceHistory;
+/* 131 */     return this.B;
 /*     */   }
 /*     */ 
-/*     */   public TraceHistory getOldAlarmTraceHistory()
+/*     */   public _A B()
 /*     */   {
-/* 140 */     return this.m_oldAlarmTraceHistory;
+/* 140 */     return this.H;
 /*     */   }
 /*     */ 
 /*     */   public String toString()
 /*     */   {
-/* 149 */     return "TraceHistorySet (" + getTotalBytes() + " bytes total) = " + this.m_pumpTraceHistory + ", " + this.m_detailTraceHistory + ", " + this.m_newAlarmTraceHistory + ", " + this.m_oldAlarmTraceHistory;
+/* 149 */     return "TraceHistorySet (" + A() + " bytes total) = " + this.K + ", " + this.D + ", " + this.B + ", " + this.H;
 /*     */   }
 /*     */ 
-/*     */   public int getTotalBytes()
+/*     */   public int A()
 /*     */   {
-/* 160 */     return this.m_pumpTraceHistory.getData().length + this.m_detailTraceHistory.getData().length + this.m_oldAlarmTraceHistory.getData().length + this.m_newAlarmTraceHistory.getData().length;
+/* 160 */     return this.K.B().length + this.D.B().length + this.H.B().length + this.B.B().length;
 /*     */   }
 /*     */ 
-/*     */   public class TraceHistory
+/*     */   public class _A
 /*     */   {
-/*     */     private static final String UNDERSCORE = "_";
-/*     */     private static final String FILE_EXTENSION = ".tup";
-/*     */     private final byte[] m_data;
-/*     */     private final String m_fileID;
-/*     */     private final int m_bufferID;
-/*     */     private final SimpleDateFormat m_dateFormatter;
-/*     */     private final SimpleDateFormat m_timeFormatter;
-/*     */     private final String m_bufferName;
-/*     */     private final TraceHistorySet this$0;
+/*     */     private static final String I = "_";
+/*     */     private static final String A = ".tup";
+/*     */     private final byte[] D;
+/*     */     private final String E;
+/*     */     private final int B;
+/*     */     private final SimpleDateFormat G;
+/*     */     private final SimpleDateFormat F;
+/*     */     private final String H;
 /*     */ 
-/*     */     private TraceHistory(String paramArrayOfByte, byte[] paramInt, int arg4)
+/*     */     private _A(String paramArrayOfByte, byte[] paramInt, int arg4)
 /*     */     {
-/* 197 */       this.this$0 = this$1;
 /* 198 */       Contract.preNonNull(paramInt);
 /*     */       int i;
 /* 199 */       Contract.pre(i, 1, 4);
 /*     */ 
-/* 201 */       this.m_bufferName = paramArrayOfByte;
-/* 202 */       this.m_data = paramInt;
-/* 203 */       this.m_bufferID = i;
+/* 201 */       this.H = paramArrayOfByte;
+/* 202 */       this.D = paramInt;
+/* 203 */       this.B = i;
 /*     */ 
-/* 206 */       this.m_dateFormatter = new SimpleDateFormat("ddMMMyy");
-/* 207 */       this.m_timeFormatter = new SimpleDateFormat("HHmm");
+/* 206 */       this.G = new SimpleDateFormat("ddMMMyy");
+/* 207 */       this.F = new SimpleDateFormat("HHmm");
 /*     */ 
-/* 210 */       this.m_fileID = ("Pump" + this$1.m_serialNum + "_" + this$1.m_fwVersion + "_" + this.m_dateFormatter.format(this$1.m_timeStamp) + "_" + "time" + this.m_timeFormatter.format(this$1.m_timeStamp) + "_" + this.m_bufferID + ".tup");
+/* 210 */       this.E = ("Pump" + EA.A(this$1) + "_" + EA.B(this$1) + "_" + this.G.format(EA.C(this$1)) + "_" + "time" + this.F.format(EA.C(this$1)) + "_" + this.B + ".tup");
 /*     */     }
 /*     */ 
-/*     */     private TraceHistory(String paramArrayOfInt, int[] paramInt, int arg4)
+/*     */     private _A(String paramArrayOfInt, int[] paramInt, int arg4)
 /*     */     {
-/* 230 */       this(paramArrayOfInt, MedicalDevice.Util.convertIntsToBytes(paramInt), i);
+/* 230 */       this(paramArrayOfInt, O._B.A(paramInt), i);
 /*     */     }
 /*     */ 
-/*     */     public byte[] getData()
+/*     */     public byte[] B()
 /*     */     {
-/* 242 */       return this.m_data;
+/* 242 */       return this.D;
 /*     */     }
 /*     */ 
-/*     */     public String getFileID()
+/*     */     public String A()
 /*     */     {
-/* 252 */       return this.m_fileID;
+/* 252 */       return this.E;
 /*     */     }
 /*     */ 
 /*     */     public String toString()
 /*     */     {
-/* 262 */       return this.m_bufferName + ": " + getFileID() + " - " + getData().length + " bytes";
-/*     */     }
-/*     */ 
-/*     */     TraceHistory(String paramArrayOfInt, int[] paramInt, int param1, TraceHistorySet.1 arg5)
-/*     */     {
-/* 170 */       this(paramArrayOfInt, paramInt, param1);
+/* 262 */       return this.H + ": " + A() + " - " + B().length + " bytes";
 /*     */     }
 /*     */   }
 /*     */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.TraceHistorySet
+ * Qualified Name:     minimed.ddms.A.EA
  * JD-Core Version:    0.6.0
  */

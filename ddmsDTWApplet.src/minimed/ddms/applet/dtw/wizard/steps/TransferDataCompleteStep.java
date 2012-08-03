@@ -1,6 +1,6 @@
 /*     */ package minimed.ddms.applet.dtw.wizard.steps;
 /*     */ 
-/*     */ import java.awt.GridBagLayout;
+/*     */ import java.awt.BorderLayout;
 /*     */ import java.util.ResourceBundle;
 /*     */ import javax.swing.Icon;
 /*     */ import javax.swing.ImageIcon;
@@ -30,7 +30,7 @@
 /*  59 */     getTopImageLabel().setIcon((Icon)localObject);
 /*     */ 
 /*  62 */     JPanel localJPanel = getContentArea();
-/*  63 */     localJPanel.setLayout(new GridBagLayout());
+/*  63 */     localJPanel.setLayout(new BorderLayout());
 /*     */     String str1;
 /*  67 */     if (displayDisconnectParadigmLinkMessage())
 /*  68 */       str1 = this.m_resources.getString("wizard.transfercomplete.disconnect");
@@ -68,21 +68,21 @@
 /*     */   {
 /* 125 */     WizardSelections localWizardSelections = getWizardSelections();
 /*     */     int i;
-/* 137 */     if ("wizard.selections.SELECTION_DEVICE_MMLINKMETER".equals(localWizardSelections.getDeviceSelection()))
+/* 136 */     if ("wizard.selections.SELECTION_DEVICE_MMLINKMETER".equals(localWizardSelections.getDeviceSelection()))
 /*     */     {
-/* 140 */       i = 1;
-/* 141 */     } else if (((localWizardSelections.isDeviceSelectionACGM()) || ((localWizardSelections.isDeviceSelectionAPump()) && (!"wizard.selections.SELECTION_DEVICE_MM508".equals(localWizardSelections.getDeviceSelection())))) && ("wizard.selections.SELECTION_LINK_DEVICE_PARADIGMLINK".equals(localWizardSelections.getLinkDevice())))
+/* 139 */       i = 1;
+/* 140 */     } else if (((localWizardSelections.isDeviceSelectionACGM()) || (localWizardSelections.isDeviceSelectionAPump())) && ("wizard.selections.SELECTION_LINK_DEVICE_PARADIGMLINK".equals(localWizardSelections.getLinkDevice())))
 /*     */     {
-/* 147 */       i = 1;
+/* 144 */       i = 1;
 /*     */     }
-/* 149 */     else i = 0;
+/* 146 */     else i = 0;
 /*     */ 
-/* 152 */     return i;
+/* 149 */     return i;
 /*     */   }
 /*     */ 
 /*     */   private boolean displayGuestMessage(String paramString)
 /*     */   {
-/* 162 */     return "guest".equals(paramString);
+/* 159 */     return "guest".equals(paramString);
 /*     */   }
 /*     */ }
 

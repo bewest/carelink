@@ -1,150 +1,155 @@
-/*     */ package minimed.ddms.deviceportreader;
+/*     */ package minimed.ddms.A;
 /*     */ 
 /*     */ import java.io.IOException;
 /*     */ import minimed.util.Contract;
 /*     */ 
-/*     */ abstract class CommunicationsLinkDefault
-/*     */   implements CommunicationsLink
+/*     */ abstract class J
+/*     */   implements z
 /*     */ {
-/*     */   static final String DISCONNNECTED = "DISCONNNECTED";
-/*     */   private static final int COMM_RETRIES = 4;
-/*     */   private DeviceListener m_deviceListener;
-/*     */   private final String m_deviceSerialNumber;
-/*     */   private int m_state;
-/*     */   private int m_totalReadByteCountExpected;
-/*     */   private int m_totalReadByteCount;
-/*     */   private int m_phase;
-/*     */   private String m_linkDeviceDescription;
-/*     */   private CommPort m_commPort;
+/*     */   static final String G = "DISCONNNECTED";
+/*     */   private v F;
+/*     */   private final String E;
+/*     */   private int D;
+/*     */   private int J;
+/*     */   private int B;
+/*     */   private int C;
+/*     */   private String A;
+/*  48 */   private int I = 4;
+/*     */   private c H;
 /*     */ 
-/*     */   CommunicationsLinkDefault(DeviceListener paramDeviceListener, String paramString1, String paramString2)
+/*     */   J(v paramv, String paramString1, String paramString2)
 /*     */   {
-/*  65 */     this.m_deviceListener = paramDeviceListener;
-/*  66 */     this.m_deviceSerialNumber = paramString1;
-/*  67 */     this.m_linkDeviceDescription = paramString2;
-/*  68 */     setState(1);
-/*  69 */     MedicalDevice.logInfo(this, "Created link device " + toString());
+/*  66 */     this.F = paramv;
+/*  67 */     this.E = paramString1;
+/*  68 */     this.A = paramString2;
+/*  69 */     D(1);
+/*  70 */     O.A(this, "Created link device " + toString());
 /*     */   }
 /*     */ 
-/*     */   public CommPort getCommPort()
+/*     */   public c C()
 /*     */   {
-/*  80 */     return this.m_commPort;
+/*  81 */     return this.H;
 /*     */   }
 /*     */ 
-/*     */   public void setCommPort(CommPort paramCommPort)
+/*     */   public void A(c paramc)
 /*     */   {
-/*  89 */     this.m_commPort = paramCommPort;
+/*  90 */     this.H = paramc;
 /*     */   }
 /*     */ 
-/*     */   public final void initCommunications()
-/*     */     throws BadDeviceCommException, IOException, SerialIOHaltedException
+/*     */   public final void D()
+/*     */     throws t, IOException, W
 /*     */   {
-/* 101 */     setState(2);
-/* 102 */     int i = 0;
+/* 102 */     D(2);
+/* 103 */     int i = 0;
 /*     */ 
-/* 104 */     for (int j = 0; (j <= 4) && (i == 0); j++) {
+/* 105 */     for (int j = 0; (j <= this.I) && (i == 0); j++) {
 /*     */       try {
-/* 106 */         initCommunicationsIO();
-/* 107 */         i = 1;
+/* 107 */         H();
+/* 108 */         i = 1;
 /*     */       } catch (IOException localIOException) {
-/* 109 */         MedicalDevice.logWarning(this, "initCommunications: got error " + localIOException);
-/* 110 */         if (j == 4)
+/* 110 */         O.D(this, "initCommunications: got error " + localIOException);
+/* 111 */         if (j == this.I)
 /*     */         {
-/* 112 */           throw localIOException;
+/* 113 */           throw localIOException;
 /*     */         }
-/* 114 */         MedicalDevice.logWarning(this, "initCommunications: retrying...");
+/* 115 */         O.D(this, "initCommunications: retrying...");
 /*     */       }
 /*     */     }
-/* 117 */     setState(1);
+/* 118 */     D(1);
 /*     */   }
 /*     */ 
-/*     */   public final void endCommunications()
+/*     */   public final void B()
 /*     */     throws IOException
 /*     */   {
-/* 126 */     endCommunicationsIO();
-/* 127 */     setState(1);
+/* 127 */     F();
+/* 128 */     D(1);
 /*     */   }
 /*     */ 
-/*     */   public final void resetTotalReadByteCount()
+/*     */   public final void A()
 /*     */   {
-/* 134 */     this.m_totalReadByteCount = 0;
+/* 135 */     this.B = 0;
 /*     */   }
 /*     */ 
-/*     */   public final void setTotalReadByteCountExpected(int paramInt)
+/*     */   public final void A(int paramInt)
 /*     */   {
-/* 143 */     this.m_totalReadByteCountExpected = paramInt;
+/* 144 */     this.J = paramInt;
 /*     */   }
 /*     */ 
-/*     */   public final void incTotalReadByteCount(int paramInt)
+/*     */   public final void B(int paramInt)
 /*     */   {
-/* 152 */     this.m_totalReadByteCount += paramInt;
+/* 153 */     this.B += paramInt;
 /*     */   }
 /*     */ 
-/*     */   public final void setListener(DeviceListener paramDeviceListener)
+/*     */   public final void A(v paramv)
 /*     */   {
-/* 161 */     this.m_deviceListener = paramDeviceListener;
+/* 162 */     this.F = paramv;
 /*     */   }
 /*     */ 
 /*     */   public String toString()
 /*     */   {
-/* 170 */     return this.m_linkDeviceDescription + " using " + getPortDescription();
+/* 171 */     return this.A + " using " + G();
 /*     */   }
 /*     */ 
-/*     */   final String getDeviceSerialNumber()
+/*     */   final String J()
 /*     */   {
-/* 179 */     return this.m_deviceSerialNumber;
+/* 180 */     return this.E;
 /*     */   }
 /*     */ 
-/*     */   abstract void initCommunicationsIO()
-/*     */     throws IOException, SerialIOHaltedException, BadDeviceCommException;
+/*     */   abstract void H()
+/*     */     throws IOException, W, t;
 /*     */ 
-/*     */   abstract void endCommunicationsIO()
+/*     */   abstract void F()
 /*     */     throws IOException;
 /*     */ 
-/*     */   String getPortDescription()
+/*     */   String G()
 /*     */   {
-/* 205 */     return getCommPort() != null ? getCommPort().toString() : "DISCONNNECTED";
+/* 206 */     return C() != null ? C().toString() : "DISCONNNECTED";
 /*     */   }
 /*     */ 
-/*     */   void notifyDeviceUpdateProgress()
+/*     */   void I()
 /*     */   {
-/* 213 */     double d = this.m_totalReadByteCount / this.m_totalReadByteCountExpected * 100.0D;
+/* 214 */     double d = this.B / this.J * 100.0D;
 /*     */ 
-/* 215 */     this.m_deviceListener.deviceUpdateProgress((int)d);
+/* 216 */     this.F.deviceUpdateProgress((int)d);
 /*     */   }
 /*     */ 
-/*     */   void setState(int paramInt)
+/*     */   void D(int paramInt)
 /*     */   {
-/* 226 */     Contract.pre((paramInt >= 1) && (paramInt <= 9));
+/* 227 */     Contract.pre((paramInt >= 1) && (paramInt <= 9));
 /*     */ 
-/* 229 */     if (paramInt != this.m_state) {
-/* 230 */       this.m_state = paramInt;
-/* 231 */       this.m_deviceListener.deviceUpdateState(this.m_state, DevicePortReader.STATE_TEXT[this.m_state]);
+/* 230 */     if (paramInt != this.D) {
+/* 231 */       this.D = paramInt;
+/* 232 */       this.F.deviceUpdateState(this.D, G.H[this.D]);
 /*     */     }
 /*     */   }
 /*     */ 
-/*     */   void setPhase(int paramInt)
+/*     */   void C(int paramInt)
 /*     */   {
-/* 243 */     Contract.pre((paramInt >= 1) && (paramInt <= 7));
+/* 244 */     Contract.pre((paramInt >= 1) && (paramInt <= 7));
 /*     */ 
-/* 247 */     if (paramInt != this.m_phase) {
-/* 248 */       this.m_phase = paramInt;
-/* 249 */       this.m_deviceListener.deviceUpdateState(this.m_phase, DevicePortReader.PHASE_TEXT[this.m_phase]);
+/* 248 */     if (paramInt != this.C) {
+/* 249 */       this.C = paramInt;
+/* 250 */       this.F.deviceUpdateState(this.C, G.K[this.C]);
 /*     */     }
 /*     */   }
 /*     */ 
-/*     */   DeviceListener getDeviceListener()
+/*     */   void E(int paramInt)
 /*     */   {
-/* 259 */     return this.m_deviceListener;
+/* 260 */     this.I = paramInt;
 /*     */   }
 /*     */ 
-/*     */   int getState()
+/*     */   v E()
 /*     */   {
-/* 268 */     return this.m_state;
+/* 269 */     return this.F;
+/*     */   }
+/*     */ 
+/*     */   int K()
+/*     */   {
+/* 278 */     return this.D;
 /*     */   }
 /*     */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.CommunicationsLinkDefault
+ * Qualified Name:     minimed.ddms.A.J
  * JD-Core Version:    0.6.0
  */

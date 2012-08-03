@@ -1,1228 +1,2771 @@
 Manifest-Version: 1.0
-Sealed: true
-Built-By: ddms
-Created-By: 1.4.2_05-b04 (Sun Microsystems Inc.)
 Ant-Version: Apache Ant 1.7.0
-Built-On: April 16 2010
 Implementation-Title: ddmsDTWApplet.jar
-Specification-Version: 7333-5.2.002
-Implementation-Version: 7333-5.2.002
-
-Name: minimed/ddms/text/Formats.class
-SHA1-Digest: Bby2F4+ZcMhcE61p9rsBMi8LkFY=
-
-Name: minimed/ddms/deviceportreader/TheraSenseFreeStyle$SnapshotCreato
- r.class
-SHA1-Digest: pKFf82QU9X66k9+XwoHio9g3kuM=
-
-Name: minimed/ddms/deviceportreader/LSMeter$1.class
-SHA1-Digest: 620r7XhXrVLg8NnRbUX+4NEiDMU=
-
-Name: minimed/ddms/deviceportreader/DeviceListener.class
-SHA1-Digest: YqGdgM87gO+FR6RnDKPd+GNEGh8=
-
-Name: minimed/ddms/deviceportreader/MMGuardian3.class
-SHA1-Digest: 9cDCkKBVj7eHzKqEV0171cK1KV8=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$ReadGlucoseHis
- toryCommand.class
-SHA1-Digest: Ipy7WEJ2CYZqsR3LWTP3O7ebk8Q=
-
-Name: Serialio/SnoopListener.class
-SHA1-Digest: e/nsq63KujW4sbCPkBpYsGjqPIM=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBDStep.class
-SHA1-Digest: hDDNth4VKN4QzOOPxKp8tk1d8fU=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/othermeter/VerifyConnection
- sStep.class
-SHA1-Digest: Xu4YroE8toX2Brzsm3IuCy8H884=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataCheckStep.class
-SHA1-Digest: Qusm58KaMwzg+cFhjNCP3xMgFVA=
-
-Name: Serialio/SnoopInputStream$Token.class
-SHA1-Digest: O+UfokivcA+HOSEE+MnYAuo/Dtg=
-
-Name: images/SN-Screen-G3.jpg
-SHA1-Digest: f31HyGzTiHEF4JoIxknbQ7jaAKI=
-
-Name: Serialio/FlowControlTask.class
-SHA1-Digest: 8q1nf4mpjkG9QCrvoo095ynejoQ=
-
-Name: images/USBCable.jpg
-SHA1-Digest: 6rvxKP3FKFAS7t859HLD88011W0=
-
-Name: minimed/ddms/deviceportreader/TheraSenseFreeStyle$Command.class
-SHA1-Digest: 5vqHUWFXX2p8dRc5/ypeh2LT9E0=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationFailStep.cla
- ss
-SHA1-Digest: cNFRG8Ih2pKyFJZXMUmI14edgtQ=
-
-Name: minimed/ddms/applet/dtw/AppletResources_ru.properties
-SHA1-Digest: bedQzK3V6hR3Sw/M1l/+DsxS5Zs=
-
-Name: minimed/ddms/deviceportreader/BadDeviceValueException.class
-SHA1-Digest: BZdf8ulj6d0+zK75LlPcEdkt6Lo=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/ComLinkUSBDriver
- InstallAuthorizationStep.class
-SHA1-Digest: DRA4z1AClfZcYtK8bemGS7csO8M=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBrandStep$1.clas
- s
-SHA1-Digest: 3FHU+KuYyWDAC6PrkM4lufm4wXg=
-
-Name: minimed/ddms/deviceportreader/RocheMeter.class
-SHA1-Digest: eG9l7CA8XEhDSNkNphsUEDMd1hk=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBayerStep.class
-SHA1-Digest: 7kwM6zLrgCHcRAombfBhD8GNVfw=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/bayermeter/MeterSelectSeria
- lPortStep.class
-SHA1-Digest: PgjISewyal7iN4rTmQyVEMREib0=
-
-Name: minimed/ddms/deviceportreader/MMX54.class
-SHA1-Digest: JA76VKQS0mCDYqKiL9C8sPZS9E8=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/USBDriverInstall
- AuthorizationStep.class
-SHA1-Digest: utd9StNWl/7pKPdtmk6cDEPW4eY=
-
-Name: minimed/ddms/deviceportreader/RocheActiveAndCompact$1.class
-SHA1-Digest: ZIYKLeSppblHoalsguHr81ebEwA=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBrandStep.class
-SHA1-Digest: eHstXozC1x6flb3tdSOQFMQKFFo=
-
-Name: minimed/ddms/deviceportreader/BayerMeter$SnapshotCreator.class
-SHA1-Digest: CQNUZpruw0LYqoRJal7ttu/mRFo=
-
-Name: minimed/ddms/applet/dtw/AppletResources_nl.properties
-SHA1-Digest: oZdfTLFSM+OG9cn3aN7A7b3vn90=
-
-Name: minimed/ddms/deviceportreader/MMParadigm2Proxy.class
-SHA1-Digest: 7sqETq2KOsGniUgCfh71Edkc4M8=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterLifeScanStep.cla
- ss
-SHA1-Digest: 7cPmcj89wcW/3jc+SL5wYGf0SCQ=
-
-Name: Serialio/LookFor.class
-SHA1-Digest: pXv6Y6blM1lDINRjH4l6ajWSw9w=
-
-Name: minimed/ddms/applet/dtw/AppletResources_it.properties
-SHA1-Digest: JwpI5AWqTC+VAUI67uLVk5YXkk0=
-
-Name: minimed/ddms/deviceportreader/MMX15.class
-SHA1-Digest: Et8NWy8cOVXoF0kyUhdOdTSGDls=
-
-Name: minimed/ddms/applet/dtw/NetHelper$4.class
-SHA1-Digest: kICsMzH8Huww2H2pPUv5xVMYPvg=
-
-Name: images/SerialCable.jpg
-SHA1-Digest: DOzN7Ln7CbrWRf18msP6tBuYdWE=
-
-Name: minimed/ddms/deviceportreader/MMX12.class
-SHA1-Digest: e2kKPzg3b31jmtaI3f+nAb+1acQ=
-
-Name: drivers/usb/ComLink2/wdreg_gui.exe
-SHA1-Digest: col1qQ6sD1SvQw4C+hoXcNyqcgw=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/USBDriverPostIns
- tallStep.class
-SHA1-Digest: 5a6i8cWJ5IGWWmxNVadX+fmpzY0=
-
-Name: minimed/ddms/deviceportreader/BayerEliteXL.class
-SHA1-Digest: 8EIU2ecQgl+g7l6RnbJdzNLE1fo=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/VerifyComLinkUSB
- ConnectionStep.class
-SHA1-Digest: maP6sN1gDO6Fv14QY+9/ApLwyfs=
-
-Name: images/device_BayerDex2.jpg
-SHA1-Digest: tjrr+2jQyEIwaJ0vyDJPTenNg0E=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataCompleteStep.cl
- ass
-SHA1-Digest: ym1wim0GKcSJYyQbfZ0VUYRRxx8=
-
-Name: minimed/ddms/deviceportreader/IntRange.class
-SHA1-Digest: F1YsuGNb3pvnQgJS2PtAVAqa6rI=
-
-Name: minimed/ddms/deviceportreader/ComLink1$RS232Command.class
-SHA1-Digest: 4EQ0fYhkFoyDdAw0oMP3CRXg2KI=
-
-Name: minimed/ddms/deviceportreader/MMX53.class
-SHA1-Digest: sg8G7xGHyG8j5fsUo1z2HPNlGro=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterRocheStep$1.clas
- s
-SHA1-Digest: d6KDQQNjLAPnTjjO+iBbIB39AG4=
-
-Name: minimed/ddms/deviceportreader/Enums.class
-SHA1-Digest: hv6pUMhv7ioB9OiI+H1O/04p1S4=
-
-Name: images/ParadigmLink.png
-SHA1-Digest: jjig4VEjFaEGLFb98Ub9W+RXNj0=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/StepProvider.class
-SHA1-Digest: T5LP5qe0Yg/5APS+49SIwL8tlsg=
-
-Name: drivers/usb/ComLink2/cl2_jni_wrapper.dll
-SHA1-Digest: bkgcELXj0zR9V/DOOv3JVW1v7Nc=
-
-Name: images/device_MMLogicMeter.jpg
-SHA1-Digest: /j3IBj/ZsMTCRYlnWObz3FdAGMg=
-
-Name: minimed/ddms/deviceportreader/RocheMeter$5.class
-SHA1-Digest: 4gB/fgKC3E8HUn5Iz6bM3HsVGI8=
-
-Name: minimed/ddms/deviceportreader/Snapshot$1.class
-SHA1-Digest: g6olanleHpGprkvLv+3iIrvSCtQ=
-
-Name: minimed/ddms/applet/dtw/components/StepLayout.class
-SHA1-Digest: 3lEegkFC/stDo62L94pwu65iOh0=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchProfile.class
-SHA1-Digest: uRf25zl2QSwUiuyvc2dfXG5x3bk=
-
-Name: minimed/ddms/deviceportreader/RocheActiveAndCompact$2.class
-SHA1-Digest: DwgRQzVMqvguH/RYnWhyB9+hVEg=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterOtherStep$1.clas
- s
-SHA1-Digest: zha0zihZ7UfaUlGhMRQPBXr/Jno=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpOperationSte
- p$1.class
-SHA1-Digest: dfKfLJ59U2a/3wy7aGvxMKZ59JY=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterOtherStep.class
-SHA1-Digest: yI10JZciFu3cDdk4abMw0uOsgNo=
-
-Name: minimed/ddms/deviceportreader/TheraSenseFreeStyle.class
-SHA1-Digest: vpuusznrtuq+nTNxQ78oUedbChg=
-
-Name: minimed/ddms/deviceportreader/MedicalDevice$SnapshotCreator.clas
- s
-SHA1-Digest: NBNVl/hx/K0tom8YbmnNmYzoUw8=
-
-Name: images/device_MM511.jpg
-SHA1-Digest: Y9yZdoQjKV2GE7lo26E+5gJFXRw=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/USBDriverPostInstallStep.cl
- ass
-SHA1-Digest: aIQeDpKYGLvB/EAiw0HY9H/4RuM=
-
-Name: minimed/ddms/deviceportreader/RocheMeter$Command.class
-SHA1-Digest: EZYH/lbXTAysqySFWmH40o9QALY=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchUltra$1.class
-SHA1-Digest: q8SX6TfeA28Ocyc1DBSpj1+AhW0=
-
-Name: minimed/ddms/deviceportreader/LSFastTake.class
-SHA1-Digest: xoUOyJL63z07e9UtfyHQMllMIoQ=
-
-Name: minimed/ddms/applet/dtw/DiskHelper.class
-SHA1-Digest: YZlyf4BdlRiLeuDUXtmr5LM2IT8=
-
-Name: minimed/ddms/applet/dtw/AppletResources_da.properties
-SHA1-Digest: m2WNUMluyvuqZbGfmAAacmq1Ig0=
-
-Name: minimed/ddms/applet/dtw/wizard/WizardConfig.class
-SHA1-Digest: 26ktWiKsq+EiYEuLaeOqrMe9ivk=
-
-Name: Serialio/SerLooker.class
-SHA1-Digest: y338kzVgqEU5yMkorhF4rEfate0=
-
-Name: images/device_MM512.jpg
-SHA1-Digest: RWzi8XxkGmHxmyfy3WebXuH4RXA=
-
-Name: images/device_BayerContourLink.png
-SHA1-Digest: A6RDcl0cvWPL25rsuqzqkXKvTbY=
-
-Name: images/readWiz.gif
-SHA1-Digest: ZN+StOIK4oFJ+1mW7VVfnmnk5R4=
-
-Name: minimed/ddms/applet/dtw/components/UserEditListener.class
-SHA1-Digest: Yzh4Gm0zxJeTSGsOlwcnlzvp21I=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataStep.class
-SHA1-Digest: oLHebK9MD0R5WZqKLpho3xjj/cw=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mmmeter/USBDriverPostInstal
- lStep.class
-SHA1-Digest: gY9H/dPaDnrLQSoLtSyesjNINEk=
-
-Name: minimed/ddms/deviceportreader/Enums$TempBasalType.class
-SHA1-Digest: yEQrNJv+wEzIBR2ndtT3K6m8Qz0=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/ComLinkUSBDriver
- PostInstallStep.class
-SHA1-Digest: 0ZvlfmuGmH0Exd/GGoeWSpVBgx8=
-
-Name: minimed/ddms/deviceportreader/RocheAviva.class
-SHA1-Digest: KBiLlDKtAhDxDb8cIda+YT0PWS8=
-
-Name: Serialio/SerOutputStream.class
-SHA1-Digest: 4YGEkvw78x8fYVzWE2mt/RQV44Y=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/UnrecoverableErrorStep$1.cl
- ass
-SHA1-Digest: Cdm2dVctIEX+2yfLL9dc7rGxsm0=
-
-Name: Serialio/SerByteQueue.class
-SHA1-Digest: cJs2rCAJ6rLrxztxJvKZR9yec9Y=
-
-Name: minimed/ddms/deviceportreader/MedicalDevice$Util.class
-SHA1-Digest: m5Xx83t5zFMBvkpHuCycF5exglI=
-
-Name: images/ComLinkUSB.png
-SHA1-Digest: HH7Ve/ddGhEcCxyGE5S+hlvjk1Y=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$2.class
-SHA1-Digest: wL//FUc9ZJrxXqDvm46K55slUBo=
-
-Name: images/device_LSUltraSmart.jpg
-SHA1-Digest: ySffwu/YXiVy33eNG1Z2Zo29oVY=
-
-Name: minimed/ddms/applet/dtw/components/NumericTextField$2.class
-SHA1-Digest: nVENHOuPKJOXQUrADwx2lRzRJF8=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataStep$1.class
-SHA1-Digest: klzaM7Q6aIIvCf4dQho3yjLa/FI=
-
-Name: minimed/ddms/deviceportreader/TheraSenseFreeStyle$Reader.class
-SHA1-Digest: kHxjovpbWCEa0l1nT3MJXTKTC4Y=
-
-Name: Serialio/SerialConfig.class
-SHA1-Digest: WOiD+g5Ruq82ksb7wX50uy9FMrg=
-
-Name: minimed/ddms/applet/dtw/components/ClickAdapter.class
-SHA1-Digest: n1pDVgydLt0PBD5wD5QYs9qBTeo=
-
-Name: minimed/ddms/deviceportreader/MMLogicMeter.class
-SHA1-Digest: MzDz99YHmTSxR8EvIR6frlRF5v0=
-
-Name: images/device_MSXceed.png
-SHA1-Digest: 8wP4vsonOl+K0Mx1vTAuERBReyw=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/lifescanmeter/VerifyConnect
- ionsStep.class
-SHA1-Digest: b0boBT3T4VkJ92hzec6/d0k4+5Q=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchBasic.class
-SHA1-Digest: q/QYLkap9OvLkk0ZIr1LBWpPYeA=
-
-Name: minimed/ddms/deviceportreader/BayerContour.class
-SHA1-Digest: JzCIKxEZxoDtEklDeOiSaxpVzro=
-
-Name: minimed/ddms/deviceportreader/ComLink2.class
-SHA1-Digest: eLU5oNfPcmKIX259aGyIS62J30A=
-
-Name: images/device_LSProfile.jpg
-SHA1-Digest: l5jH4A4bdc3T/6gh9e9EGNVn+zI=
-
-Name: images/device_LSFastTake.jpg
-SHA1-Digest: aOvXD73blh2V2W5ZGd/cFm3Y8Zg=
-
-Name: minimed/ddms/applet/dtw/components/NumericTextField.class
-SHA1-Digest: ZiXLtH5v66fUQyU/mpUrJCgvF5w=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/VerifyConnection
- sStep.class
-SHA1-Digest: WRRxaSXv7Bc2aOc+2XhX9e6fJh0=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchUltraSmart$SnapshotCreat
- or.class
-SHA1-Digest: 2x/bPDipGwsgCYvxG70oUbk5f/o=
-
-Name: drivers/usb/ComLink2/wdreg.exe
-SHA1-Digest: FyQWQnAZmgaRihzU7iZNkjfVXR0=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/TransferPumpDataCompleteSte
- p.class
-SHA1-Digest: HDZWRu83zhxdZFnU3xeSCIjdXvk=
-
-Name: minimed/ddms/deviceportreader/MedisenseXtra.class
-SHA1-Digest: j/0UdZe5OYbIZucKGJ0sGGbBoVY=
-
-Name: Serialio/SerialServerTask.class
-SHA1-Digest: NDT1oIz008JmSPXhWwF6tokExbo=
-
-Name: drivers/usb/bd/bdhidcom.inf
-SHA1-Digest: CZMs4+Gk3VUqHEhYE/57twYIyFM=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/USBDriverInstallAuthorizati
- onStep.class
-SHA1-Digest: srfznj4rgjWHBdF7NwSfByvaL/0=
-
-Name: config/images.properties
-SHA1-Digest: tvgD8X7GLgCrEmaFUrGeP6AXVNA=
-
-Name: minimed/ddms/deviceportreader/USBComm.class
-SHA1-Digest: DjUQLJ3Uqah3ZmD0iYL6mwS18qA=
-
-Name: Serialio/SerialPortLocal.class
-SHA1-Digest: /SzlM+NAUARW6mui42Cmw41axAo=
-
-Name: minimed/util/Contract.class
-SHA1-Digest: mJDdhikm6j1Ni9UdTaTGOdWvkPA=
-
-Name: minimed/ddms/deviceportreader/RocheMeter$SnapshotCreator.class
-SHA1-Digest: 1PZNew9gCZP6WI1pTLZxNUhSZig=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$6.class
-SHA1-Digest: nsgTssUw07qV/fzjdJBSEIhwC6I=
-
-Name: minimed/ddms/deviceportreader/LSMeter.class
-SHA1-Digest: haW2zLpacKUay7wjG/z8qR6erLk=
-
-Name: minimed/ddms/applet/dtw/InstallFileVersion.class
-SHA1-Digest: Yd51Rx7yAcHmBHvN63lHELtEiGU=
-
-Name: minimed/ddms/deviceportreader/TheraSenseFreeStyle$1.class
-SHA1-Digest: 0Mz0aEt+/hcLUEcdy1e/MoB+0bg=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SerialPortDLLInstallAuthori
- zationStep.class
-SHA1-Digest: 4vZrvVh5BD68DF7bOPIZxqj7/os=
-
-Name: Serialio/ErrorStatusHandler.class
-SHA1-Digest: sLDzVexnW3XuRXl+i5cxBqCVavU=
-
-Name: minimed/ddms/applet/dtw/LogWriter.class
-SHA1-Digest: qR1V++ZE9lEifk9JWRZGfJqOK7A=
-
-Name: minimed/ddms/deviceportreader/RocheMeter$7.class
-SHA1-Digest: L1d9W/26QyTITSHEbY3Kf/BYn+w=
-
-Name: minimed/ddms/deviceportreader/LSFastTake$SnapshotCreator.class
-SHA1-Digest: qF5NrKjA+OFTTQHuyaySTE3CyYU=
-
-Name: minimed/ddms/applet/dtw/wizard/Wizard.class
-SHA1-Digest: rZh7GG+skL6n8HVgu67jUDtdz3k=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/SelectLinkDevice
- Step$1.class
-SHA1-Digest: dCGHuf0BEwDY4PIVhT27nzqEULU=
-
-Name: Serialio/SerInputStream.class
-SHA1-Digest: yyAWng/zncAH9TnATeAySQe36CU=
-
-Name: minimed/ddms/applet/dtw/NetHelper$ObjectExchanger.class
-SHA1-Digest: jAX10gV7Tn3+gYv7CdTaBqGu3e8=
-
-Name: minimed/ddms/applet/dtw/components/GlowBorder.class
-SHA1-Digest: VtXHEaKK7kNecPHcXxVf0Hx4lMs=
-
-Name: minimed/ddms/applet/dtw/CaptureResult.class
-SHA1-Digest: w6Tc9R2kvHgGqzBQjJszevUOHDg=
-
-Name: images/device_LSBasic.jpg
-SHA1-Digest: so7JqN9wdXXwGoI97Apl0jOcpi8=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$SnapshotCreato
- r.class
-SHA1-Digest: XlL9j75carIvWCHvm/XLHafwElQ=
-
-Name: minimed/ddms/applet/dtw/wizard/Wizard$1.class
-SHA1-Digest: aUVXm4x/MU30P22eiapG95yeUyU=
-
-Name: drivers/usb/ComLink2/windrvr6.sys
-SHA1-Digest: /iibZ4kG2s0JFDsAuooEuJ0iyA8=
-
-Name: minimed/ddms/applet/dtw/AppletResources_sv.properties
-SHA1-Digest: aYaJX9ygRkYOeGt6T2bdGtCi7gY=
-
-Name: minimed/ddms/applet/dtw/AppletResources_fi.properties
-SHA1-Digest: jEEqXmFeSfC5Ktk5fdG8G196Nko=
-
-Name: minimed/ddms/deviceportreader/CommunicationsLink.class
-SHA1-Digest: cdb+Ks1iZyKrIshIKUPPZo7GVOE=
-
-Name: images/SN-Screen.jpg
-SHA1-Digest: S3IuiLPnbzfHFynvbBEmtO8nfVA=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/SelectConnection
- TypeStep.class
-SHA1-Digest: sD6hzWmpboUSgjO+mnTvxvldNAM=
-
-Name: images/device_RocheAviva.jpg
-SHA1-Digest: 6/BuNDIWUzUql8aseBGUKeeXYBQ=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$4.class
-SHA1-Digest: YUCoESHZPP8zrI35+/0RVej+0fc=
-
-Name: Serialio/SnoopLoopListener.class
-SHA1-Digest: mWwZPJgpIGJb1HNQiiVhKe7Q7IM=
-
-Name: minimed/ddms/applet/dtw/IOHelper.class
-SHA1-Digest: EvauIn+hiv6cqx9+POdfDcLBvNw=
-
-Name: minimed/ddms/deviceportreader/MedisenseBGKetone$Command.class
-SHA1-Digest: jhajBfBCPrj7ehYY4Biwy/zamGo=
-
-Name: minimed/ddms/deviceportreader/ComLink1.class
-SHA1-Digest: GNJpVJDf+C9QfKHFi3BpeteylYc=
-
-Name: minimed/ddms/applet/dtw/AppletResources_en_US.properties
-SHA1-Digest: yB4AEBG3gaSAHXD9FrLHOAWbT9w=
-
-Name: drivers/usb/bd/bdhidcom.cat
-SHA1-Digest: kns4DwbqF5P2c3WclYpTV2AWiUk=
-
-Name: minimed/ddms/applet/dtw/OperationResult.class
-SHA1-Digest: 5hoiFHNumTV4scM6id1ZEAH+vbQ=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchUltraSmart$1.class
-SHA1-Digest: RRGX35hPRWJh6sD9loo2xAnHqdY=
-
-Name: drivers/usb/ComLink2/wd811.cat
-SHA1-Digest: WJsgZhS9gcWu90Wj7+y5QG6zKzQ=
-
-Name: minimed/ddms/applet/dtw/SaveFailedException.class
-SHA1-Digest: LZNrG8XLDkUyE985OvogCdi0NZQ=
-
-Name: images/readWizFail.gif
-SHA1-Digest: D3xMcnEy5+116s2AbroE4EBD4eY=
-
-Name: minimed/ddms/deviceportreader/MM508Command.class
-SHA1-Digest: Qr1/SGoiW/Tpng7I0pJc8M5hC8c=
-
-Name: minimed/ddms/deviceportreader/Enums$CarbUnits.class
-SHA1-Digest: c9fhuq0/sTWTOXuy7mA1fKLaSp4=
-
-Name: minimed/ddms/applet/dtw/AppletResources_es.properties
-SHA1-Digest: yZtiZ+6bpoBQESppzGAgv4CxFPE=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/USBDriverInstallAuthorizati
- onStep$2.class
-SHA1-Digest: 220k4OpAhu5K2na8Lgcr9maNWnA=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/UnrecoverableErrorStep.clas
- s
-SHA1-Digest: tGrmBfqcOGAFfJk6/cvEQYV14vo=
-
-Name: minimed/ddms/deviceportreader/BayerDEX.class
-SHA1-Digest: JnkszAh2p2jmYUGkwyjsU41+3ck=
-
-Name: minimed/ddms/deviceportreader/TraceHistorySet.class
-SHA1-Digest: pObP8lO81KHuR8kE2NKCltAj2sI=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$5.class
-SHA1-Digest: FWh36QH6WWUDcrgOkJviM/xRLdY=
-
-Name: minimed/ddms/deviceportreader/DeviceCommand.class
-SHA1-Digest: uaItg5PPSgVbg812Yb4r/frjTgM=
-
-Name: mdt/common/device/driver/minimed/JungoUSBPort.class
-SHA1-Digest: iwpjlNABB0w8G7HKi7f8jBtRrCg=
-
-Name: minimed/ddms/applet/dtw/ExeHelper$StreamGobbler.class
-SHA1-Digest: eQR4CxlJQbzxCW5xS9j8oEymf5A=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectSerialPortStep.class
-SHA1-Digest: KrEEsluYk5YKZhdkhrrxqwlWoSs=
-
-Name: drivers/usb/ComLink2/ReInstall_MDTCLUSB.cmd
-SHA1-Digest: MxEdOu6qUnRKZTTxxOUbHHBuEIw=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mm508/PumpOperationStep.cla
- ss
-SHA1-Digest: 3VD0uibvCZHxCjoa62Bfcho2BTk=
-
-Name: minimed/ddms/deviceportreader/MMMeter$1.class
-SHA1-Digest: MG8cxFdw4s1UeCmJZBNJJzkYulU=
-
-Name: images/ParadigmLinkOff.png
-SHA1-Digest: jjig4VEjFaEGLFb98Ub9W+RXNj0=
-
-Name: minimed/ddms/deviceportreader/MedisenseBGKetone$Reader.class
-SHA1-Digest: i5Kpw5zfR8p9qqXYnNrsAgMtKZw=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mmmeter/USBDriverInstallAut
- horizationStep.class
-SHA1-Digest: /U/4DWTQaGzkaVvxmup6jka7Q8o=
-
-Name: Serialio/SnoopLoop.class
-SHA1-Digest: XXRGGkz3NhTxP03KO1m+VWi1fEo=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$Command.class
-SHA1-Digest: RuZJMu4VVndIxNcP+BsNVkmx/CY=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpOperationFai
- lStep.class
-SHA1-Digest: LCBOq5xJx0krigdyImRNr1sc4KE=
-
-Name: minimed/ddms/deviceportreader/MedisenseBGKetone$1.class
-SHA1-Digest: VWJAFWjNp9lmxp600fqKjiS5q50=
+Implementation-Version: 7333-5.8.003
+Built-On: February 28 2012
+Built-By: carelink
+Sealed: true
+Created-By: yGuard Bytecode Obfuscator 2.3.0.1
+Specification-Version: 7333-5.8.003
+
+Name: minimed/ddms/A/N$4.class
+SHA-1-Digest: 7IeVki3alAr5+cX7m+B9tL1bFPM=
+SHA1-Digest: 7IeVki3alAr5+cX7m+B9tL1bFPM=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: BzdmV4SggUmV8W7Hm2GmRQ==
+
+Name: minimed/ddms/A/K.class
+SHA-1-Digest: MaizdZZ0fKITYFWv6JkRt8FmAy8=
+SHA1-Digest: MaizdZZ0fKITYFWv6JkRt8FmAy8=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: nLEpLZ+vsU7iNG4xRITKuA==
+
+Name: minimed/ddms/A/GA$_A.class
+SHA-1-Digest: cxjuepXMNZFWzPFfaDP7VsBQaYA=
+SHA1-Digest: cxjuepXMNZFWzPFfaDP7VsBQaYA=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 6qYtWuRn8WZLWW4nqfETVQ==
 
 Name: Serialio/SnoopInputStream.class
-SHA1-Digest: vr+5XopbEpPscJPXKUQ6RzgEuEo=
-
-Name: minimed/ddms/deviceportreader/Snapshot$Element.class
-SHA1-Digest: qDUu2AX5bCR5NTCcaHhO8lKiFGg=
-
-Name: images/device_BayerBreeze.gif
-SHA1-Digest: y7/BwQhTRGqG50tabIMrglL3zHA=
-
-Name: minimed/ddms/deviceportreader/MMX22$SnapshotCreator.class
-SHA1-Digest: mYlRG4scHtVv+K1cMxf5DugyGRY=
+SHA-1-Digest: Qpt/u6j3FRmoVuHNEV6tPaO33yc=
+SHA1-Digest: Qpt/u6j3FRmoVuHNEV6tPaO33yc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: bFOP30AZJYzYtkroept1KQ==
 
 Name: images/SerialNumber.gif
+SHA-Digest: 4hRDHpBBqazl414abyBMKLsNEfQ=
 SHA1-Digest: 4hRDHpBBqazl414abyBMKLsNEfQ=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: lqCLyvQ+6O0XiCsVF9m8rg==
 
-Name: minimed/ddms/deviceportreader/RocheActiveAndCompact.class
-SHA1-Digest: uw3v+eh3R0W3X/7EPXuWPXQCdoc=
+Name: minimed/ddms/applet/dtw/AppletResources_nl.properties
+SHA-Digest: 0KQPLvQ8hCvKzs2kojx4duu5R2Y=
+SHA1-Digest: 0KQPLvQ8hCvKzs2kojx4duu5R2Y=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: El8oEoSPeRGkSNYNCgXv+g==
 
-Name: minimed/ddms/deviceportreader/MM508Command$Command.class
-SHA1-Digest: 27IT3KS+vFwVwR2krF2cARmCWMc=
+Name: minimed/ddms/A/J.class
+SHA-1-Digest: huJixZWZK5m7d8zPxcSZ4S7fpfA=
+SHA1-Digest: huJixZWZK5m7d8zPxcSZ4S7fpfA=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 6hHtYhFC/elg5A/a+pSpMg==
 
-Name: Serialio/ByteTokenizer.class
-SHA1-Digest: v66afH6sT99KuMXsFclBOwSA7l4=
+Name: minimed/ddms/applet/dtw/wizard/ControlCodeHotCorner.class
+SHA-1-Digest: qkMgu/2xzm2dlMDth589bFpL1DE=
+SHA1-Digest: qkMgu/2xzm2dlMDth589bFpL1DE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: mUMPC6BnWp9HmTemAPpDOQ==
 
-Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/IdentifyPumpStep
- .class
-SHA1-Digest: H0GKVc64UxMvAYd8Np64OOAw9tc=
+Name: minimed/ddms/A/p$_C.class
+SHA-1-Digest: ISsTyVAa66ztTGRgIDGGBeE/xmo=
+SHA1-Digest: ISsTyVAa66ztTGRgIDGGBeE/xmo=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: OillxBjDPr2hB1bDu80mXQ==
 
-Name: minimed/ddms/applet/dtw/wizard/steps/mmmeter/SelectConnectionTyp
- eStep.class
-SHA1-Digest: nUNbEE7HVgb3QjK26yop4V/o0WA=
+Name: minimed/ddms/A/h.class
+SHA-1-Digest: ur1gT8FJffc8KoGlf7HEsBfyFvs=
+SHA1-Digest: ur1gT8FJffc8KoGlf7HEsBfyFvs=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 94LjwLTZGR5Sm+m5mskUVw==
 
-Name: Serialio/LookForListener.class
-SHA1-Digest: ZFFMVyz68d6qGzm23+EAw84kfr4=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectConnectionTypeStep$1.
- class
-SHA1-Digest: Q67jsJZCvtqeYzrdYLz1vSj9Y04=
-
-Name: minimed/ddms/deviceportreader/USBPnPNotifier.class
-SHA1-Digest: aq0vtOzNxSDTlBBq12GcEGslgMg=
-
-Name: Serialio/NativeHandleMutex.class
-SHA1-Digest: /46Yt1GVhaC7ug2cT2L6AAjFAnk=
-
-Name: minimed/ddms/deviceportreader/MMX22.class
-SHA1-Digest: HRvb7D9K9MkleE/EybjAGBuFA7w=
-
-Name: drivers/usb/ComLink2/mdtclusb.cat
-SHA1-Digest: nXWLX1zu0IC+imCIJHV7wa9I4yA=
-
-Name: minimed/ddms/applet/dtw/wizard/WizardStepProvider.class
-SHA1-Digest: L1ZLsaDYWbiwgkfS+pw9f1+1n4c=
-
-Name: images/checkMark.gif
-SHA1-Digest: obiwhhAuz4lAY8sreEHABzUALOg=
-
-Name: minimed/ddms/deviceportreader/CommunicationsLinkDefault.class
-SHA1-Digest: gLzdRWlzoYXataieL5BvSDs/Idg=
-
-Name: minimed/ddms/deviceportreader/MM511$Command.class
-SHA1-Digest: Cu79q12lQP/2KR+pMfj+ivVrYEo=
-
-Name: minimed/ddms/applet/dtw/AppletResources_fr.properties
-SHA1-Digest: 9m5XgNw0yLF96/JpWFqdmsntFxw=
-
-Name: minimed/ddms/deviceportreader/LSMeter$AbstractCommand.class
-SHA1-Digest: B6eBlBhwCpVMZF5v2xawtVCrDck=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectConnectionTypeStep.cl
- ass
-SHA1-Digest: lqSQhuiLJueThzT7GecxMzfBZ5M=
-
-Name: images/device_RocheActive.jpg
-SHA1-Digest: 0D/UZutZlbTsGvgMY3UyC0az34Y=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/rochemeter/VerifyConnection
- sStep.class
-SHA1-Digest: TD3lNV9IABcfoSyDIHagmo8Ub+8=
-
-Name: minimed/ddms/deviceportreader/MMX22$CommandReadSensorHistoryData
- .class
-SHA1-Digest: nkE/M1LVIVe6tuO7jBi2Ldc+qUg=
-
-Name: minimed/ddms/deviceportreader/RocheMeter$2.class
-SHA1-Digest: G7a01l8kxo8mpFedhGP0lp2hhUw=
-
-Name: minimed/ddms/deviceportreader/MM508c.class
-SHA1-Digest: xvwQZYzK78SdzxEqotYo8vvAxjg=
-
-Name: drivers/usb/bd/BDHidComInst.exe
-SHA1-Digest: 9umSJVTAxX3C2nerplP1g/eqN+s=
-
-Name: drivers/usb/ComLink2/MDTCLUSB.inf
-SHA1-Digest: 0HUf1bwXal/48uLH1GfqhiR0uAg=
-
-Name: minimed/ddms/deviceportreader/MMX23$SnapshotCreator.class
-SHA1-Digest: Fjbdd51/BAzRf4we5RJBkE9SdPs=
-
-Name: minimed/ddms/deviceportreader/MMMeter$Reader.class
-SHA1-Digest: zXp49b6claH4A58qQ7Xhp1NIZb4=
-
-Name: minimed/ddms/applet/dtw/AppletResources.properties
-SHA1-Digest: n6iLpp9BdE6A0tlEMP1kTzo0PjM=
-
-Name: minimed/ddms/deviceportreader/SerialPort.class
-SHA1-Digest: S8Ciyi1xwtLBKiLrbBzzzWv9PxY=
-
-Name: minimed/ddms/applet/dtw/AppletResources_de.properties
-SHA1-Digest: A2igFgAWkht9xhf1M75a3taOyJk=
-
-Name: minimed/ddms/applet/dtw/wizard/WizardStep$1.class
-SHA1-Digest: /2Qp+AtkbO2r5zV2n8qb6ASIHCw=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$6.class
-SHA1-Digest: AU92GOjcj3ut6wWGaaGzCDu3Y0A=
-
-Name: drivers/usb/bd/CCPORT.SYS
-SHA1-Digest: QgUnvfXhG2NrNwnQt1mExGU753s=
-
-Name: minimed/ddms/applet/dtw/UploadFailedException.class
-SHA1-Digest: D825x8TOuHXP7KNdEzO9Nk/PWn8=
-
-Name: minimed/ddms/deviceportreader/RocheMeter$6.class
-SHA1-Digest: XrSK3SH5inGKS4JqcBiH8SNOQcA=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchUltraSmart.class
-SHA1-Digest: vBE9t+BENKZOFC5fxnLbU5uDoPI=
-
-Name: minimed/ddms/deviceportreader/Enums$ReservoirWarningUnits.class
-SHA1-Digest: /FYw6LL3MKeQnRi0FQJ1YDwNDLY=
-
-Name: minimed/ddms/deviceportreader/ComLink1$1.class
-SHA1-Digest: vC9fKp55v19zuVsmPXvLkAhgs1U=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchUltraSmart$HRProcedureCo
- mmand.class
-SHA1-Digest: mimAB+PU3KR78o5XwuWuO4WUv74=
-
-Name: minimed/ddms/applet/dtw/components/DefaultRadioButtonGroup.class
-SHA1-Digest: aMMjcboOEIkh/Nji7wfVJ3wMZhA=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBayerStep$1.clas
- s
-SHA1-Digest: HoUPLACVeDHoBxKHfVVb09mn0+U=
-
-Name: minimed/ddms/applet/dtw/UploadCancelledException.class
-SHA1-Digest: NF7A5dNFq53RZDCl+KPRL/AsfQE=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/InitializationStep.class
-SHA1-Digest: fviaAnrQRtD9e9v/jX7JDuAtcTc=
+Name: minimed/ddms/applet/dtw/wizard/ControlCodeHotCorner$7.class
+SHA-1-Digest: wpZ4TbENvFbJeelQRsOpqmYMJ9A=
+SHA1-Digest: wpZ4TbENvFbJeelQRsOpqmYMJ9A=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: HzAyY385so1ig2D+2OSRAQ==
 
 Name: minimed/ddms/applet/dtw/wizard/steps/bayermeter/VerifyConnection
  sStep.class
-SHA1-Digest: M7DfhtO18+6a6nvW/oJWNRpGnbU=
+SHA-1-Digest: qMjw1PbuNQchUHuYAgMPNQT7UWs=
+SHA1-Digest: qMjw1PbuNQchUHuYAgMPNQT7UWs=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: /pJsowjHJUMGADd9FMBZAg==
 
-Name: minimed/ddms/deviceportreader/LSMeter$Reader.class
-SHA1-Digest: 4faS/xmJIBJVAvKHQW7PrJ9IMAg=
+Name: minimed/ddms/applet/dtw/NetHelper$3.class
+SHA-1-Digest: hFD4JrUgm89AOoZQCTjz3fhe9c8=
+SHA1-Digest: hFD4JrUgm89AOoZQCTjz3fhe9c8=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Rtlyz6jMFRpfcJdZ3uVYRQ==
 
-Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep.class
-SHA1-Digest: g01pPf/agyAEsA+RKXh/3ALZ3qk=
+Name: minimed/ddms/A/EA$_A.class
+SHA-1-Digest: 58rKoULTosTZghRDo3iVlPbRcao=
+SHA1-Digest: 58rKoULTosTZghRDo3iVlPbRcao=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: oby5OoxeB2O4j7OaP3E1Qg==
 
-Name: images/device_LSSureStep.jpg
-SHA1-Digest: wzSfBT3vLg88CXqUEyuD1j4+i8A=
+Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataFailStep.class
+SHA-1-Digest: No4kBWemh+7+CN2MvWfXOJrraoU=
+SHA1-Digest: No4kBWemh+7+CN2MvWfXOJrraoU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: sZvBjvRnjgn0HMJaU918Gw==
 
-Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$1.class
-SHA1-Digest: MxAe41UxMgkAH0dGf29No2ystKw=
+Name: images/device_CLUSBDisconnected.jpg
+SHA-Digest: Lozsqy49ICHUN20JNYjsdFu43MU=
+SHA1-Digest: Lozsqy49ICHUN20JNYjsdFu43MU=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: WDGUtYqV65m2kJH80ZcHKA==
 
-Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/SelectLinkDevice
- Step.class
-SHA1-Digest: ndhSAgsrkR/wvqlZeF0L8FbcfbY=
+Name: minimed/ddms/applet/dtw/wizard/steps/UnrecoverableErrorStep.clas
+ s
+SHA-1-Digest: 8aUbLJqJ7cPV98jE8uys08su8Bg=
+SHA1-Digest: 8aUbLJqJ7cPV98jE8uys08su8Bg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: IweTd6Yjznq93fk3nNp3Fw==
 
-Name: minimed/ddms/deviceportreader/TraceHistorySet$TraceHistory.class
-SHA1-Digest: FauqsJ9FlQf/DvEe5mk86o3k0Do=
+Name: images/ParadigmLink.png
+SHA-Digest: jjig4VEjFaEGLFb98Ub9W+RXNj0=
+SHA1-Digest: jjig4VEjFaEGLFb98Ub9W+RXNj0=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: GkKkZ8iH5EgQAOwfPHCD0Q==
 
-Name: minimed/ddms/applet/dtw/wizard/WizardStep.class
-SHA1-Digest: B/pnh/vHRdBTCI+9SLW6vY/2nCQ=
+Name: minimed/ddms/A/_.class
+SHA-1-Digest: SMwnxryiwz+ecJfG4k4KlhITucY=
+SHA1-Digest: SMwnxryiwz+ecJfG4k4KlhITucY=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: RDgrXGGDuxxIJUe20pYOMA==
 
-Name: minimed/ddms/applet/dtw/wizard/steps/mm508/PumpOperationFailStep
- .class
-SHA1-Digest: PJOuj4v40+tKUFhGMzSIVcewBIE=
+Name: minimed/ddms/A/o.class
+SHA-1-Digest: oyVy9vZdCVnpR36RpcWl6c9YQic=
+SHA1-Digest: oyVy9vZdCVnpR36RpcWl6c9YQic=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: PsF2KcXsGPSynYBzicdB/A==
 
-Name: minimed/ddms/applet/dtw/wizard/steps/MeterOperationStep.class
-SHA1-Digest: Y6RgmR52tELBH3ghH4ZLpIx3fAk=
+Name: minimed/ddms/A/GA.class
+SHA-1-Digest: PICVQFiq0XnxjFz3Z7lkH2SeS6M=
+SHA1-Digest: PICVQFiq0XnxjFz3Z7lkH2SeS6M=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: egTij7nMurrWJ5QacC2CFA==
 
-Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$4.class
-SHA1-Digest: 0uAQuo3FKSNaZFdJNzbwsQRDQtI=
+Name: minimed/ddms/applet/dtw/NetHelper$5$1.class
+SHA-1-Digest: 4Ht4VFMbR1ZHoLcsd6vXlp4dadA=
+SHA1-Digest: 4Ht4VFMbR1ZHoLcsd6vXlp4dadA=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 1bOFd0+CtItmXkx9g9fCDA==
 
-Name: minimed/ddms/applet/dtw/NetHelper.class
-SHA1-Digest: Q/f/9slhYSJI4hDTAvA4+TFKqSE=
+Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$2.class
+SHA-1-Digest: SGORTWCqcEpFJLzSGyoIZPZKjMg=
+SHA1-Digest: SGORTWCqcEpFJLzSGyoIZPZKjMg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: VlmnkZOB0jKm1JkDmSGkcw==
 
-Name: minimed/ddms/deviceportreader/MM508.class
-SHA1-Digest: GdMsh7i2O+ZhFNzSREcfiwkheJA=
+Name: minimed/ddms/A/k$_A.class
+SHA-1-Digest: +RelHGfKVAtiRC9rqtFaMpOgdmc=
+SHA1-Digest: +RelHGfKVAtiRC9rqtFaMpOgdmc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: SJ67sH7tJPvbRo7Ro3EbEw==
 
-Name: mdt/common/device/driver/minimed/IDevicePnPListener.class
-SHA1-Digest: MXT8lx35rtpt6A6oUFsqA5pPvac=
-
-Name: images/device_RocheCompact.jpg
-SHA1-Digest: cP3NKQ2qNa9vLOWghjCMva20NMk=
-
-Name: minimed/ddms/deviceportreader/LSMeter$Command.class
-SHA1-Digest: CfvvyHJrL0WJ0IRrMI/P8UzfOFc=
+Name: minimed/ddms/A/n.class
+SHA-1-Digest: iKZj4FPMk5BNpNu6SA95odvqdfc=
+SHA1-Digest: iKZj4FPMk5BNpNu6SA95odvqdfc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Uo+UjQBp0Tze8OeSkWh1oA==
 
 Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpOperationSte
  p$LastHistoryPageReadCustomizer.class
-SHA1-Digest: 8kMZs1FEaYlcV3ykIMdeNLnocgM=
+SHA-1-Digest: vFAAw4Hdaz2CPoWLn0Em8v0/hRU=
+SHA1-Digest: vFAAw4Hdaz2CPoWLn0Em8v0/hRU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: kE0ppETtBcymWbPqQuGI3w==
 
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBDStep$1.class
-SHA1-Digest: HRpG5QKZKgfQQFoSwgLegl/QVlI=
+Name: drivers/usb/ComLink2/Win64/difxapi.dll
+SHA-Digest: dK1d0SMDfPTUNMUHPL4EwLy6Tnk=
+SHA1-Digest: dK1d0SMDfPTUNMUHPL4EwLy6Tnk=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: 9VWMZ6OttmLUPUChy95BYA==
 
-Name: minimed/ddms/deviceportreader/MMX15$SnapshotCreator.class
-SHA1-Digest: wK43/IWl5spZlV2S0HgyFVvvAsA=
+Name: Serialio/PortDriverInfo.class
+SHA-1-Digest: NETKU09VvXYG07f3OXL+avmqMKc=
+SHA1-Digest: NETKU09VvXYG07f3OXL+avmqMKc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 9hsg7LQeQxzRwgt5DClzhA==
 
-Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/CheckPumpStatusS
- tep.class
-SHA1-Digest: Uu5iUTlo99hTaW9nE1qjE3+szJU=
-
-Name: images/device_MM508.jpg
-SHA1-Digest: Wggy3jxrYBcXr3gUkL+L3nruVPw=
-
-Name: minimed/ddms/deviceportreader/Enums$1.class
-SHA1-Digest: JrdeB/fHrUWjpZaJenfsjbwTmBM=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectDeviceStep.class
-SHA1-Digest: BZwQcjIsW1rBiFbjDUijJzw9hNs=
-
-Name: minimed/ddms/applet/dtw/DeviceID.class
-SHA1-Digest: t1t5rIpTgPjI65hcjiRcbAliU04=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mmmeter/MeterSelectSerialPo
- rtStep.class
-SHA1-Digest: M70jmePsiOOg3qDUOsFqKM0lto8=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$5.class
-SHA1-Digest: ViQ+XtnSxfgD233Ru3UC8hhZDeI=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterRocheStep.class
-SHA1-Digest: ohLMsqRLfPcZVfq9t4wO2ghPcHI=
-
-Name: minimed/ddms/deviceportreader/MMPump$Command.class
-SHA1-Digest: GmTLppViIfqGT2qOZ7dNQMo8Qic=
-
-Name: minimed/ddms/deviceportreader/Enums$InsulinActionType.class
-SHA1-Digest: chnEHUhkT8Yf6Xfm3JjBv0zZV1c=
-
-Name: drivers/usb/bd/WDMMDMLD.VXD
-SHA1-Digest: jh7+GZUzKiSAC8hA+YocQx6fUmU=
-
-Name: minimed/ddms/deviceportreader/MM511$CommandHistoryData.class
-SHA1-Digest: oM1gt45Llmu3BGP+b8J7wgpUlhk=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mm508/PumpSelectSerialPortS
- tep.class
-SHA1-Digest: 22IxoZAmsZnH/tZDT4w1aV3W9Lo=
-
-Name: minimed/ddms/deviceportreader/DevicePortReaderFactory.class
-SHA1-Digest: SefPaAxc5z7jKfjfN6GioNNuvGY=
-
-Name: minimed/ddms/deviceportreader/MMMeter.class
-SHA1-Digest: mp3WgqlSmlvZ5C5KILQeT7n71tk=
-
-Name: minimed/ddms/deviceportreader/BayerMeter$Command.class
-SHA1-Digest: ppcI0Sv6iTP6DGBGI1beEN53bBg=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$1.class
-SHA1-Digest: vZN2uc5uSihbA6V8BCg7pbII9YI=
-
-Name: minimed/util/ContractException.class
-SHA1-Digest: 7fsI+8SAQMTtVHFk3BBle3Ts04M=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectDeviceStep$1.class
-SHA1-Digest: 7qMHe6ohNCMANC1EgrQwTru8lk0=
-
-Name: minimed/ddms/applet/dtw/NetHelper$1.class
-SHA1-Digest: mNbiLGCEhm06sFxd8btPbpAyxOo=
-
-Name: minimed/ddms/deviceportreader/DevicePortReader.class
-SHA1-Digest: 0VVV700Qoji5gy/r4wMmcJC4DnU=
-
-Name: Serialio/SnoopInputStream$Snoop.class
-SHA1-Digest: Dsuy94mjdPos9GBlvc8PXPNOwQ8=
-
-Name: minimed/ddms/deviceportreader/CommunicationsLinkRS232.class
-SHA1-Digest: tcbfhNykN9PCc9d8dXvTCvA+COI=
-
-Name: minimed/ddms/deviceportreader/Snapshot$SnapshotOutputStream.clas
- s
-SHA1-Digest: Cn33feIgMoBKhsf235uFquMefTw=
-
-Name: minimed/ddms/deviceportreader/RocheMeter$1.class
-SHA1-Digest: Xx+2oA9NxQHpXms7xU0oFFGp2C4=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$3.class
-SHA1-Digest: 4FkKmmIMOh3GrK82Y70KlU2Wu88=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/InitializationFailStep.clas
- s
-SHA1-Digest: dazu6WH0vj4Ee9AXHpy9BaLScXc=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpOperationSte
- p$2.class
-SHA1-Digest: D/omBJsx2A2ky0PhVg4lXxLJU6s=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mm508/VerifyConnectionsStep
- .class
-SHA1-Digest: 2VMaMw9z1lgWIxq0G7X0AqHKeLg=
-
-Name: images/device_BayerEliteXL.jpg
-SHA1-Digest: YtPYjdQ6+oyypfm+o4oALH0F/XU=
-
-Name: drivers/usb/ComLink2/Install_MDTCLUSB.cmd
-SHA1-Digest: z1VjaieLjNmHL1kuGd26q0HnDvE=
-
-Name: minimed/ddms/applet/dtw/wizard/Wizard$USBDriverInstallNeededDeci
- der.class
-SHA1-Digest: XDx+MQGkSqxGpDPBivQtnnbfw/8=
-
-Name: minimed/ddms/deviceportreader/RocheMeter$ReplyDecoder.class
-SHA1-Digest: o5b7klveGkLHUXxmYjmakJhj0Ow=
-
-Name: images/device_RocheCompactPlus.jpg
-SHA1-Digest: e5BTD2BSAe6SlqZQsEj4OQWaVSs=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchUltra$SnapshotCreator.cl
- ass
-SHA1-Digest: ubX+PzAP3q++tZxzD9SO+IeUwkc=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/USBDriverInstallAuthorizati
- onStep$1.class
-SHA1-Digest: 69a+Fcy6QwPSfNaAEYMLAEbPfc8=
-
-Name: minimed/ddms/applet/dtw/wizard/WizardSelections.class
-SHA1-Digest: RqNP5/WllG+ebDEFJ79mxPYhEow=
-
-Name: minimed/ddms/applet/dtw/MessageListener.class
-SHA1-Digest: h5p9EFLULzBNah3ga2T0uK9ew7M=
-
-Name: minimed/ddms/deviceportreader/CommPort.class
-SHA1-Digest: M0g9ovBXy+kZBwr5lWfUgfVhTL8=
-
-Name: minimed/ddms/applet/dtw/ExeHelper$1.class
-SHA1-Digest: HzBm6P7y5wpHNDg+rnGZbuMndEg=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchUltraSmart$HRCommand.cla
- ss
-SHA1-Digest: 0NzEif+ka9i1wdAwygWGBLe8x6g=
-
-Name: minimed/ddms/applet/dtw/components/NumericTextField$1.class
-SHA1-Digest: +wl2JV+HLQVbl1tw2h6v9eJOG+4=
-
-Name: minimed/ddms/deviceportreader/MMMeter$SnapshotCreator.class
-SHA1-Digest: /mE/XoXjKJVp6p9QuZvmhuqBeCg=
-
-Name: minimed/ddms/applet/dtw/NetHelper$5.class
-SHA1-Digest: 9kxdAaalkrCwz4ho+gUJxRtpeOc=
-
-Name: minimed/ddms/applet/dtw/wizard/Wizard$2.class
-SHA1-Digest: 0IFgQ3h9DE6ONlReQQ4eH6YPkt8=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpOperationSte
- p.class
-SHA1-Digest: g67zF1o+0ixNZJubiW5r/LhUyzE=
-
-Name: minimed/ddms/deviceportreader/RocheMeter$Reader.class
-SHA1-Digest: 2/YZavz1q96h/o0dSKIOJcc2J7s=
-
-Name: minimed/ddms/deviceportreader/MMParadigmLinkMeter.class
-SHA1-Digest: ndIO0HBRTPGpRDDRwNc1+rdvktw=
-
-Name: minimed/ddms/deviceportreader/BayerMeter$CommandGetData.class
-SHA1-Digest: qq59pyesqA8+0Av7BZyXYZ7zF/Q=
-
-Name: Serialio/SerialPort.class
-SHA1-Digest: kLlJrKz7shds8+UPdaXtFUP7meM=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/TransferMeterDataCompleteSt
- ep.class
-SHA1-Digest: Pfi6KigDsc+RNuPzRWlmTjV9Mf8=
-
-Name: minimed/ddms/applet/dtw/PropertyWriter.class
-SHA1-Digest: nPUuYPSou/5fZGXsHemKjBekGyY=
-
-Name: minimed/ddms/deviceportreader/MM511.class
-SHA1-Digest: fddTfn2qfjIe/5B29jnGoPruf58=
-
-Name: minimed/ddms/applet/dtw/PreferencesHelper.class
-SHA1-Digest: bx5LUbouKVvaEJshMueLOWt/Th4=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mm508/CheckPumpStatusStep.c
- lass
-SHA1-Digest: ZkmeIhlXxfDVhhLRTCte6q1aea4=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterLifeScanStep$1.c
- lass
-SHA1-Digest: 4tGI1BZmtdzDEXVmNf1FTyhsFn4=
+Name: minimed/ddms/A/GA$_B.class
+SHA-1-Digest: OyobqTOpe/SvXZPEJ5iV4ORIVt0=
+SHA1-Digest: OyobqTOpe/SvXZPEJ5iV4ORIVt0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: bHnToE71PcNizVs09//RoQ==
 
 Name: images/device_TSFreeStyle.png
+SHA-Digest: a/8NarJ3uMLKkwQo6uxwe9lHrCQ=
 SHA1-Digest: a/8NarJ3uMLKkwQo6uxwe9lHrCQ=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: UZBeSEzmUGOarQMMjBxpqg==
 
-Name: minimed/ddms/applet/dtw/NetHelper$3.class
-SHA1-Digest: a/fLOum/dGsX3zo6RQOsYixtPws=
+Name: images/readWizFail.gif
+SHA-Digest: D3xMcnEy5+116s2AbroE4EBD4eY=
+SHA1-Digest: D3xMcnEy5+116s2AbroE4EBD4eY=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: gZuufhLQ44g7UJ3p/5Rb+w==
 
-Name: minimed/ddms/deviceportreader/RocheMeter$4.class
-SHA1-Digest: gZ/+zUR/xDKnrhEgbRqCDVxXABM=
+Name: drivers/usb/bd/BdHidCom.sys
+SHA-Digest: S1ARn7144//EGzOjdbWuymtr77U=
+SHA1-Digest: S1ARn7144//EGzOjdbWuymtr77U=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: UDAsEd3SIhViaqi16F8I+w==
 
-Name: drivers/usb/ComLink2/windrvr6.inf
-SHA1-Digest: KZkGnFPH6eWYbF9wMi9kPkBvav4=
+Name: minimed/ddms/A/U.class
+SHA-1-Digest: GPjfCjePpFzG2r5LBGBFtF+CL1w=
+SHA1-Digest: GPjfCjePpFzG2r5LBGBFtF+CL1w=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: zCMoB/jcNrWxRcFVsNrmmg==
 
-Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$3.class
-SHA1-Digest: x+pSFIlHHt3xSN+2Rz3MxSTMyME=
+Name: minimed/ddms/A/Z.class
+SHA-1-Digest: VdMSiRnBTmnxcGiuG43Kd5Vm2d4=
+SHA1-Digest: VdMSiRnBTmnxcGiuG43Kd5Vm2d4=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: ALX+yRQJaaltc/pfdDePcg==
 
-Name: minimed/ddms/deviceportreader/ConnectToPumpException.class
-SHA1-Digest: S478fi1Lf95gGb/4x5BOOyqImHs=
+Name: minimed/ddms/A/E$1.class
+SHA-1-Digest: ecbv/NPRh0SwuKXZon04wMCmkfs=
+SHA1-Digest: ecbv/NPRh0SwuKXZon04wMCmkfs=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: EtrlZPTAY5STDILSd1QSTg==
 
-Name: drivers/usb/ComLink2/Autorun.inf
-SHA1-Digest: 15oSQo0LEfilJU9MvzEMCfp8DLU=
+Name: BayerComm/BCIComm.class
+SHA-1-Digest: c3O+Qy0wJNqnxtE7SeIHAGk/xA8=
+SHA1-Digest: c3O+Qy0wJNqnxtE7SeIHAGk/xA8=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: c/J4LSS8pyEjTCd0DnwvCg==
 
-Name: minimed/ddms/deviceportreader/ReplyDecoder.class
-SHA1-Digest: z0lQhbWuUDeourj7+TX4e0Wdr9U=
+Name: minimed/ddms/applet/dtw/wizard/ControlCodeHotCorner$3.class
+SHA-1-Digest: Tx+KEfpKBhP0t9TH/y9tAsz1B7U=
+SHA1-Digest: Tx+KEfpKBhP0t9TH/y9tAsz1B7U=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: kY9bufXv3wNrYrqhQrmZXQ==
 
-Name: minimed/ddms/deviceportreader/TraceHistorySet$1.class
-SHA1-Digest: 84gqobhzMokCeD/pZ4bEpouV1iw=
-
-Name: minimed/ddms/applet/dtw/ExeHelper.class
-SHA1-Digest: VChpTFwBJisw0o6VTBUJAKAF1Sc=
+Name: drivers/usb/ComLink2/Win32/mdtclusb.cat
+SHA-Digest: jNK4TOiG1zBZAECMY8BmLCr4poE=
+SHA1-Digest: jNK4TOiG1zBZAECMY8BmLCr4poE=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: wuRxBVi7+7L1yHsIYpJgZA==
 
 Name: minimed/ddms/applet/dtw/ControlCodeParser.class
-SHA1-Digest: AcVNvzcygNL0p0V9RhOH1RvdDok=
+SHA-1-Digest: aV7xSEiKP+v80GinpEUPYnP3TdU=
+SHA1-Digest: aV7xSEiKP+v80GinpEUPYnP3TdU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: KoUDlLboPWvEjox0N9eXzg==
 
-Name: minimed/ddms/deviceportreader/BayerMeter$Reader.class
-SHA1-Digest: YP98sNnVdwQWFH6bhx+GYI8otDw=
+Name: minimed/ddms/A/N.class
+SHA-1-Digest: Js9BSOWPO0OjioIp2cAiOWDYsOM=
+SHA1-Digest: Js9BSOWPO0OjioIp2cAiOWDYsOM=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: NZIIRqapFTMNnnNcOIjTRw==
 
-Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$DisconnectComm
- and.class
-SHA1-Digest: BYwJNYd5/8YpXlgxhJUNO1CvKFc=
+Name: minimed/ddms/A/b$_B.class
+SHA-1-Digest: JHuqlFu46VonKazcVfn1AfCfCxQ=
+SHA1-Digest: JHuqlFu46VonKazcVfn1AfCfCxQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: ZdmsxbE1mRhFoKbXQRkhEw==
 
-Name: minimed/ddms/deviceportreader/LSMeter$SnapshotCreator.class
-SHA1-Digest: hWA9eRCV0RyJNKkUoIVXVAmps8Y=
+Name: drivers/usb/ComLink2/Win32/wdreg_gui.exe
+SHA-Digest: lpJ0CDuN2DL8kVwk+lSFiEfjDvI=
+SHA1-Digest: lpJ0CDuN2DL8kVwk+lSFiEfjDvI=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: 4LpyTp0MFjYrKRPuYC008Q==
 
-Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataStep$TransferRe
- sult.class
-SHA1-Digest: FsabmmQ5T/F4HnSdhbW1CGow/yY=
+Name: images/device_BayerContourUSB.png
+SHA-Digest: zy/83CrTGpsOp4DmuUgpL25Ywvs=
+SHA1-Digest: zy/83CrTGpsOp4DmuUgpL25Ywvs=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: bK3UXzC9RXZ84I9VKEvMdg==
 
-Name: minimed/ddms/applet/dtw/wizard/steps/othermeter/MeterSelectSeria
- lPortStep.class
-SHA1-Digest: B0L/7LyqF6VFc+UPaaY/6ZbAAPc=
+Name: minimed/util/ContractException.class
+SHA-1-Digest: Ax8AhetRQb9xALtEn7HAzmljBfI=
+SHA1-Digest: Ax8AhetRQb9xALtEn7HAzmljBfI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: TjSzgb1KnQzzi0dpWiLfzA==
 
-Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpSelectSerial
- PortStep.class
-SHA1-Digest: aZOWnftd8XNIPhHGXiBtmW7tKCY=
+Name: minimed/ddms/applet/dtw/wizard/WizardStep.class
+SHA-1-Digest: i8HyEt3LBVKFsSPv5ZQR9wUvCbU=
+SHA1-Digest: i8HyEt3LBVKFsSPv5ZQR9wUvCbU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: AEBzaI5IKO6U4aDOsgovlA==
+
+Name: minimed/ddms/applet/dtw/NetHelper.class
+SHA-1-Digest: F5uNlvdSTIT9caVmsim+FJdG34E=
+SHA1-Digest: F5uNlvdSTIT9caVmsim+FJdG34E=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: aVEPT9gUuQmB/V9ZTJGDxQ==
+
+Name: minimed/ddms/A/f.class
+SHA-1-Digest: zwu64vgNiBqRXFtmWwPnyeKOVY0=
+SHA1-Digest: zwu64vgNiBqRXFtmWwPnyeKOVY0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: zSgXEqpAKAfrYSEyZuBuFQ==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DriverInstallAuthorizationS
+ tep$2.class
+SHA-1-Digest: IRzOvEQTHAfY/3tLLgs1Dl6tB1s=
+SHA1-Digest: IRzOvEQTHAfY/3tLLgs1Dl6tB1s=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 1NxuVJnky2RGJFzOH5xf1Q==
+
+Name: minimed/ddms/A/m.class
+SHA-1-Digest: FJJMBpiotAINwNGnAMQNubKEN4I=
+SHA1-Digest: FJJMBpiotAINwNGnAMQNubKEN4I=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: WMSr7Xa0SbILuk14LpedpA==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBrandStep.class
+SHA-1-Digest: W1sICMD5L74voEvDJ8zPaqQGqXM=
+SHA1-Digest: W1sICMD5L74voEvDJ8zPaqQGqXM=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: AO/z1Z7zM9J2f8cQOQJMHg==
+
+Name: minimed/ddms/applet/dtw/NetHelper$4.class
+SHA-1-Digest: W3/9s2DXS2NV9kWXoK9goJjECWw=
+SHA1-Digest: W3/9s2DXS2NV9kWXoK9goJjECWw=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: bbjm2QYaJ4RTaepbuOIgHA==
+
+Name: minimed/ddms/A/Q$_C.class
+SHA-1-Digest: jOIoRpQ3NA7Tz40ADz86iy1IwMg=
+SHA1-Digest: jOIoRpQ3NA7Tz40ADz86iy1IwMg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: nY2IIHJzm5W7Cqyd3LtKtw==
+
+Name: Serialio/NativeHandleMutex.class
+SHA-1-Digest: d1G1PQzcguLQdR8pFvv+3dbC95I=
+SHA1-Digest: d1G1PQzcguLQdR8pFvv+3dbC95I=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: +O3Qp3ILqB6dcC9zAwLkDA==
+
+Name: mdt/common/device/driver/minimed/BayerUSB.class
+SHA-1-Digest: XRTzOWjYEs0mjd11OdVkOthrIZk=
+SHA1-Digest: XRTzOWjYEs0mjd11OdVkOthrIZk=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 1BvDt3u2eRzbe8NHI7zvgA==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataStep$1.class
+SHA-1-Digest: wQnQ+cU/9fLjyyRcT4v4BjdwN3Y=
+SHA1-Digest: wQnQ+cU/9fLjyyRcT4v4BjdwN3Y=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: EkG7XjVFLf8UAPUugYLOzA==
+
+Name: minimed/ddms/applet/dtw/wizard/WizardStepProvider.class
+SHA-1-Digest: FvdyTDRn+ujKaGRDLBdsolzfotA=
+SHA1-Digest: FvdyTDRn+ujKaGRDLBdsolzfotA=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: sRR+QrxcJnBOdo5QfEskFw==
+
+Name: minimed/ddms/A/h$6.class
+SHA-1-Digest: 6Nk1XUZyyxQ9Y1G+NZkopCLiGQM=
+SHA1-Digest: 6Nk1XUZyyxQ9Y1G+NZkopCLiGQM=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: pg/lHzRDadQAs/R6azS8FA==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmmeter/SelectConnectionTyp
+ eStep.class
+SHA-1-Digest: GrLfru63GSi1aTY9Iiu45MejyAo=
+SHA1-Digest: GrLfru63GSi1aTY9Iiu45MejyAo=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Epvc4t+1RZ+xLeEhn0X/KA==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/othermeter/VerifyConnection
+ sStep.class
+SHA-1-Digest: sohE9+tevri+yLFhMt2QD4+vBkY=
+SHA1-Digest: sohE9+tevri+yLFhMt2QD4+vBkY=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: XPwAcT/K6IBwgISLwIRnMg==
+
+Name: minimed/ddms/applet/dtw/AppletResources_it.properties
+SHA-Digest: E3KffP07YFxLBEVMjWdfYCEAoCE=
+SHA1-Digest: E3KffP07YFxLBEVMjWdfYCEAoCE=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: I8pS315KmnpLXBtorpVBgw==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$2$1.cla
+ ss
+SHA-1-Digest: 35ie0FhUsZ4ju1GbPqUdSyCtWjY=
+SHA1-Digest: 35ie0FhUsZ4ju1GbPqUdSyCtWjY=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: nr6FVYps+551XvVTJdBDoA==
+
+Name: images/ParadigmLinkOff.png
+SHA-Digest: jjig4VEjFaEGLFb98Ub9W+RXNj0=
+SHA1-Digest: jjig4VEjFaEGLFb98Ub9W+RXNj0=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: GkKkZ8iH5EgQAOwfPHCD0Q==
+
+Name: minimed/ddms/A/E$_B.class
+SHA-1-Digest: Lu54t5o+Zxt4o9Qb9wTAVa9X+m8=
+SHA1-Digest: Lu54t5o+Zxt4o9Qb9wTAVa9X+m8=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Ltu+Y/0KFxSY6Smjlouxcw==
+
+Name: minimed/ddms/A/d.class
+SHA-1-Digest: wPpd8gdUOuOuFNTC7suygNjkW+0=
+SHA1-Digest: wPpd8gdUOuOuFNTC7suygNjkW+0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: bsmnioSQBBBVu1sJjmiXeA==
+
+Name: images/warningicon.png
+SHA-Digest: XYKUksv0rDaS54CZUp/yamSc7N0=
+SHA1-Digest: XYKUksv0rDaS54CZUp/yamSc7N0=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: C7wBy5R8N+nRntTT9UkheA==
+
+Name: drivers/usb/ComLink2/Win64/cl2_jni_wrapper.dll
+SHA-Digest: 3OF6PjRcGKVNiOPL354soj46vy4=
+SHA1-Digest: 3OF6PjRcGKVNiOPL354soj46vy4=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: v26o5Tq8/vigr+C41bXpqg==
+
+Name: minimed/util/BASE64.class
+SHA-1-Digest: UVSdblrClbXz5tW8chJOXsYQhFc=
+SHA1-Digest: UVSdblrClbXz5tW8chJOXsYQhFc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: oK3hP5GpKO4MegbaRRqCPA==
+
+Name: BayerComm/BCIHandle.class
+SHA-1-Digest: Cf/41K3XORx8i/oaYa9SsPwXPuo=
+SHA1-Digest: Cf/41K3XORx8i/oaYa9SsPwXPuo=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: oD4J/i8pqW1zINxfNJKo0Q==
+
+Name: minimed/ddms/A/h$1.class
+SHA-1-Digest: fmumgT/B8cY/CceIgFv2hTtgx9c=
+SHA1-Digest: fmumgT/B8cY/CceIgFv2hTtgx9c=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: N21DhkiVmuUGHexVblzFaw==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/TransferPumpDataCompleteSte
+ p.class
+SHA-1-Digest: dRKVR15DXfCRqS3oQrGqfELuhYM=
+SHA1-Digest: dRKVR15DXfCRqS3oQrGqfELuhYM=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Baf6LBWg4dHXDvfmEnx0zQ==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectDeviceStep.class
+SHA-1-Digest: 9Plok9bD3Dnua1aDBqlXPGvyp18=
+SHA1-Digest: 9Plok9bD3Dnua1aDBqlXPGvyp18=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: CKPyRPGJ6xXukwIreLC5PA==
+
+Name: Serialio/tool/FormatData.class
+SHA-1-Digest: yNhx2yM09wpWHdLSXM/2jB+t7js=
+SHA1-Digest: yNhx2yM09wpWHdLSXM/2jB+t7js=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: jtLivjuHnGpbpmQ168Jjfw==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/ComLinkUSBDriver
+ PostInstallStep.class
+SHA-1-Digest: OTFQfL9nnLkM14pdiHrXaCclM5E=
+SHA1-Digest: OTFQfL9nnLkM14pdiHrXaCclM5E=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: /NewOtT4igrmYTWUrwaRdQ==
+
+Name: drivers/serial/ddmsDTWSerialPort-64.jnilib
+SHA-Digest: Nfz4x1k1/lrLXRAahn2GMhag9xg=
+SHA1-Digest: Nfz4x1k1/lrLXRAahn2GMhag9xg=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: 13vQqrHfbq+OOb1aU2Dq6g==
+
+Name: drivers/usb/ComLink2/Win32/wdapi1010.dll
+SHA-Digest: FvgS7a/KR2KN067iDjfy9qduf/c=
+SHA1-Digest: FvgS7a/KR2KN067iDjfy9qduf/c=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: VGvkeiykUDImE24KvMEogg==
+
+Name: minimed/ddms/applet/dtw/AppletResources_fr.properties
+SHA-Digest: r9oY1NBHrbkTA61lRwlWhfcNMDE=
+SHA1-Digest: r9oY1NBHrbkTA61lRwlWhfcNMDE=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: GY4VFq6djXPSAknzE8zgbg==
+
+Name: drivers/usb/ComLink2/Win64/wdreg_gui.exe
+SHA-Digest: 2eQFUoRVNFOrYWqfaWKDU+axi6Q=
+SHA1-Digest: 2eQFUoRVNFOrYWqfaWKDU+axi6Q=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: EwbxxGqgZ/u9mR6EgtAB7Q==
+
+Name: minimed/ddms/A/R.class
+SHA-1-Digest: BbhhbcjrE0kIK3iPjFrdf1b5n6A=
+SHA1-Digest: BbhhbcjrE0kIK3iPjFrdf1b5n6A=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Oqu9nW8wElc0qp13YapAjQ==
+
+Name: minimed/ddms/A/N$_D.class
+SHA-1-Digest: anvDsxB/peMz/BcyZR5vFj/SiUs=
+SHA1-Digest: anvDsxB/peMz/BcyZR5vFj/SiUs=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 1SniD3LDi1N2vWIQD/u05g==
+
+Name: minimed/ddms/A/O.class
+SHA-1-Digest: eshSkRYqhPMku2b/JSZRi/pUiEw=
+SHA1-Digest: eshSkRYqhPMku2b/JSZRi/pUiEw=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 19zDCyCcwDlWrTQKigzYFA==
+
+Name: minimed/ddms/applet/dtw/NetHelper$5.class
+SHA-1-Digest: 2LPyKip5yFKeha1BsJiuWDFE+JE=
+SHA1-Digest: 2LPyKip5yFKeha1BsJiuWDFE+JE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: JNIRZ/KxzCH8nZjFjQruuQ==
+
+Name: images/erroricon.png
+SHA-Digest: MZ0YSyIBQYaaNTWSIUFL0HvzKkM=
+SHA1-Digest: MZ0YSyIBQYaaNTWSIUFL0HvzKkM=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: zz9t/USYz9GWCGMxdBrOiw==
+
+Name: minimed/ddms/applet/dtw/LoadFailedException.class
+SHA-1-Digest: TCmeTr7OFgnfWiOX36C/0bKtbHU=
+SHA1-Digest: TCmeTr7OFgnfWiOX36C/0bKtbHU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: pD1WTX5RIKTnr4w3BrwH7w==
+
+Name: minimed/ddms/applet/dtw/wizard/ControlCodeHotCorner$2.class
+SHA-1-Digest: CCFVbiv5hbtv0jWoo+d/hqKEHHQ=
+SHA1-Digest: CCFVbiv5hbtv0jWoo+d/hqKEHHQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: v06mcNdDil2YDnbyjQH6ag==
+
+Name: drivers/usb/Bayer/Win32/bci_jni_wrapper.dll
+SHA-Digest: 7UlbAS0fGVIOJI6htYTOTezUY84=
+SHA1-Digest: 7UlbAS0fGVIOJI6htYTOTezUY84=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: eiG76V+W5T6r8J3mguTvlw==
+
+Name: minimed/ddms/A/s$_A.class
+SHA-1-Digest: df8W31+TX9AuflBNu492iGSxNJg=
+SHA1-Digest: df8W31+TX9AuflBNu492iGSxNJg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 842pYKMaG2or8QL1bPL+rg==
+
+Name: minimed/ddms/applet/dtw/components/ClickAdapter.class
+SHA-1-Digest: KS08yMSbySxv4PVTkQu59+3hC9U=
+SHA1-Digest: KS08yMSbySxv4PVTkQu59+3hC9U=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: gUfV0E9kqqMslFm8BCM47Q==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SerialPortDLLInstallAuthori
+ zationStep.class
+SHA-1-Digest: dl5wsftDwk0ISG5lzJiugbBwmZs=
+SHA1-Digest: dl5wsftDwk0ISG5lzJiugbBwmZs=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: tBJWiULFcAMJ7HsglcGxNw==
+
+Name: minimed/ddms/A/M$1.class
+SHA-1-Digest: i2xpyExnxNg8xsdb/7kwY/gm7vc=
+SHA1-Digest: i2xpyExnxNg8xsdb/7kwY/gm7vc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: eTGtiDn+rvSdNcZCnihG5A==
+
+Name: images/device_MMLogicMeter.jpg
+SHA-Digest: /j3IBj/ZsMTCRYlnWObz3FdAGMg=
+SHA1-Digest: /j3IBj/ZsMTCRYlnWObz3FdAGMg=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: VJn9BGi1JNDTRrZJDboeZA==
 
 Name: minimed/ddms/applet/dtw/wizard/steps/InitializationStep$1.class
-SHA1-Digest: S9TVgrsonYyrJkxIJvhZ4DC7qzI=
+SHA-1-Digest: CMjDnB0nWtZRdoLP9uGV3uXtwgc=
+SHA1-Digest: CMjDnB0nWtZRdoLP9uGV3uXtwgc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: u3cNLGXpFJPjdMZXZM+Zcg==
 
-Name: minimed/ddms/deviceportreader/MM508c$SnapshotCreator.class
-SHA1-Digest: nEUGKZ0YT0oQkzmn3iRNaE89dpc=
+Name: Serialio/SerByteQueue.class
+SHA-1-Digest: e4+hYbkmvvsKXivm6KXZhfmUidU=
+SHA1-Digest: e4+hYbkmvvsKXivm6KXZhfmUidU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: aFOLNq8sX5Ki5Ed8HTNdEg==
 
-Name: minimed/ddms/applet/dtw/wizard/steps/MeterOperationFailStep.clas
- s
-SHA1-Digest: 0QMbVVQ/mayTE0c9aWSfhjiF9Lc=
-
-Name: minimed/ddms/deviceportreader/BadDeviceCommException.class
-SHA1-Digest: vs+gBGh+0CcF0NTtiqhueJjBMeg=
-
-Name: minimed/ddms/applet/dtw/NetHelper$2.class
-SHA1-Digest: 4GHuGvk2gqPrIm9z4FQYJ16hFbE=
-
-Name: minimed/ddms/deviceportreader/MMMeter$Command.class
-SHA1-Digest: z/lDLvwIBHOxlsoklPeNfT+dGSE=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchUltra.class
-SHA1-Digest: GCOTJ7yByFPJuWY7gpDAT1U7npo=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/mmmeter/VerifyConnectionsSt
- ep.class
-SHA1-Digest: YYc1n9sYs7jngFSjGC8vxf2lrb4=
-
-Name: minimed/ddms/applet/dtw/AppletResources_el.properties
-SHA1-Digest: w1eZ6Jrtw1EOqazXMCBd8dVw+GE=
-
-Name: minimed/ddms/deviceportreader/ComLink2$1.class
-SHA1-Digest: zSKxpUvMe9zFitpVaanMFg3l2Io=
+Name: Serialio/tool/Compare.class
+SHA-1-Digest: FTHzweTeTQyWEicfVS8py3bqaXo=
+SHA1-Digest: FTHzweTeTQyWEicfVS8py3bqaXo=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: XGGhN10KgI0kzuL3xWCxqQ==
 
 Name: minimed/ddms/applet/dtw/wizard/steps/lifescanmeter/MeterSelectSe
  rialPortStep.class
-SHA1-Digest: DubPBkmKyGDKrPB4aXznzFMnukU=
+SHA-1-Digest: 5jm8jfxFoCubtBEMfSYTYhLE9lw=
+SHA1-Digest: 5jm8jfxFoCubtBEMfSYTYhLE9lw=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: J1BW5G4mtafOBql/mHAi0g==
 
-Name: minimed/ddms/text/Formats$DatePatternKey.class
-SHA1-Digest: UT6QWVuAYYIl4SqXd/jVVuRZP1Q=
+Name: minimed/ddms/A/g.class
+SHA-1-Digest: rd4Xxkfm+mZITJfzcKba5kj+FuE=
+SHA1-Digest: rd4Xxkfm+mZITJfzcKba5kj+FuE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: ZGNwoDIL9UIkO06oDvWS3w==
+
+Name: images/device_MM508.jpg
+SHA-Digest: Wggy3jxrYBcXr3gUkL+L3nruVPw=
+SHA1-Digest: Wggy3jxrYBcXr3gUkL+L3nruVPw=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: 99rh9Nn1ocZcCaCOKSdK9Q==
+
+Name: Serialio/tool/StringCompare.class
+SHA-1-Digest: 1dQ2nFCVu37/hQEx+2ucK4fgSwI=
+SHA1-Digest: 1dQ2nFCVu37/hQEx+2ucK4fgSwI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: kyJIs0vGJxhT75w2I57WFA==
+
+Name: images/device_LSSureStep.jpg
+SHA-Digest: wzSfBT3vLg88CXqUEyuD1j4+i8A=
+SHA1-Digest: wzSfBT3vLg88CXqUEyuD1j4+i8A=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: 7l3nYBNAXkRTiEfXSoeZfg==
+
+Name: images/readWiz.gif
+SHA-Digest: ZN+StOIK4oFJ+1mW7VVfnmnk5R4=
+SHA1-Digest: ZN+StOIK4oFJ+1mW7VVfnmnk5R4=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: KbHXfkThikjGXFBjz0IPjg==
+
+Name: images/device_LSProfile.jpg
+SHA-Digest: l5jH4A4bdc3T/6gh9e9EGNVn+zI=
+SHA1-Digest: l5jH4A4bdc3T/6gh9e9EGNVn+zI=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: 5+PVV5BfECWr+2v8ZsOExQ==
+
+Name: Serialio/ByteTokenizer.class
+SHA-1-Digest: 4v8lojU9eI5bXOdKmnqOiYI/sdw=
+SHA1-Digest: 4v8lojU9eI5bXOdKmnqOiYI/sdw=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: jjq4JTEZ12vvUOrrC4iMPg==
+
+Name: minimed/ddms/A/a.class
+SHA-1-Digest: MchTr0yHA5gDqD1yW9swHbH3bbs=
+SHA1-Digest: MchTr0yHA5gDqD1yW9swHbH3bbs=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Fc1impjM9K01YTde9OKyIg==
+
+Name: drivers/usb/ComLink2/Win64/windrvr6.sys
+SHA-Digest: nbDDqhyurIQ9CtpnHuFNSg6gfM8=
+SHA1-Digest: nbDDqhyurIQ9CtpnHuFNSg6gfM8=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: TefWHPUfTIJh0RnPvbcCQw==
+
+Name: minimed/ddms/A/e.class
+SHA-1-Digest: 8zX7HpdYs54mqS7bCmhKcyIR59o=
+SHA1-Digest: 8zX7HpdYs54mqS7bCmhKcyIR59o=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: RkXR3RjgihmErgRYZ7mfNg==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/USBDriverInstall
+ AuthorizationStep.class
+SHA-1-Digest: RTEZnp5nH4qukDkxGHX2LkADnew=
+SHA1-Digest: RTEZnp5nH4qukDkxGHX2LkADnew=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: jcnrL+nZ2vX8+Yok2Ssceg==
+
+Name: minimed/ddms/A/r.class
+SHA-1-Digest: SiBkOK8n8qxSMcPs3zXBmbxD4d8=
+SHA1-Digest: SiBkOK8n8qxSMcPs3zXBmbxD4d8=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: cUlR8D4uHGinKeXUg+qJ2w==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataCompleteStep.cl
+ ass
+SHA-1-Digest: J/Svq1qW0Md5mnPhhDfjjbvyHrg=
+SHA1-Digest: J/Svq1qW0Md5mnPhhDfjjbvyHrg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 299nsR+nsMbYHHDyylKLpQ==
+
+Name: drivers/usb/bd/WDMMDMLD.VXD
+SHA-Digest: jh7+GZUzKiSAC8hA+YocQx6fUmU=
+SHA1-Digest: jh7+GZUzKiSAC8hA+YocQx6fUmU=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: POJkeDPq/d6ctDG84bJT/Q==
+
+Name: drivers/usb/ComLink2/Win32/mdtclusb.inf
+SHA-Digest: mYdpTJuSBcFm65fj8aw1dKDJPa4=
+SHA1-Digest: mYdpTJuSBcFm65fj8aw1dKDJPa4=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: UDzWBnOiY2x4P8h0LtdFxg==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBayerStep.class
+SHA-1-Digest: iBvVE69oW9mmUswNESHcfYUSsHE=
+SHA1-Digest: iBvVE69oW9mmUswNESHcfYUSsHE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: MY4RoQAkzmeBoJmq8mhcJw==
+
+Name: drivers/usb/ComLink2/Win64/wdapi1010.dll
+SHA-Digest: ETraDP7Hq4CfycPwNq626m51itA=
+SHA1-Digest: ETraDP7Hq4CfycPwNq626m51itA=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: AyT/HH8hE4OCakXS2V02Og==
+
+Name: minimed/ddms/A/F.class
+SHA-1-Digest: IUsf15cpl3KgW4J2mlIklqyQj3U=
+SHA1-Digest: IUsf15cpl3KgW4J2mlIklqyQj3U=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: jRtBcCBcT7MnSHpwOe5KLQ==
+
+Name: drivers/usb/ComLink2/Win32/wd1010.cat
+SHA-Digest: 4K/Ui/dKSEY96/U4KllNrILYa24=
+SHA1-Digest: 4K/Ui/dKSEY96/U4KllNrILYa24=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: FoI37HJKdKz+ukRQm6xruw==
+
+Name: Serialio/SerialServerTask.class
+SHA-1-Digest: l9MZ+rBVYmCJrlr4i78UGu81yP0=
+SHA1-Digest: l9MZ+rBVYmCJrlr4i78UGu81yP0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: s/UAM+qge5wGOoy6AwTOVw==
+
+Name: minimed/ddms/A/S.class
+SHA-1-Digest: Ua9su8/xDg2BlSYJVtmQaQGklPc=
+SHA1-Digest: Ua9su8/xDg2BlSYJVtmQaQGklPc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: CJrzsGZEtozwL9RwjjCc7w==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/InitializationFailStep.clas
+ s
+SHA-1-Digest: CnSYz++V+nzmGiyvnrzPnOVxEsI=
+SHA1-Digest: CnSYz++V+nzmGiyvnrzPnOVxEsI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: DnKeqG29TMRx4nqg5OGw/A==
+
+Name: images/device_LSUltraSmart.jpg
+SHA-Digest: ySffwu/YXiVy33eNG1Z2Zo29oVY=
+SHA1-Digest: ySffwu/YXiVy33eNG1Z2Zo29oVY=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: 17Np5baHhlUdN7oqzsuqAQ==
+
+Name: Serialio/FlowControlTask.class
+SHA-1-Digest: vX6ZE7DRspVCU+eWg9oNzvgYszI=
+SHA1-Digest: vX6ZE7DRspVCU+eWg9oNzvgYszI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: BwrBBBy0vkWxD0ZMNCnwAg==
+
+Name: BayerComm/BCICallback.class
+SHA-1-Digest: TRhrB3EGiPYI62tbn6rf37cJVT4=
+SHA1-Digest: TRhrB3EGiPYI62tbn6rf37cJVT4=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: TfuH3HnOUrl5SVwtGqXCoQ==
+
+Name: minimed/ddms/A/p$_A.class
+SHA-1-Digest: UPIjfL+3lSGJXEi+o1LQjEg2n88=
+SHA1-Digest: UPIjfL+3lSGJXEi+o1LQjEg2n88=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: D8OlWDT1kUAI290sqcM0Ng==
+
+Name: minimed/ddms/A/FA.class
+SHA-1-Digest: XIPWyVvLMRCjImb2bUJEIXg7/+Y=
+SHA1-Digest: XIPWyVvLMRCjImb2bUJEIXg7/+Y=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 3bx0Z9RMyzoZlT39bq0KBQ==
+
+Name: minimed/ddms/A/p.class
+SHA-1-Digest: Xciq7JJlcZkE92aXk8CBa2WrBLo=
+SHA1-Digest: Xciq7JJlcZkE92aXk8CBa2WrBLo=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: qVgna09EwOIpxTQeMBGFCg==
+
+Name: drivers/usb/ComLink2/Win64/cl2_jni_wrapper_64.dll
+SHA-Digest: VxBrm7Lrn5P+lSvq49M+1smVaVg=
+SHA1-Digest: VxBrm7Lrn5P+lSvq49M+1smVaVg=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: bOE5skj9G6xs6l7mdzHDnA==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpOperationSte
+ p.class
+SHA-1-Digest: S9Qiij6h5XzVSq/Q1AWDwviGngU=
+SHA1-Digest: S9Qiij6h5XzVSq/Q1AWDwviGngU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: rOgOEX65mFhLDLlieByXBA==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectDeviceStep$1.class
+SHA-1-Digest: uDEHr7A2NqJpG/p7yiV5ljbkcA8=
+SHA1-Digest: uDEHr7A2NqJpG/p7yiV5ljbkcA8=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: ukJEoR/gVuHX1ROmD3LhKw==
+
+Name: minimed/ddms/applet/dtw/ExeHelper$1.class
+SHA-1-Digest: Yo8l0GvoZ+Xp54uLOzOE4nj6kOQ=
+SHA1-Digest: Yo8l0GvoZ+Xp54uLOzOE4nj6kOQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: eNXj0A/76hEP+PzaSm2jsA==
+
+Name: drivers/usb/ComLink2/Install_MDTCLUSB.cmd
+SHA-Digest: Mw6fF5T09A5zCFHNdKuPR569aZU=
+SHA1-Digest: Mw6fF5T09A5zCFHNdKuPR569aZU=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: V1jC9XQprhb6sifU6tvI8g==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$4.class
+SHA-1-Digest: iwataxzIs+8MsQK24HBEDq7nkQI=
+SHA1-Digest: iwataxzIs+8MsQK24HBEDq7nkQI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: qNhpUnz/Q0cNP2yFrXTFMw==
+
+Name: minimed/ddms/A/A$_B.class
+SHA-1-Digest: aKCilFVeHAZCdkXIC2XXA62j+24=
+SHA1-Digest: aKCilFVeHAZCdkXIC2XXA62j+24=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: FDDdo7grBduao366FfNwiw==
+
+Name: minimed/ddms/A/GA$1.class
+SHA-1-Digest: 0XdestkrtlY0IHzAYG4OMhuMSCA=
+SHA1-Digest: 0XdestkrtlY0IHzAYG4OMhuMSCA=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: rgAiVfJDAAcLRwQkN1yE1A==
+
+Name: minimed/ddms/A/N$7.class
+SHA-1-Digest: wmpG0oHDYoWiH57vSYPllPFH58c=
+SHA1-Digest: wmpG0oHDYoWiH57vSYPllPFH58c=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: jXOcD8gp8HAAaOzQajFa+Q==
+
+Name: minimed/ddms/A/M$_B.class
+SHA-1-Digest: rXdPDt5ENxNFK1PampC4m9Dak9A=
+SHA1-Digest: rXdPDt5ENxNFK1PampC4m9Dak9A=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Vk7Nn7+MdprR0s4Zsix81w==
 
 Name: Serialio/ExTokenOverflow.class
-SHA1-Digest: uZZlBvApMtz7SPZm28pSe/Ymw4k=
+SHA-1-Digest: g4qQqVx6SPrZC2NX2UZ/tw0YMQg=
+SHA1-Digest: g4qQqVx6SPrZC2NX2UZ/tw0YMQg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: bLz9Wd/sZ8CQz7kdM/ZL5Q==
 
-Name: minimed/ddms/deviceportreader/MMPump.class
-SHA1-Digest: /AmP7SoqXsoZgI/Uc/Nt390JLb4=
+Name: Serialio/SerOutputStream.class
+SHA-1-Digest: zVWx3ZvbFhxlpWX9nol4pa7P+PI=
+SHA1-Digest: zVWx3ZvbFhxlpWX9nol4pa7P+PI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: iBH6EZ8CJS5orSLqgmJ6fw==
 
-Name: minimed/ddms/deviceportreader/Enums$BGUnits.class
-SHA1-Digest: cVhBDP/QlSGbMDj2puNZ7PP4AVw=
+Name: minimed/ddms/A/h$3.class
+SHA-1-Digest: QVt9xib3d4OmFkOzoReTfmrDZtQ=
+SHA1-Digest: QVt9xib3d4OmFkOzoReTfmrDZtQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: qAGCD0yi0+je4iuhqJeSZw==
 
-Name: minimed/ddms/applet/dtw/wizard/WizardConfig$USBConfig.class
-SHA1-Digest: vKF16AQZw7QTZh+1qThKnO8RqEc=
+Name: minimed/ddms/A/T.class
+SHA-1-Digest: SVoSxNwWKDdgeRqNkADC7nLVZz0=
+SHA1-Digest: SVoSxNwWKDdgeRqNkADC7nLVZz0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Ok7orDd0Xy4Lkx2bkjA4qQ==
 
-Name: minimed/ddms/deviceportreader/Snapshot.class
-SHA1-Digest: jvJu+80rnyXudjI7eudiCxB8OCA=
+Name: minimed/ddms/applet/dtw/wizard/ControlCodeHotCorner$1$1.class
+SHA-1-Digest: ldycTzOe0hl6LpJsfMDYSjF1ehw=
+SHA1-Digest: ldycTzOe0hl6LpJsfMDYSjF1ehw=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: PK5Zttyg8d76qbDJ7St8MA==
 
-Name: minimed/ddms/deviceportreader/MedisenseBGKetone.class
-SHA1-Digest: tS7ZKw7v0YrAUJNGOX+os4xXyXQ=
+Name: minimed/ddms/A/w$_B.class
+SHA-1-Digest: xVhl1hBDXnoQ9VYwIWAN9js5zNc=
+SHA1-Digest: xVhl1hBDXnoQ9VYwIWAN9js5zNc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: xuD5rv1ezhYoLQPduk235A==
 
-Name: minimed/ddms/deviceportreader/MM511$SnapshotCreator.class
-SHA1-Digest: Z9T9hOU5VUXfn5nuD+o0infZ0f8=
-
-Name: images/device_LSUltraMini.jpg
-SHA1-Digest: sXp3uQAQID2gYl8qrmAcJmqyDe0=
-
-Name: minimed/ddms/applet/dtw/components/UserEditListenerList.class
-SHA1-Digest: uBslORiNd2v4h3zHKtvkWonAQlk=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterMiniMedStep$1.cl
- ass
-SHA1-Digest: ALP1nDFudAs+AIhOXcjOvDhzq3U=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini$2.class
-SHA1-Digest: B56y4/ZxxUR1vQn6WY/Fie267KE=
-
-Name: config/SystemVariables.properties
-SHA1-Digest: uOK3mx0EuWmAx+pf53EAbZgV9b8=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectPumpStep$1.class
-SHA1-Digest: wETFNfxf8axOUHh9QwwyUynemns=
-
-Name: minimed/ddms/applet/dtw/AppletResources_en.properties
-SHA1-Digest: cWA+jrSOc8v6C3Fr/MRXGcaP4yw=
-
-Name: minimed/ddms/deviceportreader/RocheMeter$8.class
-SHA1-Digest: anRF6TTwl9TQc92uCbhVNuY5bbw=
-
-Name: minimed/ddms/deviceportreader/MMGuardian3$SnapshotCreator.class
-SHA1-Digest: E21ley3GoswZvqmJhYdt0/KfI1w=
-
-Name: minimed/ddms/deviceportreader/LSSureStep.class
-SHA1-Digest: qlceoGNIGyb0y1lvMWCLc22P4Es=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterMiniMedStep.clas
- s
-SHA1-Digest: R0DK3hOb63GkJ2K6HWGwe89OKnc=
-
-Name: minimed/ddms/deviceportreader/BayerBreeze.class
-SHA1-Digest: YUEZdjJgka11pjnRSZpU6+xpGqA=
-
-Name: drivers/serial/ddmsDTWSerialPort.dll
-SHA1-Digest: oAZ1/n5x5RhJgFVdmCaiXhNdPYo=
-
-Name: drivers/usb/ComLink2/difxapi.dll
-SHA1-Digest: 2mVTjS28A5esT2WvRx0dzlSVD0A=
-
-Name: minimed/ddms/deviceportreader/BayerMeter$1.class
-SHA1-Digest: gZZDDOUGRMJ3XGlhDxBAFzYDhmY=
-
-Name: Serialio/ExTimeout.class
-SHA1-Digest: 3wPEiQR+dFBplXDSWWm/IVLxXSg=
-
-Name: minimed/ddms/applet/dtw/InstallTestResult.class
-SHA1-Digest: KCrCzrrbOdHFTElocZ6+ZizTrjs=
-
-Name: images/rightArrow.gif
-SHA1-Digest: XqlJO6KcphzHT3GY57GNypWkfE8=
-
-Name: minimed/ddms/deviceportreader/MMX22$CommandHistoryDataFilter.cla
- ss
-SHA1-Digest: rltDMSi565lnwWEntZO5gsv/EiQ=
-
-Name: images/device_MMLinkMeter.jpg
-SHA1-Digest: ae3Bo0LIZ9dNuDoJ5jwY1E/3rRA=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataFailStep.class
-SHA1-Digest: 0hv5MGjKSmKZb2x0QYEWEZL2V+M=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/rochemeter/MeterSelectSeria
- lPortStep.class
-SHA1-Digest: pxugAkBjZpUeAxaYttdTqdhmTHU=
-
-Name: minimed/ddms/deviceportreader/MM508u.class
-SHA1-Digest: QYyX212mHHqT6KaHb+pEPlDa8GI=
-
-Name: minimed/ddms/deviceportreader/ComLink2$USBCommand.class
-SHA1-Digest: A8dB2/P8Wqv8Tsu2vsStmAtAKkY=
-
-Name: minimed/ddms/deviceportreader/MM508u$SnapshotCreator.class
-SHA1-Digest: xlDVEY+T3YB5Zmi31zwooWOUY1A=
-
-Name: minimed/ddms/deviceportreader/MedicalDevice.class
-SHA1-Digest: 7VbFx6Mywhp3BbDS4MoXBRLwN94=
-
-Name: Serialio/SnoopTokenListener.class
-SHA1-Digest: kbe+y4DEtoW1G8GB6/Uw87vRRh0=
-
-Name: minimed/ddms/deviceportreader/RocheMeter$3.class
-SHA1-Digest: pCYwBWlMphHAwC5hvZjP7QyRQBQ=
-
-Name: images/ComLink.png
-SHA1-Digest: doawqwZJkMqPsNSPV0Bnes7jKnI=
-
-Name: minimed/ddms/deviceportreader/MMX23.class
-SHA1-Digest: 6TXW5ksYrr/R0ZICRIR3VpX+qM8=
-
-Name: minimed/ddms/deviceportreader/LSFastTake$1.class
-SHA1-Digest: yiO4fvIu1nwmYcyZACBog184NSA=
-
-Name: minimed/ddms/deviceportreader/SerialIOHaltedException.class
-SHA1-Digest: l6ecGmMTjqxRIA5uGe1gQRJGIrE=
-
-Name: minimed/ddms/applet/dtw/DTWApplet.class
-SHA1-Digest: 6L57M0H9HvjLcjPy/fPeoKnZICo=
-
-Name: minimed/ddms/deviceportreader/RocheActiveAndCompact$SnapshotCrea
- tor.class
-SHA1-Digest: Uszyu7yPfdEsat2WnOi0awfPzds=
-
-Name: drivers/usb/bd/BdHidCom.sys
-SHA1-Digest: S1ARn7144//EGzOjdbWuymtr77U=
-
-Name: minimed/ddms/applet/dtw/wizard/steps/SelectPumpStep.class
-SHA1-Digest: 8aMhgIiBc39r+Ia+KQUvu3FPwlk=
-
-Name: minimed/ddms/deviceportreader/MMPump$1.class
-SHA1-Digest: KGHzjJFO0vHE/YF0BL9/VCYcKbw=
-
-Name: minimed/ddms/deviceportreader/LSOneTouchUltraMini.class
-SHA1-Digest: czxr/PvdGRa6rcxi/s2yYv4JXr8=
-
-Name: minimed/ddms/applet/dtw/MessageHelper.class
-SHA1-Digest: 6Ot8p8A2JhlYbji0O5KWnNFvY70=
+Name: drivers/usb/bd/bdhidcom.cat
+SHA-Digest: kns4DwbqF5P2c3WclYpTV2AWiUk=
+SHA1-Digest: kns4DwbqF5P2c3WclYpTV2AWiUk=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: /gIUfNI11cVrVnY8Z2LLkA==
 
 Name: images/device_LSUltraLink.png
+SHA-Digest: llCrbMieWfyxSojplNXyylvO6kA=
 SHA1-Digest: llCrbMieWfyxSojplNXyylvO6kA=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: H7WE0p1vJXZLs+X0kxxX0Q==
 
-Name: minimed/ddms/deviceportreader/MMX12$SnapshotCreator.class
-SHA1-Digest: JJbZe7cRdpGWe1W/U3WSXX1nhdk=
+Name: minimed/ddms/applet/dtw/wizard/steps/USBDriverPostInstallStep.cl
+ ass
+SHA-1-Digest: LVHim0HgOuA1vjYHZkLFtbGFxo0=
+SHA1-Digest: LVHim0HgOuA1vjYHZkLFtbGFxo0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: XKPr0XZEAQdjSYKplGk91w==
 
-Name: minimed/ddms/deviceportreader/MMPump$Reader.class
-SHA1-Digest: GRecKM6UM1XdQyrfT6K6qIRrEuk=
+Name: images/device_MSXceed.png
+SHA-Digest: 8wP4vsonOl+K0Mx1vTAuERBReyw=
+SHA1-Digest: 8wP4vsonOl+K0Mx1vTAuERBReyw=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: /xCjcUIW7RjLnoGA253DIg==
 
-Name: minimed/ddms/applet/dtw/AppletResources_no.properties
-SHA1-Digest: Zt6GFhGP0zXFdwmfALjGwxGvtXo=
+Name: minimed/ddms/applet/dtw/wizard/steps/lifescanmeter/VerifyConnect
+ ionsStep.class
+SHA-1-Digest: K846gPfRLp0IWQXsRZ5dauqrAGI=
+SHA1-Digest: K846gPfRLp0IWQXsRZ5dauqrAGI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 3+fXr2+Y+ON5rWOgm7Qplw==
 
-Name: minimed/ddms/deviceportreader/Snapshot$Header.class
-SHA1-Digest: 7ssXP3nplMeD1H92PqiHGdGi9tc=
+Name: minimed/ddms/A/R$_A.class
+SHA-1-Digest: MObf0m8wxcFOrZ6S4MWjjZp9l28=
+SHA1-Digest: MObf0m8wxcFOrZ6S4MWjjZp9l28=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: dQ9yYHCqmF/hZxrHJU/Irg==
 
-Name: minimed/ddms/deviceportreader/MedisenseBGKetone$SnapshotCreator.
+Name: images/device_RocheCompact.jpg
+SHA-Digest: cP3NKQ2qNa9vLOWghjCMva20NMk=
+SHA1-Digest: cP3NKQ2qNa9vLOWghjCMva20NMk=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: gpwnjQAk/ZiV1n/orIu0Wg==
+
+Name: drivers/usb/Bayer/Mac/BayerHID00.dll
+SHA-Digest: NpAmsFO1dwT379yaQgvb2Rw1/CQ=
+SHA1-Digest: NpAmsFO1dwT379yaQgvb2Rw1/CQ=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: KM1IMtLMOoM3rnYoq6JpvA==
+
+Name: minimed/ddms/A/u$_A.class
+SHA-1-Digest: i8rrMOhyqovArBLhSM1EfO327fA=
+SHA1-Digest: i8rrMOhyqovArBLhSM1EfO327fA=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Mpc1r5iYVBdqXpcztTlBbg==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterLifeScanStep$1.c
+ lass
+SHA-1-Digest: G43+1PHXY3cwWAMcyT7w36SEDmw=
+SHA1-Digest: G43+1PHXY3cwWAMcyT7w36SEDmw=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: P8xzfVh0PDrTLGN6rNOeNw==
+
+Name: minimed/ddms/applet/dtw/wizard/ControlCodeHotCorner$1.class
+SHA-1-Digest: Q2NYIjlOnzwPhslAVGC44E176oQ=
+SHA1-Digest: Q2NYIjlOnzwPhslAVGC44E176oQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: /ehmEHZQ+iTdDuPsu7NQpw==
+
+Name: minimed/ddms/applet/dtw/NetHelper$2.class
+SHA-1-Digest: pwCidrojrEbNDC1k9IuC6deNgHI=
+SHA1-Digest: pwCidrojrEbNDC1k9IuC6deNgHI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: oed4QmmNGjPGSqVi295QJQ==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/othermeter/MeterSelectSeria
+ lPortStep.class
+SHA-1-Digest: 7T/svMYTv8ywAr+BJRo0s0pmOrQ=
+SHA1-Digest: 7T/svMYTv8ywAr+BJRo0s0pmOrQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: XrbEv0vLjUCvU2+b4NhRfQ==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/SelectLinkDevice
+ Step.class
+SHA-1-Digest: +OMDJFsL/3zDJNK2iCaGgfIffG4=
+SHA1-Digest: +OMDJFsL/3zDJNK2iCaGgfIffG4=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Nm0l2CrhGMpw2TFj5Ktv4g==
+
+Name: minimed/ddms/A/N$2.class
+SHA-1-Digest: KII4lKIqmaeVbQ5WBZaBQDnsAzM=
+SHA1-Digest: KII4lKIqmaeVbQ5WBZaBQDnsAzM=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: QmmPs84E/ObpXfg+HwHitg==
+
+Name: images/device_MM511.jpg
+SHA-Digest: Y9yZdoQjKV2GE7lo26E+5gJFXRw=
+SHA1-Digest: Y9yZdoQjKV2GE7lo26E+5gJFXRw=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: yfmrxzWbtXSsWPeDSE0l6w==
+
+Name: minimed/ddms/A/A$_C.class
+SHA-1-Digest: ptHEdhlaRjgiGbhdqIuCddlf0jw=
+SHA1-Digest: ptHEdhlaRjgiGbhdqIuCddlf0jw=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: zRZcrOQYoeycl9JfYK2Baw==
+
+Name: config/images.properties
+SHA-Digest: c0og7JKiXPCjXE1eQaT9mUfuGUo=
+SHA1-Digest: c0og7JKiXPCjXE1eQaT9mUfuGUo=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: tYw9lVzvkqIxBei1QkQKbw==
+
+Name: images/XTLinkUSB.png
+SHA-Digest: pYhCfcSzd28OKP4BHTaV4FZ6Bc4=
+SHA1-Digest: pYhCfcSzd28OKP4BHTaV4FZ6Bc4=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: F1NT7zIYqcLqdOfGE5iwGQ==
+
+Name: minimed/ddms/A/B$_A.class
+SHA-1-Digest: hJ/Bhi3T9EIXxpXd4+u+pV3eUzs=
+SHA1-Digest: hJ/Bhi3T9EIXxpXd4+u+pV3eUzs=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: xouPx/gfZf/7YX/M2FwRjw==
+
+Name: minimed/ddms/A/R$_C.class
+SHA-1-Digest: XZf+4eDXzswQgcYxdXAfTiJ+kjM=
+SHA1-Digest: XZf+4eDXzswQgcYxdXAfTiJ+kjM=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: rRq0Jd3deDqFBJzQA4w2pg==
+
+Name: Serialio/SerInputStream.class
+SHA-1-Digest: iFANDT+mIsspQJYQ/qHpR0//PFQ=
+SHA1-Digest: iFANDT+mIsspQJYQ/qHpR0//PFQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: CKOed7z6qtN4EaUowPtL4A==
+
+Name: minimed/ddms/A/G.class
+SHA-1-Digest: a7UM/p0UP7i/HlpNOiNFs1QDs4M=
+SHA1-Digest: a7UM/p0UP7i/HlpNOiNFs1QDs4M=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: A/9hqX5b74n0d3q0CZg6GA==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBDStep$1.class
+SHA-1-Digest: MpcLpslh9hi72TfifogPdVFllUo=
+SHA1-Digest: MpcLpslh9hi72TfifogPdVFllUo=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: xcnDVfH3xSLqFmhz8SSwRw==
+
+Name: minimed/ddms/A/p$1.class
+SHA-1-Digest: ZTznhPMVktd0eUvQmKt7CUmBa8w=
+SHA1-Digest: ZTznhPMVktd0eUvQmKt7CUmBa8w=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: KO1MmyjB1dMhHVnoNWa/PQ==
+
+Name: minimed/ddms/A/D.class
+SHA-1-Digest: vwjXH7flMQz5DHnS4qy2VLw0+8E=
+SHA1-Digest: vwjXH7flMQz5DHnS4qy2VLw0+8E=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: n8UbQ56JSLxKCN+tnPj0kw==
+
+Name: minimed/ddms/A/CA$_B.class
+SHA-1-Digest: YK1Kuvxy7E9zivtotlUYzLpfKGo=
+SHA1-Digest: YK1Kuvxy7E9zivtotlUYzLpfKGo=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: RUcWP1rEducJD6068pWylA==
+
+Name: minimed/ddms/applet/dtw/AppletResources_es.properties
+SHA-Digest: +nnYIyHo+N/5sPXdKSbMByZXL3U=
+SHA1-Digest: +nnYIyHo+N/5sPXdKSbMByZXL3U=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: eFJtLkLlTu2ic03qHqzngw==
+
+Name: minimed/ddms/A/M$_A.class
+SHA-1-Digest: anJvls+RzOiHnNXMIrtMUwywx7s=
+SHA1-Digest: anJvls+RzOiHnNXMIrtMUwywx7s=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 3XL+Zo+ITP1WCp3IIdIubg==
+
+Name: minimed/ddms/A/w$_C.class
+SHA-1-Digest: gxfz0HfTk4ktUZy0CLsFUwhvtrg=
+SHA1-Digest: gxfz0HfTk4ktUZy0CLsFUwhvtrg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: YPJHMrvDsrcN/OTDHyqB0Q==
+
+Name: minimed/ddms/A/u.class
+SHA-1-Digest: vCpYSTXtlf+o/8M8DDcPlCPsf9g=
+SHA1-Digest: vCpYSTXtlf+o/8M8DDcPlCPsf9g=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 6fVwSNpILnH27tEXbgFP6w==
+
+Name: minimed/ddms/A/m$1.class
+SHA-1-Digest: y0MVu/qVTjNL34IvO3ZIxh9u/8g=
+SHA1-Digest: y0MVu/qVTjNL34IvO3ZIxh9u/8g=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: mIMq0M/GCI0Ld3avzDU3Yw==
+
+Name: minimed/ddms/A/Q.class
+SHA-1-Digest: DAUiXI4CuwEaZ2tTpGhvYBs9F+Q=
+SHA1-Digest: DAUiXI4CuwEaZ2tTpGhvYBs9F+Q=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: LU1drlptSxINi7oAJ+I73g==
+
+Name: Serialio/SerialPortLocal.class
+SHA-1-Digest: +AFejUzmRby4PIkR6me+58cAsJ8=
+SHA1-Digest: +AFejUzmRby4PIkR6me+58cAsJ8=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: XYYBaDJ0N9V1pN+k4fughQ==
+
+Name: drivers/usb/ComLink2/Win64/mdtclusb.cat
+SHA-Digest: LI3TH2BZ+OTOiPbd3kHWVgcxc30=
+SHA1-Digest: LI3TH2BZ+OTOiPbd3kHWVgcxc30=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: 8FZKEEqQM6jk4XTeOr2dxg==
+
+Name: images/device_BayerContourLink.png
+SHA-Digest: A6RDcl0cvWPL25rsuqzqkXKvTbY=
+SHA1-Digest: A6RDcl0cvWPL25rsuqzqkXKvTbY=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: cIEHNOHPl5KX9dzbBVWKIA==
+
+Name: minimed/ddms/applet/dtw/components/DefaultRadioButtonGroup.class
+SHA-1-Digest: TElBKhavxyJnmcCPI/2JNzWUtJM=
+SHA1-Digest: TElBKhavxyJnmcCPI/2JNzWUtJM=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: umROP5gpD2ZgcrvpVql/zA==
+
+Name: minimed/ddms/applet/dtw/AppletResources_cs.properties
+SHA-Digest: 7Oziuh3sIYc2VajqymJ/4wQqfww=
+SHA1-Digest: 7Oziuh3sIYc2VajqymJ/4wQqfww=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: hieI2Fc8oryuEjqfmkhy/w==
+
+Name: minimed/ddms/A/CA$_A.class
+SHA-1-Digest: bWtp6JXhjAXzsBcyHG5AKBNCvY0=
+SHA1-Digest: bWtp6JXhjAXzsBcyHG5AKBNCvY0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: VTulytDe7MD9Z5e6Um28JQ==
+
+Name: minimed/ddms/A/Q$_B.class
+SHA-1-Digest: PoSb8Fe2zCv5/F17cPbFwM5f2TE=
+SHA1-Digest: PoSb8Fe2zCv5/F17cPbFwM5f2TE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: ADOA63UCEBab6hP9o8VM3g==
+
+Name: minimed/ddms/A/BA.class
+SHA-1-Digest: EZwzzG5XycfrjN7inbRE8XTFgl0=
+SHA1-Digest: EZwzzG5XycfrjN7inbRE8XTFgl0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: GNrWWIYBrs4Vv0XedOmaIQ==
+
+Name: images/rightArrow.gif
+SHA-Digest: XqlJO6KcphzHT3GY57GNypWkfE8=
+SHA1-Digest: XqlJO6KcphzHT3GY57GNypWkfE8=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: qT/Rrpw+JjfqHWB7Affx4A==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpOperationSte
+ p$2.class
+SHA-1-Digest: lfIKZo2tnb6WyCt0WtoAMbAmKs4=
+SHA1-Digest: lfIKZo2tnb6WyCt0WtoAMbAmKs4=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: k8vmwr+HS7kQIoU9ShFNVQ==
+
+Name: minimed/util/Contract.class
+SHA-1-Digest: GSQdS04VJtjz+CEbRDBbvrP/FGI=
+SHA1-Digest: GSQdS04VJtjz+CEbRDBbvrP/FGI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: twnodvylGicNQOFWwllaFw==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/UnrecoverableErrorStep$1.cl
+ ass
+SHA-1-Digest: KaPyj747tIVzHLjxHklKdBQ0dJY=
+SHA1-Digest: KaPyj747tIVzHLjxHklKdBQ0dJY=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: rZt0Zhe7j2CG998v7saGjA==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectConnectionTypeStep$1.
  class
-SHA1-Digest: QwtSgpAkEuhu5WJgsam1Qyv+Dh4=
+SHA-1-Digest: NSeeB++njiwYLrdk2yNPztxOCDw=
+SHA1-Digest: NSeeB++njiwYLrdk2yNPztxOCDw=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: onV+7dcBX8nTpECCwYk+3A==
 
-Name: minimed/ddms/deviceportreader/ComStation1.class
-SHA1-Digest: 2WNFYUEWKtLO7t6gBBjgJ7vy4QI=
+Name: minimed/ddms/A/M.class
+SHA-1-Digest: Tao3RQuEUE75FlNQIPgeddv7ERY=
+SHA1-Digest: Tao3RQuEUE75FlNQIPgeddv7ERY=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: cQS96PkXyE5FTgpUqY5NzQ==
 
-Name: minimed/ddms/deviceportreader/MedisenseSofTact.class
-SHA1-Digest: EoBGolDxN3dJcrmsfM1CNa8U8O8=
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterRocheStep.class
+SHA-1-Digest: ZolLDWFbaWcSR52YNMb/UZeN3Do=
+SHA1-Digest: ZolLDWFbaWcSR52YNMb/UZeN3Do=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 99KCkKxqs0SCU2gSMwE4GQ==
+
+Name: drivers/usb/ComLink2/Win64/system64.exe
+SHA-Digest: 9s/+sSu9tFhD3MiHCUlABbwxjZc=
+SHA1-Digest: 9s/+sSu9tFhD3MiHCUlABbwxjZc=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: QRxluSqJaUNOudCGszrQfA==
+
+Name: Serialio/SnoopInputStream$Snoop.class
+SHA-1-Digest: TCIqps/I9xJCDqZTkO1oHoxIov0=
+SHA1-Digest: TCIqps/I9xJCDqZTkO1oHoxIov0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: kQ061sPQGTQ+3pNKL/HFbg==
+
+Name: images/questionmark.png
+SHA-Digest: PCcfwlG23LZhRiZVJTJwKRc0hgA=
+SHA1-Digest: PCcfwlG23LZhRiZVJTJwKRc0hgA=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: NbQ85cqzFLvWWyjj7cBoQg==
+
+Name: minimed/ddms/applet/dtw/UploadCancelledException.class
+SHA-1-Digest: MtXwJwtG8nXGEB1r/19tijuzHsk=
+SHA1-Digest: MtXwJwtG8nXGEB1r/19tijuzHsk=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Z/CXd8WZUEFku5QmzrlQGA==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmmeter/VerifyConnectionsSt
+ ep.class
+SHA-1-Digest: fohtLEU62qdVk0B/RN97OKBUopI=
+SHA1-Digest: fohtLEU62qdVk0B/RN97OKBUopI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 8uICuAa+bEtsbY5mUnjncw==
+
+Name: minimed/ddms/A/AA.class
+SHA-1-Digest: GcQJV32Mjtn/Oa2NtMaZjlLZ19Q=
+SHA1-Digest: GcQJV32Mjtn/Oa2NtMaZjlLZ19Q=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: jzJwIUjnktzO8ceKWePOow==
+
+Name: BayerComm/BCIBuf.class
+SHA-1-Digest: 93WVcMuk0rk28AYL+biRLcVZxhI=
+SHA1-Digest: 93WVcMuk0rk28AYL+biRLcVZxhI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: GBqCzPrfKi5ovaBEeDAD+w==
+
+Name: minimed/ddms/A/w$1.class
+SHA-1-Digest: 7uCTbFWmQPXy2foMzGj0FIxu/Ko=
+SHA1-Digest: 7uCTbFWmQPXy2foMzGj0FIxu/Ko=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: m/Patny2k7UawiNmPw5a2Q==
+
+Name: minimed/ddms/A/s.class
+SHA-1-Digest: 34D7FAnckQaP+kMnxOEK7eufGYI=
+SHA1-Digest: 34D7FAnckQaP+kMnxOEK7eufGYI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: igkNBLXcsymuR//MpXT18Q==
+
+Name: minimed/ddms/applet/dtw/PropertyWriter.class
+SHA-1-Digest: g1ox+jvKEH8QZ0PHEQQDXppA4ZI=
+SHA1-Digest: g1ox+jvKEH8QZ0PHEQQDXppA4ZI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: qMAb8vMazvPLsOMrKTW8xw==
+
+Name: minimed/ddms/A/B$1.class
+SHA-1-Digest: DR24Kk1fS6u8SU/IeBdPqUkoKeo=
+SHA1-Digest: DR24Kk1fS6u8SU/IeBdPqUkoKeo=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: BFNkgxKYXw92MjyKmf5EPw==
+
+Name: minimed/ddms/A/h$5.class
+SHA-1-Digest: x5JNM3qIFP1NK/bHccEbBYLZXjs=
+SHA1-Digest: x5JNM3qIFP1NK/bHccEbBYLZXjs=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: k+LHgNWjyx7057vY7J5zFw==
+
+Name: minimed/ddms/applet/dtw/SaveFailedException.class
+SHA-1-Digest: BWs7YgASYsuhcoDZX5rjSf3fbKg=
+SHA1-Digest: BWs7YgASYsuhcoDZX5rjSf3fbKg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: LRCA/01LMn0BLHQIqodqEQ==
+
+Name: minimed/ddms/text/Formats$DatePatternKey.class
+SHA-1-Digest: sFlBnoh9EhVD/f7PZuPdFxx+YC4=
+SHA1-Digest: sFlBnoh9EhVD/f7PZuPdFxx+YC4=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: cqTAZmSSaja1jrWyj5nQmA==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/StepProvider.class
+SHA-1-Digest: txgoabNQte/faosXmQ514Bo2SDg=
+SHA1-Digest: txgoabNQte/faosXmQ514Bo2SDg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: fqxqhAeH/X+4P7K0m7FH7A==
+
+Name: minimed/ddms/applet/dtw/wizard/ControlCodeHotCorner$5.class
+SHA-1-Digest: Om+nvG+y2Aer3hBqJtbpQXLkXuo=
+SHA1-Digest: Om+nvG+y2Aer3hBqJtbpQXLkXuo=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: SwCIA+5CV3gB/tJNDTv9lA==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterLifeScanStep.cla
+ ss
+SHA-1-Digest: TTseEa5QoG9nLSvU/qO37d6KJWk=
+SHA1-Digest: TTseEa5QoG9nLSvU/qO37d6KJWk=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: zNczlQO+fzlPgx2YtC+Aew==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectSerialPortStep.class
+SHA-1-Digest: g3YUFMAVBZPZFUJN+hFIhWirut4=
+SHA1-Digest: g3YUFMAVBZPZFUJN+hFIhWirut4=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: MulA4fd8b67ndtnVyUfz8g==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/XTLinkUSBDriverP
+ ostInstallStep.class
+SHA-1-Digest: i2PO09GHTa36/xPrb035RaIB+yE=
+SHA1-Digest: i2PO09GHTa36/xPrb035RaIB+yE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: qUm7vBCzcLVyr2O4l4MAfA==
+
+Name: Serialio/ErrorStatusHandler.class
+SHA-1-Digest: hmPCuyQR4Ed6hu9utUdwunD1oTA=
+SHA1-Digest: hmPCuyQR4Ed6hu9utUdwunD1oTA=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 9H9DVTUzX46XY1drAJVk4A==
+
+Name: minimed/ddms/applet/dtw/MessageHelper.class
+SHA-1-Digest: rLddFCyJunPV7MkX3LklIfxUm6k=
+SHA1-Digest: rLddFCyJunPV7MkX3LklIfxUm6k=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: DR9cjOYg7uzu9gm/J9KGuQ==
+
+Name: minimed/ddms/A/X.class
+SHA-1-Digest: cq6NCxehFEmay27wdE0xDdfhD0w=
+SHA1-Digest: cq6NCxehFEmay27wdE0xDdfhD0w=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 5UrwWlg5+QgHMXp1Fg2Siw==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DriverInstallAuthorizationS
+ tep$1.class
+SHA-1-Digest: ZmL8sXRMO4fhwR7hdqPv+kikgoM=
+SHA1-Digest: ZmL8sXRMO4fhwR7hdqPv+kikgoM=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: fvWM/aEA0f1Gu6MFLq8grQ==
+
+Name: images/SN-Screen.jpg
+SHA-Digest: S3IuiLPnbzfHFynvbBEmtO8nfVA=
+SHA1-Digest: S3IuiLPnbzfHFynvbBEmtO8nfVA=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: H06FLPDLE6h3qWN+BRvDaw==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/SelectLinkDevice
+ Step$1.class
+SHA-1-Digest: SQlllK1eyc4e+WRZerS926S8w/Q=
+SHA1-Digest: SQlllK1eyc4e+WRZerS926S8w/Q=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 1Qn/n9eULGqmaxxEtTHYFQ==
+
+Name: minimed/ddms/applet/dtw/components/UserEditListenerList.class
+SHA-1-Digest: I6U+HTiMsSVXfRGwkYbGEKBncf8=
+SHA1-Digest: I6U+HTiMsSVXfRGwkYbGEKBncf8=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 4Gy5b3T+2XeVLynDcRSk8Q==
+
+Name: BayerComm/BCIChannel.class
+SHA-1-Digest: L9kxd3H+cVpnl7I+6bTncKR9UEE=
+SHA1-Digest: L9kxd3H+cVpnl7I+6bTncKR9UEE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: fPfN34f4UFP8WlQKr1nzAw==
+
+Name: drivers/serial/Install_serialio.cmd
+SHA-Digest: 4bvciLI9U7tUK/XTQY0I6JR9Ttk=
+SHA1-Digest: 4bvciLI9U7tUK/XTQY0I6JR9Ttk=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: 0BDKQtBBZvAeuu+9Un2Y5Q==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/ComLinkUSBDriver
+ InstallAuthorizationStep.class
+SHA-1-Digest: wR1Dfhx9bRRF34n/Mw3CrPITzo8=
+SHA1-Digest: wR1Dfhx9bRRF34n/Mw3CrPITzo8=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: KsesjRS67OQMlr34Ed52/Q==
+
+Name: drivers/usb/ComLink2/Win32/windrvr6.pdb
+SHA-Digest: H9R2Fry6mpeVccba1Y13B3eJpDE=
+SHA1-Digest: H9R2Fry6mpeVccba1Y13B3eJpDE=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: EMvGYcAqbcZgby4x3GdRuA==
+
+Name: minimed/ddms/applet/dtw/MessageListener.class
+SHA-1-Digest: zYUmWuB/wV1Dz+v79m1Jw3LqQ0Y=
+SHA1-Digest: zYUmWuB/wV1Dz+v79m1Jw3LqQ0Y=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: KZ06hoRkEK4XoN9e/dKvhA==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DriverInstallAuthorizationS
+ tep.class
+SHA-1-Digest: 0iAjlN7hnzvxC9S3lzSL1UeYMRc=
+SHA1-Digest: 0iAjlN7hnzvxC9S3lzSL1UeYMRc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: eWJH/domqEIgfr+7zV+fnw==
+
+Name: minimed/ddms/A/AA$_A.class
+SHA-1-Digest: JfAp63/Ns7U7J00+IbcseYttXuo=
+SHA1-Digest: JfAp63/Ns7U7J00+IbcseYttXuo=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: nU36HBrhOceEd/IblF0RBA==
+
+Name: minimed/ddms/A/V.class
+SHA-1-Digest: QpZvNazAGVVwy/fZ6oaqc5YJ2dU=
+SHA1-Digest: QpZvNazAGVVwy/fZ6oaqc5YJ2dU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: b0vQjdsBiPmjzrSSEkdUJw==
+
+Name: drivers/usb/Bayer/Install_Bayer.sh
+SHA-Digest: luY3T0zpbjEyMWSu0QX9pfOwP+8=
+SHA1-Digest: luY3T0zpbjEyMWSu0QX9pfOwP+8=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: 2RV6LOJ9Y8NZbrTlTYpyMg==
+
+Name: minimed/ddms/A/l.class
+SHA-1-Digest: N1wDKvha+cUSBKec2+3BTu33NuA=
+SHA1-Digest: N1wDKvha+cUSBKec2+3BTu33NuA=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: uu0Q2tfMaWfzCEOEFUhmwA==
+
+Name: BayerComm/BCIUsage.class
+SHA-1-Digest: 9cCNQr3P8v2kxhskOFQI2vrODwo=
+SHA1-Digest: 9cCNQr3P8v2kxhskOFQI2vrODwo=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: LCrK8SNvzXZ0S3/fVdR8pQ==
+
+Name: minimed/ddms/A/P.class
+SHA-1-Digest: miY5XHcSRS++NdTD6oX4iGDjVQQ=
+SHA1-Digest: miY5XHcSRS++NdTD6oX4iGDjVQQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: E813GB1UoNei8vnZJCtNTg==
+
+Name: drivers/usb/ComLink2/Mac/libCareLinkUSB.dylib
+SHA-Digest: KLkW+U6EimIV9vB2+tILK9faTII=
+SHA1-Digest: KLkW+U6EimIV9vB2+tILK9faTII=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: xM7hKbl3rPWqrjVDWsuw/A==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$5.class
+SHA-1-Digest: nopruYkplMHxjyGpBKtn2sNV040=
+SHA1-Digest: nopruYkplMHxjyGpBKtn2sNV040=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 8L8gcPYk1EJumFQVAvY09w==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpSelectSerial
+ PortStep.class
+SHA-1-Digest: SQACzJZtham6GbScoQRKSr4o97c=
+SHA1-Digest: SQACzJZtham6GbScoQRKSr4o97c=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: nwbKA3tvlgKVmd3AFjUawg==
+
+Name: minimed/ddms/applet/dtw/wizard/WizardConfig$DriverConfig.class
+SHA-1-Digest: Fh/jYaTIKlSjoRaf3lV/aWoCF4M=
+SHA1-Digest: Fh/jYaTIKlSjoRaf3lV/aWoCF4M=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: x7n4zv6hpTS2ADHIFaeCEg==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataCheckStep.class
+SHA-1-Digest: CoUXJ2LBbUYZqSpzR4khzpeCEkA=
+SHA1-Digest: CoUXJ2LBbUYZqSpzR4khzpeCEkA=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: KDAD7pgn7TPr74Tlh/QqQA==
+
+Name: minimed/ddms/A/w$_D.class
+SHA-1-Digest: SVuMLWsO9MhlEtnbJlOVu023sM0=
+SHA1-Digest: SVuMLWsO9MhlEtnbJlOVu023sM0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: wjOUwdSSMB9OTSFljaDaoQ==
+
+Name: minimed/ddms/applet/dtw/AppletResources_en.properties
+SHA-Digest: fMtxudClYCmiZs4D7G5lb4YRlrg=
+SHA1-Digest: fMtxudClYCmiZs4D7G5lb4YRlrg=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: roWhJ300SQEWyc107wEIhg==
+
+Name: minimed/ddms/applet/dtw/AppletResources_sl.properties
+SHA-Digest: i0xKmEUrnpYQqW3gyAffTO80eMA=
+SHA1-Digest: i0xKmEUrnpYQqW3gyAffTO80eMA=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: RT+yJII6/fPsRrLbOA9qPA==
+
+Name: drivers/usb/bd/bdhidcom.inf
+SHA-Digest: CZMs4+Gk3VUqHEhYE/57twYIyFM=
+SHA1-Digest: CZMs4+Gk3VUqHEhYE/57twYIyFM=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: U7YIcXqxNH5yoJjM6xSq3Q==
+
+Name: minimed/ddms/A/x.class
+SHA-1-Digest: +WYAqopla5pBkfve0NmuLYlOGRY=
+SHA1-Digest: +WYAqopla5pBkfve0NmuLYlOGRY=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: xgpD6GIdu5G3Dku0znmZjw==
+
+Name: minimed/ddms/applet/dtw/AppletResources_ru.properties
+SHA-Digest: Ytv7BJOvsG5987PoAdk9CfzMn4U=
+SHA1-Digest: Ytv7BJOvsG5987PoAdk9CfzMn4U=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: uyQlIBhhQMRwh73Zj5Z6ww==
+
+Name: images/SN-Screen-G3.jpg
+SHA-Digest: f31HyGzTiHEF4JoIxknbQ7jaAKI=
+SHA1-Digest: f31HyGzTiHEF4JoIxknbQ7jaAKI=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: ZXZpb2MyYAKELihhD4oG7Q==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/bayermeter/MeterSelectSeria
+ lPortStep.class
+SHA-1-Digest: 56E+13/cOmUjC11GCONCsjx7JzI=
+SHA1-Digest: 56E+13/cOmUjC11GCONCsjx7JzI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: vNGeKx8JhwKVyi1tAoG+sA==
+
+Name: drivers/usb/Bayer/Mac/bci_jni_wrapper.dll
+SHA-Digest: tCUFag4gM7keDJBUFkoJsm5GniQ=
+SHA1-Digest: tCUFag4gM7keDJBUFkoJsm5GniQ=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: hvfp7j5ecjM+EKg9K6RvXA==
+
+Name: drivers/usb/ComLink2/Install_MDTCLUSB.sh
+SHA-Digest: uEmSIQRc/+4/pOERCuOXF1zY7+A=
+SHA1-Digest: uEmSIQRc/+4/pOERCuOXF1zY7+A=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: NXUV7WOpet0vRDb2dXDc3w==
+
+Name: minimed/ddms/A/s$1.class
+SHA-1-Digest: /GfIU81WnLXsTrLTxFBfS8OQXoE=
+SHA1-Digest: /GfIU81WnLXsTrLTxFBfS8OQXoE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: SgGBB91MphZkqzwIL44OPQ==
+
+Name: minimed/ddms/A/j.class
+SHA-1-Digest: wgFM4Jdv64rLawFFyQIrk0EuKkg=
+SHA1-Digest: wgFM4Jdv64rLawFFyQIrk0EuKkg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 0FlQC5s46vJ78i5Zx5j7uA==
+
+Name: Serialio/SnoopTokenListener.class
+SHA-1-Digest: DvCzbIeFeB6UgaU1im/Ng7yr5EQ=
+SHA1-Digest: DvCzbIeFeB6UgaU1im/Ng7yr5EQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: zofgAqjG+NTgKffpZXwIYg==
+
+Name: minimed/ddms/A/R$_B.class
+SHA-1-Digest: 173sgMej5RD1rOy7n/uzNU7gh+o=
+SHA1-Digest: 173sgMej5RD1rOy7n/uzNU7gh+o=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: WvI/lNzvSXIGYobGji2KBg==
+
+Name: images/checkMark.gif
+SHA-Digest: obiwhhAuz4lAY8sreEHABzUALOg=
+SHA1-Digest: obiwhhAuz4lAY8sreEHABzUALOg=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: KoS7OJUPJhyitM+ORHXYgA==
 
 Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/TurnOffParadigmL
  inkStep.class
-SHA1-Digest: RvV9aBKWPgATESsl6V45DRP6vTg=
+SHA-1-Digest: lztDQQ2LNf05mBY8jYPG/6VKiyc=
+SHA1-Digest: lztDQQ2LNf05mBY8jYPG/6VKiyc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: FJKX5kgxgAWNcbpRzZO8UQ==
 
-Name: minimed/ddms/deviceportreader/BayerMeter.class
-SHA1-Digest: /zDe63KwMAeM2kmePqq00Vow7Jo=
+Name: minimed/ddms/A/N$_A.class
+SHA-1-Digest: VjpR5h7n6sBKRtQE2N6FCdw65OE=
+SHA1-Digest: VjpR5h7n6sBKRtQE2N6FCdw65OE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: VI1PJ9BZtanQ18icLC6e4g==
+
+Name: minimed/ddms/A/GA$_D.class
+SHA-1-Digest: ZNiXNBxzEkHLjnWfqZZC6jjnWls=
+SHA1-Digest: ZNiXNBxzEkHLjnWfqZZC6jjnWls=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: PdspHYJGtZC/SR5e3evGew==
+
+Name: Serialio/SnoopListener.class
+SHA-1-Digest: qHxtE3N3ZL7RCQinIwyc+OgmqCk=
+SHA1-Digest: qHxtE3N3ZL7RCQinIwyc+OgmqCk=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: yFUgp51Vt0H7DeAlqofFwQ==
+
+Name: drivers/serial/ddmsDTWSerialPort.dll
+SHA-Digest: n9RmY4tf+8OKE2eKsBjwbYU0O9g=
+SHA1-Digest: n9RmY4tf+8OKE2eKsBjwbYU0O9g=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: Z16Qe28hLce9ctZnVoen8A==
+
+Name: minimed/ddms/applet/dtw/wizard/WizardConfig.class
+SHA-1-Digest: CSxNkkJ90ZPjQVj0A4QyU7U9c7A=
+SHA1-Digest: CSxNkkJ90ZPjQVj0A4QyU7U9c7A=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: ESODpJPDWWRYVGX/XcLLCA==
+
+Name: minimed/ddms/A/CA$_C.class
+SHA-1-Digest: nFTw5+AUKetADDnxXyXs7BRaMKk=
+SHA1-Digest: nFTw5+AUKetADDnxXyXs7BRaMKk=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: UKM4A+apCFpc586U759g5Q==
+
+Name: minimed/ddms/A/CA$1.class
+SHA-1-Digest: lb9n0hgDqPoQBDDfrnjkd+cJK60=
+SHA1-Digest: lb9n0hgDqPoQBDDfrnjkd+cJK60=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: zbb1/+JB51Ye3SLvFoRy5g==
+
+Name: minimed/ddms/A/W.class
+SHA-1-Digest: 8T0xrUdozzA1M1eMvhAD2ES8cV4=
+SHA1-Digest: 8T0xrUdozzA1M1eMvhAD2ES8cV4=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: YPbeinYaDkqMqlX17tsC+g==
+
+Name: minimed/ddms/applet/dtw/wizard/ControlCodeHotCorner$6.class
+SHA-1-Digest: G3Wvlfygcm4ZoE98KKxlrR+/DL8=
+SHA1-Digest: G3Wvlfygcm4ZoE98KKxlrR+/DL8=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: vKQCoiEDKBY2pL/JoF3tjw==
+
+Name: minimed/ddms/A/m$_B.class
+SHA-1-Digest: 35+mkqJCWCqF9yoSDQ0pYlTIrAU=
+SHA1-Digest: 35+mkqJCWCqF9yoSDQ0pYlTIrAU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: XZ1XLSaOHv+judyp6r4xdA==
+
+Name: minimed/ddms/applet/dtw/ConsoleWriter.class
+SHA-1-Digest: h+BxZK/luvbGWNiUp39Aq5m1tdQ=
+SHA1-Digest: h+BxZK/luvbGWNiUp39Aq5m1tdQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: H5chVsQD2cnDe67lIoignw==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/IdentifyPumpStep
+ .class
+SHA-1-Digest: ls5DgViaCGJR5UcHBLn/PUeSfqo=
+SHA1-Digest: ls5DgViaCGJR5UcHBLn/PUeSfqo=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: hZ8kADNk/4B1aZa8b2PP9w==
+
+Name: minimed/ddms/A/w$_A.class
+SHA-1-Digest: S9z76CRY5X1SeMltKoI5OjTvq9M=
+SHA1-Digest: S9z76CRY5X1SeMltKoI5OjTvq9M=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Mr46pz1Scktu/idaYNHNag==
+
+Name: minimed/ddms/applet/dtw/wizard/Wizard.class
+SHA-1-Digest: 3ZZ1JI6Iqu9kmoZNQMCt7kF8B9M=
+SHA1-Digest: 3ZZ1JI6Iqu9kmoZNQMCt7kF8B9M=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 0JmgUZ1OgnOhix6tsznd7A==
+
+Name: minimed/ddms/applet/dtw/AppletResources_hu.properties
+SHA-Digest: t2sLL2YqZfGzevcjJMrvx/+FGO0=
+SHA1-Digest: t2sLL2YqZfGzevcjJMrvx/+FGO0=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: oLBQTEy9Lwk8LsJK5EkHzg==
+
+Name: minimed/ddms/A/A$1.class
+SHA-1-Digest: BJeFRWBnTa9iz3XY6OlmS8hMDgE=
+SHA1-Digest: BJeFRWBnTa9iz3XY6OlmS8hMDgE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: zLewp+7pMSRIhQcBxCcEIA==
+
+Name: minimed/ddms/applet/dtw/ExeHelper$StreamGobbler.class
+SHA-1-Digest: x3X48bNnMhD0Sj+OLarTe0RRZgY=
+SHA1-Digest: x3X48bNnMhD0Sj+OLarTe0RRZgY=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: giwm4+KXgKq4AKsudp7sAg==
+
+Name: drivers/usb/ComLink2/Win64/wdapi1010_32.dll
+SHA-Digest: t1qSiJzDNGUWzhADgX+OYhxET4s=
+SHA1-Digest: t1qSiJzDNGUWzhADgX+OYhxET4s=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: AupOmZkLLnHLHHx8hz5RCQ==
+
+Name: drivers/serial/ddmsDTWSerialPort-64.dll
+SHA-Digest: huqPFOdznh8518khNpHyK7f40xM=
+SHA1-Digest: huqPFOdznh8518khNpHyK7f40xM=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: lCAL9jFoWHeO3zzDNBnUGg==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep.class
+SHA-1-Digest: AzHrCDfzzPDIuBKB8Wh6x78my9w=
+SHA1-Digest: AzHrCDfzzPDIuBKB8Wh6x78my9w=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: MuF91tlWphrtlnFefQKbDQ==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/InitializationStep.class
+SHA-1-Digest: Pg2vgQGdP1/tJNpjasOk0Y03giI=
+SHA1-Digest: Pg2vgQGdP1/tJNpjasOk0Y03giI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: osfGWR4m0/X0oBx887VQZQ==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmmeter/USBDriverInstallAut
+ horizationStep.class
+SHA-1-Digest: B8NgRnFU0H8Cfad4CDIv3/qwsMg=
+SHA1-Digest: B8NgRnFU0H8Cfad4CDIv3/qwsMg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: iLq3pD+rPU+0Ruu1Wk0Heg==
+
+Name: minimed/ddms/applet/dtw/components/StepLayout.class
+SHA-1-Digest: 2zGOjdsK2EtG2VT8OxkIWAhREZE=
+SHA1-Digest: 2zGOjdsK2EtG2VT8OxkIWAhREZE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: BfEF6kW7f4dw1mkD11fXVg==
+
+Name: minimed/ddms/applet/dtw/components/NumericTextField$1$1.class
+SHA-1-Digest: aP82jfg/RKog+bOVjjqQPhsAvJw=
+SHA1-Digest: aP82jfg/RKog+bOVjjqQPhsAvJw=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 4Pv76E4onoWi9xB1/rAjbg==
+
+Name: drivers/usb/ComLink2/Win64/windrvr6.pdb
+SHA-Digest: MyvA5NNmI5MUHpMxhJAeVrXRW/Q=
+SHA1-Digest: MyvA5NNmI5MUHpMxhJAeVrXRW/Q=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: +N/5tgGIRxgCoXPSSAy2DA==
+
+Name: images/device_LSFastTake.jpg
+SHA-Digest: aOvXD73blh2V2W5ZGd/cFm3Y8Zg=
+SHA1-Digest: aOvXD73blh2V2W5ZGd/cFm3Y8Zg=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: BeB2ymD8yOEmV5ZWYn9DcQ==
+
+Name: minimed/ddms/A/v.class
+SHA-1-Digest: ycUnD0DIeHTqxbK30hEiZvm/JWE=
+SHA1-Digest: ycUnD0DIeHTqxbK30hEiZvm/JWE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: WgA7ZKNZ0U7KBUwO+ymBUQ==
+
+Name: minimed/ddms/A/C$1.class
+SHA-1-Digest: Hbp22F8f12LtoXOrp+lxGnp0bsU=
+SHA1-Digest: Hbp22F8f12LtoXOrp+lxGnp0bsU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: xEtoWrTVVsBHZfV6cTKyXg==
+
+Name: minimed/ddms/A/$A.class
+SHA-1-Digest: YE/PkKcSFYsbZSvK8OfrkzZnGSw=
+SHA1-Digest: YE/PkKcSFYsbZSvK8OfrkzZnGSw=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Ntc49tUrO1rQ6OLpWQGO3g==
+
+Name: drivers/usb/ComLink2/Install_MDTCLUSB-64.cmd
+SHA-Digest: nrMI38Iypxe3Wj0b5yLQfHwwsv0=
+SHA1-Digest: nrMI38Iypxe3Wj0b5yLQfHwwsv0=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: Y0IpcT5e6pcdoXKPvWf7nA==
+
+Name: Serialio/SnoopLoop.class
+SHA-1-Digest: AFDr8uG3mMGv7g4azU1UZr17cNw=
+SHA1-Digest: AFDr8uG3mMGv7g4azU1UZr17cNw=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 6HDV/rtM3FcLTooyQjRfWA==
+
+Name: minimed/ddms/A/i.class
+SHA-1-Digest: TguErH9bdy1fG0lxyCdRfQp5tkk=
+SHA1-Digest: TguErH9bdy1fG0lxyCdRfQp5tkk=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: oT/WPBCJh3pb81jdgH0/fg==
+
+Name: minimed/ddms/A/BA$_A.class
+SHA-1-Digest: WUbgmoTFp1xY3u7kZT+bVzLrG1w=
+SHA1-Digest: WUbgmoTFp1xY3u7kZT+bVzLrG1w=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: nSxKtxXX67Sf0Ni+yTsgiw==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/rochemeter/VerifyConnection
+ sStep.class
+SHA-1-Digest: KVIXTaI1EHVCBCYT8R4tIo4K+rs=
+SHA1-Digest: KVIXTaI1EHVCBCYT8R4tIo4K+rs=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: ab+9AzpRgoWvkxBGoHN6RQ==
+
+Name: minimed/ddms/A/H.class
+SHA-1-Digest: mYqQxug9fBnBJMXjsOU/nA41uRA=
+SHA1-Digest: mYqQxug9fBnBJMXjsOU/nA41uRA=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: oRpbM+5rNq0GpaZ9osh+yA==
+
+Name: minimed/ddms/text/Formats.class
+SHA-1-Digest: gp6aFUjcg1Gx9zRHTApQTqhfugU=
+SHA1-Digest: gp6aFUjcg1Gx9zRHTApQTqhfugU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: UIJh/KrCy+CFNyBRSyhXgQ==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/bayermeter/USBDriverPostIns
+ tallStep.class
+SHA-1-Digest: hEcIIplPEFCn4Eepd3Slx5HAvsI=
+SHA1-Digest: hEcIIplPEFCn4Eepd3Slx5HAvsI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: +ungh25D0PrKeEf5CadrNg==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationFailStep.cla
+ ss
+SHA-1-Digest: p+7i6aW5akTl+fmTyEgre47sWKo=
+SHA1-Digest: p+7i6aW5akTl+fmTyEgre47sWKo=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: S9cug5bBWvyfyaBUqStAAA==
+
+Name: Serialio/tool/StatusAcceptor.class
+SHA-1-Digest: JkZq9YZEw257FIJM2i2TUmM/vIg=
+SHA1-Digest: JkZq9YZEw257FIJM2i2TUmM/vIg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: UbJpRicuUCGIdEOuTC+Sow==
+
+Name: images/USBCable.jpg
+SHA-Digest: 6rvxKP3FKFAS7t859HLD88011W0=
+SHA1-Digest: 6rvxKP3FKFAS7t859HLD88011W0=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: DDHpdeYpdIZLPhWQXkzC7g==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/USBDriverPostIns
+ tallStep.class
+SHA-1-Digest: 0aQKhXbK8tB7Z2CSdUfqGjNFWcg=
+SHA1-Digest: 0aQKhXbK8tB7Z2CSdUfqGjNFWcg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: WeBRV8WNehGyXd1yYtpYNw==
+
+Name: minimed/ddms/A/A.class
+SHA-1-Digest: xYYAkuHuPHkkZDDC8l7aukYRwnk=
+SHA1-Digest: xYYAkuHuPHkkZDDC8l7aukYRwnk=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: TD0la7gpeo81xt3X7Eorcg==
+
+Name: minimed/ddms/A/b.class
+SHA-1-Digest: eA8f9OmdipBaqCVEL+3oJBqus8Q=
+SHA1-Digest: eA8f9OmdipBaqCVEL+3oJBqus8Q=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: A5SWG7Y6iVWrKtrtIpMOQA==
+
+Name: mdt/common/device/driver/minimed/JungoUSBPort.class
+SHA-1-Digest: syooyuKZIVxnVc24bhxNvZFc1rI=
+SHA1-Digest: syooyuKZIVxnVc24bhxNvZFc1rI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: NqTfsCcA9aTcHFrViDukdQ==
+
+Name: Serialio/LookFor.class
+SHA-1-Digest: AEuvA4qko1l3U/euupim5rVqH70=
+SHA1-Digest: AEuvA4qko1l3U/euupim5rVqH70=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: ahb1pQMqELcfTLbDGFUCHQ==
+
+Name: minimed/ddms/A/GA$_C.class
+SHA-1-Digest: 7R+iJvsQAFUEIjO1XDA8zPwJOgE=
+SHA1-Digest: 7R+iJvsQAFUEIjO1XDA8zPwJOgE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 2jY6BvX3WhzvUnqVatVMgQ==
+
+Name: minimed/ddms/A/E$_A.class
+SHA-1-Digest: QjmOx/ogc1g2u8Tb8wxsLtUtecM=
+SHA1-Digest: QjmOx/ogc1g2u8Tb8wxsLtUtecM=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: uR/bPmbVmpPLzOB73bY7kw==
+
+Name: minimed/ddms/A/q.class
+SHA-1-Digest: pgooiDBV1HE9Akws/deLU3+ypxs=
+SHA1-Digest: pgooiDBV1HE9Akws/deLU3+ypxs=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: vEn5ublCugHKFfIx1S3WWA==
+
+Name: minimed/ddms/A/N$6.class
+SHA-1-Digest: rKjd3TY7GPJPgqUuEhgxmhQa8SI=
+SHA1-Digest: rKjd3TY7GPJPgqUuEhgxmhQa8SI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: IMSYUCYjQMsKhU+ToeZ6rw==
+
+Name: drivers/usb/bd/BDHidComInst.exe
+SHA-Digest: 9umSJVTAxX3C2nerplP1g/eqN+s=
+SHA1-Digest: 9umSJVTAxX3C2nerplP1g/eqN+s=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: p+3KNUlkXhetvc1+R83JiQ==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/VerifyXTLinkUSBC
+ onnectionStep.class
+SHA-1-Digest: olP2qNWdE05pSMhbPvZxEA3xw7w=
+SHA1-Digest: olP2qNWdE05pSMhbPvZxEA3xw7w=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: djYO0YwcOt/5ScI2g31ybw==
+
+Name: drivers/usb/ComLink2/Win32/windrvr6.inf
+SHA-Digest: ea62bJ1WE0rBRM3KQubv1kSFqPc=
+SHA1-Digest: ea62bJ1WE0rBRM3KQubv1kSFqPc=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: 2BGXg+dhcKcvcD0dFGsurA==
+
+Name: minimed/ddms/A/h$4.class
+SHA-1-Digest: yn7Xx2BgYiFjyNhIxYYPSg+Up3k=
+SHA1-Digest: yn7Xx2BgYiFjyNhIxYYPSg+Up3k=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: gcbNLTu0TehkjpNtlPN3nw==
+
+Name: minimed/ddms/A/k.class
+SHA-1-Digest: VLp+0Roqiw/xpv+xy6ivwihWcCo=
+SHA1-Digest: VLp+0Roqiw/xpv+xy6ivwihWcCo=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Gcd2lBlZXF4nBPoAdep/Dg==
+
+Name: minimed/ddms/applet/dtw/components/NumericTextField.class
+SHA-1-Digest: VHC675VyYBfUg81pQtI3zSEGWnI=
+SHA1-Digest: VHC675VyYBfUg81pQtI3zSEGWnI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: BINo+LBgYCIayHyI/fIaGw==
+
+Name: images/device_LSUltraMini.jpg
+SHA-Digest: sXp3uQAQID2gYl8qrmAcJmqyDe0=
+SHA1-Digest: sXp3uQAQID2gYl8qrmAcJmqyDe0=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: oVu3cU0tIl/CLaPr6CtqBw==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterMiniMedStep$1.cl
+ ass
+SHA-1-Digest: jsuQ9syG+aFkuZmzutLnPg8s86o=
+SHA1-Digest: jsuQ9syG+aFkuZmzutLnPg8s86o=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: nR4acm5oSlphwAvrRAQKLA==
+
+Name: minimed/ddms/A/B.class
+SHA-1-Digest: Gn3hoN/RsjburuEvgePYWBbV2zQ=
+SHA1-Digest: Gn3hoN/RsjburuEvgePYWBbV2zQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: o6DIEfZsXIY7XHsCrfMfDQ==
+
+Name: minimed/ddms/A/EA.class
+SHA-1-Digest: 0taQ5oM62r4Y4A3T4SU62sd4Xtg=
+SHA1-Digest: 0taQ5oM62r4Y4A3T4SU62sd4Xtg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: yDwfJsjYv2UOoG+1YQe9+w==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBayerStep$1.clas
+ s
+SHA-1-Digest: 0BfRWPN0JzzqR2WXNL8hlZP9Dos=
+SHA1-Digest: 0BfRWPN0JzzqR2WXNL8hlZP9Dos=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: kisUZXkf8F+gTVzIWTzlcQ==
+
+Name: minimed/ddms/applet/dtw/AppletResources_no.properties
+SHA-Digest: XVrMOi95YTC1V0NBYfX1++jKJcQ=
+SHA1-Digest: XVrMOi95YTC1V0NBYfX1++jKJcQ=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: r5+5z8R5UF8VgStzQsw/NA==
+
+Name: minimed/ddms/A/I.class
+SHA-1-Digest: QNrljwL/jC7v1kHUmX3heZ5oMAI=
+SHA1-Digest: QNrljwL/jC7v1kHUmX3heZ5oMAI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 1PZp6u1Zlnl0DddKblT8cQ==
+
+Name: minimed/ddms/applet/dtw/IOHelper.class
+SHA-1-Digest: WiVqPlNachlrX9QX+O0Ci1Loe+A=
+SHA1-Digest: WiVqPlNachlrX9QX+O0Ci1Loe+A=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: bHvEv41sOOCsGD85FRia1g==
+
+Name: drivers/usb/ComLink2/Win64/wdreg.exe
+SHA-Digest: e/GqtsRMsF9HUVisW5v5d/nNEP0=
+SHA1-Digest: e/GqtsRMsF9HUVisW5v5d/nNEP0=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: F/PP8GWeAfP1/r7I6FO+MQ==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/XTLinkUSBDriverI
+ nstallAuthorizationStep.class
+SHA-1-Digest: KbcbJ8biq233UD+mVgkrFsgST9A=
+SHA1-Digest: KbcbJ8biq233UD+mVgkrFsgST9A=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: FfxA/Tcdfibu4+2L7EeHwQ==
+
+Name: minimed/ddms/applet/dtw/CaptureResult.class
+SHA-1-Digest: 0rk5LHJMqkh0Vp/KZBLO5ctljZY=
+SHA1-Digest: 0rk5LHJMqkh0Vp/KZBLO5ctljZY=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: UPHfDuPRgKYBysTaKlXKFw==
+
+Name: mdt/common/device/driver/minimed/IDevicePnPListener.class
+SHA-1-Digest: AndaIbD58kk+xrGvlyMxH6XlA6A=
+SHA1-Digest: AndaIbD58kk+xrGvlyMxH6XlA6A=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 934qxuhOb18tnIpyk9qtKA==
+
+Name: Serialio/SerLooker.class
+SHA-1-Digest: kIq3jVIJlUwuI7bX8QuxjQbWOlE=
+SHA1-Digest: kIq3jVIJlUwuI7bX8QuxjQbWOlE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: iBaN+Y/cbfssRTwdUc295g==
+
+Name: minimed/ddms/A/N$_B.class
+SHA-1-Digest: Pstuk5GwY76o7wpvmEd2S0cOlBk=
+SHA1-Digest: Pstuk5GwY76o7wpvmEd2S0cOlBk=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: vY1RjF7BKiVcMiTeqV+W0w==
+
+Name: minimed/ddms/applet/dtw/components/GlowBorder.class
+SHA-1-Digest: BkdV4KmrRYFeoQj2Kbc/b9adKsU=
+SHA1-Digest: BkdV4KmrRYFeoQj2Kbc/b9adKsU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: wzPnNv6gyBK/fYtBG5NRzg==
+
+Name: minimed/ddms/applet/dtw/AppletResources_en_US.properties
+SHA-Digest: GHUsp89HBiVDlWYNwzV7Roc4r4U=
+SHA1-Digest: GHUsp89HBiVDlWYNwzV7Roc4r4U=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: XqfnbL5ig7Ojva67XHNhgg==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/bayermeter/USBDriverInstall
+ AuthorizationStep.class
+SHA-1-Digest: C/4vY/pKP+hheg2GUuZAWnFCjhc=
+SHA1-Digest: C/4vY/pKP+hheg2GUuZAWnFCjhc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 5BtGTUfMDPqj6BwsymIpAw==
+
+Name: minimed/ddms/applet/dtw/AppletResources_de.properties
+SHA-Digest: ceYyrByQUg5h9CHmme0iQqSFKho=
+SHA1-Digest: ceYyrByQUg5h9CHmme0iQqSFKho=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: H4k2FBGrVahvJGTuBfn/Iw==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectConnectionTypeStep.cl
+ ass
+SHA-1-Digest: gsTQGxsJK6Trb2Ff7O6HWwDDm6k=
+SHA1-Digest: gsTQGxsJK6Trb2Ff7O6HWwDDm6k=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: WMVA+7lTvY4i4oGY6ebL7Q==
+
+Name: images/device_BayerBreeze.gif
+SHA-Digest: y7/BwQhTRGqG50tabIMrglL3zHA=
+SHA1-Digest: y7/BwQhTRGqG50tabIMrglL3zHA=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: yztwP9A3SVXaDS2Dd/n1uQ==
+
+Name: minimed/ddms/applet/dtw/AppletResources_pl.properties
+SHA-Digest: eAwaQDHm9lHXWdG/btYTiwpzcSw=
+SHA1-Digest: eAwaQDHm9lHXWdG/btYTiwpzcSw=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: J7VTkfDIHzhIBKUgapCYcw==
+
+Name: minimed/ddms/applet/dtw/components/NumericTextField$1.class
+SHA-1-Digest: eRwtC3f424FmFidO7U3U9Ise9jk=
+SHA1-Digest: eRwtC3f424FmFidO7U3U9Ise9jk=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: qYOM2cev22eZaRrE+w+9lw==
+
+Name: images/device_LSBasic.jpg
+SHA-Digest: so7JqN9wdXXwGoI97Apl0jOcpi8=
+SHA1-Digest: so7JqN9wdXXwGoI97Apl0jOcpi8=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: pXV+4cqT3xDD9gAHr9P4qw==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$3.class
+SHA-1-Digest: +gWEQCGgT+yZ+mT8dT2Ub5GPVog=
+SHA1-Digest: +gWEQCGgT+yZ+mT8dT2Ub5GPVog=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 1fD3CodyL/SiNTrqnKm9gg==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBrandStep$1.clas
+ s
+SHA-1-Digest: olTn3EVKDp2KBZAZE5OOsHDrq4M=
+SHA1-Digest: olTn3EVKDp2KBZAZE5OOsHDrq4M=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: KlnJYszS4XXVMdNV32PpUA==
+
+Name: minimed/ddms/applet/dtw/UploadFailedException.class
+SHA-1-Digest: o05UaVZCu/rqp6rU22faledVQuc=
+SHA1-Digest: o05UaVZCu/rqp6rU22faledVQuc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: agGJnzlLiL+7aNz4nD77Xw==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterRocheStep$1.clas
+ s
+SHA-1-Digest: vd2uuNKktfa/P2M0OWvZfU41JRw=
+SHA1-Digest: vd2uuNKktfa/P2M0OWvZfU41JRw=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: u1koqnffH3tWqt4XYRyH9A==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/MeterOperationStep.class
+SHA-1-Digest: SIurPPnLH52byMQedhEVqRim65o=
+SHA1-Digest: SIurPPnLH52byMQedhEVqRim65o=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: cFJJpaN9UH/EoSholW9Rjg==
+
+Name: images/device_RocheCompactPlus.jpg
+SHA-Digest: e5BTD2BSAe6SlqZQsEj4OQWaVSs=
+SHA1-Digest: e5BTD2BSAe6SlqZQsEj4OQWaVSs=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: Fn/Y6mYJj/hgOR+RXMUskg==
+
+Name: minimed/ddms/A/Q$1.class
+SHA-1-Digest: 4h4OfUk+MJjxJPSb/ghsTToUCYU=
+SHA1-Digest: 4h4OfUk+MJjxJPSb/ghsTToUCYU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: DvB9ISp5C1Q/ENEf4ej2dA==
+
+Name: BayerComm/BCILong.class
+SHA-1-Digest: rcDJzovuOwUgJiaj+8wcR2cH6AQ=
+SHA1-Digest: rcDJzovuOwUgJiaj+8wcR2cH6AQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: jwNBIfxewjftt+YhBS7yzw==
+
+Name: minimed/ddms/A/h$_B.class
+SHA-1-Digest: 4INt2lh6OE5ArROV2pgwZ9xG2Tg=
+SHA1-Digest: 4INt2lh6OE5ArROV2pgwZ9xG2Tg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: roWhqe2PYUkm+ZN3X2AKzQ==
+
+Name: minimed/ddms/A/C.class
+SHA-1-Digest: zUuf6SChyPY2UlGO9/6WqH6L4Qg=
+SHA1-Digest: zUuf6SChyPY2UlGO9/6WqH6L4Qg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: dhOhzj4Ls5kiP7lbGJftaA==
+
+Name: minimed/ddms/A/m$_A.class
+SHA-1-Digest: yBuGsu3YFvdhdNk36lfyFDwQN+A=
+SHA1-Digest: yBuGsu3YFvdhdNk36lfyFDwQN+A=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: IqkmZrtnHQyla3CfnZJnaA==
+
+Name: minimed/ddms/A/Q$_A.class
+SHA-1-Digest: 5zhvMJMa94ZpMXrrDuyxSJReTvQ=
+SHA1-Digest: 5zhvMJMa94ZpMXrrDuyxSJReTvQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 4jKGWVzhgdaiVIcRoe9D8A==
+
+Name: drivers/usb/ComLink2/Win64/windrvr6.inf
+SHA-Digest: ea62bJ1WE0rBRM3KQubv1kSFqPc=
+SHA1-Digest: ea62bJ1WE0rBRM3KQubv1kSFqPc=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: 2BGXg+dhcKcvcD0dFGsurA==
+
+Name: drivers/usb/Bayer/Install_Bayer.cmd
+SHA-Digest: 7qP9gU99INnvivG3n7/SH4o7aOw=
+SHA1-Digest: 7qP9gU99INnvivG3n7/SH4o7aOw=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: pDGmzC9i3wMr7S/95VUsxA==
+
+Name: config/SystemVariables.properties
+SHA-Digest: dm6Tl+i5+kT9xfsXq2JasCax3Ow=
+SHA1-Digest: dm6Tl+i5+kT9xfsXq2JasCax3Ow=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: hDh5e2J2oBW0mN9gtDsGiA==
+
+Name: minimed/ddms/applet/dtw/DTWApplet.class
+SHA-1-Digest: 8mwrgd9rBxXfaNo/SIeakCg4PqI=
+SHA1-Digest: 8mwrgd9rBxXfaNo/SIeakCg4PqI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: MVflV3SJScjmIcOqYfQUhw==
+
+Name: images/device_BayerDex2.jpg
+SHA-Digest: tjrr+2jQyEIwaJ0vyDJPTenNg0E=
+SHA1-Digest: tjrr+2jQyEIwaJ0vyDJPTenNg0E=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: V9WrwIeN/dOSFRfPLkN2nw==
+
+Name: minimed/ddms/A/E$_C.class
+SHA-1-Digest: K8tqhad3jNX26em90MdYYiDEOZU=
+SHA1-Digest: K8tqhad3jNX26em90MdYYiDEOZU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: glC2mCh2cHowNKcMiqzmbg==
+
+Name: mdt/common/device/driver/minimed/USBPort.class
+SHA-1-Digest: bbPBoC3ZI4OJuYexmk8BemIgRXg=
+SHA1-Digest: bbPBoC3ZI4OJuYexmk8BemIgRXg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: unXuolNnGPmy6nptYYqJBg==
+
+Name: minimed/ddms/A/AA$1.class
+SHA-1-Digest: uMP73leNFhAKXNJ3g/kEGaATOvg=
+SHA1-Digest: uMP73leNFhAKXNJ3g/kEGaATOvg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: NqIqzVvJ0YnJoBvb6TgUhQ==
+
+Name: Serialio/LookForListener.class
+SHA-1-Digest: 4rY6NWET468L2TvTDQY6nKlj8k4=
+SHA1-Digest: 4rY6NWET468L2TvTDQY6nKlj8k4=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Cp0XP9/bYRYwVRfj2GHUyA==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/VerifyComLinkUSB
+ ConnectionStep.class
+SHA-1-Digest: bDOCEanjCxkG/aCQMYi6VlQYx4Q=
+SHA1-Digest: bDOCEanjCxkG/aCQMYi6VlQYx4Q=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: zpzOddyoqRCn8nHvnmOIlQ==
+
+Name: minimed/ddms/applet/dtw/PreferencesHelper.class
+SHA-1-Digest: KjsMcngHM5aGdXJChhUqZgx4dFQ=
+SHA1-Digest: KjsMcngHM5aGdXJChhUqZgx4dFQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: tMn+cZgZKl3KJAYDEm/lGw==
+
+Name: minimed/ddms/A/N$8.class
+SHA-1-Digest: eYcdO4aiQs72j0avsU9jaKwS234=
+SHA1-Digest: eYcdO4aiQs72j0avsU9jaKwS234=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 6hSxat/q0zsooAwrk0bTSA==
+
+Name: Serialio/SnoopInputStream$Token.class
+SHA-1-Digest: X52w08skPEHxLz2EuxTjrbOyn98=
+SHA1-Digest: X52w08skPEHxLz2EuxTjrbOyn98=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 7bhd0JXSJw8PFTzdYQTAxw==
+
+Name: drivers/usb/ComLink2/Win32/difxapi.dll
+SHA-Digest: UNB1aIg13wRITwuTeSpTDLR6GHI=
+SHA1-Digest: UNB1aIg13wRITwuTeSpTDLR6GHI=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: G9l23XezH+DyVwitXBNRrg==
+
+Name: minimed/ddms/A/Q$_D.class
+SHA-1-Digest: TxZmg8KF9TGFZkpj3qjes+I8k5k=
+SHA1-Digest: TxZmg8KF9TGFZkpj3qjes+I8k5k=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: sCFc2m2kqOEdAj9mjn/D6g==
+
+Name: minimed/ddms/A/$A$_C.class
+SHA-1-Digest: xdtTdwA+f7+38zrqo1DVg+Q2dQE=
+SHA1-Digest: xdtTdwA+f7+38zrqo1DVg+Q2dQE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: v5g7KXSxwXK7DXqXf8n16w==
+
+Name: Serialio/ExTimeout.class
+SHA-1-Digest: 6Qe9wH8wVpjZdEyDsRJcR/3dphA=
+SHA1-Digest: 6Qe9wH8wVpjZdEyDsRJcR/3dphA=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: qlyEqqfb8eR7SQguLpFGJQ==
+
+Name: minimed/ddms/A/R$1.class
+SHA-1-Digest: yj7aq3PKqcasANU4BYJIb5qE8FE=
+SHA1-Digest: yj7aq3PKqcasANU4BYJIb5qE8FE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: om9F95zUcpwosQrj5ugR4w==
+
+Name: minimed/ddms/A/$A$_A.class
+SHA-1-Digest: WrfqWRg7qN3O4KvdqbScUOrA8sU=
+SHA1-Digest: WrfqWRg7qN3O4KvdqbScUOrA8sU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Dca/v0VGtBHEEwx82w7ycw==
+
+Name: drivers/usb/Bayer/Win32/BayerHID00.dll
+SHA-Digest: PPOI47MzMe65FdzKL+6l+EHv72Q=
+SHA1-Digest: PPOI47MzMe65FdzKL+6l+EHv72Q=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: a/05lelj+03Qvm5yqXoXYg==
+
+Name: minimed/ddms/A/N$1.class
+SHA-1-Digest: x/9aTBttRxMdPToQAvW/4B9g3Iw=
+SHA1-Digest: x/9aTBttRxMdPToQAvW/4B9g3Iw=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 7VAq4z85lzH9v8pq0mGoRQ==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterOtherStep.class
+SHA-1-Digest: 7NdCzUTs4dmXuRdbGkqfkmLcQyE=
+SHA1-Digest: 7NdCzUTs4dmXuRdbGkqfkmLcQyE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: ArHvNjskPKRgMYnVDNsrUg==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/DeviceOperationStep$1.class
+SHA-1-Digest: ahopNPAqEiLT8+pkoWaEmyi6Fz8=
+SHA1-Digest: ahopNPAqEiLT8+pkoWaEmyi6Fz8=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: FJmuIK9xQX1tXjXUx9UnTQ==
+
+Name: minimed/ddms/applet/dtw/wizard/WizardSelections.class
+SHA-1-Digest: xO3IOOZavTyJBKtfncZoKa0pPlw=
+SHA1-Digest: xO3IOOZavTyJBKtfncZoKa0pPlw=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: QHmLsByKuTgiaBgNvRM1jw==
+
+Name: minimed/ddms/A/c.class
+SHA-1-Digest: YrPSNK0Ag2iohKCh0qlE0Ckcq4E=
+SHA1-Digest: YrPSNK0Ag2iohKCh0qlE0Ckcq4E=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: /QlOiknj1atl1zzmYu0Q0w==
+
+Name: minimed/ddms/A/Y.class
+SHA-1-Digest: 8FwYPEfGOGV97/DgMYxDi6xO/1Q=
+SHA1-Digest: 8FwYPEfGOGV97/DgMYxDi6xO/1Q=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: qNG98WPZWnKXDNuMao7HvA==
+
+Name: minimed/ddms/A/BA$1.class
+SHA-1-Digest: XpnnbsTL/VcNlSh6FkfBRgoc/oc=
+SHA1-Digest: XpnnbsTL/VcNlSh6FkfBRgoc/oc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: xbJEIfFtPcC6IuBTx5QpWg==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmmeter/USBDriverPostInstal
+ lStep.class
+SHA-1-Digest: lwzYhqdrX2EbdGIkzrJgswedIrQ=
+SHA1-Digest: lwzYhqdrX2EbdGIkzrJgswedIrQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: eiXuj4akpvHuoTgeSjFGKw==
+
+Name: minimed/ddms/applet/dtw/NetHelper$1.class
+SHA-1-Digest: qqvdjer1JFeywSFggH6Fp6Jcdzc=
+SHA1-Digest: qqvdjer1JFeywSFggH6Fp6Jcdzc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: zkd9op/utU66h8bPMul63A==
+
+Name: minimed/ddms/applet/dtw/AppletResources_da.properties
+SHA-Digest: h7Kp++/vmy2+dXTJQMIMngmk6co=
+SHA1-Digest: h7Kp++/vmy2+dXTJQMIMngmk6co=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: VVH7gGMy/pGsXeJagtwZgw==
+
+Name: minimed/ddms/A/h$_A.class
+SHA-1-Digest: WcekdxpJHZcIBHXFyFD8KaR5Gzw=
+SHA1-Digest: WcekdxpJHZcIBHXFyFD8KaR5Gzw=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: fmIf4UDdvgGaMLtACHZLAg==
+
+Name: minimed/ddms/applet/dtw/DiskHelper.class
+SHA-1-Digest: 7D3Kn3YOjfeNw5fT0JeK29V2iY4=
+SHA1-Digest: 7D3Kn3YOjfeNw5fT0JeK29V2iY4=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 1JLvAjJLc4Q5AHCzrmN86g==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterBDStep.class
+SHA-1-Digest: brO0F0e3vL0yVevJOvhT+lwSr7g=
+SHA1-Digest: brO0F0e3vL0yVevJOvhT+lwSr7g=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: PhGOBHDNxYKBp0DI+IsynA==
+
+Name: drivers/usb/ComLink2/Install_MDTCLUSB-32.cmd
+SHA-Digest: w65ZEoXUWdz9EBcxbdzflB40K0U=
+SHA1-Digest: w65ZEoXUWdz9EBcxbdzflB40K0U=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: Km+RQb5WHpxLAwmuyscXBQ==
+
+Name: minimed/ddms/applet/dtw/wizard/WizardStep$1.class
+SHA-1-Digest: lB3xaeXo/+UD4/Kj+MRleDp2v6c=
+SHA1-Digest: lB3xaeXo/+UD4/Kj+MRleDp2v6c=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: URB7YozdBouTpQXoXQSyUA==
+
+Name: images/device_MM512.jpg
+SHA-Digest: RWzi8XxkGmHxmyfy3WebXuH4RXA=
+SHA1-Digest: RWzi8XxkGmHxmyfy3WebXuH4RXA=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: mxFaBvI+lhPP4ru61HNydw==
+
+Name: images/device_RocheActive.jpg
+SHA-Digest: 0D/UZutZlbTsGvgMY3UyC0az34Y=
+SHA1-Digest: 0D/UZutZlbTsGvgMY3UyC0az34Y=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: u5aVJluDqKBmJPY4z82+RA==
+
+Name: minimed/ddms/A/O$_A.class
+SHA-1-Digest: 2+jjUrysU25iokREOQTkPn5DqHg=
+SHA1-Digest: 2+jjUrysU25iokREOQTkPn5DqHg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: TDpk6T+f1raNe9DOE9pODg==
+
+Name: minimed/ddms/A/b$_A.class
+SHA-1-Digest: JL+mvl/TLvESiQY2EOEU+mNLK9g=
+SHA1-Digest: JL+mvl/TLvESiQY2EOEU+mNLK9g=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: HMVBgRYL7XmYUPOdDc+erQ==
+
+Name: minimed/ddms/applet/dtw/AppletResources_fi.properties
+SHA-Digest: j1vbl+olR4WOzlmJ6jrSfdI3u30=
+SHA1-Digest: j1vbl+olR4WOzlmJ6jrSfdI3u30=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: kIM+7eldW9i4zlzMEYsXhA==
+
+Name: minimed/ddms/applet/dtw/wizard/Wizard$1.class
+SHA-1-Digest: 2BjDmo0hWwkNslPHTDg5zUEKL5o=
+SHA1-Digest: 2BjDmo0hWwkNslPHTDg5zUEKL5o=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: ViGxKL11oJtytkDx9wcTEg==
+
+Name: minimed/ddms/applet/dtw/components/UserEditListener.class
+SHA-1-Digest: LWI1kBsEpEzKcmmWOCpUwj+oFLg=
+SHA1-Digest: LWI1kBsEpEzKcmmWOCpUwj+oFLg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 8FAxJa5hVl5VENsgzBS+Fg==
+
+Name: drivers/usb/Bayer/Win64/bci_jni_wrapper_64.dll
+SHA-Digest: wytXDRN34TY4pGEfJhxH7iyWDqo=
+SHA1-Digest: wytXDRN34TY4pGEfJhxH7iyWDqo=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: edrWaTnect1c4IYBchX/DA==
+
+Name: minimed/ddms/A/C$2.class
+SHA-1-Digest: RKYlQLS2bQiwNEGysG2Mt6Gqfhg=
+SHA1-Digest: RKYlQLS2bQiwNEGysG2Mt6Gqfhg=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: BgtuEdjCgS2HxQmMeNXQnA==
+
+Name: minimed/ddms/applet/dtw/NetHelper$ObjectExchanger.class
+SHA-1-Digest: X+xkdSGVtxhnFo+/Od9cM4E5cdc=
+SHA1-Digest: X+xkdSGVtxhnFo+/Od9cM4E5cdc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: p7QW8fP09BmnUwn0g8jbJw==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/rochemeter/MeterSelectSeria
+ lPortStep.class
+SHA-1-Digest: IeXZ0pwWNEDl5uVaqjiSV5svdng=
+SHA1-Digest: IeXZ0pwWNEDl5uVaqjiSV5svdng=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: TPvcuJTNiXwJjgomvryxUA==
+
+Name: minimed/ddms/applet/dtw/AppletResources_el.properties
+SHA-Digest: 0kmVzg2iET5+lRbj95FzN8srB+I=
+SHA1-Digest: 0kmVzg2iET5+lRbj95FzN8srB+I=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: P6rQCw40tsMN2F/Ssw3GFA==
+
+Name: drivers/usb/ComLink2/Win64/wd1010.cat
+SHA-Digest: HK7YbYVzMLR3AsH/rSjdTL7JZLE=
+SHA1-Digest: HK7YbYVzMLR3AsH/rSjdTL7JZLE=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: BOfpNNQCdyDHlF+FTsdMHg==
+
+Name: minimed/ddms/A/N$3.class
+SHA-1-Digest: 49q05F9TJO9ARpx6qfj8pq6kELY=
+SHA1-Digest: 49q05F9TJO9ARpx6qfj8pq6kELY=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: C/7UjGwgGOE6oNW880a6bQ==
+
+Name: minimed/ddms/A/H$_A.class
+SHA-1-Digest: Y/YaVOljQgvuwp127wTiFFhX48o=
+SHA1-Digest: Y/YaVOljQgvuwp127wTiFFhX48o=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: QJ6L0JAeK5sHzLOoCN4IGw==
+
+Name: minimed/ddms/A/m$_C.class
+SHA-1-Digest: DeWFAl4B1//MkPC7Q5DC6hwRjNA=
+SHA1-Digest: DeWFAl4B1//MkPC7Q5DC6hwRjNA=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: YrLnRgD+HfOUPAU6hXVrGw==
+
+Name: minimed/ddms/A/y.class
+SHA-1-Digest: /D9AJ4CvfpJz2Z0rhL8HIv0mHYc=
+SHA1-Digest: /D9AJ4CvfpJz2Z0rhL8HIv0mHYc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 6gb6/C73nEW/QlWHXZQcTA==
+
+Name: drivers/serial/Install_serialio.sh
+SHA-Digest: JmBd6Nh06gAuJ3A9H+v1Ca2dI5M=
+SHA1-Digest: JmBd6Nh06gAuJ3A9H+v1Ca2dI5M=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: 70u5EHPHu/znM0G6LH12rg==
+
+Name: drivers/usb/ComLink2/Win32/wdreg.exe
+SHA-Digest: xVxrLaQA36ZPSE8F8rTqev5Iu90=
+SHA1-Digest: xVxrLaQA36ZPSE8F8rTqev5Iu90=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: gpDxZJlhTx2UyqYEfgYn9A==
+
+Name: drivers/usb/bd/CCPORT.SYS
+SHA-Digest: QgUnvfXhG2NrNwnQt1mExGU753s=
+SHA1-Digest: QgUnvfXhG2NrNwnQt1mExGU753s=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: iAFYB8iiPaafdVZOUiXCQg==
+
+Name: minimed/ddms/A/CA.class
+SHA-1-Digest: YexoSjqfmU7Q5b6b/Lg+Odab3eU=
+SHA1-Digest: YexoSjqfmU7Q5b6b/Lg+Odab3eU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: +l1zYS12nh7RkdeMdQMM8w==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/SelectConnection
+ TypeStep.class
+SHA-1-Digest: nAUI8HeEP4mn0BYDTJm8jNMqjrI=
+SHA1-Digest: nAUI8HeEP4mn0BYDTJm8jNMqjrI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: TTBtwsXp2qYJL8ZGE2CjQg==
+
+Name: images/SerialCable.jpg
+SHA-Digest: DOzN7Ln7CbrWRf18msP6tBuYdWE=
+SHA1-Digest: DOzN7Ln7CbrWRf18msP6tBuYdWE=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: +lcefvKugT9gumLvh9OLcQ==
+
+Name: minimed/ddms/applet/dtw/DeviceID.class
+SHA-1-Digest: oX1YHosmlYBhy63Hp2bKA2qkeDk=
+SHA1-Digest: oX1YHosmlYBhy63Hp2bKA2qkeDk=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: WbnCTp+0gHNNB5AAxQ4H2w==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/VerifyConnection
+ sStep.class
+SHA-1-Digest: DQjAhHH0+bYF8tAxlsNfaA4OkS0=
+SHA1-Digest: DQjAhHH0+bYF8tAxlsNfaA4OkS0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: KgY9IEX/jIdfdn+//PElaw==
+
+Name: minimed/ddms/A/$A$_B.class
+SHA-1-Digest: YM2lrDkrtfIYNfQXzmg2RgUoAWY=
+SHA1-Digest: YM2lrDkrtfIYNfQXzmg2RgUoAWY=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: oq0+7pfshJB8zuvBMxvcTw==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/MeterOperationFailStep.clas
+ s
+SHA-1-Digest: 4BBhPboDSYV+ehacs/oVNAmJFUM=
+SHA1-Digest: 4BBhPboDSYV+ehacs/oVNAmJFUM=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: zUDkuZL458lk0FKIYm7GFQ==
+
+Name: minimed/ddms/A/b$_C.class
+SHA-1-Digest: DUVIg9tTVovP7rgb2jRvSKGD78w=
+SHA1-Digest: DUVIg9tTVovP7rgb2jRvSKGD78w=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: vPUyLwypJ4EoG8Z6MV6Ibw==
+
+Name: minimed/ddms/A/z.class
+SHA-1-Digest: yOcQJFLVAPOyEdw/eGPJBHcXE/Q=
+SHA1-Digest: yOcQJFLVAPOyEdw/eGPJBHcXE/Q=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: B7ucnhc+BnVyBPwxSbsIvw==
+
+Name: drivers/usb/Bayer/Win64/BayerHID00_64.dll
+SHA-Digest: /HiGDlC8MLhVgKej2090StwPaXU=
+SHA1-Digest: /HiGDlC8MLhVgKej2090StwPaXU=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: f5gU3POaME4CX0e+IFCa2Q==
+
+Name: minimed/ddms/A/t.class
+SHA-1-Digest: 0tDw0FNrCyo/xWTXo5yDP1iJ7rI=
+SHA1-Digest: 0tDw0FNrCyo/xWTXo5yDP1iJ7rI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: gkK4No7QDtP5NzKdMK1qJg==
+
+Name: images/device_BayerEliteXL.jpg
+SHA-Digest: YtPYjdQ6+oyypfm+o4oALH0F/XU=
+SHA1-Digest: YtPYjdQ6+oyypfm+o4oALH0F/XU=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: Cc7PneTgJG2ud5FYi1eURQ==
+
+Name: minimed/ddms/A/N$_C.class
+SHA-1-Digest: sNb+RebZg4iWUjjcrCZcx1YUfQU=
+SHA1-Digest: sNb+RebZg4iWUjjcrCZcx1YUfQU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: y+XQvzjDWYLT0Sw9dkYjPw==
+
+Name: minimed/ddms/A/h$_C.class
+SHA-1-Digest: 4KGzVkM5/1H0UbqTzfmu2+wvqN8=
+SHA1-Digest: 4KGzVkM5/1H0UbqTzfmu2+wvqN8=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: mT8I1y3hUF67np4nqYCjiw==
+
+Name: minimed/ddms/applet/dtw/AppletResources_sv.properties
+SHA-Digest: qS0+Re53dJIE8w7RLPciqelXqgU=
+SHA1-Digest: qS0+Re53dJIE8w7RLPciqelXqgU=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: DOrGIWcluuLqFn6vrAe2Tg==
+
+Name: minimed/ddms/applet/dtw/OperationResult.class
+SHA-1-Digest: k+WJPzkA1XQ7Use+6e3NsXmm3vQ=
+SHA1-Digest: k+WJPzkA1XQ7Use+6e3NsXmm3vQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: l6dEbEDpQGl/lEnU3oX1YQ==
+
+Name: minimed/ddms/A/N$5.class
+SHA-1-Digest: UYzznaOlnfr/rqehx7jC3bRDIx4=
+SHA1-Digest: UYzznaOlnfr/rqehx7jC3bRDIx4=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: NKUmy4+u0MUV+RXT+Dd2fg==
+
+Name: minimed/ddms/A/DA.class
+SHA-1-Digest: noIzUb6dfbvls+0AgW6Xp9Nihx0=
+SHA1-Digest: noIzUb6dfbvls+0AgW6Xp9Nihx0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: wpChxsFl6jLRn/52c6zyKg==
+
+Name: minimed/ddms/applet/dtw/LogWriter.class
+SHA-1-Digest: +SEPgxBD6XozkC3lUNbvY4lZ8bc=
+SHA1-Digest: +SEPgxBD6XozkC3lUNbvY4lZ8bc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: AuGW0/+QPuNQLCk8yTBVrw==
+
+Name: minimed/ddms/A/x$_A.class
+SHA-1-Digest: 3DJrscVwi4aMKBCR63al3ZSrN6M=
+SHA1-Digest: 3DJrscVwi4aMKBCR63al3ZSrN6M=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: yKcrMksIWEWaheTHXskMkw==
+
+Name: minimed/ddms/applet/dtw/ExeHelper.class
+SHA-1-Digest: k6k0JfLQy2QhKOc+B9/zHBQV9gI=
+SHA1-Digest: k6k0JfLQy2QhKOc+B9/zHBQV9gI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: UUQ/08CbuWRao3KmljAl3Q==
+
+Name: minimed/ddms/A/_$_A.class
+SHA-1-Digest: t0Gd0efcPXDu1KiwY6ZoKUfslKI=
+SHA1-Digest: t0Gd0efcPXDu1KiwY6ZoKUfslKI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: lBJqtFOAfg0FTv7MXm692g==
+
+Name: minimed/ddms/A/GA$_E.class
+SHA-1-Digest: 0Gq/oLKVnucKFR2M4h0iHfVdAhc=
+SHA1-Digest: 0Gq/oLKVnucKFR2M4h0iHfVdAhc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: +E1qIzYndaQRqT57sUwW0Q==
+
+Name: Serialio/SnoopLoopListener.class
+SHA-1-Digest: Ws8AMaa1ezDql1jR0djXohw+/IQ=
+SHA1-Digest: Ws8AMaa1ezDql1jR0djXohw+/IQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: iNZm3o2N+Om2ayXH/a/uYw==
+
+Name: minimed/ddms/A/E.class
+SHA-1-Digest: oxpOLkEEFOn8PtD0EJHqhUopjns=
+SHA1-Digest: oxpOLkEEFOn8PtD0EJHqhUopjns=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: jIVSIuYoPWQPlgYQ1vP8UA==
+
+Name: drivers/usb/ComLink2/Win32/cl2_jni_wrapper.dll
+SHA-Digest: scnCbRbehg/mgZgwiIwObTsOg2s=
+SHA1-Digest: scnCbRbehg/mgZgwiIwObTsOg2s=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: c8SRvuT1G09lXOqJuv8OhQ==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpOperationFai
+ lStep.class
+SHA-1-Digest: HS3zgtX3N/76IMXMSBkSy4KsUi4=
+SHA1-Digest: HS3zgtX3N/76IMXMSBkSy4KsUi4=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: n2BZM2ysddsRC2nOINiLAA==
+
+Name: minimed/ddms/A/L.class
+SHA-1-Digest: Y3GcfkX9kWrqA+0+yKmYFryeyPM=
+SHA1-Digest: Y3GcfkX9kWrqA+0+yKmYFryeyPM=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: EaB3KFiEyYsJ7gIXUf9tkg==
+
+Name: Serialio/SerialConfig.class
+SHA-1-Digest: dra43iOC/Mfb+TEYvo9TaTx+FLs=
+SHA1-Digest: dra43iOC/Mfb+TEYvo9TaTx+FLs=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: DfcoB38e+ojTtogX2Kcpew==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterMiniMedStep.clas
+ s
+SHA-1-Digest: KhCAl9DU6tPQ2xILx1L0MvcP+iM=
+SHA1-Digest: KhCAl9DU6tPQ2xILx1L0MvcP+iM=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: mhUh7DLkrDfCGofsE9VCGg==
+
+Name: drivers/serial/ddmsDTWSerialPort.jnilib
+SHA-Digest: eJ4JvleF6J7Y5qOFIAGfiQWoxzc=
+SHA1-Digest: eJ4JvleF6J7Y5qOFIAGfiQWoxzc=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: /7VVyXsrwuOcIlj5HK6QsQ==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/PumpOperationSte
+ p$1.class
+SHA-1-Digest: HZRZKEMaui3Ovr5mM8oO2SDUr2k=
+SHA1-Digest: HZRZKEMaui3Ovr5mM8oO2SDUr2k=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: H3+//WzqHdZVLwYB/2Gb7w==
+
+Name: images/ComLink.png
+SHA-Digest: doawqwZJkMqPsNSPV0Bnes7jKnI=
+SHA1-Digest: doawqwZJkMqPsNSPV0Bnes7jKnI=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: d9K7yHSeTfDO3ESg2O3T4w==
+
+Name: minimed/ddms/applet/dtw/AppletResources_sk.properties
+SHA-Digest: cPR1MvVCDsd4rFaX8uTwQxyYofg=
+SHA1-Digest: cPR1MvVCDsd4rFaX8uTwQxyYofg=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: oA7WPjQER5BiHi4mBxjlpQ==
+
+Name: images/ComLinkUSB.png
+SHA-Digest: HH7Ve/ddGhEcCxyGE5S+hlvjk1Y=
+SHA1-Digest: HH7Ve/ddGhEcCxyGE5S+hlvjk1Y=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: slxwaFgqx36avRVzUpdTOA==
+
+Name: images/infoicon.png
+SHA-Digest: hoAqPDo2yG3M9pOLsUzWHFsjhhA=
+SHA1-Digest: hoAqPDo2yG3M9pOLsUzWHFsjhhA=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: eJQXjH11GH59gpCAPk+Uxg==
+
+Name: images/device_RocheAviva.jpg
+SHA-Digest: 6/BuNDIWUzUql8aseBGUKeeXYBQ=
+SHA1-Digest: 6/BuNDIWUzUql8aseBGUKeeXYBQ=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: lpQZWp2Rl/30gRvfFFZ2+Q==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmparadigm/CheckPumpStatusS
+ tep.class
+SHA-1-Digest: mnVx7mFBn2cENkvxKRJulncHyC0=
+SHA1-Digest: mnVx7mFBn2cENkvxKRJulncHyC0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: QGyUxM8c4ssTRgKjmDwHGA==
+
+Name: minimed/ddms/applet/dtw/wizard/ControlCodeHotCorner$4.class
+SHA-1-Digest: YA6kg+YKf+0jAoUVmtNsYzFQxbI=
+SHA1-Digest: YA6kg+YKf+0jAoUVmtNsYzFQxbI=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: IhNrUlH3v1XnhdicH5YAPw==
+
+Name: minimed/ddms/A/C$_A.class
+SHA-1-Digest: C4Dmr0XId6wwAIwPEJ+7hv62qfk=
+SHA1-Digest: C4Dmr0XId6wwAIwPEJ+7hv62qfk=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: f2SNFeNDBkOZX60osJWRbQ==
+
+Name: Serialio/SerialPort.class
+SHA-1-Digest: FH9LsrIF2zYjYP0hv4K4roMwPgc=
+SHA1-Digest: FH9LsrIF2zYjYP0hv4K4roMwPgc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 3ja9k+bHOvDZwwtETyaTfg==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/mmmeter/MeterSelectSerialPo
+ rtStep.class
+SHA-1-Digest: VCknsxzV6cvM+mZl4zhpxvIBAp8=
+SHA1-Digest: VCknsxzV6cvM+mZl4zhpxvIBAp8=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 69uPLL6+Aev1tj/RRn8SOg==
+
+Name: minimed/ddms/A/w.class
+SHA-1-Digest: YzndZl/pliicJWsxNTM+CY0WobM=
+SHA1-Digest: YzndZl/pliicJWsxNTM+CY0WobM=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: dTAlhGhVMT66yw5e8R0ZWA==
+
+Name: images/device_MMLinkMeter.jpg
+SHA-Digest: ae3Bo0LIZ9dNuDoJ5jwY1E/3rRA=
+SHA1-Digest: ae3Bo0LIZ9dNuDoJ5jwY1E/3rRA=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: mvcl0nvmZSrMfaVzlvb0Lg==
+
+Name: minimed/ddms/A/h$2.class
+SHA-1-Digest: 1Bha8zPVmxGmDbhcIB6Y0EIFazk=
+SHA1-Digest: 1Bha8zPVmxGmDbhcIB6Y0EIFazk=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: oXeFuJOs3/E0f71LeLFs4g==
+
+Name: minimed/ddms/A/EA$1.class
+SHA-1-Digest: YVN/hgOEm8Dm39as83IFT2ynrJQ=
+SHA1-Digest: YVN/hgOEm8Dm39as83IFT2ynrJQ=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: DbvHY+xO8SBp2PtpaNMY4Q==
+
+Name: minimed/ddms/applet/dtw/AppletResources.properties
+SHA-Digest: CiZLF+A9eAA/QudqSw0sj7Vtqlk=
+SHA1-Digest: CiZLF+A9eAA/QudqSw0sj7Vtqlk=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: 6jbTnMNRS/25Q+jP9O1rWg==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/TransferMeterDataCompleteSt
+ ep.class
+SHA-1-Digest: fd0LC8yR6uRwud6FbF7unVe8sw0=
+SHA1-Digest: fd0LC8yR6uRwud6FbF7unVe8sw0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: tokaNDDMIMbIOybMx+Cfyw==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataStep.class
+SHA-1-Digest: 8NcNA+h1JNGn89vQKwcunybo3/0=
+SHA1-Digest: 8NcNA+h1JNGn89vQKwcunybo3/0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: fSdPMxiQ4lMJPizNVdAZ3g==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/SelectMeterOtherStep$1.clas
+ s
+SHA-1-Digest: Q64icjFNoyq5PQeggS9pu99eMOM=
+SHA1-Digest: Q64icjFNoyq5PQeggS9pu99eMOM=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: fKtC2sBsSDUkK5FIL3sORg==
+
+Name: minimed/util/OSInfo.class
+SHA-1-Digest: 0WypEWW5DQdXt2TFDpnYa9vyBF0=
+SHA1-Digest: 0WypEWW5DQdXt2TFDpnYa9vyBF0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: Jhx3DS49wHUIxoJEmTku7g==
+
+Name: drivers/usb/ComLink2/Win32/windrvr6.sys
+SHA-Digest: LeYSThAcHQpAcoCTNfHStpj/hZc=
+SHA1-Digest: LeYSThAcHQpAcoCTNfHStpj/hZc=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: AyeTqOYojExg/zBULuqyKw==
+
+Name: minimed/ddms/A/O$_B.class
+SHA-1-Digest: geOjh+p04lvtUN5JuADtJa8ZYdU=
+SHA1-Digest: geOjh+p04lvtUN5JuADtJa8ZYdU=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: ozFv292BtGkfrN3CQGetTA==
+
+Name: minimed/ddms/A/p$_B.class
+SHA-1-Digest: P47RumhJwWqfh/yYrf5s/Fhe5po=
+SHA1-Digest: P47RumhJwWqfh/yYrf5s/Fhe5po=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: tG8OaN0TQa8a3ORZw0PY7A==
+
+Name: minimed/ddms/A/h$_D.class
+SHA-1-Digest: bf4Mo+7NzvBTGqopM9T7IiCqZOc=
+SHA1-Digest: bf4Mo+7NzvBTGqopM9T7IiCqZOc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 4VZe6AfCHuIloOvbZYIvjg==
+
+Name: mdt/common/device/driver/minimed/ArtLogicUSBPort.class
+SHA-1-Digest: ahCTmrNkG3wOPTjwh71G/husIIE=
+SHA1-Digest: ahCTmrNkG3wOPTjwh71G/husIIE=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: tl6N6NtqLHM6/LtP9P8Q+w==
+
+Name: minimed/ddms/A/A$_A.class
+SHA-1-Digest: h1T3VR4+CqXA0GolzB7Uhwqg5N0=
+SHA1-Digest: h1T3VR4+CqXA0GolzB7Uhwqg5N0=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: YSg64XdkF6Qh+7G0qtx1Fg==
+
+Name: drivers/usb/ComLink2/Win64/mdtclusb.inf
+SHA-Digest: mYdpTJuSBcFm65fj8aw1dKDJPa4=
+SHA1-Digest: mYdpTJuSBcFm65fj8aw1dKDJPa4=
+Digest-Algorithms: SHA, MD5
+MD5-Digest: UDzWBnOiY2x4P8h0LtdFxg==
+
+Name: minimed/ddms/applet/dtw/wizard/steps/TransferDataStep$TransferRe
+ sult.class
+SHA-1-Digest: 3vEaVkhcTjwJ1W8OfIXj3G2jyQ8=
+SHA1-Digest: 3vEaVkhcTjwJ1W8OfIXj3G2jyQ8=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: 84+PUDNebTcRWwpAjsFr2w==
+
+Name: Serialio/tool/SortVector.class
+SHA-1-Digest: rXULOc2eWf6nvuiaZP2b1bcdTMc=
+SHA1-Digest: rXULOc2eWf6nvuiaZP2b1bcdTMc=
+Digest-Algorithms: SHA-1, MD5
+MD5-Digest: rptzsO7QZVsjp1SZA2PCmQ==
 

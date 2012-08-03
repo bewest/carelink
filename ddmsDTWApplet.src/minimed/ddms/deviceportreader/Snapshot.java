@@ -1,4 +1,4 @@
-/*     */ package minimed.ddms.deviceportreader;
+/*     */ package minimed.ddms.A;
 /*     */ 
 /*     */ import java.io.BufferedWriter;
 /*     */ import java.io.ByteArrayInputStream;
@@ -16,188 +16,184 @@
 /*     */ import java.util.TreeMap;
 /*     */ import minimed.util.Contract;
 /*     */ 
-/*     */ final class Snapshot
+/*     */ final class CA
 /*     */ {
-/*     */   private static final int SNAPLENGTH_2 = 2;
-/*     */   private static final int SNAPLENGTH_4 = 4;
-/*     */   private static final boolean LOG_DETAILED_DEBUG_INFO = true;
-/*     */   private static final int SNAPSHOT_CRC_INDEX = 4;
-/*  44 */   private static final String TERM = System.getProperty("line.separator");
-/*     */   private SnapshotOutputStream m_snapshotOutputStream;
-/*     */   private Header m_snapshotHeader;
-/*     */   private TreeMap m_elementCollection;
+/*     */   private static final int H = 2;
+/*     */   private static final int E = 4;
+/*     */   private static final boolean B = true;
+/*     */   private static final int A = 4;
+/*  44 */   private static final String F = System.getProperty("line.separator");
+/*     */   private _B G;
+/*     */   private _C C;
+/*     */   private TreeMap D;
 /*     */ 
-/*     */   Snapshot(int paramInt1, int paramInt2, int[] paramArrayOfInt1, int[] paramArrayOfInt2, int[] paramArrayOfInt3)
+/*     */   CA(int paramInt1, int paramInt2, int[] paramArrayOfInt1, int[] paramArrayOfInt2, int[] paramArrayOfInt3)
 /*     */   {
-/*  77 */     this.m_snapshotHeader = new Header(paramInt1, paramInt2, paramArrayOfInt1, paramArrayOfInt2, paramArrayOfInt3, null);
+/*  77 */     this.C = new _C(paramInt1, paramInt2, paramArrayOfInt1, paramArrayOfInt2, paramArrayOfInt3, null);
 /*     */ 
-/*  80 */     this.m_elementCollection = new TreeMap();
-/*  81 */     this.m_snapshotOutputStream = null;
+/*  80 */     this.D = new TreeMap();
+/*  81 */     this.G = null;
 /*     */   }
 /*     */ 
-/*     */   Snapshot(int paramInt1, int paramInt2, String paramString1, String paramString2, String paramString3)
+/*     */   CA(int paramInt1, int paramInt2, String paramString1, String paramString2, String paramString3)
 /*     */   {
-/*  97 */     this(paramInt1, paramInt2, MedicalDevice.Util.makeIntArray(paramString1), MedicalDevice.Util.makeIntArray(paramString2), MedicalDevice.Util.makeIntArray(paramString3));
+/*  97 */     this(paramInt1, paramInt2, O._B.D(paramString1), O._B.D(paramString2), O._B.D(paramString3));
 /*     */   }
 /*     */ 
-/*     */   Snapshot()
+/*     */   CA()
 /*     */   {
 /* 108 */     this(0, 0, new int[0], new int[0], new int[0]);
 /*     */   }
 /*     */ 
-/*     */   int write()
+/*     */   int D()
 /*     */     throws IOException
 /*     */   {
-/* 125 */     Contract.pre(this.m_snapshotHeader != null);
-/* 126 */     Contract.pre(this.m_elementCollection != null);
+/* 125 */     Contract.pre(this.C != null);
+/* 126 */     Contract.pre(this.D != null);
 /*     */ 
-/* 128 */     MedicalDevice.logInfo(this, "write: writing snapshot to stream");
+/* 128 */     O.A(this, "write: writing snapshot to stream");
 /*     */ 
-/* 130 */     Header.access$102(this.m_snapshotHeader, 0);
-/* 131 */     writeToStream(false);
+/* 130 */     _C.A(this.C, 0);
+/* 131 */     A(false);
 /*     */ 
-/* 134 */     int[] arrayOfInt = MedicalDevice.Util.makeIntArray(this.m_snapshotOutputStream.getOutputBuffer().toByteArray());
-/* 135 */     Header.access$102(this.m_snapshotHeader, computeCRC(arrayOfInt));
+/* 134 */     int[] arrayOfInt = O._B.C(_B.A(this.G).toByteArray());
+/* 135 */     _C.A(this.C, A(arrayOfInt));
 /*     */ 
-/* 138 */     writeToStream(true);
-/* 139 */     MedicalDevice.logInfo(this, "write: wrote " + this.m_snapshotOutputStream.size() + " bytes.");
-/* 140 */     return this.m_snapshotOutputStream.size();
+/* 138 */     A(true);
+/* 139 */     O.A(this, "write: wrote " + this.G.size() + " bytes.");
+/* 140 */     return this.G.size();
 /*     */   }
 /*     */ 
-/*     */   InputStream toInputStream()
+/*     */   InputStream E()
 /*     */   {
-/* 152 */     return new ByteArrayInputStream(this.m_snapshotOutputStream.getOutputBuffer().toByteArray());
+/* 152 */     return new ByteArrayInputStream(_B.A(this.G).toByteArray());
 /*     */   }
 /*     */ 
-/*     */   void store(String paramString)
+/*     */   void B(String paramString)
 /*     */     throws FileNotFoundException, IOException
 /*     */   {
 /* 165 */     FileOutputStream localFileOutputStream = new FileOutputStream(paramString);
-/* 166 */     localFileOutputStream.write(this.m_snapshotOutputStream.getOutputBuffer().toByteArray());
+/* 166 */     localFileOutputStream.write(_B.A(this.G).toByteArray());
 /* 167 */     localFileOutputStream.close();
 /*     */ 
-/* 169 */     writeText(paramString);
+/* 169 */     A(paramString);
 /*     */   }
 /*     */ 
-/*     */   int getSnapshotVersion()
+/*     */   int B()
 /*     */   {
-/* 178 */     return this.m_snapshotHeader.m_snapshotVersion;
+/* 178 */     return _C.A(this.C);
 /*     */   }
 /*     */ 
-/*     */   int[] getDeviceTime()
+/*     */   int[] F()
 /*     */   {
-/* 187 */     return this.m_snapshotHeader.m_deviceTime;
+/* 187 */     return _C.B(this.C);
 /*     */   }
 /*     */ 
-/*     */   void addElement(int paramInt1, int[] paramArrayOfInt, int paramInt2)
+/*     */   void A(int paramInt1, int[] paramArrayOfInt, int paramInt2)
 /*     */   {
 /* 200 */     Contract.pre(paramArrayOfInt != null);
 /* 201 */     Contract.pre(paramArrayOfInt.length >= paramInt2);
 /*     */ 
-/* 203 */     Element localElement = new Element(paramInt1, paramArrayOfInt, paramInt2, null);
-/* 204 */     this.m_elementCollection.put(new Integer(paramInt1), localElement);
+/* 203 */     _A local_A = new _A(paramInt1, paramArrayOfInt, paramInt2, null);
+/* 204 */     this.D.put(new Integer(paramInt1), local_A);
 /*     */   }
 /*     */ 
-/*     */   void addElement(int paramInt, int[] paramArrayOfInt)
+/*     */   void A(int paramInt, int[] paramArrayOfInt)
 /*     */   {
 /* 216 */     Contract.pre(paramArrayOfInt != null);
 /*     */ 
-/* 218 */     addElement(paramInt, paramArrayOfInt, paramArrayOfInt.length);
+/* 218 */     A(paramInt, paramArrayOfInt, paramArrayOfInt.length);
 /*     */   }
 /*     */ 
-/*     */   void addElement(int paramInt, String paramString)
+/*     */   void A(int paramInt, String paramString)
 /*     */   {
 /* 230 */     Contract.pre(paramString != null);
 /*     */ 
-/* 232 */     int[] arrayOfInt = MedicalDevice.Util.makeIntArray(paramString);
-/* 233 */     addElement(paramInt, arrayOfInt, arrayOfInt.length);
+/* 232 */     int[] arrayOfInt = O._B.D(paramString);
+/* 233 */     A(paramInt, arrayOfInt, arrayOfInt.length);
 /*     */   }
 /*     */ 
-/*     */   void addElement(int paramInt1, int paramInt2)
+/*     */   void A(int paramInt1, int paramInt2)
 /*     */   {
 /* 243 */     int[] arrayOfInt = new int[1];
 /*     */ 
 /* 245 */     arrayOfInt[0] = paramInt2;
-/* 246 */     addElement(paramInt1, arrayOfInt);
+/* 246 */     A(paramInt1, arrayOfInt);
 /*     */   }
 /*     */ 
-/*     */   void addElement(int paramInt1, int paramInt2, int paramInt3)
+/*     */   void A(int paramInt1, int paramInt2, int paramInt3)
 /*     */   {
 /* 257 */     int[] arrayOfInt = new int[2];
 /*     */ 
 /* 259 */     arrayOfInt[0] = paramInt2;
 /* 260 */     arrayOfInt[1] = paramInt3;
-/* 261 */     addElement(paramInt1, arrayOfInt);
+/* 261 */     A(paramInt1, arrayOfInt);
 /*     */   }
 /*     */ 
-/*     */   int getSnapshotCRC()
+/*     */   int A()
 /*     */   {
-/* 270 */     return this.m_snapshotHeader.m_snapshotCRC;
+/* 270 */     return _C.C(this.C);
 /*     */   }
 /*     */ 
-/*     */   private int computeCRC(int[] paramArrayOfInt)
+/*     */   private int A(int[] paramArrayOfInt)
 /*     */   {
 /* 281 */     paramArrayOfInt[4] = 0;
 /* 282 */     paramArrayOfInt[5] = 0;
-/* 283 */     int i = MedicalDevice.Util.computeCRC16CCITT(paramArrayOfInt, 0, paramArrayOfInt.length);
+/* 283 */     int i = O._B.C(paramArrayOfInt, 0, paramArrayOfInt.length);
 /*     */ 
-/* 287 */     paramArrayOfInt[4] = MedicalDevice.Util.getHighByte(i);
-/* 288 */     paramArrayOfInt[5] = MedicalDevice.Util.getLowByte(i);
+/* 287 */     paramArrayOfInt[4] = O._B.J(i);
+/* 288 */     paramArrayOfInt[5] = O._B.K(i);
 /* 289 */     return i;
 /*     */   }
 /*     */ 
-/*     */   private void writeToStream(boolean paramBoolean)
+/*     */   private void A(boolean paramBoolean)
 /*     */     throws IOException
 /*     */   {
-/* 299 */     this.m_snapshotOutputStream = new SnapshotOutputStream(new ByteArrayOutputStream(), null);
+/* 299 */     this.G = new _B(new ByteArrayOutputStream(), null);
 /*     */ 
-/* 302 */     this.m_snapshotHeader.write(paramBoolean);
+/* 302 */     _C.A(this.C, paramBoolean);
 /*     */ 
-/* 305 */     Iterator localIterator = this.m_elementCollection.keySet().iterator();
+/* 305 */     Iterator localIterator = this.D.keySet().iterator();
 /* 306 */     while (localIterator.hasNext()) {
-/* 307 */       Element localElement = (Element)this.m_elementCollection.get(localIterator.next());
-/* 308 */       localElement.write(paramBoolean);
+/* 307 */       _A local_A = (_A)this.D.get(localIterator.next());
+/* 308 */       _A.A(local_A, paramBoolean);
 /*     */     }
 /*     */ 
-/* 311 */     this.m_snapshotOutputStream.close();
+/* 311 */     this.G.close();
 /*     */   }
 /*     */ 
-/*     */   private void writeText(String paramString)
+/*     */   private void A(String paramString)
 /*     */     throws IOException
 /*     */   {
-/* 326 */     Contract.pre(this.m_snapshotHeader != null);
-/* 327 */     Contract.pre(this.m_elementCollection != null);
+/* 326 */     Contract.pre(this.C != null);
+/* 327 */     Contract.pre(this.D != null);
 /*     */ 
-/* 329 */     MedicalDevice.logInfo(this, "writeText: writing snapshot " + paramString + ".txt");
+/* 329 */     O.A(this, "writeText: writing snapshot " + paramString + ".txt");
 /*     */ 
 /* 332 */     PrintWriter localPrintWriter = new PrintWriter(new BufferedWriter(new FileWriter(paramString + ".txt")));
 /*     */ 
-/* 336 */     this.m_snapshotHeader.writeText(localPrintWriter);
+/* 336 */     _C.A(this.C, localPrintWriter);
 /*     */ 
-/* 339 */     Iterator localIterator = this.m_elementCollection.keySet().iterator();
+/* 339 */     Iterator localIterator = this.D.keySet().iterator();
 /* 340 */     while (localIterator.hasNext()) {
-/* 341 */       Element localElement = (Element)this.m_elementCollection.get(localIterator.next());
-/* 342 */       localElement.writeText(localPrintWriter);
+/* 341 */       _A local_A = (_A)this.D.get(localIterator.next());
+/* 342 */       _A.A(local_A, localPrintWriter);
 /*     */     }
 /*     */ 
 /* 345 */     localPrintWriter.close();
 /*     */   }
 /*     */ 
-/*     */   private final class SnapshotOutputStream extends DataOutputStream
+/*     */   private final class _B extends DataOutputStream
 /*     */   {
-/*     */     private ByteArrayOutputStream m_outputBuffer;
-/*     */     private final Snapshot this$0;
+/*     */     private ByteArrayOutputStream B;
 /*     */ 
-/*     */     private SnapshotOutputStream(ByteArrayOutputStream arg2)
+/*     */     private _B(ByteArrayOutputStream arg2)
 /*     */     {
 /* 712 */       super();
-/*     */ 
-/* 709 */       this.this$0 = this$1;
-/*     */ 
-/* 713 */       this.m_outputBuffer = localOutputStream;
+/* 713 */       this.B = localOutputStream;
 /*     */     }
 /*     */ 
-/*     */     public void writeBytes(int[] paramArrayOfInt)
+/*     */     public void A(int[] paramArrayOfInt)
 /*     */       throws IOException
 /*     */     {
 /* 727 */       if (paramArrayOfInt != null)
@@ -205,7 +201,7 @@
 /* 729 */           write(paramArrayOfInt[i]);
 /*     */     }
 /*     */ 
-/*     */     void writeUnsignedInt(long paramLong)
+/*     */     void A(long paramLong)
 /*     */       throws IOException
 /*     */     {
 /* 743 */       Contract.pre((paramLong >= 0L) && (paramLong <= 4294967295L));
@@ -219,40 +215,33 @@
 /* 756 */       writeShort(j);
 /*     */     }
 /*     */ 
-/*     */     private ByteArrayOutputStream getOutputBuffer()
+/*     */     private ByteArrayOutputStream A()
 /*     */     {
-/* 765 */       return this.m_outputBuffer;
-/*     */     }
-/*     */ 
-/*     */     SnapshotOutputStream(ByteArrayOutputStream param1, Snapshot.1 arg3)
-/*     */     {
-/* 696 */       this(param1);
+/* 765 */       return this.B;
 /*     */     }
 /*     */   }
 /*     */ 
-/*     */   private final class Element
+/*     */   private final class _A
 /*     */   {
-/*     */     private static final int MAX_BYTE_VALUE = 255;
-/*     */     private static final int MAX_STANDARD_ELEMENT_LENGTH = 65535;
-/*     */     private static final int MIN_LARGE_ELEMENT_CODE = 10000;
-/*     */     private int m_code;
-/*     */     private int m_length;
-/*     */     private int[] m_rawData;
-/*     */     private final Snapshot this$0;
+/*     */     private static final int E = 255;
+/*     */     private static final int B = 65535;
+/*     */     private static final int D = 10000;
+/*     */     private int F;
+/*     */     private int C;
+/*     */     private int[] G;
 /*     */ 
-/*     */     private Element(int paramArrayOfInt, int[] paramInt1, int arg4)
+/*     */     private _A(int paramArrayOfInt, int[] paramInt1, int arg4)
 /*     */     {
-/* 569 */       this.this$0 = this$1;
 /* 570 */       Contract.pre(paramInt1 != null);
 /*     */       int i;
 /* 571 */       Contract.pre(paramInt1.length >= i);
 /*     */ 
-/* 573 */       this.m_code = paramArrayOfInt;
-/* 574 */       this.m_length = i;
-/* 575 */       this.m_rawData = paramInt1;
+/* 573 */       this.F = paramArrayOfInt;
+/* 574 */       this.C = i;
+/* 575 */       this.G = paramInt1;
 /*     */     }
 /*     */ 
-/*     */     private Element()
+/*     */     private _A()
 /*     */     {
 /* 583 */       this(0, new int[0], 0);
 /*     */     }
@@ -261,101 +250,94 @@
 /*     */     {
 /* 594 */       StringBuffer localStringBuffer = new StringBuffer();
 /*     */ 
-/* 596 */       localStringBuffer.append("code=" + this.m_code + ", dataLen=" + this.m_length + ", hex data bytes follow..." + Snapshot.TERM);
+/* 596 */       localStringBuffer.append("code=" + this.F + ", dataLen=" + this.C + ", hex data bytes follow..." + CA.C());
 /*     */ 
-/* 600 */       for (int i = 0; i < this.m_length; i++) {
-/* 601 */         localStringBuffer.append(MedicalDevice.Util.getHexCompact(this.m_rawData[i]) + " ");
+/* 600 */       for (int i = 0; i < this.C; i++) {
+/* 601 */         localStringBuffer.append(O._B.F(this.G[i]) + " ");
 /*     */       }
 /* 603 */       return localStringBuffer.toString();
 /*     */     }
 /*     */ 
-/*     */     private int write(boolean paramBoolean)
+/*     */     private int A(boolean paramBoolean)
 /*     */       throws IOException
 /*     */     {
 /* 620 */       int i = 0;
 /*     */ 
-/* 622 */       Contract.pre(this.this$0.m_snapshotOutputStream != null);
-/* 623 */       Contract.pre(this.m_rawData != null);
-/* 624 */       Contract.pre(this.m_rawData.length >= this.m_length);
+/* 622 */       Contract.pre(CA.A(this.A) != null);
+/* 623 */       Contract.pre(this.G != null);
+/* 624 */       Contract.pre(this.G.length >= this.C);
 /*     */ 
-/* 627 */       if (this.m_code < 10000) {
-/* 628 */         Contract.pre(this.m_length <= 65535);
+/* 627 */       if (this.F < 10000) {
+/* 628 */         Contract.pre(this.C <= 65535);
 /*     */       }
 /*     */ 
-/* 632 */       for (int j = 0; j < this.m_length; j++) {
-/* 633 */         Contract.pre(this.m_rawData[j] <= 255);
+/* 632 */       for (int j = 0; j < this.C; j++) {
+/* 633 */         Contract.pre(this.G[j] <= 255);
 /*     */       }
 /*     */ 
-/* 637 */       this.this$0.m_snapshotOutputStream.writeShort(this.m_code);
+/* 637 */       CA.A(this.A).writeShort(this.F);
 /* 638 */       i += 2;
 /*     */ 
-/* 641 */       if (this.m_code < 10000)
+/* 641 */       if (this.F < 10000)
 /*     */       {
-/* 643 */         this.this$0.m_snapshotOutputStream.writeShort(this.m_length);
+/* 643 */         CA.A(this.A).writeShort(this.C);
 /* 644 */         i += 2;
 /*     */       }
 /*     */       else {
-/* 647 */         this.this$0.m_snapshotOutputStream.writeUnsignedInt(this.m_length);
+/* 647 */         CA.A(this.A).A(this.C);
 /* 648 */         i += 4;
 /*     */       }
 /*     */ 
-/* 652 */       for (j = 0; j < this.m_length; j++) {
-/* 653 */         this.this$0.m_snapshotOutputStream.writeByte(this.m_rawData[j]);
+/* 652 */       for (j = 0; j < this.C; j++) {
+/* 653 */         CA.A(this.A).writeByte(this.G[j]);
 /*     */       }
 /*     */ 
-/* 656 */       i += this.m_length;
+/* 656 */       i += this.C;
 /* 657 */       if (paramBoolean) {
-/* 658 */         MedicalDevice.logInfo(this, "write: number of data bytes written for element " + this.m_code + "=" + this.m_length);
+/* 658 */         O.A(this, "write: number of data bytes written for element " + this.F + "=" + this.C);
 /*     */       }
 /*     */ 
 /* 662 */       return i;
 /*     */     }
 /*     */ 
-/*     */     private void writeText(PrintWriter paramPrintWriter)
+/*     */     private void A(PrintWriter paramPrintWriter)
 /*     */     {
 /* 674 */       Contract.pre(paramPrintWriter != null);
-/* 675 */       Contract.pre(this.m_rawData != null);
-/* 676 */       Contract.pre(this.m_rawData.length >= this.m_length);
+/* 675 */       Contract.pre(this.G != null);
+/* 676 */       Contract.pre(this.G.length >= this.C);
 /*     */ 
-/* 678 */       for (int i = 0; i < this.m_length; i++) {
-/* 679 */         Contract.pre(this.m_rawData[i] <= 255);
+/* 678 */       for (int i = 0; i < this.C; i++) {
+/* 679 */         Contract.pre(this.G[i] <= 255);
 /*     */       }
 /*     */ 
 /* 683 */       paramPrintWriter.println(toString());
 /* 684 */       paramPrintWriter.println();
 /*     */     }
-/*     */ 
-/*     */     Element(int paramArrayOfInt, int[] paramInt1, int param1, Snapshot.1 arg5)
-/*     */     {
-/* 538 */       this(paramArrayOfInt, paramInt1, param1);
-/*     */     }
 /*     */   }
 /*     */ 
-/*     */   private final class Header
+/*     */   private final class _C
 /*     */   {
-/*     */     private int m_snapshotFormatID;
-/*     */     private int m_snapshotVersion;
-/*     */     private int m_snapshotCRC;
-/*     */     private int m_twoBytesUnused;
-/*     */     private int[] m_deviceFirmwareVersion;
-/*     */     private int[] m_deviceSerialNumber;
-/*     */     private int[] m_deviceTime;
-/*     */     private final Snapshot this$0;
+/*     */     private int H;
+/*     */     private int D;
+/*     */     private int F;
+/*     */     private int C;
+/*     */     private int[] E;
+/*     */     private int[] G;
+/*     */     private int[] B;
 /*     */ 
-/*     */     private Header(int paramInt1, int paramArrayOfInt1, int[] paramArrayOfInt2, int[] paramArrayOfInt3, int[] arg6)
+/*     */     private _C(int paramInt1, int paramArrayOfInt1, int[] paramArrayOfInt2, int[] paramArrayOfInt3, int[] arg6)
 /*     */     {
-/* 404 */       this.this$0 = this$1;
-/* 405 */       this.m_snapshotFormatID = paramInt1;
-/* 406 */       this.m_snapshotVersion = paramArrayOfInt1;
-/* 407 */       this.m_snapshotCRC = 0;
-/* 408 */       this.m_twoBytesUnused = 0;
-/* 409 */       this.m_deviceFirmwareVersion = paramArrayOfInt2;
-/* 410 */       this.m_deviceSerialNumber = paramArrayOfInt3;
+/* 405 */       this.H = paramInt1;
+/* 406 */       this.D = paramArrayOfInt1;
+/* 407 */       this.F = 0;
+/* 408 */       this.C = 0;
+/* 409 */       this.E = paramArrayOfInt2;
+/* 410 */       this.G = paramArrayOfInt3;
 /*     */       Object localObject;
-/* 411 */       this.m_deviceTime = localObject;
+/* 411 */       this.B = localObject;
 /*     */     }
 /*     */ 
-/*     */     private Header()
+/*     */     private _C()
 /*     */     {
 /* 419 */       this(0, 0, new int[0], new int[0], new int[0]);
 /*     */     }
@@ -364,82 +346,77 @@
 /*     */     {
 /* 430 */       StringBuffer localStringBuffer = new StringBuffer();
 /*     */ 
-/* 432 */       localStringBuffer.append("snapshotFormatID=" + this.m_snapshotFormatID + Snapshot.TERM);
+/* 432 */       localStringBuffer.append("snapshotFormatID=" + this.H + CA.C());
 /*     */ 
-/* 435 */       localStringBuffer.append("snapshotVersion=" + this.m_snapshotVersion + Snapshot.TERM);
+/* 435 */       localStringBuffer.append("snapshotVersion=" + this.D + CA.C());
 /*     */ 
-/* 438 */       localStringBuffer.append("snapshotCRC=" + MedicalDevice.Util.getHex(this.m_snapshotCRC) + "; ");
+/* 438 */       localStringBuffer.append("snapshotCRC=" + O._B.H(this.F) + "; ");
 /*     */ 
-/* 441 */       localStringBuffer.append("unused=" + MedicalDevice.Util.getHex(this.m_twoBytesUnused) + Snapshot.TERM);
+/* 441 */       localStringBuffer.append("unused=" + O._B.H(this.C) + CA.C());
 /*     */ 
-/* 444 */       String str = new String(MedicalDevice.Util.makeByteArray(this.m_deviceFirmwareVersion));
-/* 445 */       str = MedicalDevice.Util.convertControlChars(str);
-/* 446 */       localStringBuffer.append("firmware=" + str + Snapshot.TERM);
+/* 444 */       String str = new String(O._B.B(this.E));
+/* 445 */       str = O._B.E(str);
+/* 446 */       localStringBuffer.append("firmware=" + str + CA.C());
 /*     */ 
-/* 449 */       str = new String(MedicalDevice.Util.makeByteArray(this.m_deviceSerialNumber));
-/* 450 */       str = MedicalDevice.Util.convertControlChars(str);
-/* 451 */       localStringBuffer.append("serialNum=" + str + Snapshot.TERM);
+/* 449 */       str = new String(O._B.B(this.G));
+/* 450 */       str = O._B.E(str);
+/* 451 */       localStringBuffer.append("serialNum=" + str + CA.C());
 /*     */ 
-/* 454 */       localStringBuffer.append("timeStamp=" + MedicalDevice.Util.getHexCompact(this.m_deviceTime));
+/* 454 */       localStringBuffer.append("timeStamp=" + O._B.G(this.B));
 /* 455 */       return localStringBuffer.toString();
 /*     */     }
 /*     */ 
-/*     */     private int write(boolean paramBoolean)
+/*     */     private int A(boolean paramBoolean)
 /*     */       throws IOException
 /*     */     {
 /* 472 */       int i = 0;
 /*     */ 
-/* 474 */       Contract.pre(this.this$0.m_snapshotOutputStream != null);
-/* 475 */       Contract.pre(this.m_deviceFirmwareVersion != null);
-/* 476 */       Contract.pre(this.m_deviceSerialNumber != null);
-/* 477 */       Contract.pre(this.m_deviceTime != null);
+/* 474 */       Contract.pre(CA.A(this.A) != null);
+/* 475 */       Contract.pre(this.E != null);
+/* 476 */       Contract.pre(this.G != null);
+/* 477 */       Contract.pre(this.B != null);
 /*     */ 
-/* 480 */       this.this$0.m_snapshotOutputStream.writeShort(this.m_snapshotFormatID);
+/* 480 */       CA.A(this.A).writeShort(this.H);
 /* 481 */       i += 2;
 /*     */ 
-/* 484 */       this.this$0.m_snapshotOutputStream.writeShort(this.m_snapshotVersion);
+/* 484 */       CA.A(this.A).writeShort(this.D);
 /* 485 */       i += 2;
 /*     */ 
-/* 488 */       this.this$0.m_snapshotOutputStream.writeShort(this.m_snapshotCRC);
+/* 488 */       CA.A(this.A).writeShort(this.F);
 /* 489 */       i += 2;
 /*     */ 
-/* 492 */       this.this$0.m_snapshotOutputStream.writeShort(this.m_twoBytesUnused);
+/* 492 */       CA.A(this.A).writeShort(this.C);
 /* 493 */       i += 2;
 /*     */ 
-/* 496 */       this.this$0.m_snapshotOutputStream.writeBytes(this.m_deviceFirmwareVersion);
-/* 497 */       i += this.m_deviceFirmwareVersion.length;
+/* 496 */       CA.A(this.A).A(this.E);
+/* 497 */       i += this.E.length;
 /*     */ 
-/* 500 */       this.this$0.m_snapshotOutputStream.writeBytes(this.m_deviceSerialNumber);
-/* 501 */       i += this.m_deviceSerialNumber.length;
+/* 500 */       CA.A(this.A).A(this.G);
+/* 501 */       i += this.G.length;
 /*     */ 
-/* 504 */       this.this$0.m_snapshotOutputStream.writeBytes(this.m_deviceTime);
-/* 505 */       i += this.m_deviceTime.length;
+/* 504 */       CA.A(this.A).A(this.B);
+/* 505 */       i += this.B.length;
 /*     */ 
 /* 507 */       if (paramBoolean) {
-/* 508 */         MedicalDevice.logInfo(this, "write: number of bytes written for header = " + i);
+/* 508 */         O.A(this, "write: number of bytes written for header = " + i);
 /*     */       }
 /*     */ 
 /* 511 */       return i;
 /*     */     }
 /*     */ 
-/*     */     private void writeText(PrintWriter paramPrintWriter)
+/*     */     private void A(PrintWriter paramPrintWriter)
 /*     */     {
 /* 524 */       Contract.pre(paramPrintWriter != null);
-/* 525 */       Contract.pre(this.m_deviceFirmwareVersion != null);
-/* 526 */       Contract.pre(this.m_deviceSerialNumber != null);
-/* 527 */       Contract.pre(this.m_deviceTime != null);
+/* 525 */       Contract.pre(this.E != null);
+/* 526 */       Contract.pre(this.G != null);
+/* 527 */       Contract.pre(this.B != null);
 /*     */ 
 /* 529 */       paramPrintWriter.println(toString());
-/*     */     }
-/*     */ 
-/*     */     Header(int paramInt1, int paramArrayOfInt1, int[] paramArrayOfInt2, int[] paramArrayOfInt3, int[] param1, Snapshot.1 arg7)
-/*     */     {
-/* 353 */       this(paramInt1, paramArrayOfInt1, paramArrayOfInt2, paramArrayOfInt3, param1);
 /*     */     }
 /*     */   }
 /*     */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.Snapshot
+ * Qualified Name:     minimed.ddms.A.CA
  * JD-Core Version:    0.6.0
  */

@@ -12,6 +12,7 @@
 /*    */ import minimed.ddms.applet.dtw.wizard.WizardConfig;
 /*    */ import minimed.ddms.applet.dtw.wizard.WizardSelections;
 /*    */ import minimed.ddms.applet.dtw.wizard.WizardStep;
+/*    */ import minimed.util.OSInfo;
 /*    */ 
 /*    */ public class TurnOffParadigmLinkStep extends WizardStep
 /*    */ {
@@ -19,41 +20,41 @@
 /*    */ 
 /*    */   public TurnOffParadigmLinkStep(Wizard paramWizard)
 /*    */   {
-/* 47 */     super(paramWizard, null);
+/* 48 */     super(paramWizard, null);
 /*    */ 
-/* 50 */     getLeftBannerLabel().setText(this.m_resources.getString("wizard.paradigm.off"));
-/* 51 */     Object localObject = new ImageIcon(getImage("wizard.read.icon"));
-/* 52 */     getRightBannerLabel().setIcon((Icon)localObject);
+/* 51 */     getLeftBannerLabel().setText(this.m_resources.getString("wizard.paradigm.off"));
+/* 52 */     Object localObject = new ImageIcon(getImage("wizard.read.icon"));
+/* 53 */     getRightBannerLabel().setIcon((Icon)localObject);
 /*    */ 
-/* 55 */     localObject = getWarningIcon();
-/* 56 */     getTopImageLabel().setIcon((Icon)localObject);
+/* 56 */     localObject = getWarningIcon();
+/* 57 */     getTopImageLabel().setIcon((Icon)localObject);
 /*    */ 
-/* 59 */     JPanel localJPanel = getContentArea();
-/* 60 */     localJPanel.setLayout(new GridBagLayout());
-/* 61 */     String str = this.m_resources.getString("wizard.paradigm.off.expanded");
-/* 62 */     GridBagConstraints localGridBagConstraints = new GridBagConstraints();
-/* 63 */     localGridBagConstraints.gridx = 1;
-/* 64 */     localGridBagConstraints.gridy = 0;
-/* 65 */     localGridBagConstraints.insets = new Insets(0, 20, 100, 0);
-/* 66 */     localJPanel.add(new JLabel(str), localGridBagConstraints);
+/* 60 */     JPanel localJPanel = getContentArea();
+/* 61 */     localJPanel.setLayout(new GridBagLayout());
+/* 62 */     String str = this.m_resources.getString("wizard.paradigm.off.expanded");
+/* 63 */     GridBagConstraints localGridBagConstraints = new GridBagConstraints();
+/* 64 */     localGridBagConstraints.gridx = 1;
+/* 65 */     localGridBagConstraints.gridy = 0;
+/* 66 */     localGridBagConstraints.insets = new Insets(0, 20, 100, 0);
+/* 67 */     localJPanel.add(new JLabel(str), localGridBagConstraints);
 /*    */ 
-/* 69 */     localGridBagConstraints = new GridBagConstraints();
-/* 70 */     localGridBagConstraints.gridx = 0;
-/* 71 */     localGridBagConstraints.gridy = 0;
-/* 72 */     localGridBagConstraints.anchor = 10;
-/* 73 */     localJPanel.add(new JLabel(new ImageIcon(getImage("wizard.paradigmlinkoff.pic"))), localGridBagConstraints);
+/* 70 */     localGridBagConstraints = new GridBagConstraints();
+/* 71 */     localGridBagConstraints.gridx = 0;
+/* 72 */     localGridBagConstraints.gridy = 0;
+/* 73 */     localGridBagConstraints.anchor = 10;
+/* 74 */     localJPanel.add(new JLabel(new ImageIcon(getImage("wizard.paradigmlinkoff.pic"))), localGridBagConstraints);
 /*    */   }
 /*    */ 
 /*    */   protected Class getNextClass()
 /*    */   {
-/* 85 */     Class localClass = SelectConnectionTypeStep.class;
-/* 86 */     if (getWizard().getConfig().isWindowsNT())
+/* 86 */     Object localObject = SelectConnectionTypeStep.class;
+/* 87 */     if ((getWizard().getConfig().isWindowsNT()) || (OSInfo.isMac()))
 /*    */     {
-/* 88 */       getWizardSelections().setConnectionType("wizard.selections.SELECTION_CONN_TYPE_SERIAL");
+/* 89 */       getWizardSelections().setConnectionType("wizard.selections.SELECTION_CONN_TYPE_SERIAL");
 /*    */ 
-/* 90 */       localClass = PumpSelectSerialPortStep.class;
+/* 91 */       localObject = PumpSelectSerialPortStep.class;
 /*    */     }
-/* 92 */     return localClass;
+/* 93 */     return (Class)localObject;
 /*    */   }
 /*    */ }
 

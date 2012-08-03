@@ -27,6 +27,8 @@
 /*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_ASCENSIA_CONTOUR_METER = "wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER";
 /*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_ASCENSIA_DEX_METER = "wizard.selections.SELECTION_DEVICE_ASCENSIA_DEX_METER";
 /*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_ASCENSIA_ELITE_METER = "wizard.selections.SELECTION_DEVICE_ASCENSIA_ELITE_METER";
+/*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_ASCENSIA_CONTOUR_USB_METER = "wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_USB_METER";
+/*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_ASCENSIA_CONTOUR_XT_LINK_METER = "wizard.selections.SELECTION_DEVICE_XTLINKMETER";
 /*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_LIFESCAN_BASIC_METER = "wizard.selections.SELECTION_DEVICE_LIFESCAN_BASIC_METER";
 /*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_LIFESCAN_FASTTAKE_METER = "wizard.selections.SELECTION_DEVICE_LIFESCAN_FASTTAKE_METER";
 /*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_LIFESCAN_PROFILE_METER = "wizard.selections.SELECTION_DEVICE_LIFESCAN_PROFILE_METER";
@@ -35,8 +37,6 @@
 /*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_LIFESCAN_ULTRASMART_METER = "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRASMART_METER";
 /*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_LIFESCAN_ULTRAMINI_METER = "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRAMINI_METER";
 /*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_MEDISENSE_XTRA_METER = "wizard.selections.SELECTION_DEVICE_MEDISENSE_XTRA_METER";
-/*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_MM508 = "wizard.selections.SELECTION_DEVICE_MM508";
-/*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_MM511 = "wizard.selections.SELECTION_DEVICE_MM511";
 /*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_MMGUARDIAN3 = "wizard.selections.SELECTION_DEVICE_MMGUARDIAN3";
 /*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_MMLINKMETER = "wizard.selections.SELECTION_DEVICE_MMLINKMETER";
 /*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_MMLOGICMETER = "wizard.selections.SELECTION_DEVICE_MMLOGICMETER";
@@ -44,6 +44,7 @@
 /*      */   public static final String KEY_RESOURCE_SELECTION_DEVICE_THERASENSE_FREESTYLE_METER = "wizard.selections.SELECTION_DEVICE_THERASENSE_FREESTYLE_METER";
 /*      */   public static final String KEY_RESOURCE_SELECTION_GROUP_MEDISENSE_THERASENSE = "wizard.selections.SELECTION_GROUP_MEDISENSE_THERASENSE";
 /*      */   public static final String KEY_RESOURCE_SELECTION_LINK_DEVICE_COMLINK = "wizard.selections.SELECTION_LINK_DEVICE_COMLINK";
+/*      */   public static final String KEY_RESOURCE_SELECTION_LINK_DEVICE_XTLINKUSB = "wizard.selections.SELECTION_LINK_DEVICE_XTLINKUSB";
 /*      */   public static final String KEY_RESOURCE_SELECTION_LINK_DEVICE_COMLINKUSB = "wizard.selections.SELECTION_LINK_DEVICE_COMLINKUSB";
 /*      */   public static final String KEY_RESOURCE_SELECTION_LINK_DEVICE_PARADIGMLINK = "wizard.selections.SELECTION_LINK_DEVICE_PARADIGMLINK";
 /*      */   public static final String KEY_RESOURCE_SELECTION_SERIAL_PORT_AUTO_DETECT = "wizard.selections.SELECTION_SERIAL_PORT_AUTO_DETECT";
@@ -78,61 +79,61 @@
 /*      */   private static final List VALID_METER_BRANDS;
 /*      */   private static final List VALID_SERIAL_PORT_METHODS;
 /*      */   private static final Map METERS_BY_BRAND;
-/*  511 */   private final ResourceBundle m_resources = DTWApplet.getResourceBundle();
+/*  521 */   private final ResourceBundle m_resources = DTWApplet.getResourceBundle();
 /*      */ 
-/*  516 */   final String m_tokenDeviceMMParadigm2X15 = this.m_resources.getString("wizard.selections.TOKEN_DEVICE_MMPARADIGM2_X15");
+/*  526 */   final String m_tokenDeviceMMParadigm2X15 = this.m_resources.getString("wizard.selections.TOKEN_DEVICE_MMPARADIGM2_X15");
 /*      */ 
-/*  522 */   final String m_tokenDeviceMMParadigm2All = this.m_resources.getString("wizard.selections.TOKEN_DEVICE_MMPARADIGM2_ALL");
+/*  532 */   public final String m_selectionDeviceMMLinkmeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_MMLINKMETER");
 /*      */ 
-/*  528 */   public final String m_selectionDeviceMMLinkmeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_MMLINKMETER");
+/*  538 */   public final String m_selectionDeviceMMLogicMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_MMLOGICMETER");
 /*      */ 
-/*  534 */   public final String m_selectionDeviceMMLogicMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_MMLOGICMETER");
+/*  544 */   public final String m_selectionBrandBD = this.m_resources.getString("wizard.selections.SELECTION_BRAND_BD");
 /*      */ 
-/*  540 */   public final String m_selectionBrandBD = this.m_resources.getString("wizard.selections.SELECTION_BRAND_BD");
+/*  550 */   public final String m_selectionBrandMinimed = this.m_resources.getString("wizard.selections.SELECTION_BRAND_MINIMED_BD");
 /*      */ 
-/*  546 */   public final String m_selectionBrandMinimed = this.m_resources.getString("wizard.selections.SELECTION_BRAND_MINIMED_BD");
+/*  556 */   public final String m_selectionBrandAscensiaBayer = this.m_resources.getString("wizard.selections.SELECTION_BRAND_ASCENSIA_BAYER");
 /*      */ 
-/*  552 */   public final String m_selectionBrandAscensiaBayer = this.m_resources.getString("wizard.selections.SELECTION_BRAND_ASCENSIA_BAYER");
+/*  562 */   public final String m_selectionBrandLifeScan = this.m_resources.getString("wizard.selections.SELECTION_BRAND_LIFESCAN");
 /*      */ 
-/*  558 */   public final String m_selectionBrandLifeScan = this.m_resources.getString("wizard.selections.SELECTION_BRAND_LIFESCAN");
+/*  568 */   public final String m_selectionBrandRoche = this.m_resources.getString("wizard.selections.SELECTION_BRAND_ROCHE");
 /*      */ 
-/*  564 */   public final String m_selectionBrandRoche = this.m_resources.getString("wizard.selections.SELECTION_BRAND_ROCHE");
+/*  574 */   public final String m_selectionGroupMedisenseTherasense = this.m_resources.getString("wizard.selections.SELECTION_GROUP_MEDISENSE_THERASENSE");
 /*      */ 
-/*  570 */   public final String m_selectionGroupMedisenseTherasense = this.m_resources.getString("wizard.selections.SELECTION_GROUP_MEDISENSE_THERASENSE");
+/*  580 */   public final String m_selectionDeviceLifeScanProfileMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_LIFESCAN_PROFILE_METER");
 /*      */ 
-/*  576 */   public final String m_selectionDeviceLifeScanProfileMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_LIFESCAN_PROFILE_METER");
+/*  586 */   public final String m_selectionDeviceLifeScanUltraMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER");
 /*      */ 
-/*  582 */   public final String m_selectionDeviceLifeScanUltraMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER");
+/*  592 */   public final String m_selectionDeviceAscensiaContourXTLink = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_XTLINKMETER");
 /*      */ 
-/*  588 */   public final String m_selectionDeviceAscensiaContourLink = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_LINK");
+/*  597 */   public final String m_selectionDeviceAscensiaContourLink = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_LINK");
 /*      */ 
-/*  594 */   public final String m_selectionDeviceLifeScanUltraLink = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_LINK");
+/*  603 */   public final String m_selectionDeviceLifeScanUltraLink = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_LINK");
 /*      */ 
-/*  600 */   public final String m_selectionDeviceLifeScanUltraSmartMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRASMART_METER");
+/*  609 */   public final String m_selectionDeviceLifeScanUltraSmartMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRASMART_METER");
 /*      */ 
-/*  606 */   public final String m_selectionDeviceLifeScanUltraMiniMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRAMINI_METER");
+/*  615 */   public final String m_selectionDeviceLifeScanUltraMiniMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRAMINI_METER");
 /*      */ 
-/*  612 */   public final String m_selectionDeviceLifeScanBasicMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_LIFESCAN_BASIC_METER");
+/*  621 */   public final String m_selectionDeviceLifeScanBasicMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_LIFESCAN_BASIC_METER");
 /*      */ 
-/*  618 */   public final String m_selectionDeviceLifeScanFastTakeMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_LIFESCAN_FASTTAKE_METER");
+/*  627 */   public final String m_selectionDeviceLifeScanFastTakeMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_LIFESCAN_FASTTAKE_METER");
 /*      */ 
-/*  624 */   public final String m_selectionDeviceLifeScanSureStepMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_LIFESCAN_SURESTEP_METER");
+/*  633 */   public final String m_selectionDeviceLifeScanSureStepMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_LIFESCAN_SURESTEP_METER");
 /*      */ 
-/*  630 */   final String m_tokenDeviceTheraSenseFreeStyleMeter = this.m_resources.getString("wizard.selections.TOKEN_DEVICE_THERASENSE_FREESTYLE_METER");
+/*  639 */   final String m_tokenDeviceTheraSenseFreeStyleMeter = this.m_resources.getString("wizard.selections.TOKEN_DEVICE_THERASENSE_FREESTYLE_METER");
 /*      */ 
-/*  636 */   public final String m_selectionDeviceRocheActiveMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_ROCHE_ACTIVE_METER");
+/*  645 */   public final String m_selectionDeviceRocheActiveMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_ROCHE_ACTIVE_METER");
 /*      */ 
-/*  642 */   public final String m_selectionDeviceRocheAvivaMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_ROCHE_AVIVA_METER");
+/*  651 */   public final String m_selectionDeviceRocheAvivaMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_ROCHE_AVIVA_METER");
 /*      */ 
-/*  648 */   public final String m_selectionDeviceRocheCompactMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_ROCHE_COMPACT_METER");
+/*  657 */   public final String m_selectionDeviceRocheCompactMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_ROCHE_COMPACT_METER");
 /*      */ 
-/*  654 */   public final String m_selectionDeviceRocheCompactPlusMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_ROCHE_COMPACTPLUS_METER");
+/*  663 */   public final String m_selectionDeviceRocheCompactPlusMeter = this.m_resources.getString("wizard.selections.SELECTION_DEVICE_ROCHE_COMPACTPLUS_METER");
 /*      */ 
-/*  660 */   public final String m_selectionLinkDeviceParadigmLink = this.m_resources.getString("wizard.selections.SELECTION_LINK_DEVICE_PARADIGMLINK");
+/*  669 */   public final String m_selectionLinkDeviceParadigmLink = this.m_resources.getString("wizard.selections.SELECTION_LINK_DEVICE_PARADIGMLINK");
 /*      */ 
-/*  666 */   public final String m_selectionSerialPortAutoDetect = this.m_resources.getString("wizard.selections.SELECTION_SERIAL_PORT_AUTO_DETECT");
+/*  675 */   public final String m_selectionSerialPortAutoDetect = this.m_resources.getString("wizard.selections.SELECTION_SERIAL_PORT_AUTO_DETECT");
 /*      */ 
-/*  672 */   public final String m_selectionSerialPortSelectPort = this.m_resources.getString("wizard.selections.SELECTION_SERIAL_PORT_SELECT_PORT");
+/*  681 */   public final String m_selectionSerialPortSelectPort = this.m_resources.getString("wizard.selections.SELECTION_SERIAL_PORT_SELECT_PORT");
 /*      */   private final PreferencesHelper m_preferencesHelper;
 /*      */   private DeviceID m_currentPumpID;
 /*      */   private DeviceID m_currentMeterID;
@@ -140,447 +141,466 @@
 /*      */ 
 /*      */   public WizardSelections(LogWriter paramLogWriter)
 /*      */   {
-/*  704 */     Contract.preNonNull(paramLogWriter);
-/*  705 */     this.m_preferencesHelper = new PreferencesHelper(paramLogWriter);
+/*  713 */     Contract.preNonNull(paramLogWriter);
+/*  714 */     this.m_preferencesHelper = new PreferencesHelper(paramLogWriter);
 /*      */   }
 /*      */ 
 /*      */   public String toString()
 /*      */   {
-/*  716 */     PropertyWriter localPropertyWriter = new PropertyWriter();
-/*  717 */     localPropertyWriter.add("isUserInputCompleted", isUserInputCompleted());
-/*  718 */     localPropertyWriter.add("currentPumpID", this.m_currentPumpID);
-/*  719 */     localPropertyWriter.add("currentMeterID", this.m_currentMeterID);
-/*  720 */     localPropertyWriter.add("currentCGMID", this.m_currentCGMID);
-/*  721 */     localPropertyWriter.add("serialPortName", getSerialPortName());
-/*  722 */     localPropertyWriter.add("serialPort", getSerialPort());
-/*  723 */     localPropertyWriter.add("meterDevice", getMeterDevice());
-/*  724 */     localPropertyWriter.add("pumpDevice", getPumpDevice());
-/*  725 */     localPropertyWriter.add("linkDevice", getLinkDevice());
-/*  726 */     localPropertyWriter.add("device", getDeviceType());
-/*  727 */     localPropertyWriter.add("connectionType", getConnectionType());
-/*  728 */     return localPropertyWriter.toString();
+/*  725 */     PropertyWriter localPropertyWriter = new PropertyWriter();
+/*  726 */     localPropertyWriter.add("isUserInputCompleted", isUserInputCompleted());
+/*  727 */     localPropertyWriter.add("currentPumpID", this.m_currentPumpID);
+/*  728 */     localPropertyWriter.add("currentMeterID", this.m_currentMeterID);
+/*  729 */     localPropertyWriter.add("currentCGMID", this.m_currentCGMID);
+/*  730 */     localPropertyWriter.add("serialPortName", getSerialPortName());
+/*  731 */     localPropertyWriter.add("serialPort", getSerialPort());
+/*  732 */     localPropertyWriter.add("meterDevice", getMeterDevice());
+/*  733 */     localPropertyWriter.add("pumpDevice", getPumpDevice());
+/*  734 */     localPropertyWriter.add("linkDevice", getLinkDevice());
+/*  735 */     localPropertyWriter.add("device", getDeviceType());
+/*  736 */     localPropertyWriter.add("connectionType", getConnectionType());
+/*  737 */     return localPropertyWriter.toString();
 /*      */   }
 /*      */ 
 /*      */   public void flush()
 /*      */   {
-/*  735 */     this.m_preferencesHelper.flushSystemPreferences();
+/*  744 */     this.m_preferencesHelper.flushSystemPreferences();
 /*      */   }
 /*      */ 
 /*      */   public void setConnectionType(String paramString)
 /*      */   {
-/*  745 */     Contract.pre(VALID_CONNECTION_TYPES.contains(paramString));
-/*  746 */     this.m_preferencesHelper.setSystemPreference("wizard2.connectiontype", paramString);
+/*  754 */     Contract.pre(VALID_CONNECTION_TYPES.contains(paramString));
+/*  755 */     this.m_preferencesHelper.setSystemPreference("wizard2.connectiontype", paramString);
 /*      */   }
 /*      */ 
 /*      */   public void setLinkDevice(String paramString)
 /*      */   {
-/*  756 */     Contract.pre(VALID_LINK_DEVICES.contains(paramString));
-/*  757 */     this.m_preferencesHelper.setSystemPreference("wizard2.linkdevice", paramString);
+/*  765 */     Contract.pre(VALID_LINK_DEVICES.contains(paramString));
+/*  766 */     this.m_preferencesHelper.setSystemPreference("wizard2.linkdevice", paramString);
 /*      */   }
 /*      */ 
 /*      */   public void setPumpDevice(String paramString)
 /*      */   {
-/*  767 */     Contract.pre(VALID_PUMP_DEVICES.contains(paramString));
-/*  768 */     this.m_preferencesHelper.setSystemPreference("wizard2.pumpdevice", paramString);
+/*  776 */     Contract.pre(VALID_PUMP_DEVICES.contains(paramString));
+/*  777 */     this.m_preferencesHelper.setSystemPreference("wizard2.pumpdevice", paramString);
 /*      */   }
 /*      */ 
 /*      */   public void setDeviceType(String paramString)
 /*      */   {
-/*  779 */     Contract.pre(VALID_DEVICE_TYPES.contains(paramString));
-/*  780 */     this.m_preferencesHelper.setSystemPreference("wizard2.devicetype", paramString);
+/*  788 */     Contract.pre(VALID_DEVICE_TYPES.contains(paramString));
+/*  789 */     this.m_preferencesHelper.setSystemPreference("wizard2.devicetype", paramString);
 /*      */   }
 /*      */ 
 /*      */   public void setPumpSerialNumber(String paramString)
 /*      */   {
-/*  790 */     Contract.preString(paramString);
+/*  799 */     Contract.preString(paramString);
 /*      */ 
-/*  792 */     String str = Wizard.mapToServerClassName(getPumpDevice());
-/*  793 */     this.m_currentPumpID = new DeviceID(str, paramString);
+/*  801 */     String str = Wizard.mapToServerClassName(getPumpDevice());
+/*  802 */     this.m_currentPumpID = new DeviceID(str, paramString);
 /*      */   }
 /*      */ 
 /*      */   public void clearPumpSerialNumber()
 /*      */   {
-/*  800 */     this.m_currentPumpID = null;
+/*  809 */     this.m_currentPumpID = null;
 /*      */   }
 /*      */ 
 /*      */   public void setCGMSerialNumber(String paramString)
 /*      */   {
-/*  810 */     Contract.preString(paramString);
+/*  819 */     Contract.preString(paramString);
 /*      */ 
-/*  812 */     String str = Wizard.mapToServerClassName(getCGMDevice());
-/*  813 */     this.m_currentCGMID = new DeviceID(str, paramString);
+/*  821 */     String str = Wizard.mapToServerClassName(getCGMDevice());
+/*  822 */     this.m_currentCGMID = new DeviceID(str, paramString);
 /*      */   }
 /*      */ 
 /*      */   public void clearCGMSerialNumber()
 /*      */   {
-/*  820 */     this.m_currentCGMID = null;
+/*  829 */     this.m_currentCGMID = null;
 /*      */   }
 /*      */ 
 /*      */   public void setMeterSerialNumber(String paramString)
 /*      */   {
-/*  830 */     Contract.preString(paramString);
+/*  839 */     Contract.preString(paramString);
 /*      */ 
-/*  832 */     String str = Wizard.mapToServerClassName(getMeterDevice());
-/*  833 */     this.m_currentMeterID = new DeviceID(str, paramString);
+/*  841 */     String str = Wizard.mapToServerClassName(getMeterDevice());
+/*  842 */     this.m_currentMeterID = new DeviceID(str, paramString);
 /*      */   }
 /*      */ 
 /*      */   public void setMeterDevice(String paramString)
 /*      */   {
-/*  843 */     Contract.pre(VALID_METER_DEVICES.contains(paramString));
-/*  844 */     this.m_preferencesHelper.setSystemPreference("wizard2.meterdevice", paramString);
+/*  852 */     Contract.pre(VALID_METER_DEVICES.contains(paramString));
+/*  853 */     this.m_preferencesHelper.setSystemPreference("wizard2.meterdevice", paramString);
 /*      */   }
 /*      */ 
 /*      */   public void setMeterBrand(String paramString)
 /*      */   {
-/*  854 */     Contract.pre(VALID_METER_BRANDS.contains(paramString));
-/*  855 */     this.m_preferencesHelper.setSystemPreference("wizard2.meterbrand", paramString);
+/*  863 */     Contract.pre(VALID_METER_BRANDS.contains(paramString));
+/*  864 */     this.m_preferencesHelper.setSystemPreference("wizard2.meterbrand", paramString);
 /*      */   }
 /*      */ 
 /*      */   public void setCGMDevice(String paramString)
 /*      */   {
-/*  865 */     Contract.pre(VALID_CGM_DEVICES.contains(paramString));
-/*  866 */     this.m_preferencesHelper.setSystemPreference("wizard2.cgmdevice", paramString);
+/*  874 */     Contract.pre(VALID_CGM_DEVICES.contains(paramString));
+/*  875 */     this.m_preferencesHelper.setSystemPreference("wizard2.cgmdevice", paramString);
 /*      */   }
 /*      */ 
 /*      */   public void setSerialPort(String paramString)
 /*      */   {
-/*  876 */     Contract.pre(VALID_SERIAL_PORT_METHODS.contains(paramString));
-/*  877 */     this.m_preferencesHelper.setSystemPreference("wizard2.serialportmethod", paramString);
+/*  885 */     Contract.pre(VALID_SERIAL_PORT_METHODS.contains(paramString));
+/*  886 */     this.m_preferencesHelper.setSystemPreference("wizard2.serialportmethod", paramString);
 /*      */   }
 /*      */ 
 /*      */   public void setSerialPortName(String paramString)
 /*      */   {
-/*  889 */     Contract.preString(paramString);
-/*  890 */     this.m_preferencesHelper.setSystemPreference("wizard2.serialportname", paramString);
+/*  898 */     Contract.preString(paramString);
+/*  899 */     this.m_preferencesHelper.setSystemPreference("wizard2.serialportname", paramString);
 /*      */   }
 /*      */ 
 /*      */   public void setUserInputCompleted()
 /*      */   {
-/*  900 */     this.m_preferencesHelper.setSystemPreference(getUserInputCompletedKey(), true);
+/*  909 */     this.m_preferencesHelper.setSystemPreference(getUserInputCompletedKey(), true);
 /*      */   }
 /*      */ 
 /*      */   public String getConnectionType()
 /*      */   {
-/*  913 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.connectiontype", VALID_CONNECTION_TYPES, "wizard.selections.SELECTION_CONN_TYPE_USB");
+/*  922 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.connectiontype", VALID_CONNECTION_TYPES, "wizard.selections.SELECTION_CONN_TYPE_USB");
 /*      */ 
-/*  915 */     Contract.post(VALID_CONNECTION_TYPES.contains(str));
-/*  916 */     return str;
+/*  924 */     Contract.post(VALID_CONNECTION_TYPES.contains(str));
+/*  925 */     return str;
 /*      */   }
 /*      */ 
 /*      */   public String getDeviceType()
 /*      */   {
-/*  928 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.devicetype", VALID_DEVICE_TYPES, "wizard.selections.SELECTION_DEVICE_PUMP");
+/*  937 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.devicetype", VALID_DEVICE_TYPES, "wizard.selections.SELECTION_DEVICE_PUMP");
 /*      */ 
-/*  930 */     Contract.post(VALID_DEVICE_TYPES.contains(str));
-/*  931 */     return str;
+/*  939 */     Contract.post(VALID_DEVICE_TYPES.contains(str));
+/*  940 */     return str;
 /*      */   }
 /*      */ 
 /*      */   public String getLinkDevice()
 /*      */   {
-/*  947 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.linkdevice", VALID_LINK_DEVICES, "wizard.selections.SELECTION_LINK_DEVICE_COMLINKUSB");
+/*  955 */     return getLinkDevice("wizard.selections.SELECTION_LINK_DEVICE_COMLINKUSB");
+/*      */   }
 /*      */ 
-/*  949 */     Contract.post(VALID_LINK_DEVICES.contains(str));
-/*  950 */     return str;
+/*      */   public String getLinkDevice(String paramString)
+/*      */   {
+/*  967 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.linkdevice", VALID_LINK_DEVICES, paramString);
+/*      */ 
+/*  969 */     Contract.post(VALID_LINK_DEVICES.contains(str));
+/*  970 */     return str;
 /*      */   }
 /*      */ 
 /*      */   public String getPumpDevice()
 /*      */   {
-/*  962 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.pumpdevice", VALID_PUMP_DEVICES, "wizard.selections.SELECTION_DEVICE_MMPARADIGM2");
+/*  982 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.pumpdevice", VALID_PUMP_DEVICES, "wizard.selections.SELECTION_DEVICE_MMPARADIGM2");
 /*      */ 
-/*  964 */     Contract.post(VALID_PUMP_DEVICES.contains(str));
-/*  965 */     return str;
+/*  984 */     Contract.post(VALID_PUMP_DEVICES.contains(str));
+/*  985 */     return str;
+/*      */   }
+/*      */ 
+/*      */   public String getMeterDevice(String paramString)
+/*      */   {
+/*  997 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.meterdevice", VALID_METER_DEVICES, paramString);
+/*      */ 
+/*  999 */     Contract.post(VALID_METER_DEVICES.contains(str));
+/* 1000 */     return str;
 /*      */   }
 /*      */ 
 /*      */   public String getMeterDevice()
 /*      */   {
-/*  977 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.meterdevice", VALID_METER_DEVICES, "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER");
-/*      */ 
-/*  979 */     Contract.post(VALID_METER_DEVICES.contains(str));
-/*  980 */     return str;
+/* 1011 */     return getMeterDevice("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER");
 /*      */   }
 /*      */ 
 /*      */   public String getCGMDevice()
 /*      */   {
-/*  992 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.cgmdevice", VALID_CGM_DEVICES, "wizard.selections.SELECTION_DEVICE_MMGUARDIAN3");
+/* 1023 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.cgmdevice", VALID_CGM_DEVICES, "wizard.selections.SELECTION_DEVICE_MMGUARDIAN3");
 /*      */ 
-/*  994 */     Contract.post(VALID_CGM_DEVICES.contains(str));
-/*  995 */     return str;
+/* 1025 */     Contract.post(VALID_CGM_DEVICES.contains(str));
+/* 1026 */     return str;
 /*      */   }
 /*      */ 
 /*      */   public String getMeterBrand()
 /*      */   {
-/* 1007 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.meterbrand", VALID_METER_BRANDS, "wizard.selections.SELECTION_BRAND_MINIMED_BD");
+/* 1038 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.meterbrand", VALID_METER_BRANDS, "wizard.selections.SELECTION_BRAND_MINIMED_BD");
 /*      */ 
-/* 1009 */     Contract.post(VALID_METER_BRANDS.contains(str));
-/* 1010 */     return str;
+/* 1040 */     Contract.post(VALID_METER_BRANDS.contains(str));
+/* 1041 */     return str;
+/*      */   }
+/*      */ 
+/*      */   public boolean isRocheMeter()
+/*      */   {
+/* 1050 */     return "wizard.selections.SELECTION_BRAND_ROCHE".equals(getMeterBrand());
 /*      */   }
 /*      */ 
 /*      */   public String getSerialPort()
 /*      */   {
-/* 1022 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.serialportmethod", VALID_SERIAL_PORT_METHODS, "wizard.selections.SELECTION_SERIAL_PORT_AUTO_DETECT");
+/* 1062 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.serialportmethod", VALID_SERIAL_PORT_METHODS, "wizard.selections.SELECTION_SERIAL_PORT_AUTO_DETECT");
 /*      */ 
-/* 1024 */     Contract.post(VALID_SERIAL_PORT_METHODS.contains(str));
-/* 1025 */     return str;
+/* 1064 */     Contract.post(VALID_SERIAL_PORT_METHODS.contains(str));
+/* 1065 */     return str;
 /*      */   }
 /*      */ 
 /*      */   public String getSerialPortName()
 /*      */   {
-/* 1037 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.serialportname", "wizard.selections.SELECTION_SERIAL_PORT_NAMED");
+/* 1077 */     String str = this.m_preferencesHelper.getSystemPreference("wizard2.serialportname", "wizard.selections.SELECTION_SERIAL_PORT_NAMED");
 /*      */ 
-/* 1039 */     Contract.postString(str);
-/* 1040 */     return str;
+/* 1079 */     Contract.postString(str);
+/* 1080 */     return str;
 /*      */   }
 /*      */ 
 /*      */   public String getDeviceSerialNumber()
 /*      */   {
 /*      */     String str;
-/* 1050 */     if (getDeviceType().equals("wizard.selections.SELECTION_DEVICE_PUMP")) {
-/* 1051 */       str = getPumpSerialNumber();
-/* 1052 */     } else if (getDeviceType().equals("wizard.selections.SELECTION_DEVICE_METER")) {
-/* 1053 */       str = getMeterSerialNumber();
-/* 1054 */     } else if (getDeviceType().equals("wizard.selections.SELECTION_DEVICE_CGM")) {
-/* 1055 */       str = getCGMSerialNumber();
+/* 1090 */     if (getDeviceType().equals("wizard.selections.SELECTION_DEVICE_PUMP")) {
+/* 1091 */       str = getPumpSerialNumber();
+/* 1092 */     } else if (getDeviceType().equals("wizard.selections.SELECTION_DEVICE_METER")) {
+/* 1093 */       str = getMeterSerialNumber();
+/* 1094 */     } else if (getDeviceType().equals("wizard.selections.SELECTION_DEVICE_CGM")) {
+/* 1095 */       str = getCGMSerialNumber();
 /*      */     } else {
-/* 1057 */       str = null;
-/* 1058 */       Contract.unreachable();
+/* 1097 */       str = null;
+/* 1098 */       Contract.unreachable();
 /*      */     }
-/* 1060 */     return str;
+/* 1100 */     return str;
 /*      */   }
 /*      */ 
 /*      */   public String getDeviceSelection()
 /*      */   {
 /*      */     String str;
-/* 1070 */     if (getDeviceType().equals("wizard.selections.SELECTION_DEVICE_PUMP")) {
-/* 1071 */       str = getPumpDevice();
-/* 1072 */     } else if (getDeviceType().equals("wizard.selections.SELECTION_DEVICE_METER")) {
-/* 1073 */       str = getMeterDevice();
-/* 1074 */     } else if (getDeviceType().equals("wizard.selections.SELECTION_DEVICE_CGM")) {
-/* 1075 */       str = getCGMDevice();
+/* 1110 */     if (getDeviceType().equals("wizard.selections.SELECTION_DEVICE_PUMP")) {
+/* 1111 */       str = getPumpDevice();
+/* 1112 */     } else if (getDeviceType().equals("wizard.selections.SELECTION_DEVICE_METER")) {
+/* 1113 */       str = getMeterDevice();
+/* 1114 */     } else if (getDeviceType().equals("wizard.selections.SELECTION_DEVICE_CGM")) {
+/* 1115 */       str = getCGMDevice();
 /*      */     } else {
-/* 1077 */       str = null;
-/* 1078 */       Contract.unreachable();
+/* 1117 */       str = null;
+/* 1118 */       Contract.unreachable();
 /*      */     }
-/* 1080 */     return str;
+/* 1120 */     return str;
 /*      */   }
 /*      */ 
 /*      */   public String getPumpSerialNumber()
 /*      */   {
-/* 1089 */     return this.m_currentPumpID != null ? this.m_currentPumpID.getSerialNumber() : null;
+/* 1129 */     return this.m_currentPumpID != null ? this.m_currentPumpID.getSerialNumber() : null;
 /*      */   }
 /*      */ 
 /*      */   public String getMeterSerialNumber()
 /*      */   {
-/* 1098 */     return this.m_currentMeterID != null ? this.m_currentMeterID.getSerialNumber() : null;
+/* 1138 */     return this.m_currentMeterID != null ? this.m_currentMeterID.getSerialNumber() : null;
 /*      */   }
 /*      */ 
 /*      */   public String getCGMSerialNumber()
 /*      */   {
-/* 1107 */     return this.m_currentCGMID != null ? this.m_currentCGMID.getSerialNumber() : null;
+/* 1147 */     return this.m_currentCGMID != null ? this.m_currentCGMID.getSerialNumber() : null;
 /*      */   }
 /*      */ 
 /*      */   public boolean isDeviceSelectionAPump()
 /*      */   {
-/* 1116 */     return VALID_PUMP_DEVICES.contains(getDeviceSelection());
+/* 1156 */     return VALID_PUMP_DEVICES.contains(getDeviceSelection());
 /*      */   }
 /*      */ 
 /*      */   public boolean isDeviceSelectionACGM()
 /*      */   {
-/* 1125 */     return VALID_CGM_DEVICES.contains(getDeviceSelection());
+/* 1165 */     return VALID_CGM_DEVICES.contains(getDeviceSelection());
 /*      */   }
 /*      */ 
 /*      */   public boolean isDeviceSelectionAMeter()
 /*      */   {
-/* 1134 */     return VALID_METER_DEVICES.contains(getDeviceSelection());
+/* 1174 */     return VALID_METER_DEVICES.contains(getDeviceSelection());
 /*      */   }
 /*      */ 
 /*      */   public void setCurrentPumpID(DeviceID paramDeviceID)
 /*      */   {
-/* 1143 */     this.m_currentPumpID = paramDeviceID;
+/* 1183 */     this.m_currentPumpID = paramDeviceID;
 /*      */   }
 /*      */ 
 /*      */   public void setCurrentMeterID(DeviceID paramDeviceID)
 /*      */   {
-/* 1152 */     this.m_currentMeterID = paramDeviceID;
+/* 1192 */     this.m_currentMeterID = paramDeviceID;
 /*      */   }
 /*      */ 
 /*      */   public PreferencesHelper getPreferencesHelper()
 /*      */   {
-/* 1160 */     return this.m_preferencesHelper;
+/* 1200 */     return this.m_preferencesHelper;
 /*      */   }
 /*      */ 
 /*      */   public void setCurrentCGMID(DeviceID paramDeviceID)
 /*      */   {
-/* 1169 */     this.m_currentCGMID = paramDeviceID;
+/* 1209 */     this.m_currentCGMID = paramDeviceID;
 /*      */   }
 /*      */ 
 /*      */   boolean isUserInputCompleted()
 /*      */   {
-/* 1182 */     return this.m_preferencesHelper.getSystemPreference(getUserInputCompletedKey(), false);
+/* 1222 */     return this.m_preferencesHelper.getSystemPreference(getUserInputCompletedKey(), false);
 /*      */   }
 /*      */ 
 /*      */   boolean isMeterBrandAndModelMismatch(String paramString1, String paramString2)
 /*      */   {
-/* 1196 */     Contract.pre(VALID_METER_BRANDS.contains(paramString1));
-/* 1197 */     Contract.pre(VALID_METER_DEVICES.contains(paramString2));
-/* 1198 */     List localList = (List)METERS_BY_BRAND.get(paramString1);
-/* 1199 */     return !localList.contains(paramString2);
+/* 1236 */     Contract.pre(VALID_METER_BRANDS.contains(paramString1));
+/* 1237 */     Contract.pre(VALID_METER_DEVICES.contains(paramString2));
+/* 1238 */     List localList = (List)METERS_BY_BRAND.get(paramString1);
+/* 1239 */     return !localList.contains(paramString2);
 /*      */   }
 /*      */ 
 /*      */   boolean isDeviceTypeSet()
 /*      */   {
-/* 1208 */     return this.m_preferencesHelper.isSystemPreferenceSet("wizard2.devicetype");
+/* 1248 */     return this.m_preferencesHelper.isSystemPreferenceSet("wizard2.devicetype");
 /*      */   }
 /*      */ 
 /*      */   boolean isPumpDeviceSet()
 /*      */   {
-/* 1217 */     return this.m_preferencesHelper.isSystemPreferenceSet("wizard2.pumpdevice");
+/* 1257 */     return this.m_preferencesHelper.isSystemPreferenceSet("wizard2.pumpdevice");
 /*      */   }
 /*      */ 
 /*      */   boolean isMeterDeviceSet()
 /*      */   {
-/* 1226 */     return this.m_preferencesHelper.isSystemPreferenceSet("wizard2.meterdevice");
+/* 1266 */     return this.m_preferencesHelper.isSystemPreferenceSet("wizard2.meterdevice");
 /*      */   }
 /*      */ 
 /*      */   boolean isCGMDeviceSet()
 /*      */   {
-/* 1235 */     return this.m_preferencesHelper.isSystemPreferenceSet("wizard2.cgmdevice");
+/* 1275 */     return this.m_preferencesHelper.isSystemPreferenceSet("wizard2.cgmdevice");
 /*      */   }
 /*      */ 
 /*      */   boolean isMeterBrandSet()
 /*      */   {
-/* 1244 */     return this.m_preferencesHelper.isSystemPreferenceSet("wizard2.meterbrand");
+/* 1284 */     return this.m_preferencesHelper.isSystemPreferenceSet("wizard2.meterbrand");
 /*      */   }
 /*      */ 
 /*      */   boolean isLinkDeviceSet()
 /*      */   {
-/* 1253 */     return this.m_preferencesHelper.isSystemPreferenceSet("wizard2.linkdevice");
+/* 1293 */     return this.m_preferencesHelper.isSystemPreferenceSet("wizard2.linkdevice");
 /*      */   }
 /*      */ 
 /*      */   boolean isConnectionTypeSet()
 /*      */   {
-/* 1262 */     return this.m_preferencesHelper.isSystemPreferenceSet("wizard2.connectiontype");
+/* 1302 */     return this.m_preferencesHelper.isSystemPreferenceSet("wizard2.connectiontype");
 /*      */   }
 /*      */ 
 /*      */   boolean isSerialPortMethodSet()
 /*      */   {
-/* 1271 */     return this.m_preferencesHelper.isSystemPreferenceSet("wizard2.serialportmethod");
+/* 1311 */     return this.m_preferencesHelper.isSystemPreferenceSet("wizard2.serialportmethod");
 /*      */   }
 /*      */ 
 /*      */   void clear()
 /*      */   {
-/* 1278 */     this.m_preferencesHelper.clear();
+/* 1318 */     this.m_preferencesHelper.clear();
 /*      */   }
 /*      */ 
 /*      */   private String getUserInputCompletedKey()
 /*      */   {
-/* 1289 */     String str = "wizard2.finish-" + getDeviceSelection();
-/* 1290 */     Contract.post(str.length() <= 80);
-/* 1291 */     return str;
+/* 1329 */     String str = "wizard2.finish-" + getDeviceSelection();
+/* 1330 */     Contract.post(str.length() <= 80);
+/* 1331 */     return str;
 /*      */   }
 /*      */ 
 /*      */   static
 /*      */   {
-/*  398 */     ArrayList localArrayList = new ArrayList();
-/*  399 */     localArrayList.add("wizard.selections.SELECTION_CONN_TYPE_SERIAL");
-/*  400 */     localArrayList.add("wizard.selections.SELECTION_CONN_TYPE_USB");
-/*  401 */     VALID_CONNECTION_TYPES = Collections.unmodifiableList(localArrayList);
+/*  404 */     ArrayList localArrayList = new ArrayList();
+/*  405 */     localArrayList.add("wizard.selections.SELECTION_CONN_TYPE_SERIAL");
+/*  406 */     localArrayList.add("wizard.selections.SELECTION_CONN_TYPE_USB");
+/*  407 */     VALID_CONNECTION_TYPES = Collections.unmodifiableList(localArrayList);
 /*      */ 
-/*  404 */     localArrayList = new ArrayList();
-/*  405 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_PUMP");
-/*  406 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_METER");
-/*  407 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_CGM");
-/*  408 */     VALID_DEVICE_TYPES = Collections.unmodifiableList(localArrayList);
+/*  410 */     localArrayList = new ArrayList();
+/*  411 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_PUMP");
+/*  412 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_METER");
+/*  413 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_CGM");
+/*  414 */     VALID_DEVICE_TYPES = Collections.unmodifiableList(localArrayList);
 /*      */ 
-/*  411 */     localArrayList = new ArrayList();
-/*  412 */     localArrayList.add("wizard.selections.SELECTION_LINK_DEVICE_PARADIGMLINK");
-/*  413 */     localArrayList.add("wizard.selections.SELECTION_LINK_DEVICE_COMLINKUSB");
-/*  414 */     localArrayList.add("wizard.selections.SELECTION_LINK_DEVICE_COMLINK");
-/*  415 */     VALID_LINK_DEVICES = Collections.unmodifiableList(localArrayList);
-/*      */ 
-/*  418 */     localArrayList = new ArrayList();
-/*  419 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MMPARADIGM2");
-/*  420 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MM511");
-/*  421 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MM508");
-/*  422 */     VALID_PUMP_DEVICES = Collections.unmodifiableList(localArrayList);
+/*  417 */     localArrayList = new ArrayList();
+/*  418 */     localArrayList.add("wizard.selections.SELECTION_LINK_DEVICE_PARADIGMLINK");
+/*  419 */     localArrayList.add("wizard.selections.SELECTION_LINK_DEVICE_COMLINKUSB");
+/*  420 */     localArrayList.add("wizard.selections.SELECTION_LINK_DEVICE_COMLINK");
+/*  421 */     localArrayList.add("wizard.selections.SELECTION_LINK_DEVICE_XTLINKUSB");
+/*  422 */     VALID_LINK_DEVICES = Collections.unmodifiableList(localArrayList);
 /*      */ 
 /*  425 */     localArrayList = new ArrayList();
-/*  426 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MMLINKMETER");
-/*  427 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MMLOGICMETER");
-/*  428 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_PROFILE_METER");
-/*  429 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER");
-/*  430 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRASMART_METER");
-/*  431 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRAMINI_METER");
-/*  432 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_BASIC_METER");
-/*  433 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_FASTTAKE_METER");
-/*  434 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_SURESTEP_METER");
-/*  435 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_DEX_METER");
-/*  436 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_ELITE_METER");
-/*  437 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_BREEZE_METER");
-/*  438 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER");
-/*  439 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MEDISENSE_XTRA_METER");
-/*  440 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_THERASENSE_FREESTYLE_METER");
-/*  441 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ROCHE_ACTIVE_METER");
-/*  442 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ROCHE_AVIVA_METER");
-/*  443 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ROCHE_COMPACT_METER");
-/*  444 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ROCHE_COMPACTPLUS_METER");
-/*  445 */     VALID_METER_DEVICES = Collections.unmodifiableList(localArrayList);
+/*  426 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MMPARADIGM2");
+/*  427 */     VALID_PUMP_DEVICES = Collections.unmodifiableList(localArrayList);
 /*      */ 
-/*  448 */     localArrayList = new ArrayList();
-/*  449 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MMGUARDIAN3");
-/*  450 */     VALID_CGM_DEVICES = Collections.unmodifiableList(localArrayList);
+/*  430 */     localArrayList = new ArrayList();
+/*  431 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MMLINKMETER");
+/*  432 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MMLOGICMETER");
+/*  433 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_PROFILE_METER");
+/*  434 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER");
+/*  435 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRASMART_METER");
+/*  436 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRAMINI_METER");
+/*  437 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_BASIC_METER");
+/*  438 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_FASTTAKE_METER");
+/*  439 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_SURESTEP_METER");
+/*  440 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_DEX_METER");
+/*  441 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_ELITE_METER");
+/*  442 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_BREEZE_METER");
+/*  443 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER");
+/*  444 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_USB_METER");
+/*  445 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_XTLINKMETER");
+/*  446 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MEDISENSE_XTRA_METER");
+/*  447 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_THERASENSE_FREESTYLE_METER");
+/*  448 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ROCHE_ACTIVE_METER");
+/*  449 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ROCHE_AVIVA_METER");
+/*  450 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ROCHE_COMPACT_METER");
+/*  451 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ROCHE_COMPACTPLUS_METER");
+/*  452 */     VALID_METER_DEVICES = Collections.unmodifiableList(localArrayList);
 /*      */ 
-/*  453 */     localArrayList = new ArrayList();
-/*  454 */     localArrayList.add("wizard.selections.SELECTION_BRAND_MINIMED_BD");
-/*  455 */     localArrayList.add("wizard.selections.SELECTION_BRAND_ASCENSIA_BAYER");
-/*  456 */     localArrayList.add("wizard.selections.SELECTION_BRAND_LIFESCAN");
-/*  457 */     localArrayList.add("wizard.selections.SELECTION_GROUP_MEDISENSE_THERASENSE");
-/*  458 */     localArrayList.add("wizard.selections.SELECTION_BRAND_ROCHE");
-/*  459 */     localArrayList.add("wizard.selections.SELECTION_BRAND_BD");
-/*  460 */     VALID_METER_BRANDS = Collections.unmodifiableList(localArrayList);
+/*  455 */     localArrayList = new ArrayList();
+/*  456 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MMGUARDIAN3");
+/*  457 */     VALID_CGM_DEVICES = Collections.unmodifiableList(localArrayList);
 /*      */ 
-/*  463 */     HashMap localHashMap = new HashMap();
-/*  464 */     localArrayList = new ArrayList();
-/*  465 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MMLINKMETER");
-/*  466 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER");
-/*  467 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER");
-/*  468 */     localHashMap.put("wizard.selections.SELECTION_BRAND_MINIMED_BD", Collections.unmodifiableList(localArrayList));
-/*  469 */     localArrayList = new ArrayList();
-/*  470 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_PROFILE_METER");
-/*  471 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER");
-/*  472 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRASMART_METER");
-/*  473 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRAMINI_METER");
-/*  474 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_BASIC_METER");
-/*  475 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_FASTTAKE_METER");
-/*  476 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_SURESTEP_METER");
-/*  477 */     localHashMap.put("wizard.selections.SELECTION_BRAND_LIFESCAN", Collections.unmodifiableList(localArrayList));
-/*  478 */     localArrayList = new ArrayList();
-/*  479 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_DEX_METER");
-/*  480 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_ELITE_METER");
-/*  481 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_BREEZE_METER");
-/*  482 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER");
-/*  483 */     localHashMap.put("wizard.selections.SELECTION_BRAND_ASCENSIA_BAYER", Collections.unmodifiableList(localArrayList));
+/*  460 */     localArrayList = new ArrayList();
+/*  461 */     localArrayList.add("wizard.selections.SELECTION_BRAND_MINIMED_BD");
+/*  462 */     localArrayList.add("wizard.selections.SELECTION_BRAND_ASCENSIA_BAYER");
+/*  463 */     localArrayList.add("wizard.selections.SELECTION_BRAND_LIFESCAN");
+/*  464 */     localArrayList.add("wizard.selections.SELECTION_GROUP_MEDISENSE_THERASENSE");
+/*  465 */     localArrayList.add("wizard.selections.SELECTION_BRAND_ROCHE");
+/*  466 */     localArrayList.add("wizard.selections.SELECTION_BRAND_BD");
+/*  467 */     VALID_METER_BRANDS = Collections.unmodifiableList(localArrayList);
 /*      */ 
-/*  485 */     localArrayList = new ArrayList();
-/*  486 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MEDISENSE_XTRA_METER");
-/*  487 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_THERASENSE_FREESTYLE_METER");
-/*  488 */     localHashMap.put("wizard.selections.SELECTION_GROUP_MEDISENSE_THERASENSE", Collections.unmodifiableList(localArrayList));
+/*  470 */     HashMap localHashMap = new HashMap();
+/*  471 */     localArrayList = new ArrayList();
+/*  472 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MMLINKMETER");
+/*  473 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER");
+/*  474 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER");
+/*  475 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_XTLINKMETER");
+/*  476 */     localHashMap.put("wizard.selections.SELECTION_BRAND_MINIMED_BD", Collections.unmodifiableList(localArrayList));
+/*  477 */     localArrayList = new ArrayList();
+/*  478 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_PROFILE_METER");
+/*  479 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER");
+/*  480 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRASMART_METER");
+/*  481 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRAMINI_METER");
+/*  482 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_BASIC_METER");
+/*  483 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_FASTTAKE_METER");
+/*  484 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_LIFESCAN_SURESTEP_METER");
+/*  485 */     localHashMap.put("wizard.selections.SELECTION_BRAND_LIFESCAN", Collections.unmodifiableList(localArrayList));
+/*  486 */     localArrayList = new ArrayList();
+/*  487 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_DEX_METER");
+/*  488 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_ELITE_METER");
+/*  489 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_BREEZE_METER");
+/*  490 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER");
+/*  491 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_USB_METER");
+/*  492 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_XTLINKMETER");
+/*  493 */     localHashMap.put("wizard.selections.SELECTION_BRAND_ASCENSIA_BAYER", Collections.unmodifiableList(localArrayList));
 /*      */ 
-/*  490 */     localArrayList = new ArrayList();
-/*  491 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ROCHE_ACTIVE_METER");
-/*  492 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ROCHE_AVIVA_METER");
-/*  493 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ROCHE_COMPACT_METER");
-/*  494 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ROCHE_COMPACTPLUS_METER");
-/*  495 */     localHashMap.put("wizard.selections.SELECTION_BRAND_ROCHE", Collections.unmodifiableList(localArrayList));
-/*  496 */     localArrayList = new ArrayList();
-/*  497 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MMLINKMETER");
-/*  498 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MMLOGICMETER");
-/*  499 */     localHashMap.put("wizard.selections.SELECTION_BRAND_BD", Collections.unmodifiableList(localArrayList));
-/*  500 */     METERS_BY_BRAND = Collections.unmodifiableMap(localHashMap);
+/*  495 */     localArrayList = new ArrayList();
+/*  496 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MEDISENSE_XTRA_METER");
+/*  497 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_THERASENSE_FREESTYLE_METER");
+/*  498 */     localHashMap.put("wizard.selections.SELECTION_GROUP_MEDISENSE_THERASENSE", Collections.unmodifiableList(localArrayList));
 /*      */ 
-/*  503 */     localArrayList = new ArrayList();
-/*  504 */     localArrayList.add("wizard.selections.SELECTION_SERIAL_PORT_AUTO_DETECT");
-/*  505 */     localArrayList.add("wizard.selections.SELECTION_SERIAL_PORT_SELECT_PORT");
-/*  506 */     VALID_SERIAL_PORT_METHODS = Collections.unmodifiableList(localArrayList);
+/*  500 */     localArrayList = new ArrayList();
+/*  501 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ROCHE_ACTIVE_METER");
+/*  502 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ROCHE_AVIVA_METER");
+/*  503 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ROCHE_COMPACT_METER");
+/*  504 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_ROCHE_COMPACTPLUS_METER");
+/*  505 */     localHashMap.put("wizard.selections.SELECTION_BRAND_ROCHE", Collections.unmodifiableList(localArrayList));
+/*  506 */     localArrayList = new ArrayList();
+/*  507 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MMLINKMETER");
+/*  508 */     localArrayList.add("wizard.selections.SELECTION_DEVICE_MMLOGICMETER");
+/*  509 */     localHashMap.put("wizard.selections.SELECTION_BRAND_BD", Collections.unmodifiableList(localArrayList));
+/*  510 */     METERS_BY_BRAND = Collections.unmodifiableMap(localHashMap);
+/*      */ 
+/*  513 */     localArrayList = new ArrayList();
+/*  514 */     localArrayList.add("wizard.selections.SELECTION_SERIAL_PORT_AUTO_DETECT");
+/*  515 */     localArrayList.add("wizard.selections.SELECTION_SERIAL_PORT_SELECT_PORT");
+/*  516 */     VALID_SERIAL_PORT_METHODS = Collections.unmodifiableList(localArrayList);
 /*      */   }
 /*      */ }
 

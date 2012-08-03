@@ -1,26 +1,26 @@
-/*     */ package minimed.ddms.deviceportreader;
+/*     */ package minimed.ddms.A;
 /*     */ 
-/*     */ public class RocheAviva extends RocheMeter
+/*     */ public class S extends N
 /*     */ {
-/*     */   private static final int SNAPSHOT_FORMAT_ID = 172;
-/*  35 */   private static final int[] READ_FIRMWARE_CMD = { 67, 9, 49, 13 };
-/*  36 */   private static final int[] READ_SERIAL_NUMBER_CMD = { 67, 9, 51, 13 };
-/*  37 */   private static final int[] READ_MODEL_NUMBER_CMD = { 67, 9, 52, 13 };
-/*  38 */   private static final int[] READ_DATE_CMD = { 83, 9, 49, 13 };
-/*  39 */   private static final int[] READ_TIME_CMD = { 83, 9, 50, 13 };
-/*  40 */   private static final int[] GET_NUM_RESULTS = { 96, 13 };
+/*     */   private static final int ό = 172;
+/*  35 */   private static final int[] ϓ = { 67, 9, 49, 13 };
+/*  36 */   private static final int[] ϒ = { 67, 9, 51, 13 };
+/*  37 */   private static final int[] ϕ = { 67, 9, 52, 13 };
+/*  38 */   private static final int[] ύ = { 83, 9, 49, 13 };
+/*  39 */   private static final int[] ϑ = { 83, 9, 50, 13 };
+/*  40 */   private static final int[] ϖ = { 96, 13 };
 /*     */ 
-/*  46 */   private static final int[] EXTRACT_RESULTS_CMD = { 97, 9, 49, 9, 48, 48, 49, 13 };
-/*     */   private static final int RESULTS_REC_LENGTH = 31;
-/*     */   private static final int MAX_RESULTS_SIZE = 15500;
+/*  46 */   private static final int[] ϔ = { 97, 9, 49, 9, 48, 48, 49, 13 };
+/*     */   private static final int ώ = 31;
+/*     */   private static final int ϐ = 15500;
 /*     */ 
-/*     */   public RocheAviva()
+/*     */   public S()
 /*     */   {
-/*  60 */     super("Roche Aviva", 172, 22, READ_FIRMWARE_CMD, READ_SERIAL_NUMBER_CMD, READ_TIME_CMD, READ_DATE_CMD, READ_MODEL_NUMBER_CMD, GET_NUM_RESULTS, EXTRACT_RESULTS_CMD, 15500, 31);
+/*  60 */     super("Roche Aviva", 172, 22, ϓ, ϒ, ϑ, ύ, ϕ, ϖ, ϔ, 15500, 31);
 /*     */   }
 /*     */ 
-/*     */   String extractData(int[] paramArrayOfInt)
-/*     */     throws BadDeviceValueException
+/*     */   String U(int[] paramArrayOfInt)
+/*     */     throws Z
 /*     */   {
 /*  85 */     int i = -1;
 /*  86 */     for (int j = 0; (j < paramArrayOfInt.length) && (i == -1); j++) {
@@ -30,7 +30,7 @@
 /*     */     }
 /*     */ 
 /*  92 */     if (i == -1) {
-/*  93 */       throw new BadDeviceValueException("extractData: can find TAB1 in response " + MedicalDevice.Util.getHex(paramArrayOfInt));
+/*  93 */       throw new Z("extractData: can find TAB1 in response " + O._B.D(paramArrayOfInt));
 /*     */     }
 /*     */ 
 /*  98 */     j = -1;
@@ -41,22 +41,22 @@
 /*     */     }
 /*     */ 
 /* 105 */     if (j == -1) {
-/* 106 */       throw new BadDeviceValueException("extractData: can find TAB2 in response " + MedicalDevice.Util.getHex(paramArrayOfInt));
+/* 106 */       throw new Z("extractData: can find TAB2 in response " + O._B.D(paramArrayOfInt));
 /*     */     }
 /*     */ 
 /* 111 */     k = j - i - 1;
 /* 112 */     if (k < 1) {
-/* 113 */       throw new BadDeviceValueException("extractData: response length (" + k + ") too short: " + MedicalDevice.Util.getHex(paramArrayOfInt));
+/* 113 */       throw new Z("extractData: response length (" + k + ") too short: " + O._B.D(paramArrayOfInt));
 /*     */     }
 /*     */ 
 /* 118 */     int[] arrayOfInt = new int[k];
 /*     */ 
 /* 120 */     System.arraycopy(paramArrayOfInt, i + 1, arrayOfInt, 0, k);
-/* 121 */     return MedicalDevice.Util.makeString(arrayOfInt);
+/* 121 */     return O._B.E(arrayOfInt);
 /*     */   }
 /*     */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.RocheAviva
+ * Qualified Name:     minimed.ddms.A.S
  * JD-Core Version:    0.6.0
  */

@@ -1,122 +1,124 @@
-/*     */ package minimed.ddms.deviceportreader;
+/*     */ package minimed.ddms.A;
 /*     */ 
 /*     */ import java.util.Vector;
 /*     */ 
-/*     */ public class RocheActiveAndCompact extends RocheMeter
+/*     */ public class C extends N
 /*     */ {
-/*     */   private static final int SNAPSHOT_FORMAT_ID = 173;
-/*     */   private static final int RESULTS_REC_LENGTH = 22;
-/*     */   private static final int MAX_RESULTS_SIZE = 11000;
-/*  41 */   private static final int[] READ_FIRMWARE_CMD = { 67, 32, 49, 13 };
-/*  42 */   private static final int[] READ_SERIAL_NUMBER_CMD = { 67, 32, 51, 13 };
-/*  43 */   private static final int[] READ_MODEL_NUMBER_CMD = { 67, 32, 52, 13 };
-/*  44 */   private static final int[] READ_DATE_CMD = { 83, 32, 49, 13 };
-/*  45 */   private static final int[] READ_TIME_CMD = { 83, 32, 50, 13 };
-/*  46 */   private static final int[] GET_NUM_RESULTS = { 96, 13 };
+/*     */   private static final int ς = 173;
+/*     */   private static final int ω = 22;
+/*     */   private static final int ν = 11000;
+/*  41 */   private static final int[] ψ = { 67, 32, 49, 13 };
+/*  42 */   private static final int[] φ = { 67, 32, 51, 13 };
+/*  43 */   private static final int[] λ = { 67, 32, 52, 13 };
+/*  44 */   private static final int[] ϋ = { 83, 32, 49, 13 };
+/*  45 */   private static final int[] ο = { 83, 32, 50, 13 };
+/*  46 */   private static final int[] κ = { 96, 13 };
 /*     */ 
-/*  49 */   private static final int[] READ_INSTRUMENT_NAME_CMD = { 73, 13 };
-/*  50 */   private static final int[] READ_BG_UNITS_CMD = { 83, 32, 51, 13 };
-/*     */   private static final String ACTIVE_INSTRUMENT_NAME = "ACCU-CHEK Active";
-/*     */   private static final String COMPACT_INSTRUMENT_NAME = "GCP";
-/*     */   private static final String COMPACTPLUS_INSTRUMENT_NAME = "GCP2";
-/*     */   private static final String COMPACTPLUS_INSTRUMENT_NAME2 = "GCP2-LCM";
-/*     */   private static final String MSG_METER_DEVICE_SELECTION = "Wrong Meter Selection";
-/*  71 */   private static final int[] EXTRACT_RESULTS_CMD = { 97, 32, 49, 32, 48, 48, 49, 13 };
-/*     */   private RocheMeter.Command m_cmdReadInstrumentName;
-/*     */   private RocheMeter.Command m_cmdReadBGUnits;
-/*     */   private String m_instrumentName;
-/*     */   private String m_bgUnits;
+/*  49 */   private static final int[] ρ = { 73, 13 };
+/*  50 */   private static final int[] ϊ = { 83, 32, 51, 13 };
+/*     */   private static final String ξ = "ACCU-CHEK Active";
+/*     */   private static final String ζ = "ACCU-CHEK Active LCM";
+/*     */   private static final String ι = "GCP";
+/*     */   private static final String μ = "GCP2";
+/*     */   private static final String π = "GCP2-LCM";
+/*     */   private static final String τ = "Wrong Meter Selection";
+/*  72 */   private static final int[] θ = { 97, 32, 49, 32, 48, 48, 49, 13 };
+/*     */   private N._A χ;
+/*     */   private N._A υ;
+/*     */   private String σ;
+/*     */   private String η;
 /*     */ 
-/*     */   RocheActiveAndCompact(int paramInt)
+/*     */   C(int paramInt)
 /*     */   {
-/*  89 */     super("Roche Active-Compact-CompactPlus", 173, paramInt, READ_FIRMWARE_CMD, READ_SERIAL_NUMBER_CMD, READ_TIME_CMD, READ_DATE_CMD, READ_MODEL_NUMBER_CMD, GET_NUM_RESULTS, EXTRACT_RESULTS_CMD, 11000, 22);
+/*  90 */     super("Roche Active-Compact-CompactPlus", 173, paramInt, ψ, φ, ο, ϋ, λ, κ, θ, 11000, 22);
 /*     */ 
-/*  96 */     this.m_cmdReadInstrumentName = new RocheMeter.Command(this, READ_INSTRUMENT_NAME_CMD, "Read Instrument Name", new RocheMeter.ReplyDecoder()
+/*  97 */     this.χ = new N._A(this, ρ, "Read Instrument Name", new N._D()
 /*     */     {
-/*     */       public void decodeReply(RocheMeter.Command paramCommand)
-/*     */         throws BadDeviceValueException
+/*     */       public void A(N._A param_A)
+/*     */         throws Z
 /*     */       {
-/* 107 */         RocheActiveAndCompact.access$002(RocheActiveAndCompact.this, RocheActiveAndCompact.this.extractData(paramCommand.getRawData()));
-/* 108 */         MedicalDevice.logInfo(this, "decodeReply: instrument name is " + RocheActiveAndCompact.this.m_instrumentName);
+/* 108 */         C.A(C.this, C.this.U(param_A.I()));
+/* 109 */         O.A(this, "decodeReply: instrument name is " + C.B(C.this));
 /*     */ 
-/* 110 */         int i = RocheActiveAndCompact.this.getDeviceID(RocheActiveAndCompact.this.m_instrumentName);
-/* 111 */         if (i != RocheActiveAndCompact.this.m_deviceClassID)
-/* 112 */           throw new BadDeviceValueException("Wrong Meter Selection: deviceID found = " + i + ", expected = " + RocheActiveAndCompact.this.m_deviceClassID);
+/* 111 */         int i = C.C(C.this, C.B(C.this));
+/* 112 */         if (i != C.this.ā)
+/* 113 */           throw new Z("Wrong Meter Selection: deviceID found = " + i + ", expected = " + C.this.ā);
 /*     */       }
 /*     */     });
-/* 120 */     this.m_cmdReadBGUnits = new RocheMeter.Command(this, READ_BG_UNITS_CMD, "Read BG Units", new RocheMeter.ReplyDecoder()
+/* 121 */     this.υ = new N._A(this, ϊ, "Read BG Units", new N._D()
 /*     */     {
-/*     */       public void decodeReply(RocheMeter.Command paramCommand) throws BadDeviceValueException {
-/* 123 */         RocheActiveAndCompact.access$202(RocheActiveAndCompact.this, RocheActiveAndCompact.this.extractData(paramCommand.getRawData()));
-/* 124 */         MedicalDevice.logInfo(this, "decodeReply: BG units are " + RocheActiveAndCompact.this.m_bgUnits);
+/*     */       public void A(N._A param_A) throws Z {
+/* 124 */         C.B(C.this, C.this.U(param_A.I()));
+/* 125 */         O.A(this, "decodeReply: BG units are " + C.A(C.this));
 /*     */       }
 /*     */     });
-/* 129 */     this.m_snapshotCreator = new SnapshotCreator();
+/* 130 */     this.Ė = new _A();
 /*     */   }
 /*     */ 
-/*     */   private int getDeviceID(String paramString)
-/*     */     throws BadDeviceValueException
+/*     */   private int J(String paramString)
+/*     */     throws Z
 /*     */   {
 /*     */     int i;
-/* 142 */     if ("ACCU-CHEK Active".equalsIgnoreCase(paramString))
-/* 143 */       i = 23;
-/* 144 */     else if ("GCP".equalsIgnoreCase(paramString))
-/* 145 */       i = 24;
-/* 146 */     else if (("GCP2".equalsIgnoreCase(paramString)) || ("GCP2-LCM".equalsIgnoreCase(paramString)))
+/* 143 */     if (("ACCU-CHEK Active".equalsIgnoreCase(paramString)) || ("ACCU-CHEK Active LCM".equalsIgnoreCase(paramString)))
 /*     */     {
-/* 148 */       i = 25;
+/* 145 */       i = 23;
+/* 146 */     } else if ("GCP".equalsIgnoreCase(paramString))
+/* 147 */       i = 24;
+/* 148 */     else if (("GCP2".equalsIgnoreCase(paramString)) || ("GCP2-LCM".equalsIgnoreCase(paramString)))
+/*     */     {
+/* 150 */       i = 25;
 /*     */     }
-/* 150 */     else throw new BadDeviceValueException("unknown Instrument Name: " + paramString);
+/* 152 */     else throw new Z("unknown Instrument Name: " + paramString);
 /*     */ 
-/* 152 */     return i;
+/* 154 */     return i;
 /*     */   }
 /*     */ 
-/*     */   String extractData(int[] paramArrayOfInt)
-/*     */     throws BadDeviceValueException
+/*     */   String U(int[] paramArrayOfInt)
+/*     */     throws Z
 /*     */   {
-/* 173 */     int i = paramArrayOfInt.length - 4;
+/* 175 */     int i = paramArrayOfInt.length - 4;
 /*     */ 
-/* 175 */     if (i < 1) {
-/* 176 */       throw new BadDeviceValueException("extractData: response length (" + i + ") too short: " + MedicalDevice.Util.getHex(paramArrayOfInt));
+/* 177 */     if (i < 1) {
+/* 178 */       throw new Z("extractData: response length (" + i + ") too short: " + O._B.D(paramArrayOfInt));
 /*     */     }
 /*     */ 
-/* 181 */     int[] arrayOfInt = new int[i];
-/* 182 */     System.arraycopy(paramArrayOfInt, 2, arrayOfInt, 0, i);
-/* 183 */     return MedicalDevice.Util.makeString(arrayOfInt);
+/* 183 */     int[] arrayOfInt = new int[i];
+/* 184 */     System.arraycopy(paramArrayOfInt, 2, arrayOfInt, 0, i);
+/* 185 */     return O._B.E(arrayOfInt);
 /*     */   }
 /*     */ 
-/*     */   Vector createCommandList()
+/*     */   Vector r()
 /*     */   {
-/* 193 */     Vector localVector = super.createCommandList();
+/* 195 */     Vector localVector = super.r();
 /*     */ 
-/* 197 */     localVector.insertElementAt(this.m_cmdReadBGUnits, 0);
-/* 198 */     localVector.insertElementAt(this.m_cmdReadInstrumentName, 1);
+/* 199 */     localVector.insertElementAt(this.υ, 0);
+/* 200 */     localVector.insertElementAt(this.χ, 1);
 /*     */ 
-/* 200 */     return localVector;
+/* 202 */     return localVector;
 /*     */   }
 /*     */ 
-/*     */   private class SnapshotCreator extends RocheMeter.SnapshotCreator
+/*     */   private class _A extends N._C
 /*     */   {
-/*     */     private static final int SNAPCODE_READ_INSTRUMENT_NAME = 4;
-/*     */     private static final int SNAPCODE_READ_BG_UNITS = 5;
+/*     */     private static final int e = 4;
+/*     */     private static final int f = 5;
 /*     */ 
-/*     */     SnapshotCreator()
+/*     */     _A()
 /*     */     {
-/* 226 */       super();
+/* 228 */       super();
 /*     */     }
 /*     */ 
-/*     */     void createSnapshotBody()
+/*     */     void A()
 /*     */     {
-/* 236 */       super.createSnapshotBody();
+/* 238 */       super.A();
 /*     */ 
-/* 241 */       RocheActiveAndCompact.this.m_snapshot.addElement(4, RocheActiveAndCompact.this.pad(RocheActiveAndCompact.this.m_instrumentName));
+/* 243 */       C.this.Î.A(4, C.this.I(C.B(C.this)));
 /*     */ 
-/* 244 */       RocheActiveAndCompact.this.m_snapshot.addElement(5, RocheActiveAndCompact.this.pad(RocheActiveAndCompact.this.m_bgUnits));
+/* 246 */       C.this.Î.A(5, C.this.I(C.A(C.this)));
 /*     */     }
 /*     */   }
 /*     */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.RocheActiveAndCompact
+ * Qualified Name:     minimed.ddms.A.C
  * JD-Core Version:    0.6.0
  */

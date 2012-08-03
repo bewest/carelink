@@ -11,7 +11,7 @@
 /*    */ import minimed.ddms.applet.dtw.MessageHelper;
 /*    */ import minimed.ddms.applet.dtw.wizard.Wizard;
 /*    */ import minimed.ddms.applet.dtw.wizard.WizardConfig;
-/*    */ import minimed.ddms.applet.dtw.wizard.WizardConfig.USBConfig;
+/*    */ import minimed.ddms.applet.dtw.wizard.WizardConfig.DriverConfig;
 /*    */ import minimed.ddms.applet.dtw.wizard.WizardStep;
 /*    */ 
 /*    */ public abstract class USBDriverPostInstallStep extends WizardStep
@@ -22,7 +22,7 @@
 /*    */   {
 /* 50 */     super(paramWizard, paramClass);
 /*    */ 
-/* 52 */     getLeftBannerLabel().setText(this.m_resources.getString("wizard.usb.postinstall.leftbanner"));
+/* 52 */     getLeftBannerLabel().setText(this.m_resources.getString("wizard.driver.postinstall.leftbanner"));
 /* 53 */     Object localObject = new ImageIcon(getImage("wizard.read.icon"));
 /* 54 */     getRightBannerLabel().setIcon((Icon)localObject);
 /*    */ 
@@ -37,7 +37,7 @@
 /*    */ 
 /* 67 */       if (str2.length() > 0)
 /*    */       {
-/* 69 */         String str3 = new DiskHelper().getViewableName(paramWizard.getConfig().getBDUSBConfig().getInstallUSBDriverDir());
+/* 69 */         String str3 = new DiskHelper().getViewableName(paramWizard.getConfig().getBDDriverConfig().getInstallDriverDir());
 /*    */ 
 /* 71 */         str1 = str1 + MessageHelper.format(str2, new Object[] { str3 });
 /*    */       }

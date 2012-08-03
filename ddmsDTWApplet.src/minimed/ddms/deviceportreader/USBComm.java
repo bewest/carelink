@@ -1,184 +1,220 @@
-/*     */ package minimed.ddms.deviceportreader;
+/*     */ package minimed.ddms.A;
 /*     */ 
 /*     */ import java.io.IOException;
+/*     */ import mdt.common.device.driver.minimed.ArtLogicUSBPort;
 /*     */ import mdt.common.device.driver.minimed.JungoUSBPort;
+/*     */ import mdt.common.device.driver.minimed.USBPort;
 /*     */ import minimed.util.Contract;
+/*     */ import minimed.util.OSInfo;
 /*     */ 
-/*     */ final class USBComm extends CommPort
+/*     */ final class DA extends c
 /*     */ {
-/*     */   private static final int FIFO_SIZE = 64;
-/*     */   private JungoUSBPort m_USBPort;
-/*  57 */   private boolean m_initialized = false;
-/*     */   private long m_startTimeMS;
-/*     */   private byte[] m_writeBuffer;
+/*     */   private static final int d = 256;
+/*     */   private static final int c = 64;
+/*     */   private USBPort b;
+/*  60 */   private boolean a = false;
+/*     */   private long _;
+/*     */   private byte[] Z;
+/*     */   private boolean e;
 /*     */ 
-/*     */   USBComm()
+/*     */   DA(USBPort paramUSBPort)
 /*     */   {
-/*  67 */     this.m_USBPort = new JungoUSBPort();
-/*  68 */     resetClock();
-/*  69 */     setContinueIO(true);
-/*  70 */     MedicalDevice.logInfo(this, "Created communications device " + toString());
+/*  71 */     this.b = paramUSBPort;
+/*  72 */     Z();
+/*  73 */     A(true);
+/*  74 */     O.A(this, "Created communications device " + toString());
+/*  75 */     Y();
+/*     */   }
+/*     */ 
+/*     */   DA()
+/*     */   {
+/*  83 */     this(OSInfo.isMac() ? new ArtLogicUSBPort() : new JungoUSBPort());
 /*     */   }
 /*     */ 
 /*     */   public String toString()
 /*     */   {
-/*  81 */     return "USB Communications using " + this.m_USBPort;
+/*  95 */     return "USB Communications using " + this.b + ", version " + this.b.getVersion();
 /*     */   }
 /*     */ 
-/*     */   void initCommunications()
-/*     */     throws IOException, SerialIOHaltedException
+/*     */   void Y()
 /*     */   {
-/*  92 */     this.m_USBPort.initCommunications();
-/*  93 */     this.m_initialized = true;
+/* 102 */     this.e = true;
 /*     */   }
 /*     */ 
-/*     */   void endCommunications()
+/*     */   void S()
 /*     */   {
-/* 100 */     this.m_USBPort.endCommunications();
-/* 101 */     this.m_initialized = false;
+/* 109 */     this.e = false;
 /*     */   }
 /*     */ 
-/*     */   void clearBuffers()
+/*     */   void _()
+/*     */     throws IOException, W
+/*     */   {
+/* 120 */     this.b.initCommunications();
+/* 121 */     this.a = true;
+/*     */   }
+/*     */ 
+/*     */   void V()
+/*     */   {
+/* 128 */     this.b.endCommunications();
+/* 129 */     this.a = false;
+/*     */   }
+/*     */ 
+/*     */   void T()
 /*     */     throws IOException
 /*     */   {
-/* 110 */     this.m_USBPort.clearBuffers();
+/* 138 */     this.b.clearBuffers();
 /*     */   }
 /*     */ 
-/*     */   void write(int paramInt)
-/*     */     throws IOException, SerialIOHaltedException
+/*     */   void A(String paramString) throws IOException
 /*     */   {
-/* 124 */     checkInitialized();
-/* 125 */     int[] arrayOfInt = new int[1];
-/* 126 */     arrayOfInt[0] = paramInt;
-/* 127 */     write(arrayOfInt);
+/* 143 */     int[] arrayOfInt = O._B.D(paramString);
+/* 144 */     C(arrayOfInt);
 /*     */   }
 /*     */ 
-/*     */   void write(int[] paramArrayOfInt)
-/*     */     throws IOException, SerialIOHaltedException
+/*     */   void K(int paramInt)
+/*     */     throws IOException, W
 /*     */   {
-/* 141 */     checkInitialized();
-/* 142 */     setWriteBuffer(paramArrayOfInt);
-/*     */ 
-/* 145 */     MedicalDevice.logInfoHigh(this, "write(" + getClockMS() + "MS)[" + paramArrayOfInt.length + "]: <" + MedicalDevice.Util.getHexCompact(paramArrayOfInt) + ">");
-/*     */ 
-/* 147 */     resetClock();
-/* 148 */     writeIO();
+/* 158 */     int[] arrayOfInt = new int[1];
+/* 159 */     arrayOfInt[0] = paramInt;
+/* 160 */     C(arrayOfInt);
 /*     */   }
 /*     */ 
-/*     */   int[] writeAndRead(int paramInt)
-/*     */     throws IOException, SerialIOHaltedException
+/*     */   void C(int[] paramArrayOfInt)
+/*     */     throws IOException, W
 /*     */   {
-/* 163 */     checkInitialized();
-/* 164 */     write(paramInt);
-/* 165 */     return read();
+/* 174 */     X();
+/* 175 */     G();
+/* 176 */     D(paramArrayOfInt);
+/*     */ 
+/* 179 */     O.B(this, "write(" + U() + "MS)[" + paramArrayOfInt.length + "]: <" + G(paramArrayOfInt) + ">");
+/*     */ 
+/* 181 */     Z();
+/* 182 */     W();
 /*     */   }
 /*     */ 
-/*     */   int[] writeAndRead(int[] paramArrayOfInt)
-/*     */     throws IOException, SerialIOHaltedException
+/*     */   int[] J(int paramInt)
+/*     */     throws IOException, W
 /*     */   {
-/* 180 */     checkInitialized();
-/* 181 */     write(paramArrayOfInt);
-/* 182 */     return read();
+/* 197 */     K(paramInt);
+/* 198 */     return R();
 /*     */   }
 /*     */ 
-/*     */   int[] writeAndRead(int[] paramArrayOfInt, int paramInt)
-/*     */     throws IOException, SerialIOHaltedException
+/*     */   int[] F(int[] paramArrayOfInt)
+/*     */     throws IOException, W
 /*     */   {
-/* 199 */     checkInitialized();
-/* 200 */     write(paramArrayOfInt);
-/* 201 */     return read(paramInt);
+/* 213 */     C(paramArrayOfInt);
+/* 214 */     return R();
 /*     */   }
 /*     */ 
-/*     */   int[] read()
-/*     */     throws IOException, SerialIOHaltedException
+/*     */   int[] A(int[] paramArrayOfInt, int paramInt)
+/*     */     throws IOException, W
 /*     */   {
-/* 214 */     return read(64);
+/* 231 */     C(paramArrayOfInt);
+/* 232 */     return I(paramInt);
 /*     */   }
 /*     */ 
-/*     */   int[] read(int paramInt)
-/*     */     throws IOException, SerialIOHaltedException
+/*     */   int[] R()
+/*     */     throws IOException, W
 /*     */   {
-/* 229 */     checkInitialized();
+/* 245 */     return I(64);
+/*     */   }
 /*     */ 
-/* 232 */     int[] arrayOfInt1 = readIO();
+/*     */   int[] I(int paramInt)
+/*     */     throws IOException, W
+/*     */   {
+/* 260 */     X();
+/* 261 */     G();
 /*     */ 
-/* 235 */     while (arrayOfInt1.length < paramInt) {
-/* 236 */       arrayOfInt2 = readIO();
-/* 237 */       arrayOfInt1 = MedicalDevice.Util.concat(arrayOfInt1, arrayOfInt2);
+/* 264 */     int[] arrayOfInt1 = H(paramInt);
+/*     */ 
+/* 267 */     int[] arrayOfInt2 = new int[paramInt];
+/* 268 */     System.arraycopy(arrayOfInt1, 0, arrayOfInt2, 0, paramInt);
+/*     */ 
+/* 271 */     O.B(this, "read(" + U() + "MS)[" + arrayOfInt2.length + "]: <" + G(arrayOfInt2) + ">");
+/*     */ 
+/* 273 */     Z();
+/* 274 */     Contract.post(paramInt == arrayOfInt2.length);
+/* 275 */     return arrayOfInt2;
+/*     */   }
+/*     */ 
+/*     */   String C() throws IOException
+/*     */   {
+/* 280 */     int[] arrayOfInt = I(256);
+/* 281 */     return O._B.E(arrayOfInt);
+/*     */   }
+/*     */ 
+/*     */   static void A(l paraml)
+/*     */   {
+/* 290 */     if (OSInfo.isMac())
+/* 291 */       ArtLogicUSBPort.addPnPListener(paraml);
+/*     */     else
+/* 293 */       JungoUSBPort.addPnPListener(paraml);
+/*     */   }
+/*     */ 
+/*     */   private void W()
+/*     */     throws IOException
+/*     */   {
+/* 303 */     this.b.write(this.Z);
+/*     */   }
+/*     */ 
+/*     */   private void D(int[] paramArrayOfInt)
+/*     */   {
+/* 313 */     this.Z = E(paramArrayOfInt);
+/*     */   }
+/*     */ 
+/*     */   private void X()
+/*     */     throws IOException
+/*     */   {
+/* 322 */     if (!this.a)
+/* 323 */       throw new IOException("USB Communications not initialized");
+/*     */   }
+/*     */ 
+/*     */   private int[] H(int paramInt)
+/*     */     throws IOException
+/*     */   {
+/* 334 */     byte[] arrayOfByte = this.b.read(paramInt);
+/* 335 */     return C(arrayOfByte);
+/*     */   }
+/*     */ 
+/*     */   private byte[] E(int[] paramArrayOfInt)
+/*     */   {
+/* 346 */     byte[] arrayOfByte = new byte[paramArrayOfInt.length];
+/* 347 */     for (int i = 0; i < paramArrayOfInt.length; i++) {
+/* 348 */       Contract.pre(paramArrayOfInt[i], 0, 255);
+/* 349 */       arrayOfByte[i] = (byte)O._B.K(paramArrayOfInt[i]);
 /*     */     }
-/*     */ 
-/* 241 */     int[] arrayOfInt2 = new int[paramInt];
-/* 242 */     System.arraycopy(arrayOfInt1, 0, arrayOfInt2, 0, paramInt);
-/*     */ 
-/* 245 */     MedicalDevice.logInfoHigh(this, "read(" + getClockMS() + "MS)[" + arrayOfInt2.length + "]: <" + MedicalDevice.Util.getHexCompact(arrayOfInt2) + ">");
-/*     */ 
-/* 247 */     resetClock();
-/* 248 */     Contract.post(paramInt == arrayOfInt2.length);
-/* 249 */     return arrayOfInt2;
+/* 351 */     return arrayOfByte;
 /*     */   }
 /*     */ 
-/*     */   static void addPnPListener(USBPnPNotifier paramUSBPnPNotifier)
+/*     */   private int[] C(byte[] paramArrayOfByte)
 /*     */   {
-/* 258 */     JungoUSBPort.addPnPListener(paramUSBPnPNotifier);
-/*     */   }
+/* 361 */     int[] arrayOfInt = new int[paramArrayOfByte.length];
 /*     */ 
-/*     */   private void writeIO()
-/*     */     throws IOException
-/*     */   {
-/* 267 */     this.m_USBPort.write(this.m_writeBuffer);
-/*     */   }
-/*     */ 
-/*     */   private void setWriteBuffer(int[] paramArrayOfInt)
-/*     */   {
-/* 277 */     this.m_writeBuffer = convertIntsToBytes(paramArrayOfInt);
-/*     */   }
-/*     */ 
-/*     */   private void checkInitialized()
-/*     */     throws IOException
-/*     */   {
-/* 286 */     if (!this.m_initialized)
-/* 287 */       throw new IOException("USB Communications not initialized");
-/*     */   }
-/*     */ 
-/*     */   private int[] readIO()
-/*     */     throws IOException
-/*     */   {
-/* 298 */     byte[] arrayOfByte = this.m_USBPort.read();
-/* 299 */     return convertBytesToInts(arrayOfByte);
-/*     */   }
-/*     */ 
-/*     */   private byte[] convertIntsToBytes(int[] paramArrayOfInt)
-/*     */   {
-/* 310 */     byte[] arrayOfByte = new byte[paramArrayOfInt.length];
-/* 311 */     for (int i = 0; i < paramArrayOfInt.length; i++) {
-/* 312 */       Contract.pre(paramArrayOfInt[i], 0, 255);
-/* 313 */       arrayOfByte[i] = (byte)MedicalDevice.Util.getLowByte(paramArrayOfInt[i]);
+/* 363 */     for (int i = 0; i < paramArrayOfByte.length; i++) {
+/* 364 */       paramArrayOfByte[i] &= 255;
 /*     */     }
-/* 315 */     return arrayOfByte;
+/* 366 */     return arrayOfInt;
 /*     */   }
 /*     */ 
-/*     */   private int[] convertBytesToInts(byte[] paramArrayOfByte)
+/*     */   private void Z()
 /*     */   {
-/* 325 */     int[] arrayOfInt = new int[paramArrayOfByte.length];
-/*     */ 
-/* 327 */     for (int i = 0; i < paramArrayOfByte.length; i++) {
-/* 328 */       paramArrayOfByte[i] &= 255;
-/*     */     }
-/* 330 */     return arrayOfInt;
+/* 373 */     this._ = System.currentTimeMillis();
 /*     */   }
 /*     */ 
-/*     */   private void resetClock()
+/*     */   private long U()
 /*     */   {
-/* 337 */     this.m_startTimeMS = System.currentTimeMillis();
+/* 382 */     return System.currentTimeMillis() - this._;
 /*     */   }
 /*     */ 
-/*     */   private long getClockMS()
+/*     */   private String G(int[] paramArrayOfInt)
 /*     */   {
-/* 346 */     return System.currentTimeMillis() - this.m_startTimeMS;
+/* 392 */     String str = this.e ? O._B.G(paramArrayOfInt) : O._B.E(O._B.E(paramArrayOfInt));
+/*     */ 
+/* 394 */     return str;
 /*     */   }
 /*     */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.USBComm
+ * Qualified Name:     minimed.ddms.A.DA
  * JD-Core Version:    0.6.0
  */

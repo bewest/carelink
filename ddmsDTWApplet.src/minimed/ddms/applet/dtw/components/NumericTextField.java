@@ -2,13 +2,17 @@
 /*     */ 
 /*     */ import java.awt.Component;
 /*     */ import javax.swing.JFormattedTextField;
+/*     */ import javax.swing.LookAndFeel;
+/*     */ import javax.swing.UIManager;
 /*     */ import javax.swing.event.DocumentEvent;
 /*     */ import javax.swing.event.DocumentListener;
+/*     */ import javax.swing.text.AttributeSet;
 /*     */ import javax.swing.text.BadLocationException;
 /*     */ import javax.swing.text.DefaultFormatter;
 /*     */ import javax.swing.text.DefaultFormatterFactory;
 /*     */ import javax.swing.text.Document;
 /*     */ import javax.swing.text.DocumentFilter;
+/*     */ import javax.swing.text.DocumentFilter.FilterBypass;
 /*     */ 
 /*     */ public final class NumericTextField extends JFormattedTextField
 /*     */   implements DocumentListener
@@ -26,7 +30,32 @@
 /*  52 */     this.m_component = this;
 /*     */ 
 /*  54 */     1 local1 = new DefaultFormatter() {
-/*  55 */       private final DocumentFilter filter = new NumericTextField.2(this);
+/*  55 */       private final DocumentFilter filter = new DocumentFilter()
+/*     */       {
+/*     */         public void replace(DocumentFilter.FilterBypass paramFilterBypass, int paramInt1, int paramInt2, String paramString, AttributeSet paramAttributeSet)
+/*     */           throws BadLocationException
+/*     */         {
+/*  73 */           StringBuffer localStringBuffer = new StringBuffer(paramFilterBypass.getDocument().getText(0, paramFilterBypass.getDocument().getLength()));
+/*     */ 
+/*  75 */           localStringBuffer.replace(paramInt1, paramInt1 + paramInt2, paramString);
+/*  76 */           int i = 1;
+/*     */ 
+/*  78 */           if (localStringBuffer.length() > 6)
+/*  79 */             i = 0;
+/*     */           else {
+/*  81 */             for (int j = 0; (j < localStringBuffer.length()) && (i != 0); j++) {
+/*  82 */               if (!NumericTextField.access$000(localStringBuffer.charAt(j))) {
+/*  83 */                 i = 0;
+/*     */               }
+/*     */             }
+/*     */           }
+/*     */ 
+/*  88 */           if (i != 0)
+/*  89 */             paramFilterBypass.replace(paramInt1, paramInt2, paramString, paramAttributeSet);
+/*     */           else
+/*  91 */             UIManager.getLookAndFeel().provideErrorFeedback(NumericTextField.this.m_component);
+/*     */         }
+/*  55 */       };
 /*     */ 
 /*     */       public DocumentFilter getDocumentFilter()
 /*     */       {
@@ -35,11 +64,11 @@
 /*     */ 
 /*     */       public void install(JFormattedTextField paramJFormattedTextField)
 /*     */       {
-/* 114 */         NumericTextField.access$302(NumericTextField.this, false);
+/* 114 */         NumericTextField.access$202(NumericTextField.this, false);
 /*     */         try {
 /* 116 */           super.install(paramJFormattedTextField);
 /*     */         } finally {
-/* 118 */           NumericTextField.access$302(NumericTextField.this, true);
+/* 118 */           NumericTextField.access$202(NumericTextField.this, true);
 /*     */         }
 /*     */       }
 /*     */     };

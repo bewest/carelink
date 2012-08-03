@@ -1,32 +1,32 @@
-package minimed.ddms.deviceportreader;
+package minimed.ddms.A;
 
 import java.io.IOException;
 
-abstract interface CommunicationsLink
+abstract interface z
 {
-  public abstract void initCommunications()
-    throws IOException, SerialIOHaltedException, BadDeviceCommException;
+  public abstract void D()
+    throws IOException, W, t;
 
-  public abstract void endCommunications()
+  public abstract void B()
     throws IOException;
 
-  public abstract void execute(DeviceCommand paramDeviceCommand)
-    throws BadDeviceCommException, SerialIOHaltedException, BadDeviceValueException;
+  public abstract void A(n paramn)
+    throws t, W, Z;
 
-  public abstract void setListener(DeviceListener paramDeviceListener);
+  public abstract void A(v paramv);
 
-  public abstract void resetTotalReadByteCount();
+  public abstract void A();
 
-  public abstract void setTotalReadByteCountExpected(int paramInt);
+  public abstract void A(int paramInt);
 
-  public abstract void incTotalReadByteCount(int paramInt);
+  public abstract void B(int paramInt);
 
-  public abstract CommPort getCommPort();
+  public abstract c C();
 
-  public abstract void setCommPort(CommPort paramCommPort);
+  public abstract void A(c paramc);
 }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.CommunicationsLink
+ * Qualified Name:     minimed.ddms.A.z
  * JD-Core Version:    0.6.0
  */

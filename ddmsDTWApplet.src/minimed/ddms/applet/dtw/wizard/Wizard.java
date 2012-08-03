@@ -11,12 +11,13 @@
 /*      */ import java.util.HashMap;
 /*      */ import java.util.Map;
 /*      */ import javax.swing.Timer;
+/*      */ import minimed.ddms.A.AA;
+/*      */ import minimed.ddms.applet.dtw.CaptureResult;
 /*      */ import minimed.ddms.applet.dtw.DTWApplet;
 /*      */ import minimed.ddms.applet.dtw.LogWriter;
 /*      */ import minimed.ddms.applet.dtw.PropertyWriter;
 /*      */ import minimed.ddms.applet.dtw.components.NumericTextField;
 /*      */ import minimed.ddms.applet.dtw.components.StepLayout;
-/*      */ import minimed.ddms.deviceportreader.ComLink2;
 /*      */ import minimed.util.Contract;
 /*      */ 
 /*      */ public final class Wizard
@@ -38,8 +39,6 @@
 /*      */   private static final String SERVER_CLASS_NAME_515 = "MiniMed515";
 /*      */   private static final String SERVER_CLASS_NAME_712 = "MiniMed712";
 /*      */   private static final String SERVER_CLASS_NAME_512 = "MiniMed512";
-/*      */   private static final String SERVER_CLASS_NAME_511 = "MiniMed511";
-/*      */   private static final String SERVER_CLASS_NAME_508 = "MiniMed508";
 /*      */   private static final String SERVER_CLASS_NAME_GUARDIAN3 = "MiniMedGuardian3";
 /*      */   private static final String SERVER_CLASS_NAME_GUARDIAN3K = "MiniMedGuardian3K";
 /*      */   private static final String SERVER_CLASS_NAME_PARADIGMLINK = "BDParadigmLink";
@@ -48,6 +47,8 @@
 /*      */   private static final String SERVER_CLASS_NAME_BAYER_ELITE_XL = "BayerEliteXL";
 /*      */   private static final String SERVER_CLASS_NAME_BAYER_BREEZE = "BayerBreeze";
 /*      */   private static final String SERVER_CLASS_NAME_BAYER_CONTOUR = "BayerContour";
+/*      */   private static final String SERVER_CLASS_NAME_BAYER_CONTOUR_USB = "BayerContourUSB";
+/*      */   private static final String SERVER_CLASS_NAME_BAYER_CONTOUR_XT_LINK = "BayerContourXTLink";
 /*      */   private static final String SERVER_CLASS_NAME_BAYER_CONTOURLINK = "BayerContourLink";
 /*      */   private static final String SERVER_CLASS_NAME_LIFESCAN_FASTTAKE = "LifescanFastTake";
 /*      */   private static final String SERVER_CLASS_NAME_LIFESCAN_OT_BASIC = "LifescanOTBasic";
@@ -66,7 +67,7 @@
 /*      */   private static final String SERVER_CLASS_NAME_ROCHE_COMPACTPLUS = "RocheCompactPlus";
 /*      */   private static final Map SELECTIONS_ID_MAP;
 /*      */   private static final Map SELECTIONS_CLASSNAME_MAP;
-/*  285 */   private static final Class[] STEP_CONSTRUCTOR_ARG_TYPES = { Wizard.class };
+/*  272 */   private static final Class[] STEP_CONSTRUCTOR_ARG_TYPES = { Wizard.class };
 /*      */   public static final boolean ALLOW_CARELINK_USB = true;
 /*      */   private static final int COMLINKUSB_TIMER_UPDATE = 2000;
 /*      */   private static final String COMLINKUSB_CONNECT_SUCCESS_INDICATOR = "connect-success.txt";
@@ -76,683 +77,707 @@
 /*      */   private boolean m_stopped;
 /*      */   private String m_failureReason;
 /*      */   private boolean m_enabledUnloadMessage;
-/*  338 */   private boolean m_isBDUSBDriverInstallNeeded = true;
-/*      */ 
-/*  347 */   private final USBDriverInstallNeededDecider m_standardBDUSBDriverInstallNeededDecider = new USBDriverInstallNeededDecider()
-/*      */   {
-/*      */     public boolean isUSBDriverInstallNeeded()
-/*      */     {
-/*  359 */       if (Wizard.this.m_isBDUSBDriverInstallNeeded) {
-/*  360 */         File localFile = new File(Wizard.this.getConfig().getBDUSBConfig().getInstallUSBDriverDir() + File.separator + Wizard.this.getConfig().getBDUSBConfig().getInstallUSBDriverSuccessIndicatorFile());
-/*      */ 
-/*  363 */         Wizard.access$002(Wizard.this, (!localFile.exists()) || (!localFile.isFile()));
-/*      */ 
-/*  367 */         if (Wizard.this.m_isBDUSBDriverInstallNeeded) {
-/*  368 */           localFile = new File(Wizard.this.getConfig().getBDUSBConfig().getSecondaryInstallUSBDriverDir() + File.separator + Wizard.this.getConfig().getBDUSBConfig().getInstallUSBDriverSuccessIndicatorFile());
-/*      */ 
-/*  372 */           Wizard.access$002(Wizard.this, (!localFile.exists()) || (!localFile.isFile()));
-/*      */         }
-/*      */       }
-/*  375 */       return Wizard.this.m_isBDUSBDriverInstallNeeded;
-/*      */     }
-/*  347 */   };
 /*      */   private Timer m_comLinkUSBMonitor;
+/*  331 */   private final CaptureResult m_captureResult = new CaptureResult();
 /*      */ 
 /*      */   public Wizard(WizardConfig paramWizardConfig)
 /*      */   {
-/*  515 */     Contract.preNonNull(paramWizardConfig);
-/*  516 */     this.m_config = paramWizardConfig;
-/*  517 */     this.m_stepLayout = new StepLayout();
-/*  518 */     Container localContainer = this.m_config.getContentPane();
-/*  519 */     localContainer.setLayout(this.m_stepLayout);
-/*  520 */     this.m_stepConstructorArgs = new Object[] { this };
+/*  463 */     Contract.preNonNull(paramWizardConfig);
+/*  464 */     this.m_config = paramWizardConfig;
+/*  465 */     this.m_stepLayout = new StepLayout();
+/*  466 */     Container localContainer = this.m_config.getContentPane();
+/*  467 */     localContainer.setLayout(this.m_stepLayout);
+/*  468 */     this.m_stepConstructorArgs = new Object[] { this };
 /*      */   }
 /*      */ 
 /*      */   public String toString()
 /*      */   {
-/*  531 */     PropertyWriter localPropertyWriter = new PropertyWriter();
-/*  532 */     localPropertyWriter.add("config", this.m_config);
-/*  533 */     localPropertyWriter.add("stopped", isStopped());
-/*  534 */     localPropertyWriter.add("failureReason", getFailureReason());
-/*  535 */     localPropertyWriter.add("stepLayout", this.m_stepLayout);
-/*  536 */     return localPropertyWriter.toString();
+/*  479 */     PropertyWriter localPropertyWriter = new PropertyWriter();
+/*  480 */     localPropertyWriter.add("config", this.m_config);
+/*  481 */     localPropertyWriter.add("stopped", isStopped());
+/*  482 */     localPropertyWriter.add("failureReason", getFailureReason());
+/*  483 */     localPropertyWriter.add("stepLayout", this.m_stepLayout);
+/*  484 */     return localPropertyWriter.toString();
 /*      */   }
 /*      */ 
 /*      */   public void start()
 /*      */   {
-/*  543 */     Class localClass = this.m_config.getWizardStepProvider().getStartStep(this);
-/*  544 */     showNextStep(localClass);
+/*  491 */     Class localClass = this.m_config.getWizardStepProvider().getStartStep(this);
+/*  492 */     showNextStep(localClass);
 /*      */   }
 /*      */ 
 /*      */   public void stop()
 /*      */   {
-/*  551 */     this.m_config.getLogWriter().logInfo("stop wizard execution requested");
-/*  552 */     stopComLinkUSBMonitor();
+/*  499 */     this.m_config.getLogWriter().logInfo("stop wizard execution requested");
+/*  500 */     stopComLinkUSBMonitor();
 /*      */ 
-/*  554 */     if (!isStopped()) {
-/*  555 */       setStopped();
+/*  502 */     if (!isStopped()) {
+/*  503 */       setStopped();
 /*      */ 
-/*  557 */       WizardStep localWizardStep = (WizardStep)this.m_stepLayout.getCurrentStep();
-/*  558 */       if (localWizardStep != null)
-/*  559 */         localWizardStep.appletStopped();
+/*  505 */       WizardStep localWizardStep = (WizardStep)this.m_stepLayout.getCurrentStep();
+/*  506 */       if (localWizardStep != null)
+/*  507 */         localWizardStep.appletStopped();
 /*      */     }
 /*      */   }
 /*      */ 
 /*      */   public WizardConfig getConfig()
 /*      */   {
-/*  571 */     WizardConfig localWizardConfig = this.m_config;
-/*  572 */     Contract.postNonNull(localWizardConfig);
-/*  573 */     return localWizardConfig;
+/*  519 */     WizardConfig localWizardConfig = this.m_config;
+/*  520 */     Contract.postNonNull(localWizardConfig);
+/*  521 */     return localWizardConfig;
 /*      */   }
 /*      */ 
 /*      */   boolean isComLinkUSB(String paramString)
 /*      */   {
-/*  583 */     return "wizard.selections.SELECTION_LINK_DEVICE_COMLINKUSB".equals(paramString);
+/*  531 */     return "wizard.selections.SELECTION_LINK_DEVICE_COMLINKUSB".equals(paramString);
+/*      */   }
+/*      */ 
+/*      */   boolean isXTLinkUSB(String paramString)
+/*      */   {
+/*  541 */     return "wizard.selections.SELECTION_LINK_DEVICE_XTLINKUSB".equals(paramString);
 /*      */   }
 /*      */ 
 /*      */   private static void uniAssociate(HashMap paramHashMap, Object paramObject1, Object paramObject2)
 /*      */   {
-/*  595 */     Object localObject = paramHashMap.put(paramObject1, paramObject2);
-/*  596 */     Contract.pre(localObject == null);
+/*  553 */     Object localObject = paramHashMap.put(paramObject1, paramObject2);
+/*  554 */     Contract.pre(localObject == null);
 /*      */   }
 /*      */ 
 /*      */   private static void biAssociate(HashMap paramHashMap, Object paramObject1, Object paramObject2)
 /*      */   {
-/*  610 */     uniAssociate(paramHashMap, paramObject1, paramObject2);
-/*  611 */     Object localObject = paramHashMap.put(paramObject2, paramObject1);
-/*  612 */     Contract.pre(localObject == null);
+/*  568 */     uniAssociate(paramHashMap, paramObject1, paramObject2);
+/*  569 */     Object localObject = paramHashMap.put(paramObject2, paramObject1);
+/*  570 */     Contract.pre(localObject == null);
 /*      */   }
 /*      */ 
 /*      */   private synchronized void setStopped()
 /*      */   {
-/*  619 */     this.m_stopped = true;
+/*  577 */     this.m_stopped = true;
 /*      */   }
 /*      */ 
 /*      */   public synchronized boolean isStopped()
 /*      */   {
-/*  628 */     return this.m_stopped;
+/*  586 */     return this.m_stopped;
 /*      */   }
 /*      */ 
 /*      */   public synchronized void setFailureReason(String paramString)
 /*      */   {
-/*  638 */     Contract.preString(paramString);
-/*  639 */     this.m_failureReason = paramString;
+/*  596 */     Contract.preString(paramString);
+/*  597 */     this.m_failureReason = paramString;
 /*      */   }
 /*      */ 
 /*      */   public synchronized String getFailureReason()
 /*      */   {
-/*  648 */     return this.m_failureReason;
+/*  606 */     return this.m_failureReason;
 /*      */   }
 /*      */ 
 /*      */   public void enableVerifySuspendOffMessage()
 /*      */   {
-/*  656 */     if (!this.m_enabledUnloadMessage) {
-/*  657 */       DTWApplet localDTWApplet = getConfig().getApplet();
-/*  658 */       localDTWApplet.enableUnloadMessage(true);
-/*  659 */       this.m_enabledUnloadMessage = true;
+/*  614 */     if (!this.m_enabledUnloadMessage) {
+/*  615 */       DTWApplet localDTWApplet = getConfig().getApplet();
+/*  616 */       localDTWApplet.enableUnloadMessage(true);
+/*  617 */       this.m_enabledUnloadMessage = true;
 /*      */     }
+/*      */   }
+/*      */ 
+/*      */   public boolean isSerialDriverInstallNeeded()
+/*      */   {
+/*  627 */     return isDriverInstallNeeded(this.m_config.getSerialConfig());
 /*      */   }
 /*      */ 
 /*      */   public boolean isComLink2USBDriverInstallNeeded()
 /*      */   {
-/*  669 */     File localFile = new File(getConfig().getComLink2Config().getInstallUSBDriverDir() + File.separator + getConfig().getComLink2Config().getInstallUSBDriverSuccessIndicatorFile());
+/*  636 */     return isDriverInstallNeeded(this.m_config.getComLink2Config());
+/*      */   }
 /*      */ 
-/*  672 */     return (!localFile.exists()) || (!localFile.isFile());
+/*      */   public boolean isXTLink2USBDriverInstallNeeded()
+/*      */   {
+/*  645 */     return isDriverInstallNeeded(this.m_config.getBayerUSBConfig());
 /*      */   }
 /*      */ 
 /*      */   public boolean hasComLink2EverBeenDetected()
 /*      */   {
-/*  683 */     File localFile = new File(getConfig().getComLink2Config().getInstallUSBDriverDir() + File.separator + "connect-success.txt");
+/*  656 */     File localFile = new File(getConfig().getComLink2Config().getInstallDriverDir() + File.separator + "connect-success.txt");
 /*      */ 
-/*  685 */     return (localFile.exists()) && (localFile.isFile());
+/*  658 */     return (localFile.exists()) && (localFile.isFile());
 /*      */   }
 /*      */ 
 /*      */   public void writeComLink2EverBeenDetectedIndicator()
 /*      */     throws IOException
 /*      */   {
-/*  694 */     File localFile = new File(getConfig().getComLink2Config().getInstallUSBDriverDir() + File.separator + "connect-success.txt");
+/*  667 */     File localFile = new File(getConfig().getComLink2Config().getInstallDriverDir() + File.separator + "connect-success.txt");
 /*      */ 
-/*  698 */     localFile.createNewFile();
+/*  671 */     localFile.createNewFile();
 /*      */   }
 /*      */ 
 /*      */   public void setUserInputCompleted()
 /*      */   {
-/*  705 */     getConfig().getWizardSelections().setUserInputCompleted();
+/*  678 */     getConfig().getWizardSelections().setUserInputCompleted();
 /*      */   }
 /*      */ 
 /*      */   public boolean isDeviceSelectionAPump()
 /*      */   {
-/*  714 */     return getConfig().getWizardSelections().isDeviceSelectionAPump();
+/*  687 */     return getConfig().getWizardSelections().isDeviceSelectionAPump();
 /*      */   }
 /*      */ 
 /*      */   public boolean isDeviceSelectionAMeter()
 /*      */   {
-/*  723 */     return getConfig().getWizardSelections().isDeviceSelectionAMeter();
+/*  696 */     return getConfig().getWizardSelections().isDeviceSelectionAMeter();
 /*      */   }
 /*      */ 
 /*      */   public static int mapToDevicePortReaderFactoryID(String paramString)
 /*      */   {
-/*  734 */     Integer localInteger = (Integer)SELECTIONS_ID_MAP.get(paramString);
-/*  735 */     Contract.preNonNull(localInteger);
-/*  736 */     return localInteger.intValue();
+/*  707 */     Integer localInteger = (Integer)SELECTIONS_ID_MAP.get(paramString);
+/*  708 */     Contract.preNonNull(localInteger);
+/*  709 */     return localInteger.intValue();
 /*      */   }
 /*      */ 
 /*      */   public static String mapToServerClassName(String paramString)
 /*      */   {
-/*  747 */     String str = (String)SELECTIONS_CLASSNAME_MAP.get(paramString);
-/*  748 */     Contract.preNonNull(str);
-/*  749 */     return str;
+/*  720 */     String str = (String)SELECTIONS_CLASSNAME_MAP.get(paramString);
+/*  721 */     Contract.preNonNull(str);
+/*  722 */     return str;
 /*      */   }
 /*      */ 
 /*      */   public static String mapToWizardDeviceSelection(String paramString)
 /*      */   {
-/*  760 */     String str = (String)SELECTIONS_CLASSNAME_MAP.get(resolveServerClassName(paramString));
-/*  761 */     Contract.preNonNull(str);
-/*  762 */     return str;
+/*  733 */     String str = (String)SELECTIONS_CLASSNAME_MAP.get(resolveServerClassName(paramString));
+/*  734 */     Contract.preNonNull(str);
+/*  735 */     return str;
 /*      */   }
 /*      */ 
 /*      */   public static String resolveServerClassName(String paramString)
 /*      */   {
-/*  779 */     if (("MiniMed754".equals(paramString)) || ("MiniMed554".equals(paramString)) || ("MiniMed753".equals(paramString)) || ("MiniMed553".equals(paramString)) || ("MiniMed723".equals(paramString)) || ("MiniMed523".equals(paramString)) || ("MiniMed723K".equals(paramString)) || ("MiniMed523K".equals(paramString)) || ("MiniMed722".equals(paramString)) || ("MiniMed522".equals(paramString)) || ("MiniMed722K".equals(paramString)) || ("MiniMed522K".equals(paramString)) || ("MiniMed715".equals(paramString)) || ("MiniMed515".equals(paramString)) || ("MiniMed712".equals(paramString)) || ("MiniMed512".equals(paramString)))
+/*  752 */     if (("MiniMed754".equals(paramString)) || ("MiniMed554".equals(paramString)) || ("MiniMed753".equals(paramString)) || ("MiniMed553".equals(paramString)) || ("MiniMed723".equals(paramString)) || ("MiniMed523".equals(paramString)) || ("MiniMed723K".equals(paramString)) || ("MiniMed523K".equals(paramString)) || ("MiniMed722".equals(paramString)) || ("MiniMed522".equals(paramString)) || ("MiniMed722K".equals(paramString)) || ("MiniMed522K".equals(paramString)) || ("MiniMed715".equals(paramString)) || ("MiniMed515".equals(paramString)) || ("MiniMed712".equals(paramString)) || ("MiniMed512".equals(paramString)))
 /*      */     {
-/*  789 */       paramString = "MiniMedParadigm2";
-/*  790 */     } else if ("MiniMedGuardian3K".equals(paramString))
+/*  762 */       paramString = "MiniMedParadigm2";
+/*  763 */     } else if ("MiniMedGuardian3K".equals(paramString))
 /*      */     {
-/*  792 */       paramString = "MiniMedGuardian3";
-/*  793 */     } else if (("LifescanOTUltra2".equals(paramString)) || ("LifescanOTUltraLink".equals(paramString)))
+/*  765 */       paramString = "MiniMedGuardian3";
+/*  766 */     } else if (("LifescanOTUltra2".equals(paramString)) || ("LifescanOTUltraLink".equals(paramString)))
 /*      */     {
-/*  796 */       paramString = "LifescanOTUltra";
-/*  797 */     } else if ("BayerContourLink".equals(paramString))
+/*  769 */       paramString = "LifescanOTUltra";
+/*  770 */     } else if ("BayerContourLink".equals(paramString))
 /*      */     {
-/*  799 */       paramString = "BayerContour";
+/*  772 */       paramString = "BayerContour";
 /*      */     }
 /*      */ 
-/*  802 */     return paramString;
+/*  775 */     return paramString;
 /*      */   }
 /*      */ 
 /*      */   public void showNextStep(Class paramClass)
 /*      */   {
-/*  813 */     Contract.preNonNull(paramClass);
+/*  786 */     Contract.preNonNull(paramClass);
 /*      */ 
-/*  815 */     LogWriter localLogWriter = this.m_config.getLogWriter();
-/*  816 */     localLogWriter.logInfo("showNextStep: showing " + paramClass.getName() + " " + isStopped());
-/*  817 */     if (isStopped()) {
-/*  818 */       localLogWriter.logInfo("showNextStep: abort showing " + paramClass.getName() + " - stopped");
-/*  819 */       return;
+/*  788 */     LogWriter localLogWriter = this.m_config.getLogWriter();
+/*  789 */     localLogWriter.logInfo("showNextStep: showing " + paramClass.getName() + " " + isStopped());
+/*  790 */     if (isStopped()) {
+/*  791 */       localLogWriter.logInfo("showNextStep: abort showing " + paramClass.getName() + " - stopped");
+/*  792 */       return;
 /*      */     }
 /*      */ 
-/*  822 */     WizardStep localWizardStep = (WizardStep)this.m_stepLayout.getStep(paramClass.getName());
-/*  823 */     if (localWizardStep == null)
+/*  795 */     WizardStep localWizardStep = (WizardStep)this.m_stepLayout.getStep(paramClass.getName());
+/*  796 */     if (localWizardStep == null)
 /*      */     {
 /*      */       try {
-/*  826 */         Constructor localConstructor = paramClass.getConstructor(STEP_CONSTRUCTOR_ARG_TYPES);
-/*  827 */         localWizardStep = (WizardStep)localConstructor.newInstance(this.m_stepConstructorArgs);
+/*  799 */         Constructor localConstructor = paramClass.getConstructor(STEP_CONSTRUCTOR_ARG_TYPES);
+/*  800 */         localWizardStep = (WizardStep)localConstructor.newInstance(this.m_stepConstructorArgs);
 /*      */       }
 /*      */       catch (NoSuchMethodException localNoSuchMethodException) {
-/*  830 */         Contract.unreachable();
+/*  803 */         Contract.unreachable();
 /*      */       }
 /*      */       catch (InstantiationException localInstantiationException) {
-/*  833 */         Contract.unreachable();
+/*  806 */         Contract.unreachable();
 /*      */       }
 /*      */       catch (InvocationTargetException localInvocationTargetException) {
-/*  836 */         Contract.unreachable();
+/*  809 */         Contract.unreachable();
 /*      */       }
 /*      */       catch (IllegalAccessException localIllegalAccessException) {
-/*  839 */         Contract.unreachable();
+/*  812 */         Contract.unreachable();
 /*      */       }
-/*  841 */       this.m_config.getContentPane().add(localWizardStep, localWizardStep.getName());
+/*  814 */       this.m_config.getContentPane().add(localWizardStep, localWizardStep.getName());
 /*      */     }
 /*      */ 
-/*  845 */     this.m_stepLayout.show(this.m_config.getContentPane(), localWizardStep.getName());
-/*  846 */     localWizardStep.stepShown();
+/*  818 */     this.m_stepLayout.show(this.m_config.getContentPane(), localWizardStep.getName());
+/*  819 */     localWizardStep.stepShown();
 /*      */ 
-/*  850 */     startComLinkUSBMonitor();
+/*  823 */     startComLinkUSBMonitor();
 /*      */   }
 /*      */ 
 /*      */   public void showPreviousStep()
 /*      */   {
-/*  859 */     showPreviousStep(1);
+/*  832 */     showPreviousStep(1);
 /*      */   }
 /*      */ 
 /*      */   public void showPreviousStep(int paramInt)
 /*      */   {
-/*  869 */     this.m_stepLayout.showPreviousStep(this.m_config.getContentPane(), paramInt);
-/*  870 */     WizardStep localWizardStep = (WizardStep)this.m_stepLayout.getCurrentStep();
-/*  871 */     localWizardStep.stepShown();
+/*  842 */     this.m_stepLayout.showPreviousStep(this.m_config.getContentPane(), paramInt);
+/*  843 */     WizardStep localWizardStep = (WizardStep)this.m_stepLayout.getCurrentStep();
+/*  844 */     localWizardStep.stepShown();
 /*      */   }
 /*      */ 
 /*      */   public WizardStep getPreviousStep()
 /*      */   {
-/*  880 */     return (WizardStep)this.m_stepLayout.getPreviousStep();
+/*  853 */     return (WizardStep)this.m_stepLayout.getPreviousStep();
 /*      */   }
 /*      */ 
 /*      */   public WizardStep getStep(Class paramClass)
 /*      */   {
-/*  893 */     return (WizardStep)this.m_stepLayout.getStep(paramClass);
+/*  866 */     return (WizardStep)this.m_stepLayout.getStep(paramClass);
 /*      */   }
 /*      */ 
-/*      */   public boolean canDeviceUseUSB()
+/*      */   public boolean isAutoDetect()
 /*      */   {
-/*  903 */     WizardSelections localWizardSelections = this.m_config.getWizardSelections();
-/*  904 */     String str1 = localWizardSelections.getDeviceType();
-/*      */     String str2;
+/*  875 */     WizardSelections localWizardSelections = this.m_config.getWizardSelections();
+/*  876 */     String str1 = localWizardSelections.getDeviceType();
+/*      */ 
+/*  878 */     boolean bool = localWizardSelections.getSerialPort().equals("wizard.selections.SELECTION_SERIAL_PORT_AUTO_DETECT");
 /*      */     int i;
-/*  911 */     if (str1.equals("wizard.selections.SELECTION_DEVICE_PUMP"))
+/*  884 */     if (str1.equals("wizard.selections.SELECTION_DEVICE_METER"))
 /*      */     {
-/*  913 */       str2 = localWizardSelections.getPumpDevice();
-/*  914 */       if (!str2.equals("wizard.selections.SELECTION_DEVICE_MM508"))
+/*  886 */       String str2 = localWizardSelections.getMeterDevice();
+/*      */ 
+/*  888 */       if ((str2.equals("wizard.selections.SELECTION_DEVICE_MMLINKMETER")) || (str2.equals("wizard.selections.SELECTION_DEVICE_MMLOGICMETER")))
 /*      */       {
-/*  916 */         i = 1;
+/*  890 */         if (localWizardSelections.getConnectionType().equals("wizard.selections.SELECTION_CONN_TYPE_USB"))
+/*      */         {
+/*  892 */           i = 1;
+/*      */         }
+/*  894 */         else i = bool;
+/*      */ 
 /*      */       }
-/*  918 */       else i = 0;
+/*  897 */       else if ((str2.equals("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_USB_METER")) || (str2.equals("wizard.selections.SELECTION_DEVICE_XTLINKMETER")))
+/*      */       {
+/*  900 */         i = 0;
+/*      */       }
+/*  902 */       else i = bool;
+/*      */ 
 /*      */     }
-/*  920 */     else if (str1.equals("wizard.selections.SELECTION_DEVICE_METER"))
+/*  906 */     else if (localWizardSelections.getLinkDevice().equals("wizard.selections.SELECTION_LINK_DEVICE_COMLINK")) {
+/*  907 */       i = bool;
+/*  908 */     } else if (localWizardSelections.getLinkDevice().equals("wizard.selections.SELECTION_LINK_DEVICE_PARADIGMLINK"))
 /*      */     {
-/*  922 */       str2 = localWizardSelections.getMeterDevice();
-/*  923 */       if ((str2.equals("wizard.selections.SELECTION_DEVICE_MMLINKMETER")) || (str2.equals("wizard.selections.SELECTION_DEVICE_MMLOGICMETER")))
+/*  910 */       if (localWizardSelections.getConnectionType().equals("wizard.selections.SELECTION_CONN_TYPE_SERIAL"))
 /*      */       {
-/*  926 */         i = 1;
+/*  912 */         i = bool;
 /*      */       }
-/*  928 */       else i = 0;
+/*  914 */       else i = 1; 
 /*      */     }
 /*      */     else
 /*      */     {
-/*  932 */       i = 1;
+/*  917 */       i = 0;
 /*      */     }
-/*  934 */     return i;
+/*      */ 
+/*  920 */     return i;
 /*      */   }
 /*      */ 
 /*      */   public boolean isBDUSBDriverInstallNeeded()
 /*      */   {
-/*  943 */     return this.m_standardBDUSBDriverInstallNeededDecider.isUSBDriverInstallNeeded();
+/*  929 */     return isDriverInstallNeeded(this.m_config.getBDDriverConfig());
+/*      */   }
+/*      */ 
+/*      */   public boolean isBayerUSBDriverInstallNeeded()
+/*      */   {
+/*  938 */     return isDriverInstallNeeded(this.m_config.getBayerUSBConfig());
 /*      */   }
 /*      */ 
 /*      */   public boolean canFinish()
 /*      */   {
-/*  956 */     return canFinish(this.m_standardBDUSBDriverInstallNeededDecider);
+/*  951 */     return canFinish(isBDUSBDriverInstallNeeded());
 /*      */   }
 /*      */ 
-/*      */   boolean canFinish(USBDriverInstallNeededDecider paramUSBDriverInstallNeededDecider)
+/*      */   public CaptureResult getCaptureResult()
 /*      */   {
-/* 1033 */     WizardSelections localWizardSelections = this.m_config.getWizardSelections();
-/*      */     boolean bool;
-/* 1037 */     if (!localWizardSelections.isDeviceTypeSet()) {
-/* 1038 */       bool = false;
-/* 1039 */       return bool;
-/*      */     }
-/* 1041 */     String str = localWizardSelections.getDeviceType();
+/*  961 */     return this.m_captureResult;
+/*      */   }
 /*      */ 
-/* 1043 */     if (isPump(str)) {
-/* 1044 */       bool = canFinishPump(localWizardSelections, paramUSBDriverInstallNeededDecider);
-/* 1045 */     } else if (isMeter(str)) {
-/* 1046 */       bool = canFinishMeter(localWizardSelections, paramUSBDriverInstallNeededDecider);
-/* 1047 */     } else if (isCGM(str)) {
-/* 1048 */       bool = canFinishCGM(localWizardSelections, paramUSBDriverInstallNeededDecider);
+/*      */   boolean canFinish(boolean paramBoolean)
+/*      */   {
+/* 1032 */     WizardSelections localWizardSelections = this.m_config.getWizardSelections();
+/*      */     boolean bool;
+/* 1036 */     if (!localWizardSelections.isDeviceTypeSet()) {
+/* 1037 */       bool = false;
+/* 1038 */       return bool;
+/*      */     }
+/* 1040 */     String str = localWizardSelections.getDeviceType();
+/*      */ 
+/* 1042 */     if (isPump(str)) {
+/* 1043 */       bool = canFinishPump(localWizardSelections, paramBoolean);
+/* 1044 */     } else if (isMeter(str)) {
+/* 1045 */       bool = canFinishMeter(localWizardSelections, paramBoolean);
+/* 1046 */     } else if (isCGM(str)) {
+/* 1047 */       bool = canFinishCGM(localWizardSelections, paramBoolean);
 /*      */     }
 /*      */     else {
-/* 1051 */       bool = false;
-/* 1052 */       Contract.unreachable();
+/* 1050 */       bool = false;
+/* 1051 */       Contract.unreachable();
 /*      */     }
 /*      */ 
-/* 1062 */     return bool ? localWizardSelections.isUserInputCompleted() : false;
+/* 1061 */     return bool ? localWizardSelections.isUserInputCompleted() : false;
 /*      */   }
 /*      */ 
 /*      */   private boolean isComLinkUSBConnected()
 /*      */   {
-/* 1071 */     boolean bool = false;
+/* 1070 */     boolean bool = false;
 /*      */ 
-/* 1074 */     if (!isComLink2USBDriverInstallNeeded()) {
-/* 1075 */       bool = ComLink2.isLinkPresent();
+/* 1073 */     if (!isComLink2USBDriverInstallNeeded()) {
+/* 1074 */       bool = AA.R();
 /*      */     }
-/* 1077 */     return bool;
+/* 1076 */     return bool;
 /*      */   }
 /*      */ 
-/*      */   private boolean canFinishPump(WizardSelections paramWizardSelections, USBDriverInstallNeededDecider paramUSBDriverInstallNeededDecider)
+/*      */   private boolean canFinishPump(WizardSelections paramWizardSelections, boolean paramBoolean)
 /*      */   {
 /*      */     boolean bool;
-/* 1093 */     if (!paramWizardSelections.isPumpDeviceSet()) {
-/* 1094 */       bool = false;
-/* 1095 */       return bool;
+/* 1092 */     if (!paramWizardSelections.isPumpDeviceSet()) {
+/* 1093 */       bool = false;
+/* 1094 */       return bool;
 /*      */     }
-/* 1097 */     String str1 = paramWizardSelections.getPumpDevice();
 /*      */ 
-/* 1099 */     if (is508(str1)) {
-/* 1100 */       bool = paramWizardSelections.isSerialPortMethodSet();
-/*      */     }
-/*      */     else {
-/* 1103 */       String str2 = paramWizardSelections.getPumpSerialNumber();
-/* 1104 */       if (str2 != null)
+/* 1098 */     String str1 = paramWizardSelections.getPumpSerialNumber();
+/* 1099 */     if (str1 != null)
+/*      */     {
+/* 1101 */       if (NumericTextField.isValidEntry(str1))
 /*      */       {
-/* 1106 */         if (NumericTextField.isValidEntry(str2))
+/* 1103 */         if (!paramWizardSelections.isLinkDeviceSet()) {
+/* 1104 */           bool = false;
+/* 1105 */           return bool;
+/*      */         }
+/* 1107 */         String str2 = paramWizardSelections.getLinkDevice();
+/* 1108 */         if (isComLinkUSB(str2)) {
+/* 1109 */           bool = isComLinkUSBConnected();
+/* 1110 */         } else if (isComLink(str2)) {
+/* 1111 */           bool = paramWizardSelections.isSerialPortMethodSet();
+/* 1112 */         } else if (isXTLinkUSB(str2)) {
+/* 1113 */           bool = !isXTLink2USBDriverInstallNeeded();
+/* 1114 */         } else if (isParadigmLink(str2))
 /*      */         {
-/* 1108 */           if (!paramWizardSelections.isLinkDeviceSet()) {
-/* 1109 */             bool = false;
-/* 1110 */             return bool;
+/* 1116 */           if (!paramWizardSelections.isConnectionTypeSet()) {
+/* 1117 */             bool = false;
+/* 1118 */             return bool;
 /*      */           }
-/* 1112 */           String str3 = paramWizardSelections.getLinkDevice();
-/* 1113 */           if (isComLinkUSB(str3)) {
-/* 1114 */             bool = isComLinkUSBConnected();
-/* 1115 */           } else if (isComLink(str3)) {
-/* 1116 */             bool = paramWizardSelections.isSerialPortMethodSet();
-/* 1117 */           } else if (isParadigmLink(str3))
-/*      */           {
-/* 1119 */             if (!paramWizardSelections.isConnectionTypeSet()) {
-/* 1120 */               bool = false;
-/* 1121 */               return bool;
-/*      */             }
-/* 1123 */             String str4 = paramWizardSelections.getConnectionType();
-/* 1124 */             if (isSerial(str4)) {
-/* 1125 */               bool = paramWizardSelections.isSerialPortMethodSet();
-/* 1126 */             } else if (isUSB(str4)) {
-/* 1127 */               bool = !paramUSBDriverInstallNeededDecider.isUSBDriverInstallNeeded();
-/*      */             } else {
-/* 1129 */               bool = false;
-/* 1130 */               Contract.unreachable();
-/*      */             }
-/*      */           }
-/*      */           else {
-/* 1134 */             bool = false;
-/* 1135 */             Contract.unreachable();
-/*      */           }
-/*      */         }
-/*      */         else {
-/* 1139 */           bool = false;
-/*      */         }
-/*      */       }
-/*      */       else {
-/* 1143 */         bool = false;
-/*      */       }
-/*      */     }
-/*      */ 
-/* 1147 */     return bool;
-/*      */   }
-/*      */ 
-/*      */   private boolean canFinishMeter(WizardSelections paramWizardSelections, USBDriverInstallNeededDecider paramUSBDriverInstallNeededDecider)
-/*      */   {
-/*      */     boolean bool;
-/* 1163 */     if (!paramWizardSelections.isMeterBrandSet()) {
-/* 1164 */       bool = false;
-/* 1165 */       return bool;
-/*      */     }
-/* 1167 */     String str1 = paramWizardSelections.getMeterBrand();
-/*      */ 
-/* 1170 */     if (!paramWizardSelections.isMeterDeviceSet()) {
-/* 1171 */       bool = false;
-/* 1172 */       return bool;
-/*      */     }
-/* 1174 */     String str2 = paramWizardSelections.getMeterDevice();
-/*      */ 
-/* 1177 */     if (paramWizardSelections.isMeterBrandAndModelMismatch(str1, str2)) {
-/* 1178 */       bool = false;
-/* 1179 */       return bool;
-/*      */     }
-/*      */ 
-/* 1182 */     if (!isMiniMedOrBD(str1))
-/*      */     {
-/* 1184 */       bool = paramWizardSelections.isSerialPortMethodSet();
-/*      */     }
-/* 1186 */     else if (("wizard.selections.SELECTION_DEVICE_MMLINKMETER".equals(str2)) || ("wizard.selections.SELECTION_DEVICE_MMLOGICMETER".equals(str2)))
-/*      */     {
-/* 1192 */       if (!paramWizardSelections.isConnectionTypeSet()) {
-/* 1193 */         bool = false;
-/* 1194 */         return bool;
-/*      */       }
-/* 1196 */       String str3 = paramWizardSelections.getConnectionType();
-/* 1197 */       if (isSerial(str3)) {
-/* 1198 */         bool = paramWizardSelections.isSerialPortMethodSet();
-/* 1199 */       } else if (isUSB(str3)) {
-/* 1200 */         bool = !paramUSBDriverInstallNeededDecider.isUSBDriverInstallNeeded();
-/*      */       }
-/*      */       else {
-/* 1203 */         bool = false;
-/* 1204 */         Contract.unreachable();
-/*      */       }
-/*      */     }
-/*      */     else {
-/* 1208 */       bool = paramWizardSelections.isSerialPortMethodSet();
-/*      */     }
-/*      */ 
-/* 1213 */     if ((bool) && (getConfig().isUploadParadigmLinkMeterOnly()) && (!"wizard.selections.SELECTION_DEVICE_MMLINKMETER".equals(str2)))
-/*      */     {
-/* 1217 */       return false;
-/*      */     }
-/*      */ 
-/* 1220 */     return bool;
-/*      */   }
-/*      */ 
-/*      */   private boolean canFinishCGM(WizardSelections paramWizardSelections, USBDriverInstallNeededDecider paramUSBDriverInstallNeededDecider)
-/*      */   {
-/*      */     boolean bool;
-/* 1236 */     if (!paramWizardSelections.isCGMDeviceSet()) {
-/* 1237 */       bool = false;
-/* 1238 */       return bool;
-/*      */     }
-/*      */ 
-/* 1242 */     String str1 = paramWizardSelections.getCGMSerialNumber();
-/* 1243 */     if (str1 != null)
-/*      */     {
-/* 1245 */       if (NumericTextField.isValidEntry(str1))
-/*      */       {
-/* 1247 */         if (!paramWizardSelections.isLinkDeviceSet()) {
-/* 1248 */           bool = false;
-/* 1249 */           return bool;
-/*      */         }
-/* 1251 */         String str2 = paramWizardSelections.getLinkDevice();
-/* 1252 */         if (isComLinkUSB(str2)) {
-/* 1253 */           bool = isComLinkUSBConnected();
-/* 1254 */         } else if (isComLink(str2)) {
-/* 1255 */           bool = paramWizardSelections.isSerialPortMethodSet();
-/* 1256 */         } else if (isParadigmLink(str2))
-/*      */         {
-/* 1258 */           if (!paramWizardSelections.isConnectionTypeSet()) {
-/* 1259 */             bool = false;
-/* 1260 */             return bool;
-/*      */           }
-/* 1262 */           String str3 = paramWizardSelections.getConnectionType();
-/* 1263 */           if (isSerial(str3)) {
-/* 1264 */             bool = paramWizardSelections.isSerialPortMethodSet();
-/* 1265 */           } else if (isUSB(str3)) {
-/* 1266 */             bool = !paramUSBDriverInstallNeededDecider.isUSBDriverInstallNeeded();
+/* 1120 */           String str3 = paramWizardSelections.getConnectionType();
+/* 1121 */           if (isSerial(str3)) {
+/* 1122 */             bool = paramWizardSelections.isSerialPortMethodSet();
+/* 1123 */           } else if (isUSB(str3)) {
+/* 1124 */             bool = !paramBoolean;
 /*      */           } else {
-/* 1268 */             bool = false;
-/* 1269 */             Contract.unreachable();
+/* 1126 */             bool = false;
+/* 1127 */             Contract.unreachable();
 /*      */           }
 /*      */         }
 /*      */         else {
-/* 1273 */           bool = false;
-/* 1274 */           Contract.unreachable();
+/* 1131 */           bool = false;
+/* 1132 */           Contract.unreachable();
 /*      */         }
 /*      */       }
 /*      */       else {
-/* 1278 */         bool = false;
+/* 1136 */         bool = false;
 /*      */       }
 /*      */     }
 /*      */     else {
-/* 1282 */       bool = false;
+/* 1140 */       bool = false;
 /*      */     }
 /*      */ 
-/* 1285 */     return bool;
+/* 1143 */     return bool;
+/*      */   }
+/*      */ 
+/*      */   private boolean isDriverInstallNeeded(WizardConfig.DriverConfig paramDriverConfig)
+/*      */   {
+/* 1153 */     boolean bool = paramDriverConfig.isDriverInstallNeeded();
+/* 1154 */     String str = bool ? "" : "NOT ";
+/* 1155 */     this.m_config.getLogWriter().logInfo("install " + str + "needed for " + paramDriverConfig.getInstallDriverDir());
+/*      */ 
+/* 1157 */     return bool;
+/*      */   }
+/*      */ 
+/*      */   private boolean canFinishMeter(WizardSelections paramWizardSelections, boolean paramBoolean)
+/*      */   {
+/*      */     boolean bool;
+/* 1173 */     if (!paramWizardSelections.isMeterBrandSet()) {
+/* 1174 */       bool = false;
+/* 1175 */       return bool;
+/*      */     }
+/* 1177 */     String str1 = paramWizardSelections.getMeterBrand();
+/*      */ 
+/* 1180 */     if (!paramWizardSelections.isMeterDeviceSet()) {
+/* 1181 */       bool = false;
+/* 1182 */       return bool;
+/*      */     }
+/* 1184 */     String str2 = paramWizardSelections.getMeterDevice();
+/*      */ 
+/* 1187 */     if (paramWizardSelections.isMeterBrandAndModelMismatch(str1, str2)) {
+/* 1188 */       bool = false;
+/* 1189 */       return bool;
+/*      */     }
+/*      */ 
+/* 1192 */     if (!isMiniMedOrBD(str1)) {
+/* 1193 */       if (("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_USB_METER".equals(str2)) || ("wizard.selections.SELECTION_DEVICE_XTLINKMETER".equals(str2)))
+/*      */       {
+/* 1197 */         bool = !isBayerUSBDriverInstallNeeded();
+/*      */       }
+/* 1199 */       else bool = paramWizardSelections.isSerialPortMethodSet();
+/*      */ 
+/*      */     }
+/* 1202 */     else if (("wizard.selections.SELECTION_DEVICE_MMLINKMETER".equals(str2)) || ("wizard.selections.SELECTION_DEVICE_MMLOGICMETER".equals(str2)))
+/*      */     {
+/* 1208 */       if (!paramWizardSelections.isConnectionTypeSet()) {
+/* 1209 */         bool = false;
+/* 1210 */         return bool;
+/*      */       }
+/* 1212 */       String str3 = paramWizardSelections.getConnectionType();
+/* 1213 */       if (isSerial(str3)) {
+/* 1214 */         bool = paramWizardSelections.isSerialPortMethodSet();
+/* 1215 */       } else if (isUSB(str3)) {
+/* 1216 */         bool = !paramBoolean;
+/*      */       }
+/*      */       else {
+/* 1219 */         bool = false;
+/* 1220 */         Contract.unreachable();
+/*      */       }
+/* 1222 */     } else if ("wizard.selections.SELECTION_DEVICE_XTLINKMETER".equals(str2))
+/*      */     {
+/* 1224 */       bool = !isBayerUSBDriverInstallNeeded();
+/*      */     }
+/*      */     else {
+/* 1227 */       bool = paramWizardSelections.isSerialPortMethodSet();
+/*      */     }
+/*      */ 
+/* 1232 */     if ((bool) && (getConfig().isUploadParadigmLinkMeterOnly()) && (!"wizard.selections.SELECTION_DEVICE_MMLINKMETER".equals(str2)))
+/*      */     {
+/* 1236 */       return false;
+/*      */     }
+/*      */ 
+/* 1239 */     return bool;
+/*      */   }
+/*      */ 
+/*      */   private boolean canFinishCGM(WizardSelections paramWizardSelections, boolean paramBoolean)
+/*      */   {
+/*      */     boolean bool;
+/* 1255 */     if (!paramWizardSelections.isCGMDeviceSet()) {
+/* 1256 */       bool = false;
+/* 1257 */       return bool;
+/*      */     }
+/*      */ 
+/* 1261 */     String str1 = paramWizardSelections.getCGMSerialNumber();
+/* 1262 */     if (str1 != null)
+/*      */     {
+/* 1264 */       if (NumericTextField.isValidEntry(str1))
+/*      */       {
+/* 1266 */         if (!paramWizardSelections.isLinkDeviceSet()) {
+/* 1267 */           bool = false;
+/* 1268 */           return bool;
+/*      */         }
+/* 1270 */         String str2 = paramWizardSelections.getLinkDevice();
+/* 1271 */         if (isComLinkUSB(str2)) {
+/* 1272 */           bool = isComLinkUSBConnected();
+/* 1273 */         } else if (isComLink(str2)) {
+/* 1274 */           bool = paramWizardSelections.isSerialPortMethodSet();
+/* 1275 */         } else if (isXTLinkUSB(str2)) {
+/* 1276 */           bool = !isXTLink2USBDriverInstallNeeded();
+/* 1277 */         } else if (isParadigmLink(str2))
+/*      */         {
+/* 1279 */           if (!paramWizardSelections.isConnectionTypeSet()) {
+/* 1280 */             bool = false;
+/* 1281 */             return bool;
+/*      */           }
+/* 1283 */           String str3 = paramWizardSelections.getConnectionType();
+/* 1284 */           if (isSerial(str3)) {
+/* 1285 */             bool = paramWizardSelections.isSerialPortMethodSet();
+/* 1286 */           } else if (isUSB(str3)) {
+/* 1287 */             bool = !paramBoolean;
+/*      */           } else {
+/* 1289 */             bool = false;
+/* 1290 */             Contract.unreachable();
+/*      */           }
+/*      */         }
+/*      */         else {
+/* 1294 */           bool = false;
+/* 1295 */           Contract.unreachable();
+/*      */         }
+/*      */       }
+/*      */       else {
+/* 1299 */         bool = false;
+/*      */       }
+/*      */     }
+/*      */     else {
+/* 1303 */       bool = false;
+/*      */     }
+/*      */ 
+/* 1306 */     return bool;
 /*      */   }
 /*      */ 
 /*      */   private boolean isPump(String paramString)
 /*      */   {
-/* 1295 */     return "wizard.selections.SELECTION_DEVICE_PUMP".equals(paramString);
+/* 1316 */     return "wizard.selections.SELECTION_DEVICE_PUMP".equals(paramString);
 /*      */   }
 /*      */ 
 /*      */   private boolean isMeter(String paramString)
 /*      */   {
-/* 1305 */     return "wizard.selections.SELECTION_DEVICE_METER".equals(paramString);
+/* 1326 */     return "wizard.selections.SELECTION_DEVICE_METER".equals(paramString);
 /*      */   }
 /*      */ 
 /*      */   private boolean isCGM(String paramString)
 /*      */   {
-/* 1315 */     return "wizard.selections.SELECTION_DEVICE_CGM".equals(paramString);
+/* 1336 */     return "wizard.selections.SELECTION_DEVICE_CGM".equals(paramString);
 /*      */   }
 /*      */ 
 /*      */   private boolean isMiniMedOrBD(String paramString)
 /*      */   {
-/* 1325 */     return ("wizard.selections.SELECTION_BRAND_MINIMED_BD".equals(paramString)) || ("wizard.selections.SELECTION_BRAND_BD".equals(paramString));
-/*      */   }
-/*      */ 
-/*      */   private boolean is508(String paramString)
-/*      */   {
-/* 1336 */     return "wizard.selections.SELECTION_DEVICE_MM508".equals(paramString);
+/* 1346 */     return ("wizard.selections.SELECTION_BRAND_MINIMED_BD".equals(paramString)) || ("wizard.selections.SELECTION_BRAND_BD".equals(paramString));
 /*      */   }
 /*      */ 
 /*      */   private boolean isComLink(String paramString)
 /*      */   {
-/* 1346 */     return "wizard.selections.SELECTION_LINK_DEVICE_COMLINK".equals(paramString);
+/* 1357 */     return "wizard.selections.SELECTION_LINK_DEVICE_COMLINK".equals(paramString);
 /*      */   }
 /*      */ 
 /*      */   private boolean isParadigmLink(String paramString)
 /*      */   {
-/* 1356 */     return "wizard.selections.SELECTION_LINK_DEVICE_PARADIGMLINK".equals(paramString);
+/* 1367 */     return "wizard.selections.SELECTION_LINK_DEVICE_PARADIGMLINK".equals(paramString);
 /*      */   }
 /*      */ 
 /*      */   private boolean isSerial(String paramString)
 /*      */   {
-/* 1366 */     return "wizard.selections.SELECTION_CONN_TYPE_SERIAL".equals(paramString);
+/* 1377 */     return "wizard.selections.SELECTION_CONN_TYPE_SERIAL".equals(paramString);
 /*      */   }
 /*      */ 
 /*      */   private boolean isUSB(String paramString)
 /*      */   {
-/* 1376 */     return "wizard.selections.SELECTION_CONN_TYPE_USB".equals(paramString);
+/* 1387 */     return "wizard.selections.SELECTION_CONN_TYPE_USB".equals(paramString);
 /*      */   }
 /*      */ 
 /*      */   private void startComLinkUSBMonitor()
 /*      */   {
-/* 1385 */     2 local2 = new ActionListener()
+/* 1396 */     1 local1 = new ActionListener()
 /*      */     {
 /*      */       public void actionPerformed(ActionEvent paramActionEvent)
 /*      */       {
-/* 1393 */         if (Wizard.this.isComLinkUSB(Wizard.this.getConfig().getWizardSelections().getLinkDevice()))
+/* 1404 */         if (Wizard.this.isComLinkUSB(Wizard.this.getConfig().getWizardSelections().getLinkDevice()))
 /*      */         {
-/* 1395 */           WizardStep localWizardStep = (WizardStep)Wizard.this.m_stepLayout.getCurrentStep();
-/* 1396 */           if (localWizardStep != null) {
-/* 1397 */             localWizardStep.updateButtonStates();
-/* 1398 */             localWizardStep.updateContent();
+/* 1406 */           WizardStep localWizardStep = (WizardStep)Wizard.this.m_stepLayout.getCurrentStep();
+/* 1407 */           if (localWizardStep != null) {
+/* 1408 */             localWizardStep.updateButtonStates();
+/* 1409 */             localWizardStep.updateContent();
 /*      */           }
 /*      */         }
 /*      */       }
 /*      */     };
-/* 1405 */     if (this.m_comLinkUSBMonitor == null) {
-/* 1406 */       this.m_comLinkUSBMonitor = new Timer(2000, local2);
-/* 1407 */       this.m_comLinkUSBMonitor.start();
+/* 1416 */     if (this.m_comLinkUSBMonitor == null) {
+/* 1417 */       this.m_comLinkUSBMonitor = new Timer(2000, local1);
+/* 1418 */       this.m_comLinkUSBMonitor.start();
 /*      */     }
 /*      */   }
 /*      */ 
 /*      */   private void stopComLinkUSBMonitor()
 /*      */   {
-/* 1415 */     if (this.m_comLinkUSBMonitor != null)
-/* 1416 */       this.m_comLinkUSBMonitor.stop();
+/* 1426 */     if (this.m_comLinkUSBMonitor != null) {
+/* 1427 */       this.m_comLinkUSBMonitor.stop();
+/* 1428 */       AA.O();
+/*      */     }
 /*      */   }
 /*      */ 
 /*      */   static
 /*      */   {
-/*  390 */     HashMap localHashMap = new HashMap();
+/*  338 */     HashMap localHashMap = new HashMap();
 /*      */ 
-/*  393 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MMPARADIGM2", new Integer(13));
+/*  341 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MMPARADIGM2", new Integer(13));
 /*      */ 
-/*  395 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MM511", new Integer(1));
+/*  345 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MMLINKMETER", new Integer(16));
 /*      */ 
-/*  397 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MM508", new Integer(0));
+/*  347 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MMLOGICMETER", new Integer(17));
 /*      */ 
-/*  401 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MMLINKMETER", new Integer(16));
+/*  349 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_DEX_METER", new Integer(8));
 /*      */ 
-/*  403 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MMLOGICMETER", new Integer(17));
+/*  351 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_ELITE_METER", new Integer(9));
 /*      */ 
-/*  405 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_DEX_METER", new Integer(8));
+/*  353 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_BREEZE_METER", new Integer(19));
 /*      */ 
-/*  407 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_ELITE_METER", new Integer(9));
+/*  355 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER", new Integer(20));
 /*      */ 
-/*  409 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_BREEZE_METER", new Integer(19));
+/*  357 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_USB_METER", new Integer(27));
 /*      */ 
-/*  411 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER", new Integer(20));
+/*  359 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_XTLINKMETER", new Integer(28));
 /*      */ 
-/*  413 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_BASIC_METER", new Integer(4));
+/*  361 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_BASIC_METER", new Integer(4));
 /*      */ 
-/*  415 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_FASTTAKE_METER", new Integer(6));
+/*  363 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_FASTTAKE_METER", new Integer(6));
 /*      */ 
-/*  417 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_PROFILE_METER", new Integer(2));
+/*  365 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_PROFILE_METER", new Integer(2));
 /*      */ 
-/*  419 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_SURESTEP_METER", new Integer(7));
+/*  367 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_SURESTEP_METER", new Integer(7));
 /*      */ 
-/*  421 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER", new Integer(5));
+/*  369 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER", new Integer(5));
 /*      */ 
-/*  423 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRASMART_METER", new Integer(21));
+/*  371 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRASMART_METER", new Integer(21));
 /*      */ 
-/*  425 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRAMINI_METER", new Integer(26));
+/*  373 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRAMINI_METER", new Integer(26));
 /*      */ 
-/*  427 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MEDISENSE_XTRA_METER", new Integer(10));
+/*  375 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MEDISENSE_XTRA_METER", new Integer(10));
 /*      */ 
-/*  429 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_THERASENSE_FREESTYLE_METER", new Integer(12));
+/*  377 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_THERASENSE_FREESTYLE_METER", new Integer(12));
 /*      */ 
-/*  431 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ROCHE_ACTIVE_METER", new Integer(23));
+/*  379 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ROCHE_ACTIVE_METER", new Integer(23));
 /*      */ 
-/*  433 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ROCHE_AVIVA_METER", new Integer(22));
+/*  381 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ROCHE_AVIVA_METER", new Integer(22));
 /*      */ 
-/*  435 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ROCHE_COMPACT_METER", new Integer(24));
+/*  383 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ROCHE_COMPACT_METER", new Integer(24));
 /*      */ 
-/*  437 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ROCHE_COMPACTPLUS_METER", new Integer(25));
+/*  385 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ROCHE_COMPACTPLUS_METER", new Integer(25));
 /*      */ 
-/*  441 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MMGUARDIAN3", new Integer(13));
+/*  389 */     uniAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MMGUARDIAN3", new Integer(13));
 /*      */ 
-/*  444 */     SELECTIONS_ID_MAP = Collections.unmodifiableMap(localHashMap);
+/*  392 */     SELECTIONS_ID_MAP = Collections.unmodifiableMap(localHashMap);
 /*      */ 
-/*  448 */     localHashMap = new HashMap();
+/*  396 */     localHashMap = new HashMap();
 /*      */ 
-/*  451 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MMPARADIGM2", "MiniMedParadigm2");
+/*  399 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MMPARADIGM2", "MiniMedParadigm2");
 /*      */ 
-/*  453 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MM511", "MiniMed511");
+/*  403 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MMLINKMETER", "BDParadigmLink");
 /*      */ 
-/*  455 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MM508", "MiniMed508");
+/*  405 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MMLOGICMETER", "BDLogic");
 /*      */ 
-/*  459 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MMLINKMETER", "BDParadigmLink");
+/*  407 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_DEX_METER", "BayerDex");
 /*      */ 
-/*  461 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MMLOGICMETER", "BDLogic");
+/*  409 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_ELITE_METER", "BayerEliteXL");
 /*      */ 
-/*  463 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_DEX_METER", "BayerDex");
+/*  411 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_BREEZE_METER", "BayerBreeze");
 /*      */ 
-/*  465 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_ELITE_METER", "BayerEliteXL");
+/*  413 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER", "BayerContour");
 /*      */ 
-/*  467 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_BREEZE_METER", "BayerBreeze");
+/*  415 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_USB_METER", "BayerContourUSB");
 /*      */ 
-/*  469 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER", "BayerContour");
+/*  417 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_XTLINKMETER", "BayerContourXTLink");
 /*      */ 
-/*  471 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_BASIC_METER", "LifescanOTBasic");
+/*  419 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_BASIC_METER", "LifescanOTBasic");
 /*      */ 
-/*  473 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_FASTTAKE_METER", "LifescanFastTake");
+/*  421 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_FASTTAKE_METER", "LifescanFastTake");
 /*      */ 
-/*  475 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_PROFILE_METER", "LifescanOTProfile");
+/*  423 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_PROFILE_METER", "LifescanOTProfile");
 /*      */ 
-/*  477 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_SURESTEP_METER", "LifescanSureStep");
+/*  425 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_SURESTEP_METER", "LifescanSureStep");
 /*      */ 
-/*  479 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER", "LifescanOTUltra");
+/*  427 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER", "LifescanOTUltra");
 /*      */ 
-/*  481 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRAMINI_METER", "LifescanOTUltraMini");
+/*  429 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRAMINI_METER", "LifescanOTUltraMini");
 /*      */ 
-/*  483 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRASMART_METER", "LifescanOTUltraSmart");
+/*  431 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRASMART_METER", "LifescanOTUltraSmart");
 /*      */ 
-/*  485 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MEDISENSE_XTRA_METER", "MedisenseXtra");
+/*  433 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MEDISENSE_XTRA_METER", "MedisenseXtra");
 /*      */ 
-/*  487 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_THERASENSE_FREESTYLE_METER", "TherasenseFreestyle");
+/*  435 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_THERASENSE_FREESTYLE_METER", "TherasenseFreestyle");
 /*      */ 
-/*  489 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ROCHE_ACTIVE_METER", "RocheActive");
+/*  437 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ROCHE_ACTIVE_METER", "RocheActive");
 /*      */ 
-/*  491 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ROCHE_AVIVA_METER", "RocheAviva");
+/*  439 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ROCHE_AVIVA_METER", "RocheAviva");
 /*      */ 
-/*  493 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ROCHE_COMPACT_METER", "RocheCompact");
+/*  441 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ROCHE_COMPACT_METER", "RocheCompact");
 /*      */ 
-/*  495 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ROCHE_COMPACTPLUS_METER", "RocheCompactPlus");
+/*  443 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_ROCHE_COMPACTPLUS_METER", "RocheCompactPlus");
 /*      */ 
-/*  500 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MMGUARDIAN3", "MiniMedGuardian3");
+/*  448 */     biAssociate(localHashMap, "wizard.selections.SELECTION_DEVICE_MMGUARDIAN3", "MiniMedGuardian3");
 /*      */ 
-/*  503 */     SELECTIONS_CLASSNAME_MAP = Collections.unmodifiableMap(localHashMap);
-/*      */   }
-/*      */ 
-/*      */   static abstract interface USBDriverInstallNeededDecider
-/*      */   {
-/*      */     public abstract boolean isUSBDriverInstallNeeded();
+/*  451 */     SELECTIONS_CLASSNAME_MAP = Collections.unmodifiableMap(localHashMap);
 /*      */   }
 /*      */ }
 

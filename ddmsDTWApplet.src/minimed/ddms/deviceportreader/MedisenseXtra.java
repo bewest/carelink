@@ -1,22 +1,22 @@
-/*    */ package minimed.ddms.deviceportreader;
+/*    */ package minimed.ddms.A;
 /*    */ 
 /*    */ import java.util.Set;
 /*    */ 
-/*    */ final class MedisenseXtra extends MedisenseBGKetone
+/*    */ class f extends m
 /*    */ {
-/*    */   public static final int SNAPSHOT_FORMAT_ID = 131;
-/*    */   private static final String PRODUCT_CODE1 = "QID2";
-/*    */   private static final String PRODUCT_CODE2 = "XCEED";
+/*    */   public static final int ы = 131;
+/*    */   private static final String ъ = "QID2";
+/*    */   private static final String щ = "XCEED";
 /*    */ 
-/*    */   MedisenseXtra()
+/*    */   f()
 /*    */   {
-/* 50 */     super("Medisense Precision Xtra / Xceed Meter", 131, 10, "QID2");
+/* 49 */     super("Medisense Precision Xtra / Xceed Meter", 131, 10, "QID2");
 /*    */ 
-/* 54 */     getProductCodes().add("XCEED");
+/* 53 */     Â().add("XCEED");
 /*    */   }
 /*    */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.MedisenseXtra
+ * Qualified Name:     minimed.ddms.A.f
  * JD-Core Version:    0.6.0
  */

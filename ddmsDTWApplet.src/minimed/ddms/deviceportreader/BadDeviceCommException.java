@@ -1,34 +1,34 @@
-/*    */ package minimed.ddms.deviceportreader;
+/*    */ package minimed.ddms.A;
 /*    */ 
-/*    */ public final class BadDeviceCommException extends Exception
+/*    */ public final class t extends Exception
 /*    */ {
-/*    */   private Integer m_errorCode;
-/*    */   private String m_errorCodeDescription;
+/*    */   private Integer B;
+/*    */   private String A;
 /*    */ 
-/*    */   BadDeviceCommException(String paramString)
+/*    */   t(String paramString)
 /*    */   {
 /* 45 */     super(paramString);
 /*    */   }
 /*    */ 
-/*    */   BadDeviceCommException(String paramString1, Integer paramInteger, String paramString2)
+/*    */   t(String paramString1, Integer paramInteger, String paramString2)
 /*    */   {
 /* 58 */     super(paramString1);
-/* 59 */     this.m_errorCode = paramInteger;
-/* 60 */     this.m_errorCodeDescription = paramString2;
+/* 59 */     this.B = paramInteger;
+/* 60 */     this.A = paramString2;
 /*    */   }
 /*    */ 
-/*    */   public Integer getErrorCode()
+/*    */   public Integer A()
 /*    */   {
-/* 71 */     return this.m_errorCode;
+/* 71 */     return this.B;
 /*    */   }
 /*    */ 
-/*    */   public String getErrorCodeDescription()
+/*    */   public String B()
 /*    */   {
-/* 81 */     return this.m_errorCodeDescription;
+/* 81 */     return this.A;
 /*    */   }
 /*    */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.BadDeviceCommException
+ * Qualified Name:     minimed.ddms.A.t
  * JD-Core Version:    0.6.0
  */

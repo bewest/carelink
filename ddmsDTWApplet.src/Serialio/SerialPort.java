@@ -108,6 +108,8 @@ public abstract interface SerialPort
   public abstract void setName(String paramString);
 
   public abstract String getName();
+
+  public abstract boolean isSupported(String paramString);
 }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar

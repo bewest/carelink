@@ -1,73 +1,73 @@
-/*     */ package minimed.ddms.deviceportreader;
+/*     */ package minimed.ddms.A;
 /*     */ 
 /*     */ import minimed.util.Contract;
 /*     */ 
-/*     */ public class IntRange
+/*     */ public class y
 /*     */ {
-/*     */   private final int m_minimum;
-/*     */   private final int m_maximum;
-/*     */   private final int m_default;
-/*     */   private final String m_description;
-/*     */   private final int m_precision;
+/*     */   private final int C;
+/*     */   private final int D;
+/*     */   private final int B;
+/*     */   private final String E;
+/*     */   private final int A;
 /*     */ 
-/*     */   public IntRange(int paramInt1, int paramInt2, int paramInt3, String paramString, int paramInt4)
+/*     */   public y(int paramInt1, int paramInt2, int paramInt3, String paramString, int paramInt4)
 /*     */   {
 /*  54 */     Contract.pre(paramInt4 >= 1);
 /*  55 */     Contract.pre(paramInt1 <= paramInt2);
-/*  56 */     this.m_minimum = paramInt1;
-/*  57 */     this.m_maximum = paramInt2;
-/*  58 */     this.m_precision = paramInt4;
+/*  56 */     this.C = paramInt1;
+/*  57 */     this.D = paramInt2;
+/*  58 */     this.A = paramInt4;
 /*     */ 
-/*  60 */     verifyInRangePre(paramInt3);
-/*  61 */     this.m_default = paramInt3;
-/*  62 */     this.m_description = paramString;
+/*  60 */     A(paramInt3);
+/*  61 */     this.B = paramInt3;
+/*  62 */     this.E = paramString;
 /*     */   }
 /*     */ 
-/*     */   public IntRange(int paramInt1, int paramInt2, int paramInt3, String paramString)
+/*     */   public y(int paramInt1, int paramInt2, int paramInt3, String paramString)
 /*     */   {
 /*  75 */     this(paramInt1, paramInt2, paramInt3, paramString, 1);
 /*     */   }
 /*     */ 
 /*     */   public String toString()
 /*     */   {
-/*  88 */     return "Ranges for " + this.m_description + ": minimum=" + this.m_minimum + ", maximum=" + this.m_maximum + ", precision=" + this.m_precision;
+/*  88 */     return "Ranges for " + this.E + ": minimum=" + this.C + ", maximum=" + this.D + ", precision=" + this.A;
 /*     */   }
 /*     */ 
-/*     */   public void verifyInRange(int paramInt)
-/*     */     throws BadDeviceValueException
+/*     */   public void B(int paramInt)
+/*     */     throws Z
 /*     */   {
-/*  99 */     MedicalDevice.Util.verifyDeviceValue(paramInt, this.m_minimum, this.m_maximum, this.m_description);
-/* 100 */     MedicalDevice.Util.verifyDeviceValue(paramInt % this.m_precision == 0, "bad precision: " + paramInt);
+/*  99 */     O._B.A(paramInt, this.C, this.D, this.E);
+/* 100 */     O._B.A(paramInt % this.A == 0, "bad precision: " + paramInt);
 /*     */   }
 /*     */ 
-/*     */   public void verifyInRangePre(int paramInt)
+/*     */   public void A(int paramInt)
 /*     */   {
-/* 110 */     Contract.pre(paramInt, this.m_minimum, this.m_maximum);
-/* 111 */     Contract.pre(paramInt % this.m_precision == 0);
+/* 110 */     Contract.pre(paramInt, this.C, this.D);
+/* 111 */     Contract.pre(paramInt % this.A == 0);
 /*     */   }
 /*     */ 
-/*     */   public int getMinimum()
+/*     */   public int D()
 /*     */   {
-/* 120 */     return this.m_minimum;
+/* 120 */     return this.C;
 /*     */   }
 /*     */ 
-/*     */   public int getMaximum()
+/*     */   public int B()
 /*     */   {
-/* 129 */     return this.m_maximum;
+/* 129 */     return this.D;
 /*     */   }
 /*     */ 
-/*     */   public int getDefault()
+/*     */   public int C()
 /*     */   {
-/* 138 */     return this.m_default;
+/* 138 */     return this.B;
 /*     */   }
 /*     */ 
-/*     */   public int getPrecision()
+/*     */   public int A()
 /*     */   {
-/* 147 */     return this.m_precision;
+/* 147 */     return this.A;
 /*     */   }
 /*     */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.IntRange
+ * Qualified Name:     minimed.ddms.A.y
  * JD-Core Version:    0.6.0
  */

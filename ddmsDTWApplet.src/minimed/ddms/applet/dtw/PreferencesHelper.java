@@ -49,26 +49,38 @@
 /*     */   public void setSystemPreference(String paramString, boolean paramBoolean)
 /*     */   {
 /* 136 */     this.m_log.logInfo("SETTING SYSTEM PREFERENCE '" + paramString + "' to '" + paramBoolean + "'");
-/*     */ 
-/* 139 */     getSystemPreferences().putBoolean(paramString, paramBoolean);
+/*     */     try
+/*     */     {
+/* 140 */       getSystemPreferences().putBoolean(paramString, paramBoolean);
+/*     */     }
+/*     */     catch (IllegalStateException localIllegalStateException)
+/*     */     {
+/* 146 */       this.m_log.logWarning("setSystemPreference: setting '" + paramString + "' to '" + paramBoolean + "'" + " resulted in " + localIllegalStateException);
+/*     */     }
 /*     */   }
 /*     */ 
 /*     */   public void setSystemPreference(String paramString1, String paramString2)
 /*     */   {
-/* 149 */     this.m_log.logInfo("SETTING SYSTEM PREFERENCE '" + paramString1 + "' to '" + paramString2 + "'");
-/*     */ 
-/* 152 */     getSystemPreferences().put(paramString1, paramString2);
+/* 158 */     this.m_log.logInfo("SETTING SYSTEM PREFERENCE '" + paramString1 + "' to '" + paramString2 + "'");
+/*     */     try
+/*     */     {
+/* 162 */       getSystemPreferences().put(paramString1, paramString2);
+/*     */     }
+/*     */     catch (IllegalStateException localIllegalStateException)
+/*     */     {
+/* 168 */       this.m_log.logWarning("setSystemPreference: setting '" + paramString1 + "' to '" + paramString2 + "'" + " resulted in " + localIllegalStateException);
+/*     */     }
 /*     */   }
 /*     */ 
 /*     */   public void flushSystemPreferences()
 /*     */   {
 /*     */     try
 /*     */     {
-/* 161 */       getSystemPreferences().flush();
+/* 179 */       getSystemPreferences().flush();
 /*     */     }
 /*     */     catch (BackingStoreException localBackingStoreException)
 /*     */     {
-/* 165 */       this.m_log.logWarning("i/o; e = " + localBackingStoreException);
+/* 183 */       this.m_log.logWarning("i/o; e = " + localBackingStoreException);
 /*     */     }
 /*     */   }
 /*     */ 
@@ -76,17 +88,17 @@
 /*     */   {
 /*     */     try
 /*     */     {
-/* 174 */       getSystemPreferences().clear();
+/* 192 */       getSystemPreferences().clear();
 /*     */     } catch (BackingStoreException localBackingStoreException) {
-/* 176 */       Contract.unreachable();
+/* 194 */       Contract.unreachable();
 /*     */     }
 /*     */   }
 /*     */ 
 /*     */   private Preferences getSystemPreferences()
 /*     */   {
-/* 192 */     Preferences localPreferences = Preferences.userNodeForPackage(getClass());
-/* 193 */     Contract.post(localPreferences != null);
-/* 194 */     return localPreferences;
+/* 210 */     Preferences localPreferences = Preferences.userNodeForPackage(getClass());
+/* 211 */     Contract.post(localPreferences != null);
+/* 212 */     return localPreferences;
 /*     */   }
 /*     */ }
 

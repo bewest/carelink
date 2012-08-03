@@ -65,104 +65,109 @@
 /*     */   public int read(byte[] paramArrayOfByte, int paramInt1, int paramInt2)
 /*     */     throws IOException
 /*     */   {
+/* 129 */     int i = 1;
 /* 130 */     long l = 0L;
 /*     */ 
-/* 132 */     if (this.tmo > 0) l = System.currentTimeMillis() + this.tmo;
+/* 132 */     if ((paramInt1 < 0) || (paramInt2 < 0) || (paramInt1 + paramInt2 > paramArrayOfByte.length)) {
+/* 133 */       throw new IOException("buf[] will not accomidate the off/len request");
+/*     */     }
 /*     */ 
-/* 134 */     this.abort = false;
-/*     */     int i;
-/* 135 */     while (!this.abort) {
-/* 136 */       i = this.sp.rxReadyCount();
-/* 137 */       if ((i >= this.threshold) && (
-/* 138 */         (!this.avoidNativeBlock) || 
-/* 139 */         (i >= paramInt2)))
-/*     */       {
-/*     */         break;
+/* 136 */     if (this.tmo > 0) l = System.currentTimeMillis() + this.tmo;
+/*     */ 
+/* 138 */     this.abort = false;
+/* 139 */     while (!this.abort) {
+/* 140 */       i = this.sp.rxReadyCount();
+/* 141 */       if (i >= this.threshold) {
+/* 142 */         if (!this.avoidNativeBlock)
+/*     */           break;
+/* 144 */         if (i > 0)
+/*     */           break;
 /*     */       }
-/*     */ 
-/* 144 */       if ((this.tmo > 0) && 
-/* 145 */         (System.currentTimeMillis() > l)) break;
-/*     */       try {
-/* 147 */         Thread.sleep(this.napTime);
-/*     */       } catch (InterruptedException localInterruptedException) {
-/* 149 */         if (this.abort) return -2;
-/* 150 */         return -1;
+/*     */       else
+/*     */       {
+/* 149 */         if ((this.tmo > 0) && 
+/* 150 */           (System.currentTimeMillis() > l)) break;
+/*     */         try {
+/* 152 */           Thread.sleep(this.napTime);
+/*     */         } catch (InterruptedException localInterruptedException) {
+/* 154 */           if (this.abort) return -2;
+/* 155 */           return -1;
+/*     */         }
 /*     */       }
 /*     */     }
-/* 153 */     if (paramInt1 != 0) {
-/* 154 */       if (paramInt1 + paramInt2 > paramArrayOfByte.length) {
-/* 155 */         throw new IOException("buf[] will not accomidate the off/len request");
-/*     */       }
-/* 157 */       byte[] arrayOfByte = new byte[paramInt2];
-/* 158 */       i = this.sp.getData(arrayOfByte, 0, paramInt2);
-/* 159 */       if (i > 0) System.arraycopy(arrayOfByte, 0, paramArrayOfByte, paramInt1, i); 
+/*     */     int j;
+/* 158 */     if (paramInt1 != 0) {
+/* 159 */       byte[] arrayOfByte = new byte[paramInt2];
+/* 160 */       j = this.sp.getData(arrayOfByte, 0, paramInt2);
+/* 161 */       if (j > 0) System.arraycopy(arrayOfByte, 0, paramArrayOfByte, paramInt1, j); 
 /*     */     }
 /*     */     else
 /*     */     {
-/* 162 */       i = this.sp.getData(paramArrayOfByte, 0, paramInt2);
+/* 164 */       j = this.sp.getData(paramArrayOfByte, 0, paramInt2);
 /*     */     }
-/* 164 */     if (this.abort) return -2;
-/* 165 */     return i;
+/*     */ 
+/* 167 */     if (this.abort) return -2;
+/* 168 */     return j;
 /*     */   }
 /*     */ 
 /*     */   public int available()
 /*     */     throws IOException
 /*     */   {
-/* 175 */     return this.sp.rxReadyCount();
+/* 178 */     return this.sp.rxReadyCount();
 /*     */   }
 /*     */ 
 /*     */   public void close()
 /*     */     throws IOException
 /*     */   {
-/* 184 */     this.sp.close();
+/* 187 */     this.sp.close();
 /*     */   }
 /*     */ 
 /*     */   public void abort()
 /*     */   {
-/* 192 */     this.abort = true;
+/* 195 */     this.abort = true;
 /*     */   }
 /*     */ 
 /*     */   public void setRcvThreshold(int paramInt)
 /*     */   {
-/* 199 */     int i = this.sp.getConfig().getRxLen();
-/* 200 */     if (paramInt > i) paramInt = i;
-/* 201 */     if (paramInt < 1) paramInt = 1;
+/* 202 */     int i = this.sp.getConfig().getRxLen();
+/* 203 */     if (paramInt > i) paramInt = i;
+/* 204 */     if (paramInt < 1) paramInt = 1;
 /*     */ 
-/* 203 */     this.threshold = paramInt;
+/* 206 */     this.threshold = paramInt;
 /*     */   }
 /*     */ 
 /*     */   public int getRcvThreshold() {
-/* 207 */     return this.threshold;
+/* 210 */     return this.threshold;
 /*     */   }
 /*     */ 
 /*     */   public void setRcvTimeout(int paramInt)
 /*     */   {
-/* 214 */     this.tmo = paramInt;
+/* 217 */     this.tmo = paramInt;
 /*     */   }
 /*     */ 
 /*     */   public int getRcvTimeout() {
-/* 218 */     return this.tmo;
+/* 221 */     return this.tmo;
 /*     */   }
 /*     */ 
 /*     */   public void setRcvFrameChar(int paramInt)
 /*     */   {
-/* 225 */     this.frameData = paramInt;
+/* 228 */     this.frameData = paramInt;
 /*     */   }
 /*     */ 
 /*     */   public int getRcvFrameChar() {
-/* 229 */     return this.frameData;
+/* 232 */     return this.frameData;
 /*     */   }
 /*     */ 
 /*     */   public void setNapTime(int paramInt)
 /*     */   {
-/* 235 */     this.napTime = paramInt; } 
-/* 236 */   public int getNapTime() { return this.napTime;
+/* 238 */     this.napTime = paramInt; } 
+/* 239 */   public int getNapTime() { return this.napTime;
 /*     */   }
 /*     */ 
 /*     */   public void setNativeBlock(boolean paramBoolean)
 /*     */   {
-/* 242 */     this.avoidNativeBlock = (!paramBoolean); } 
-/* 243 */   public boolean getNativeBlock() { return !this.avoidNativeBlock;
+/* 245 */     this.avoidNativeBlock = (!paramBoolean); } 
+/* 246 */   public boolean getNativeBlock() { return !this.avoidNativeBlock;
 /*     */   }
 /*     */ }
 

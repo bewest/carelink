@@ -2,7 +2,7 @@
 /*    */ 
 /*    */ public final class SaveFailedException extends Exception
 /*    */ {
-/*    */   SaveFailedException(String paramString)
+/*    */   public SaveFailedException(String paramString)
 /*    */   {
 /* 31 */     super(paramString);
 /*    */   }

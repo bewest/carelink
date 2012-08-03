@@ -1,5 +1,6 @@
 /*     */ package minimed.ddms.applet.dtw.wizard.steps;
 /*     */ 
+/*     */ import java.awt.Font;
 /*     */ import java.awt.GridBagConstraints;
 /*     */ import java.awt.GridBagLayout;
 /*     */ import java.awt.Insets;
@@ -18,136 +19,180 @@
 /*     */ import minimed.ddms.applet.dtw.wizard.WizardConfig;
 /*     */ import minimed.ddms.applet.dtw.wizard.WizardSelections;
 /*     */ import minimed.ddms.applet.dtw.wizard.WizardStep;
+/*     */ import minimed.ddms.applet.dtw.wizard.steps.bayermeter.USBDriverInstallAuthorizationStep;
+/*     */ import minimed.ddms.applet.dtw.wizard.steps.bayermeter.VerifyConnectionsStep;
 /*     */ import minimed.ddms.applet.dtw.wizard.steps.mmmeter.SelectConnectionTypeStep;
 /*     */ import minimed.util.Contract;
+/*     */ import minimed.util.OSInfo;
 /*     */ 
 /*     */ public class SelectMeterMiniMedStep extends WizardStep
 /*     */ {
+/*     */   public static final int COL_INSET_SPACING = 12;
 /*     */   private final DefaultRadioButtonGroup m_buttonGroup;
-/*  41 */   private final ActionListener m_radioButtonListener = new ActionListener()
+/*  46 */   private final ActionListener m_radioButtonListener = new ActionListener()
 /*     */   {
 /*     */     public void actionPerformed(ActionEvent paramActionEvent)
 /*     */     {
-/*  49 */       SelectMeterMiniMedStep.this.updateButtonStates();
+/*  54 */       SelectMeterMiniMedStep.this.updateButtonStates();
 /*     */     }
-/*  41 */   };
+/*  46 */   };
 /*     */ 
 /*     */   public SelectMeterMiniMedStep(Wizard paramWizard)
 /*     */   {
-/*  62 */     super(paramWizard, null);
-/*     */ 
-/*  65 */     getLeftBannerLabel().setText(this.m_resources.getString("wizard.device.select"));
-/*  66 */     Object localObject = new ImageIcon(getImage("wizard.read.icon"));
-/*  67 */     getRightBannerLabel().setIcon((Icon)localObject);
-/*     */ 
-/*  70 */     localObject = getQuestionIcon();
-/*  71 */     getTopImageLabel().setIcon((Icon)localObject);
-/*     */ 
-/*  74 */     JPanel localJPanel = getContentArea();
-/*  75 */     localJPanel.setLayout(new GridBagLayout());
-/*     */ 
-/*  77 */     String str = this.m_resources.getString("wizard.meter.choose.link");
-/*  78 */     GridBagConstraints localGridBagConstraints = new GridBagConstraints();
-/*  79 */     localGridBagConstraints.gridx = 0;
-/*  80 */     localGridBagConstraints.gridy = 0;
-/*  81 */     localGridBagConstraints.gridheight = 1;
-/*  82 */     localGridBagConstraints.gridwidth = 6;
-/*  83 */     localGridBagConstraints.anchor = 17;
-/*  84 */     localJPanel.add(new JLabel(str), localGridBagConstraints);
-/*     */ 
-/*  87 */     this.m_buttonGroup = new DefaultRadioButtonGroup(this.m_resources, localJPanel);
-/*  88 */     JRadioButton localJRadioButton1 = null;
-/*  89 */     if (!Locale.US.equals(getLocale().getCountry())) {
-/*  90 */       localJRadioButton1 = this.m_buttonGroup.add(getWizardSelections().m_selectionDeviceAscensiaContourLink, "wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER", 1, 1);
-/*     */ 
-/*  93 */       localJRadioButton1.addActionListener(this.m_radioButtonListener);
-/*     */     }
-/*  95 */     JRadioButton localJRadioButton2 = this.m_buttonGroup.add(getWizardSelections().m_selectionDeviceLifeScanUltraLink, "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER", 3, 1);
-/*     */ 
-/*  98 */     localJRadioButton2.addActionListener(this.m_radioButtonListener);
-/*  99 */     JRadioButton localJRadioButton3 = this.m_buttonGroup.add("wizard.selections.SELECTION_DEVICE_MMLINKMETER", 5, 1);
-/*     */ 
-/* 101 */     localJRadioButton3.addActionListener(this.m_radioButtonListener);
-/*     */ 
-/* 106 */     if (localJRadioButton1 != null) {
-/* 107 */       localGridBagConstraints = new GridBagConstraints();
-/* 108 */       localGridBagConstraints.gridx = 0;
-/* 109 */       localGridBagConstraints.gridy = 1;
-/* 110 */       localGridBagConstraints.insets = new Insets(10, 0, 0, 0);
-/* 111 */       localGridBagConstraints.anchor = 13;
-/* 112 */       localJPanel.add(createImageButton("wizard.bayercontourmeter.pic", localJRadioButton1), localGridBagConstraints);
+/*  67 */     super(paramWizard, null);
+/*  68 */     Font localFont = null;
+/*  69 */     if (getFont().getSize() > 12) {
+/*  70 */       localFont = new Font(getFont().getFamily(), getFont().getStyle(), 12);
 /*     */     }
 /*     */ 
-/* 116 */     localGridBagConstraints = new GridBagConstraints();
-/* 117 */     localGridBagConstraints.gridx = 2;
-/* 118 */     localGridBagConstraints.gridy = 1;
-/* 119 */     localGridBagConstraints.insets = new Insets(10, 20, 0, 0);
-/* 120 */     localGridBagConstraints.anchor = 13;
-/* 121 */     localJPanel.add(createImageButton("wizard.lifescanultra.pic", localJRadioButton2), localGridBagConstraints);
+/*  74 */     getLeftBannerLabel().setText(this.m_resources.getString("wizard.device.select"));
+/*  75 */     Object localObject = new ImageIcon(getImage("wizard.read.icon"));
+/*  76 */     getRightBannerLabel().setIcon((Icon)localObject);
 /*     */ 
-/* 123 */     localGridBagConstraints = new GridBagConstraints();
-/* 124 */     localGridBagConstraints.gridx = 4;
-/* 125 */     localGridBagConstraints.gridy = 1;
-/* 126 */     localGridBagConstraints.insets = new Insets(10, 20, 0, 0);
-/* 127 */     localGridBagConstraints.anchor = 13;
-/* 128 */     localJPanel.add(createImageButton("wizard.mmlinkmeter.pic", localJRadioButton3), localGridBagConstraints);
+/*  79 */     localObject = getQuestionIcon();
+/*  80 */     getTopImageLabel().setIcon((Icon)localObject);
 /*     */ 
-/* 132 */     this.m_buttonGroup.selectButton(getWizardSelections().getMeterDevice(), "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER");
+/*  83 */     JPanel localJPanel = getContentArea();
+/*  84 */     localJPanel.setLayout(new GridBagLayout());
+/*     */ 
+/*  86 */     String str1 = this.m_resources.getString("wizard.meter.choose.link");
+/*  87 */     GridBagConstraints localGridBagConstraints = new GridBagConstraints();
+/*  88 */     localGridBagConstraints.gridx = 0;
+/*  89 */     localGridBagConstraints.gridy = 0;
+/*  90 */     localGridBagConstraints.gridheight = 1;
+/*  91 */     localGridBagConstraints.gridwidth = 6;
+/*  92 */     localGridBagConstraints.anchor = 17;
+/*  93 */     localJPanel.add(new JLabel(str1), localGridBagConstraints);
+/*     */ 
+/*  96 */     this.m_buttonGroup = new DefaultRadioButtonGroup(this.m_resources, localJPanel);
+/*  97 */     JRadioButton localJRadioButton1 = null;
+/*  98 */     if (getLocale().equals(Locale.US)) {
+/*  99 */       localJRadioButton1 = this.m_buttonGroup.add(getWizardSelections().m_selectionDeviceAscensiaContourXTLink, "wizard.selections.SELECTION_DEVICE_XTLINKMETER", 1, 2);
+/*     */ 
+/* 102 */       localJRadioButton1.addActionListener(this.m_radioButtonListener);
+/* 103 */       if (localFont != null) {
+/* 104 */         localJRadioButton1.setFont(localFont);
+/*     */       }
+/*     */     }
+/*     */ 
+/* 108 */     JRadioButton localJRadioButton2 = this.m_buttonGroup.add(getWizardSelections().m_selectionDeviceAscensiaContourLink, "wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER", 1, 1);
+/*     */ 
+/* 111 */     localJRadioButton2.addActionListener(this.m_radioButtonListener);
+/* 112 */     if (localFont != null) {
+/* 113 */       localJRadioButton2.setFont(localFont);
+/*     */     }
+/*     */ 
+/* 116 */     JRadioButton localJRadioButton3 = this.m_buttonGroup.add(getWizardSelections().m_selectionDeviceLifeScanUltraLink, "wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER", 3, 1);
+/*     */ 
+/* 119 */     localJRadioButton3.addActionListener(this.m_radioButtonListener);
+/* 120 */     if (localFont != null) {
+/* 121 */       localJRadioButton3.setFont(localFont);
+/*     */     }
+/* 123 */     JRadioButton localJRadioButton4 = this.m_buttonGroup.add("wizard.selections.SELECTION_DEVICE_MMLINKMETER", 5, 1);
+/*     */ 
+/* 125 */     localJRadioButton4.addActionListener(this.m_radioButtonListener);
+/* 126 */     if (localFont != null) {
+/* 127 */       localJRadioButton4.setFont(localFont);
+/*     */     }
+/*     */ 
+/* 133 */     if (localJRadioButton1 != null) {
+/* 134 */       localGridBagConstraints = new GridBagConstraints();
+/* 135 */       localGridBagConstraints.gridx = 0;
+/* 136 */       localGridBagConstraints.gridy = 2;
+/* 137 */       localGridBagConstraints.insets = new Insets(10, 0, 0, 0);
+/* 138 */       localGridBagConstraints.anchor = 13;
+/* 139 */       localJPanel.add(createImageButton("wizard.bayercontourusbmeter.pic", localJRadioButton1), localGridBagConstraints);
+/*     */     }
+/*     */ 
+/* 143 */     localGridBagConstraints = new GridBagConstraints();
+/* 144 */     localGridBagConstraints.gridx = 0;
+/* 145 */     localGridBagConstraints.gridy = 1;
+/* 146 */     localGridBagConstraints.insets = new Insets(10, 0, 0, 0);
+/* 147 */     localGridBagConstraints.anchor = 13;
+/* 148 */     localJPanel.add(createImageButton("wizard.bayercontourmeter.pic", localJRadioButton2), localGridBagConstraints);
+/*     */ 
+/* 151 */     localGridBagConstraints = new GridBagConstraints();
+/* 152 */     localGridBagConstraints.gridx = 2;
+/* 153 */     localGridBagConstraints.gridy = 1;
+/* 154 */     localGridBagConstraints.insets = new Insets(10, 12, 0, 0);
+/* 155 */     localGridBagConstraints.anchor = 13;
+/* 156 */     localJPanel.add(createImageButton("wizard.lifescanultra.pic", localJRadioButton3), localGridBagConstraints);
+/*     */ 
+/* 158 */     localGridBagConstraints = new GridBagConstraints();
+/* 159 */     localGridBagConstraints.gridx = 4;
+/* 160 */     localGridBagConstraints.gridy = 1;
+/* 161 */     localGridBagConstraints.insets = new Insets(10, 12, 0, 0);
+/* 162 */     localGridBagConstraints.anchor = 13;
+/* 163 */     localJPanel.add(createImageButton("wizard.mmlinkmeter.pic", localJRadioButton4), localGridBagConstraints);
+/*     */ 
+/* 166 */     String str2 = "wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER";
+/* 167 */     if (Locale.US.equals(getLocale()))
+/*     */     {
+/* 169 */       str2 = "wizard.selections.SELECTION_DEVICE_XTLINKMETER";
+/*     */     }
+/* 171 */     this.m_buttonGroup.selectButton(getWizardSelections().getMeterDevice(str2), str2);
 /*     */   }
 /*     */ 
 /*     */   protected void stepShown()
 /*     */   {
-/* 142 */     super.stepShown();
-/* 143 */     updateButtonStates();
+/* 180 */     super.stepShown();
+/* 181 */     updateButtonStates();
 /*     */   }
 /*     */ 
 /*     */   protected void nextRequest()
 /*     */   {
-/* 150 */     rememberUserSelections();
-/* 151 */     getWizard().showNextStep(getNextMiniMedClass());
+/* 188 */     rememberUserSelections();
+/* 189 */     getWizard().showNextStep(getNextMiniMedClass());
 /*     */   }
 /*     */ 
 /*     */   protected void rememberUserSelections()
 /*     */   {
-/* 159 */     getWizardSelections().setMeterDevice(this.m_buttonGroup.getSelectedButton());
+/* 197 */     getWizardSelections().setMeterDevice(this.m_buttonGroup.getSelectedButton());
 /*     */   }
 /*     */ 
 /*     */   protected void updateButtonStates()
 /*     */   {
-/* 166 */     rememberUserSelections();
-/* 167 */     getFinishButton().setEnabled(getWizard().canFinish());
+/* 204 */     rememberUserSelections();
+/* 205 */     getFinishButton().setEnabled(getWizard().canFinish());
 /*     */   }
 /*     */ 
 /*     */   private Class getNextMiniMedClass()
 /*     */   {
-/*     */     Class localClass;
-/* 177 */     if (getWizardSelections().getMeterDevice().equals("wizard.selections.SELECTION_DEVICE_MMLINKMETER"))
+/*     */     Object localObject;
+/* 215 */     if (getWizardSelections().getMeterDevice().equals("wizard.selections.SELECTION_DEVICE_MMLINKMETER"))
 /*     */     {
-/* 179 */       if (getWizard().getConfig().isWindowsNT())
+/* 217 */       if ((getWizard().getConfig().isWindowsNT()) || (OSInfo.isMac()))
 /*     */       {
-/* 181 */         getWizardSelections().setConnectionType("wizard.selections.SELECTION_CONN_TYPE_SERIAL");
+/* 219 */         getWizardSelections().setConnectionType("wizard.selections.SELECTION_CONN_TYPE_SERIAL");
 /*     */ 
-/* 183 */         localClass = minimed.ddms.applet.dtw.wizard.steps.mmmeter.MeterSelectSerialPortStep.class;
+/* 221 */         localObject = minimed.ddms.applet.dtw.wizard.steps.mmmeter.MeterSelectSerialPortStep.class;
 /*     */       } else {
-/* 185 */         localClass = SelectConnectionTypeStep.class;
+/* 223 */         localObject = SelectConnectionTypeStep.class;
 /*     */       }
 /*     */ 
 /*     */     }
-/* 189 */     else if (getWizardSelections().getMeterDevice().equals("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER"))
+/* 227 */     else if (getWizardSelections().getMeterDevice().equals("wizard.selections.SELECTION_DEVICE_ASCENSIA_CONTOUR_METER"))
 /*     */     {
-/* 191 */       localClass = minimed.ddms.applet.dtw.wizard.steps.bayermeter.MeterSelectSerialPortStep.class;
+/* 229 */       localObject = minimed.ddms.applet.dtw.wizard.steps.bayermeter.MeterSelectSerialPortStep.class;
 /*     */     }
-/* 194 */     else if (getWizardSelections().getMeterDevice().equals("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER"))
+/* 232 */     else if (getWizardSelections().getMeterDevice().equals("wizard.selections.SELECTION_DEVICE_LIFESCAN_ULTRA_METER"))
 /*     */     {
-/* 196 */       localClass = minimed.ddms.applet.dtw.wizard.steps.lifescanmeter.MeterSelectSerialPortStep.class;
+/* 234 */       localObject = minimed.ddms.applet.dtw.wizard.steps.lifescanmeter.MeterSelectSerialPortStep.class;
 /*     */     }
-/*     */     else
+/* 237 */     else if (getWizardSelections().getMeterDevice().equals("wizard.selections.SELECTION_DEVICE_XTLINKMETER"))
 /*     */     {
-/* 200 */       localClass = null;
-/* 201 */       Contract.unreachable();
+/* 239 */       if (getWizard().isBayerUSBDriverInstallNeeded()) {
+/* 240 */         logInfo("Install Bayer USB Driver is neeeded...");
+/* 241 */         localObject = USBDriverInstallAuthorizationStep.class;
+/*     */       } else {
+/* 243 */         localObject = VerifyConnectionsStep.class;
+/*     */       }
+/*     */     } else {
+/* 246 */       localObject = null;
+/* 247 */       Contract.unreachable();
 /*     */     }
 /*     */ 
-/* 204 */     return localClass;
+/* 250 */     return (Class)localObject;
 /*     */   }
 /*     */ }
 

@@ -1,14 +1,14 @@
-/*    */ package minimed.ddms.deviceportreader;
+/*    */ package minimed.ddms.A;
 /*    */ 
-/*    */ public final class SerialIOHaltedException extends RuntimeException
+/*    */ public final class W extends RuntimeException
 /*    */ {
-/*    */   public SerialIOHaltedException(String paramString)
+/*    */   public W(String paramString)
 /*    */   {
 /* 42 */     super(paramString);
 /*    */   }
 /*    */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.SerialIOHaltedException
+ * Qualified Name:     minimed.ddms.A.W
  * JD-Core Version:    0.6.0
  */

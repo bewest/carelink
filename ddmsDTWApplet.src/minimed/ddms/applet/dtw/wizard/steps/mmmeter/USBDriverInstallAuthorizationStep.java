@@ -3,9 +3,10 @@
 /*    */ import java.util.ResourceBundle;
 /*    */ import minimed.ddms.applet.dtw.wizard.Wizard;
 /*    */ import minimed.ddms.applet.dtw.wizard.WizardConfig;
-/*    */ import minimed.ddms.applet.dtw.wizard.WizardConfig.USBConfig;
+/*    */ import minimed.ddms.applet.dtw.wizard.WizardConfig.DriverConfig;
+/*    */ import minimed.ddms.applet.dtw.wizard.steps.DriverInstallAuthorizationStep;
 /*    */ 
-/*    */ public class USBDriverInstallAuthorizationStep extends minimed.ddms.applet.dtw.wizard.steps.USBDriverInstallAuthorizationStep
+/*    */ public class USBDriverInstallAuthorizationStep extends DriverInstallAuthorizationStep
 /*    */ {
 /*    */   public USBDriverInstallAuthorizationStep(Wizard paramWizard)
 /*    */   {
@@ -14,17 +15,22 @@
 /*    */ 
 /*    */   protected String getMainText()
 /*    */   {
-/* 56 */     return this.m_resources.getString("wizard.usb.install.meter");
+/* 56 */     return this.m_resources.getString("wizard.driver.install.meter");
 /*    */   }
 /*    */ 
 /*    */   protected String getInstallText()
 /*    */   {
-/* 65 */     return this.m_resources.getString("wizard.usb.install.executingBD");
+/* 65 */     return this.m_resources.getString("wizard.driver.install.executingBD");
 /*    */   }
 /*    */ 
-/*    */   protected WizardConfig.USBConfig getUSBConfig()
+/*    */   protected WizardConfig.DriverConfig getDriverConfig()
 /*    */   {
-/* 74 */     return getWizard().getConfig().getBDUSBConfig();
+/* 74 */     return getWizard().getConfig().getBDDriverConfig();
+/*    */   }
+/*    */ 
+/*    */   public String getDeviceName()
+/*    */   {
+/* 80 */     return "";
 /*    */   }
 /*    */ }
 

@@ -1,14 +1,14 @@
-/*    */ package minimed.ddms.deviceportreader;
+/*    */ package minimed.ddms.A;
 /*    */ 
-/*    */ public final class BadDeviceValueException extends Exception
+/*    */ public final class Z extends Exception
 /*    */ {
-/*    */   BadDeviceValueException(String paramString)
+/*    */   public Z(String paramString)
 /*    */   {
 /* 42 */     super(paramString);
 /*    */   }
 /*    */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.BadDeviceValueException
+ * Qualified Name:     minimed.ddms.A.Z
  * JD-Core Version:    0.6.0
  */

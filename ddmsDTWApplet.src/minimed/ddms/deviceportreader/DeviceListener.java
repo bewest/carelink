@@ -1,15 +1,15 @@
-package minimed.ddms.deviceportreader;
+package minimed.ddms.A;
 
 import java.util.EventListener;
 
-public abstract interface DeviceListener extends EventListener
+public abstract interface v extends EventListener
 {
   public abstract long getLastHistoryPageNumber(String paramString1, String paramString2);
 
   public abstract long getLastGlucoseHistoryPageNumber(String paramString1, String paramString2);
 
-  public abstract void allowDeviceOperation(DevicePortReader paramDevicePortReader)
-    throws ConnectToPumpException;
+  public abstract void allowDeviceOperation(G paramG)
+    throws P;
 
   public abstract void deviceUpdateProgress(int paramInt);
 
@@ -21,6 +21,6 @@ public abstract interface DeviceListener extends EventListener
 }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.DeviceListener
+ * Qualified Name:     minimed.ddms.A.v
  * JD-Core Version:    0.6.0
  */

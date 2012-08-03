@@ -6,6 +6,8 @@ public abstract interface WizardStepProvider
 
   public abstract Class getFinishStep(Wizard paramWizard);
 
+  public abstract Class getTransferStep(Wizard paramWizard);
+
   public abstract Class getUnrecoverableErrorStep(Wizard paramWizard);
 }
 

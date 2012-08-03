@@ -5,6 +5,7 @@
 /*     */ import java.awt.Insets;
 /*     */ import java.awt.event.ActionEvent;
 /*     */ import java.awt.event.ActionListener;
+/*     */ import java.util.Locale;
 /*     */ import java.util.ResourceBundle;
 /*     */ import javax.swing.Icon;
 /*     */ import javax.swing.ImageIcon;
@@ -21,127 +22,157 @@
 /*     */ public class SelectLinkDeviceStep extends WizardStep
 /*     */ {
 /*     */   private final DefaultRadioButtonGroup m_buttonGroup;
-/*  40 */   private final ActionListener m_radioButtonListener = new ActionListener()
+/*  41 */   private final ActionListener m_radioButtonListener = new ActionListener()
 /*     */   {
 /*     */     public void actionPerformed(ActionEvent paramActionEvent)
 /*     */     {
-/*  48 */       SelectLinkDeviceStep.this.updateButtonStates();
+/*  49 */       SelectLinkDeviceStep.this.updateButtonStates();
 /*     */     }
-/*  40 */   };
+/*  41 */   };
 /*     */ 
 /*     */   public SelectLinkDeviceStep(Wizard paramWizard)
 /*     */   {
-/*  61 */     super(paramWizard, null);
+/*  62 */     super(paramWizard, null);
 /*     */ 
-/*  64 */     getLeftBannerLabel().setText(this.m_resources.getString("wizard.paradigm.selectlink"));
-/*  65 */     Object localObject = new ImageIcon(getImage("wizard.read.icon"));
-/*  66 */     getRightBannerLabel().setIcon((Icon)localObject);
+/*  65 */     getLeftBannerLabel().setText(this.m_resources.getString("wizard.paradigm.selectlink"));
+/*  66 */     Object localObject = new ImageIcon(getImage("wizard.read.icon"));
+/*  67 */     getRightBannerLabel().setIcon((Icon)localObject);
 /*     */ 
-/*  69 */     localObject = getQuestionIcon();
-/*  70 */     getTopImageLabel().setIcon((Icon)localObject);
+/*  70 */     localObject = getQuestionIcon();
+/*  71 */     getTopImageLabel().setIcon((Icon)localObject);
 /*     */ 
-/*  73 */     JPanel localJPanel = getContentArea();
-/*  74 */     localJPanel.setLayout(new GridBagLayout());
+/*  74 */     JPanel localJPanel = getContentArea();
+/*  75 */     localJPanel.setLayout(new GridBagLayout());
 /*     */ 
-/*  77 */     JRadioButton localJRadioButton1 = null;
-/*  78 */     this.m_buttonGroup = new DefaultRadioButtonGroup(this.m_resources, localJPanel);
-/*  79 */     int i = 1;
+/*  78 */     JRadioButton localJRadioButton1 = null;
+/*  79 */     JRadioButton localJRadioButton2 = null;
+/*  80 */     this.m_buttonGroup = new DefaultRadioButtonGroup(this.m_resources, localJPanel);
+/*  81 */     int i = 1;
 /*     */ 
-/*  83 */     GridBagConstraints localGridBagConstraints = new GridBagConstraints();
-/*  84 */     localGridBagConstraints.insets = new Insets(0, -4, 0, 0);
-/*  85 */     localGridBagConstraints.gridx = (i++);
-/*  86 */     localGridBagConstraints.gridy = 1;
-/*  87 */     localGridBagConstraints.anchor = 17;
-/*  88 */     localJRadioButton1 = this.m_buttonGroup.add("wizard.selections.SELECTION_LINK_DEVICE_COMLINKUSB", localGridBagConstraints);
+/*  83 */     if (getLocale().equals(Locale.US)) {
+/*  84 */       localGridBagConstraints = new GridBagConstraints();
+/*  85 */       localGridBagConstraints.insets = new Insets(0, -4, 0, 0);
+/*  86 */       localGridBagConstraints.gridx = (i++);
+/*  87 */       localGridBagConstraints.gridy = 1;
+/*  88 */       localGridBagConstraints.anchor = 17;
+/*  89 */       localJRadioButton2 = this.m_buttonGroup.add("wizard.selections.SELECTION_LINK_DEVICE_XTLINKUSB", localGridBagConstraints);
 /*     */ 
-/*  90 */     localJRadioButton1.addActionListener(this.m_radioButtonListener);
+/*  91 */       localJRadioButton2.addActionListener(this.m_radioButtonListener);
+/*     */     }
 /*     */ 
-/*  95 */     localGridBagConstraints = new GridBagConstraints();
-/*  96 */     localGridBagConstraints.insets = new Insets(0, 36, 0, 0);
-/*  97 */     localGridBagConstraints.gridx = (i++);
-/*  98 */     localGridBagConstraints.gridy = 1;
-/*  99 */     localGridBagConstraints.anchor = 17;
+/*  96 */     GridBagConstraints localGridBagConstraints = new GridBagConstraints();
+/*  97 */     localGridBagConstraints.insets = new Insets(0, 36, 0, 0);
+/*  98 */     localGridBagConstraints.gridx = (i++);
+/*  99 */     localGridBagConstraints.gridy = 1;
+/* 100 */     localGridBagConstraints.anchor = 17;
+/* 101 */     localJRadioButton1 = this.m_buttonGroup.add("wizard.selections.SELECTION_LINK_DEVICE_COMLINKUSB", localGridBagConstraints);
 /*     */ 
-/* 101 */     JRadioButton localJRadioButton2 = this.m_buttonGroup.add("wizard.selections.SELECTION_LINK_DEVICE_PARADIGMLINK", localGridBagConstraints);
+/* 103 */     localJRadioButton1.addActionListener(this.m_radioButtonListener);
 /*     */ 
-/* 103 */     localJRadioButton2.addActionListener(this.m_radioButtonListener);
+/* 108 */     localGridBagConstraints = new GridBagConstraints();
+/* 109 */     localGridBagConstraints.insets = new Insets(0, 36, 0, 0);
+/* 110 */     localGridBagConstraints.gridx = (i++);
+/* 111 */     localGridBagConstraints.gridy = 1;
+/* 112 */     localGridBagConstraints.anchor = 17;
 /*     */ 
-/* 105 */     localGridBagConstraints = new GridBagConstraints();
-/* 106 */     localGridBagConstraints.insets = new Insets(0, 36, 0, 0);
-/* 107 */     localGridBagConstraints.gridx = (i++);
-/* 108 */     localGridBagConstraints.gridy = 1;
-/* 109 */     localGridBagConstraints.anchor = 17;
+/* 114 */     JRadioButton localJRadioButton3 = this.m_buttonGroup.add("wizard.selections.SELECTION_LINK_DEVICE_PARADIGMLINK", localGridBagConstraints);
 /*     */ 
-/* 111 */     JRadioButton localJRadioButton3 = this.m_buttonGroup.add("wizard.selections.SELECTION_LINK_DEVICE_COMLINK", localGridBagConstraints);
-/*     */ 
-/* 113 */     localJRadioButton3.addActionListener(this.m_radioButtonListener);
-/*     */ 
-/* 115 */     i = 1;
+/* 116 */     localJRadioButton3.addActionListener(this.m_radioButtonListener);
 /*     */ 
 /* 118 */     localGridBagConstraints = new GridBagConstraints();
-/* 119 */     localGridBagConstraints.gridx = (i++);
-/* 120 */     localGridBagConstraints.gridy = 0;
-/* 121 */     localGridBagConstraints.anchor = 17;
-/* 122 */     localGridBagConstraints.insets = new Insets(10, 0, 0, 0);
-/* 123 */     localJPanel.add(createImageButton("wizard.comlinkusb.pic", localJRadioButton1), localGridBagConstraints);
+/* 119 */     localGridBagConstraints.insets = new Insets(0, 36, 0, 0);
+/* 120 */     localGridBagConstraints.gridx = (i++);
+/* 121 */     localGridBagConstraints.gridy = 1;
+/* 122 */     localGridBagConstraints.anchor = 17;
 /*     */ 
-/* 128 */     localGridBagConstraints = new GridBagConstraints();
-/* 129 */     localGridBagConstraints.gridx = (i++);
-/* 130 */     localGridBagConstraints.gridy = 0;
-/* 131 */     localGridBagConstraints.anchor = 17;
-/* 132 */     localGridBagConstraints.insets = new Insets(10, 40, 0, 0);
-/* 133 */     localJPanel.add(createImageButton("wizard.paradigmlink.pic", localJRadioButton2), localGridBagConstraints);
+/* 124 */     JRadioButton localJRadioButton4 = this.m_buttonGroup.add("wizard.selections.SELECTION_LINK_DEVICE_COMLINK", localGridBagConstraints);
 /*     */ 
-/* 137 */     localGridBagConstraints = new GridBagConstraints();
-/* 138 */     localGridBagConstraints.gridx = (i++);
-/* 139 */     localGridBagConstraints.gridy = 0;
-/* 140 */     localGridBagConstraints.anchor = 17;
-/* 141 */     localGridBagConstraints.insets = new Insets(10, 40, 0, 0);
-/* 142 */     localJPanel.add(createImageButton("wizard.comlink.pic", localJRadioButton3), localGridBagConstraints);
+/* 126 */     localJRadioButton4.addActionListener(this.m_radioButtonListener);
 /*     */ 
-/* 147 */     this.m_buttonGroup.selectButton(getWizardSelections().getLinkDevice(), "wizard.selections.SELECTION_LINK_DEVICE_COMLINKUSB");
+/* 128 */     i = 1;
+/*     */ 
+/* 130 */     if (getLocale().equals(Locale.US)) {
+/* 131 */       localGridBagConstraints = new GridBagConstraints();
+/* 132 */       localGridBagConstraints.gridx = (i++);
+/* 133 */       localGridBagConstraints.gridy = 0;
+/* 134 */       localGridBagConstraints.anchor = 17;
+/* 135 */       localGridBagConstraints.insets = new Insets(10, 0, 0, 0);
+/* 136 */       localJPanel.add(createImageButton("wizard.xtlinkusb.pic", localJRadioButton2), localGridBagConstraints);
+/*     */     }
+/*     */ 
+/* 141 */     localGridBagConstraints = new GridBagConstraints();
+/* 142 */     localGridBagConstraints.gridx = (i++);
+/* 143 */     localGridBagConstraints.gridy = 0;
+/* 144 */     localGridBagConstraints.anchor = 17;
+/* 145 */     localGridBagConstraints.insets = new Insets(10, 40, 0, 0);
+/* 146 */     localJPanel.add(createImageButton("wizard.comlinkusb.pic", localJRadioButton1), localGridBagConstraints);
+/*     */ 
+/* 151 */     localGridBagConstraints = new GridBagConstraints();
+/* 152 */     localGridBagConstraints.gridx = (i++);
+/* 153 */     localGridBagConstraints.gridy = 0;
+/* 154 */     localGridBagConstraints.anchor = 17;
+/* 155 */     localGridBagConstraints.insets = new Insets(10, 40, 0, 0);
+/* 156 */     localJPanel.add(createImageButton("wizard.paradigmlink.pic", localJRadioButton3), localGridBagConstraints);
+/*     */ 
+/* 160 */     localGridBagConstraints = new GridBagConstraints();
+/* 161 */     localGridBagConstraints.gridx = (i++);
+/* 162 */     localGridBagConstraints.gridy = 0;
+/* 163 */     localGridBagConstraints.anchor = 17;
+/* 164 */     localGridBagConstraints.insets = new Insets(10, 40, 0, 0);
+/* 165 */     localJPanel.add(createImageButton("wizard.comlink.pic", localJRadioButton4), localGridBagConstraints);
+/*     */ 
+/* 170 */     String str = getLocale().equals(Locale.US) ? "wizard.selections.SELECTION_LINK_DEVICE_XTLINKUSB" : "wizard.selections.SELECTION_LINK_DEVICE_COMLINKUSB";
+/*     */ 
+/* 173 */     this.m_buttonGroup.selectButton(getWizardSelections().getLinkDevice(str), str);
 /*     */   }
 /*     */ 
 /*     */   protected void nextRequest()
 /*     */   {
-/* 162 */     rememberUserSelections();
+/* 188 */     rememberUserSelections();
 /*     */ 
-/* 164 */     Wizard localWizard = getWizard();
+/* 190 */     Wizard localWizard = getWizard();
 /*     */ 
-/* 168 */     String str = getWizardSelections().getLinkDevice();
-/*     */     Class localClass;
-/* 170 */     if (str.equals("wizard.selections.SELECTION_LINK_DEVICE_PARADIGMLINK")) {
-/* 171 */       localClass = TurnOffParadigmLinkStep.class;
+/* 194 */     String str = getWizardSelections().getLinkDevice();
+/*     */     Object localObject;
+/* 196 */     if (str.equals("wizard.selections.SELECTION_LINK_DEVICE_PARADIGMLINK")) {
+/* 197 */       localObject = TurnOffParadigmLinkStep.class;
 /*     */     }
-/* 173 */     else if (str.equals("wizard.selections.SELECTION_LINK_DEVICE_COMLINKUSB"))
+/* 199 */     else if (str.equals("wizard.selections.SELECTION_LINK_DEVICE_XTLINKUSB"))
 /*     */     {
-/* 177 */       if (localWizard.isComLink2USBDriverInstallNeeded())
-/* 178 */         localClass = ComLinkUSBDriverInstallAuthorizationStep.class;
-/* 179 */       else if (!localWizard.hasComLink2EverBeenDetected())
-/* 180 */         localClass = ComLinkUSBDriverPostInstallStep.class;
+/* 203 */       if (localWizard.isBayerUSBDriverInstallNeeded())
+/* 204 */         localObject = XTLinkUSBDriverInstallAuthorizationStep.class;
+/*     */       else
+/* 206 */         localObject = VerifyXTLinkUSBConnectionStep.class;
+/*     */     }
+/* 208 */     else if (str.equals("wizard.selections.SELECTION_LINK_DEVICE_COMLINKUSB"))
+/*     */     {
+/* 212 */       if (localWizard.isComLink2USBDriverInstallNeeded())
+/* 213 */         localObject = ComLinkUSBDriverInstallAuthorizationStep.class;
+/* 214 */       else if (!localWizard.hasComLink2EverBeenDetected())
+/* 215 */         localObject = ComLinkUSBDriverPostInstallStep.class;
 /*     */       else {
-/* 182 */         localClass = VerifyComLinkUSBConnectionStep.class;
+/* 217 */         localObject = VerifyComLinkUSBConnectionStep.class;
 /*     */       }
 /*     */     }
-/* 185 */     else if (str.equals("wizard.selections.SELECTION_LINK_DEVICE_COMLINK")) {
-/* 186 */       localClass = PumpSelectSerialPortStep.class;
+/* 220 */     else if (str.equals("wizard.selections.SELECTION_LINK_DEVICE_COMLINK")) {
+/* 221 */       localObject = PumpSelectSerialPortStep.class;
 /*     */     } else {
-/* 188 */       Contract.unreachable();
-/* 189 */       localClass = null;
+/* 223 */       Contract.unreachable();
+/* 224 */       localObject = null;
 /*     */     }
 /*     */ 
-/* 194 */     localWizard.showNextStep(localClass);
+/* 229 */     localWizard.showNextStep((Class)localObject);
 /*     */   }
 /*     */ 
 /*     */   protected void rememberUserSelections()
 /*     */   {
-/* 202 */     getWizardSelections().setLinkDevice(this.m_buttonGroup.getSelectedButton());
+/* 237 */     getWizardSelections().setLinkDevice(this.m_buttonGroup.getSelectedButton());
 /*     */   }
 /*     */ 
 /*     */   protected void updateButtonStates()
 /*     */   {
-/* 209 */     rememberUserSelections();
-/* 210 */     getFinishButton().setEnabled(getWizard().canFinish());
+/* 244 */     rememberUserSelections();
+/* 245 */     getFinishButton().setEnabled(getWizard().canFinish());
 /*     */   }
 /*     */ }
 

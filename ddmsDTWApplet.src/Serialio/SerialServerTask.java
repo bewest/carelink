@@ -6,23 +6,23 @@
 /*      */ {
 /*      */   private SerialPortLocal sp;
 /*      */   private int portNum;
-/* 1722 */   private boolean abortRequest = false;
+/* 2112 */   private boolean abortRequest = false;
 /*      */   public String eMsg;
 /*      */ 
 /*      */   SerialServerTask(SerialPortLocal paramSerialPortLocal)
 /*      */   {
-/* 1727 */     this.sp = paramSerialPortLocal;
+/* 2117 */     this.sp = paramSerialPortLocal;
 /*      */   }
 /*      */ 
 /*      */   public void run()
 /*      */   {
-/* 1733 */     setPriority(getPriority() + 1);
+/* 2123 */     setPriority(getPriority() + 1);
 /*      */     try
 /*      */     {
-/* 1736 */       int i = this.sp.SerServerTask();
+/* 2126 */       int i = this.sp.SerServerTask();
 /*      */     } catch (IOException localIOException) {
-/* 1738 */       this.eMsg = localIOException.getMessage();
-/* 1739 */       this.sp.getConfig().setPortNum(-1);
+/* 2128 */       this.eMsg = localIOException.getMessage();
+/* 2129 */       this.sp.getConfig().setPortNum(-1);
 /*      */     }
 /*      */   }
 /*      */ }

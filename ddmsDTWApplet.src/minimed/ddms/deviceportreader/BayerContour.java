@@ -1,49 +1,47 @@
-/*    */ package minimed.ddms.deviceportreader;
+/*    */ package minimed.ddms.A;
 /*    */ 
-/*    */ import java.io.PrintStream;
 /*    */ import java.util.Set;
 /*    */ import java.util.Vector;
 /*    */ 
-/*    */ final class BayerContour extends BayerMeter
+/*    */ final class r extends Q
 /*    */ {
-/*    */   private static final int MAX_RECORD_COUNT = 480;
-/*    */   private static final String PRODUCT_CODE = "Bayer7150";
+/*    */   private static final int Ю = 480;
+/*    */   private static final String Э = "Bayer7150";
 /*    */ 
-/*    */   BayerContour()
+/*    */   r()
 /*    */   {
 /* 48 */     super(480);
-/* 49 */     this.m_description = "Bayer Glucometer Contour Meter";
-/* 50 */     logInfo(this, "creating interface to the '" + this.m_description + "', package version " + getPackageVersion());
+/* 49 */     this.ć = "Bayer Glucometer Contour Meter";
+/* 50 */     A(this, "creating interface to the '" + this.ć + "', package version " + K());
 /*    */ 
-/* 52 */     this.m_deviceClassID = 20;
-/* 53 */     this.m_productCodes.add("Bayer7150");
+/* 52 */     this.ā = 20;
+/* 53 */     this.ϰ.add("Bayer7150");
 /*    */   }
 /*    */ 
-/*    */   void createCommands()
+/*    */   void y()
 /*    */   {
-/* 63 */     this.m_cmdGetData = new BayerMeter.CommandGetData(this);
+/* 63 */     this.ϭ = new Q._B(this);
 /*    */   }
 /*    */ 
-/*    */   Vector createCommandList()
+/*    */   Vector w()
 /*    */   {
-/* 72 */     System.out.println("created command list");
-/* 73 */     Vector localVector = new Vector();
+/* 72 */     Vector localVector = new Vector();
 /*    */ 
-/* 76 */     localVector.addElement(this.m_cmdGetData);
-/* 77 */     return localVector;
+/* 75 */     localVector.addElement(this.ϭ);
+/* 76 */     return localVector;
 /*    */   }
 /*    */ 
-/*    */   void addCurrSettingsElementToSnapshot(int paramInt)
+/*    */   void L(int paramInt)
 /*    */   {
 /*    */   }
 /*    */ 
-/*    */   void decodeCurrentSettings()
-/*    */     throws BadDeviceValueException
+/*    */   void ¢()
+/*    */     throws Z
 /*    */   {
 /*    */   }
 /*    */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.BayerContour
+ * Qualified Name:     minimed.ddms.A.r
  * JD-Core Version:    0.6.0
  */

@@ -1,14 +1,14 @@
-/*    */ package minimed.ddms.deviceportreader;
+/*    */ package minimed.ddms.A;
 /*    */ 
-/*    */ final class MMLogicMeter extends MMMeter
+/*    */ final class T extends p
 /*    */ {
-/*    */   MMLogicMeter()
+/*    */   T()
 /*    */   {
 /* 37 */     super(17, 7, 1, "Medtronic MiniMed / BD Logic Meter");
 /*    */   }
 /*    */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.MMLogicMeter
+ * Qualified Name:     minimed.ddms.A.T
  * JD-Core Version:    0.6.0
  */

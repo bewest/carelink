@@ -1,6 +1,0 @@
-; Autorun file for Medtronic CareLink USB driver installation from CD or USB thumb drive (Vista only).
-[autorun]
-open=AutoRunFiles\CareLinkUSBInstall.cmd
-icon=AutoRunFiles\CareLinkUSB.ico
-label=Medtronic CareLink USB Driver
-

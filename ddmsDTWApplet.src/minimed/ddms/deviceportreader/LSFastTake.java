@@ -1,91 +1,84 @@
-/*     */ package minimed.ddms.deviceportreader;
+/*     */ package minimed.ddms.A;
 /*     */ 
 /*     */ import java.util.Vector;
-/*     */ import minimed.util.Contract;
 /*     */ 
-/*     */ final class LSFastTake extends LSMeter
+/*     */ final class s extends w
 /*     */ {
-/*     */   public static final int SNAPSHOT_FORMAT_ID = 154;
-/*     */   private static final int ONE_SECOND = 1000;
+/*     */   public static final int ӯ = 154;
+/*     */   private static final int Ӯ = 1000;
 /*     */ 
-/*     */   LSFastTake()
+/*     */   s()
 /*     */   {
-/*  47 */     this.m_description = "LifeScan FastTake Meter";
-/*  48 */     logInfo(this, "creating interface to the '" + this.m_description + "', package version " + getPackageVersion());
+/*  47 */     this.ć = "LifeScan FastTake Meter";
+/*  48 */     A(this, "creating interface to the '" + this.ć + "', package version " + K());
 /*     */ 
-/*  50 */     this.m_deviceClassID = 6;
-/*  51 */     this.m_snapshotFormatID = 154;
-/*  52 */     this.m_snapshotCreator = new SnapshotCreator(null);
+/*  50 */     this.ā = 6;
+/*  51 */     this.Þ = 154;
+/*  52 */     this.Ė = new _A(null);
 /*     */   }
 /*     */ 
-/*     */   Vector createCommandList()
+/*     */   Vector É()
 /*     */   {
 /*  63 */     Vector localVector = new Vector();
 /*     */ 
-/*  67 */     localVector.addElement(this.m_cmdReadRealTimeClock);
-/*  68 */     localVector.addElement(this.m_cmdGetFirmwareVersion);
-/*  69 */     localVector.addElement(this.m_cmdGetSerialNumber);
-/*  70 */     localVector.addElement(this.m_cmdGetDatalog);
+/*  67 */     localVector.addElement(this.Ҷ);
+/*  68 */     localVector.addElement(this.ҭ);
+/*  69 */     localVector.addElement(this.ѳ);
+/*  70 */     localVector.addElement(this.ѵ);
 /*  71 */     return localVector;
 /*     */   }
 /*     */ 
-/*     */   void initDevice()
-/*     */     throws BadDeviceCommException, BadDeviceValueException
+/*     */   void Ñ()
+/*     */     throws t, Z
 /*     */   {
-/*  84 */     Contract.preNonNull(getRS232Port());
-/*  85 */     Contract.pre(getRS232Port().isOpen());
+/*  82 */     Y().E();
 /*     */ 
-/*  87 */     setPhase(4);
+/*  84 */     E(4);
 /*     */ 
-/*  93 */     this.m_cmdGetSettings2 = new LSMeter.Command(this, "DMST?", "Read Current Time Settings (Ultra Detection only)", 50);
+/*  90 */     this.Ұ = new w._C(this, "DMST?", "Read Current Time Settings (Ultra Detection only)", 50);
 /*     */ 
-/*  99 */     this.m_cmdGetSettings2.execute();
-/* 100 */     MedicalDevice.Util.sleepMS(1000);
-/* 101 */     this.m_cmdGetSettings2.execute();
+/*  96 */     this.Ұ.A();
+/*  97 */     O._B.G(1000);
+/*  98 */     this.Ұ.A();
 /*     */ 
-/* 103 */     String str = MedicalDevice.Util.makeString(this.m_cmdGetSettings2.getRawData());
+/* 100 */     String str = O._B.E(this.Ұ.d());
 /*     */ 
-/* 106 */     if (str.indexOf("ST?") > -1)
+/* 103 */     if (str.indexOf("ST?") > -1)
 /*     */     {
-/* 109 */       throw new BadDeviceCommException("Not a FastTake meter.");
+/* 106 */       throw new t("Not a FastTake meter.");
 /*     */     }
 /*     */ 
-/* 113 */     this.m_cmdGetSettings2 = null;
+/* 110 */     this.Ұ = null;
 /*     */   }
 /*     */ 
-/*     */   void decodeCurrentSettings()
-/*     */     throws BadDeviceValueException
+/*     */   void Ë()
+/*     */     throws Z
 /*     */   {
-/* 126 */     this.m_settingDateFormatIsMDY = null;
-/* 127 */     this.m_settingTimeFormatIsAMPM = null;
+/* 123 */     this.Һ = null;
+/* 124 */     this.ҟ = null;
 /*     */ 
-/* 129 */     logInfo(this, "decodeCurrentSettings: *** CURRENT SETTINGS *** (none)");
+/* 126 */     A(this, "decodeCurrentSettings: *** CURRENT SETTINGS *** (none)");
 /*     */   }
 /*     */ 
-/*     */   private final class SnapshotCreator extends LSMeter.SnapshotCreator {
-/*     */     private final LSFastTake this$0;
-/*     */ 
-/*     */     private SnapshotCreator() {
-/* 137 */       super(); this.this$0 = this$1;
+/*     */   private final class _A extends w._A
+/*     */   {
+/*     */     private _A()
+/*     */     {
+/* 134 */       super();
 /*     */     }
 /*     */ 
-/*     */     void createSnapshotBody()
+/*     */     void A()
 /*     */     {
-/* 152 */       this.this$0.m_snapshot = new Snapshot(this.this$0.m_snapshotFormatID, 1, pad(this.this$0.m_firmwareVersion), pad(this.this$0.m_serialNumber), pad(this.this$0.m_realTimeClock));
+/* 149 */       s.this.Î = new CA(s.this.Þ, 1, B(s.this.Ă), B(s.this.ă), B(s.this.ѻ));
 /*     */ 
-/* 155 */       MedicalDevice.logInfo(this, "createSnapshot: creating snapshot");
+/* 152 */       O.A(this, "createSnapshot: creating snapshot");
 /*     */ 
-/* 159 */       this.this$0.m_snapshot.addElement(2, this.this$0.m_datalog);
-/*     */     }
-/*     */ 
-/*     */     SnapshotCreator(LSFastTake.1 arg2)
-/*     */     {
-/* 137 */       this();
+/* 156 */       s.this.Î.A(2, s.this.Ҟ);
 /*     */     }
 /*     */   }
 /*     */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.LSFastTake
+ * Qualified Name:     minimed.ddms.A.s
  * JD-Core Version:    0.6.0
  */

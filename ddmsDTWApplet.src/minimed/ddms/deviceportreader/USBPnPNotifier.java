@@ -1,62 +1,58 @@
-/*     */ package minimed.ddms.deviceportreader;
+/*     */ package minimed.ddms.A;
 /*     */ 
 /*     */ import java.io.IOException;
-/*     */ import java.io.PrintStream;
 /*     */ import mdt.common.device.driver.minimed.IDevicePnPListener;
 /*     */ 
-/*     */ final class USBPnPNotifier
+/*     */ final class l
 /*     */   implements IDevicePnPListener
 /*     */ {
-/*  33 */   private boolean m_isPresent = false;
-/*  34 */   private boolean m_firstTime = true;
-/*     */   private String m_deviceDescription;
-/*     */   private boolean m_debugMessages;
+/*  33 */   private boolean B = false;
+/*  34 */   private boolean D = true;
+/*     */   private String A;
+/*     */   private boolean C;
 /*     */ 
-/*     */   USBPnPNotifier(String paramString, boolean paramBoolean)
+/*     */   l(String paramString, boolean paramBoolean)
 /*     */   {
-/*  47 */     this.m_deviceDescription = paramString;
-/*  48 */     this.m_debugMessages = paramBoolean;
+/*  47 */     this.A = paramString;
+/*  48 */     this.C = paramBoolean;
 /*     */   }
 /*     */ 
 /*     */   public void deviceAttached(int paramInt)
 /*     */   {
-/*  61 */     String str = this.m_deviceDescription + " ATTACHED (handle=" + paramInt + ")";
-/*  62 */     if (this.m_debugMessages) {
-/*  63 */       System.out.println(str);
-/*     */     }
-/*  65 */     MedicalDevice.logInfoLow(this, str);
-/*  66 */     this.m_isPresent = true;
+/*  61 */     String str = this.A + " ATTACHED (handle=" + paramInt + ")";
+/*  62 */     if (this.C);
+/*  64 */     O.C(this, str);
+/*  65 */     this.B = true;
 /*     */   }
 /*     */ 
 /*     */   public void deviceDetached(int paramInt)
 /*     */   {
-/*  75 */     String str = this.m_deviceDescription + " DETACHED: (handle=" + paramInt + ")";
-/*  76 */     if (this.m_debugMessages) {
-/*  77 */       System.out.println(str);
-/*     */     }
-/*  79 */     MedicalDevice.logInfoLow(this, str);
-/*  80 */     this.m_isPresent = false;
+/*  74 */     String str = this.A + " DETACHED: (handle=" + paramInt + ")";
+/*  75 */     if (this.C);
+/*  77 */     O.C(this, str);
+/*  78 */     this.B = false;
 /*     */   }
 /*     */ 
-/*     */   boolean isDevicePresent()
+/*     */   boolean A()
 /*     */   {
-/*  89 */     if (this.m_firstTime)
+/*  87 */     if (this.D)
 /*     */     {
-/*  92 */       this.m_firstTime = false;
-/*  93 */       USBComm localUSBComm = new USBComm();
-/*  94 */       USBComm.addPnPListener(this);
+/*  90 */       this.D = false;
+/*  91 */       DA localDA = new DA();
+/*  92 */       DA.A(this);
 /*     */       try {
-/*  96 */         localUSBComm.initCommunications();
-/*  97 */         localUSBComm.endCommunications();
+/*  94 */         localDA._();
+/*  95 */         localDA.V();
+/*  96 */         this.B = true;
 /*     */       }
 /*     */       catch (IOException localIOException) {
 /*     */       }
 /*     */     }
-/* 102 */     return this.m_isPresent;
+/* 101 */     return this.B;
 /*     */   }
 /*     */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.USBPnPNotifier
+ * Qualified Name:     minimed.ddms.A.l
  * JD-Core Version:    0.6.0
  */

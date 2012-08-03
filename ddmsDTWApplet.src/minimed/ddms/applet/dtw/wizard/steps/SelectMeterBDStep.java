@@ -20,103 +20,104 @@
 /*     */ import minimed.ddms.applet.dtw.wizard.WizardStep;
 /*     */ import minimed.ddms.applet.dtw.wizard.steps.mmmeter.MeterSelectSerialPortStep;
 /*     */ import minimed.ddms.applet.dtw.wizard.steps.mmmeter.SelectConnectionTypeStep;
+/*     */ import minimed.util.OSInfo;
 /*     */ 
 /*     */ public class SelectMeterBDStep extends WizardStep
 /*     */ {
 /*     */   private final DefaultRadioButtonGroup m_buttonGroup;
-/*  40 */   private final ActionListener m_radioButtonListener = new ActionListener()
+/*  41 */   private final ActionListener m_radioButtonListener = new ActionListener()
 /*     */   {
 /*     */     public void actionPerformed(ActionEvent paramActionEvent)
 /*     */     {
-/*  48 */       SelectMeterBDStep.this.updateButtonStates();
+/*  49 */       SelectMeterBDStep.this.updateButtonStates();
 /*     */     }
-/*  40 */   };
+/*  41 */   };
 /*     */ 
 /*     */   public SelectMeterBDStep(Wizard paramWizard)
 /*     */   {
-/*  61 */     super(paramWizard, null);
+/*  62 */     super(paramWizard, null);
 /*     */ 
-/*  64 */     getLeftBannerLabel().setText(this.m_resources.getString("wizard.device.select"));
-/*  65 */     Object localObject = new ImageIcon(getImage("wizard.read.icon"));
-/*  66 */     getRightBannerLabel().setIcon((Icon)localObject);
+/*  65 */     getLeftBannerLabel().setText(this.m_resources.getString("wizard.device.select"));
+/*  66 */     Object localObject = new ImageIcon(getImage("wizard.read.icon"));
+/*  67 */     getRightBannerLabel().setIcon((Icon)localObject);
 /*     */ 
-/*  69 */     localObject = getQuestionIcon();
-/*  70 */     getTopImageLabel().setIcon((Icon)localObject);
+/*  70 */     localObject = getQuestionIcon();
+/*  71 */     getTopImageLabel().setIcon((Icon)localObject);
 /*     */ 
-/*  73 */     JPanel localJPanel = getContentArea();
-/*  74 */     localJPanel.setLayout(new GridBagLayout());
+/*  74 */     JPanel localJPanel = getContentArea();
+/*  75 */     localJPanel.setLayout(new GridBagLayout());
 /*     */ 
-/*  76 */     String str = MessageHelper.format(this.m_resources.getString("wizard.meter.choose"), new Object[] { getWizardSelections().m_selectionBrandBD });
+/*  77 */     String str = MessageHelper.format(this.m_resources.getString("wizard.meter.choose"), new Object[] { getWizardSelections().m_selectionBrandBD });
 /*     */ 
-/*  79 */     GridBagConstraints localGridBagConstraints = new GridBagConstraints();
-/*  80 */     localGridBagConstraints.gridx = 0;
-/*  81 */     localGridBagConstraints.gridy = 0;
-/*  82 */     localGridBagConstraints.gridheight = 1;
-/*  83 */     localGridBagConstraints.gridwidth = 2;
-/*  84 */     localGridBagConstraints.anchor = 17;
-/*  85 */     localJPanel.add(new JLabel(str), localGridBagConstraints);
+/*  80 */     GridBagConstraints localGridBagConstraints = new GridBagConstraints();
+/*  81 */     localGridBagConstraints.gridx = 0;
+/*  82 */     localGridBagConstraints.gridy = 0;
+/*  83 */     localGridBagConstraints.gridheight = 1;
+/*  84 */     localGridBagConstraints.gridwidth = 2;
+/*  85 */     localGridBagConstraints.anchor = 17;
+/*  86 */     localJPanel.add(new JLabel(str), localGridBagConstraints);
 /*     */ 
-/*  88 */     this.m_buttonGroup = new DefaultRadioButtonGroup(this.m_resources, localJPanel);
-/*  89 */     JRadioButton localJRadioButton1 = this.m_buttonGroup.add("wizard.selections.SELECTION_DEVICE_MMLINKMETER");
+/*  89 */     this.m_buttonGroup = new DefaultRadioButtonGroup(this.m_resources, localJPanel);
+/*  90 */     JRadioButton localJRadioButton1 = this.m_buttonGroup.add("wizard.selections.SELECTION_DEVICE_MMLINKMETER");
 /*     */ 
-/*  91 */     localJRadioButton1.addActionListener(this.m_radioButtonListener);
-/*  92 */     JRadioButton localJRadioButton2 = this.m_buttonGroup.add("wizard.selections.SELECTION_DEVICE_MMLOGICMETER");
+/*  92 */     localJRadioButton1.addActionListener(this.m_radioButtonListener);
+/*  93 */     JRadioButton localJRadioButton2 = this.m_buttonGroup.add("wizard.selections.SELECTION_DEVICE_MMLOGICMETER");
 /*     */ 
-/*  94 */     localJRadioButton2.addActionListener(this.m_radioButtonListener);
+/*  95 */     localJRadioButton2.addActionListener(this.m_radioButtonListener);
 /*     */ 
-/*  98 */     localGridBagConstraints = new GridBagConstraints();
-/*  99 */     localGridBagConstraints.gridx = 0;
-/* 100 */     localGridBagConstraints.gridy = 1;
-/* 101 */     localGridBagConstraints.insets = new Insets(10, 0, 0, 0);
-/* 102 */     localGridBagConstraints.anchor = 13;
-/* 103 */     localJPanel.add(createImageButton("wizard.mmlinkmeter.pic", localJRadioButton1), localGridBagConstraints);
+/*  99 */     localGridBagConstraints = new GridBagConstraints();
+/* 100 */     localGridBagConstraints.gridx = 0;
+/* 101 */     localGridBagConstraints.gridy = 1;
+/* 102 */     localGridBagConstraints.insets = new Insets(10, 0, 0, 0);
+/* 103 */     localGridBagConstraints.anchor = 13;
+/* 104 */     localJPanel.add(createImageButton("wizard.mmlinkmeter.pic", localJRadioButton1), localGridBagConstraints);
 /*     */ 
-/* 106 */     localGridBagConstraints = new GridBagConstraints();
-/* 107 */     localGridBagConstraints.gridx = 0;
-/* 108 */     localGridBagConstraints.gridy = 2;
-/* 109 */     localGridBagConstraints.insets = new Insets(10, 0, 0, 0);
-/* 110 */     localGridBagConstraints.anchor = 13;
-/* 111 */     localJPanel.add(createImageButton("wizard.mmlogicmeter.pic", localJRadioButton2), localGridBagConstraints);
+/* 107 */     localGridBagConstraints = new GridBagConstraints();
+/* 108 */     localGridBagConstraints.gridx = 0;
+/* 109 */     localGridBagConstraints.gridy = 2;
+/* 110 */     localGridBagConstraints.insets = new Insets(10, 0, 0, 0);
+/* 111 */     localGridBagConstraints.anchor = 13;
+/* 112 */     localJPanel.add(createImageButton("wizard.mmlogicmeter.pic", localJRadioButton2), localGridBagConstraints);
 /*     */ 
-/* 114 */     this.m_buttonGroup.selectButton(getWizardSelections().getMeterDevice(), "wizard.selections.SELECTION_DEVICE_MMLINKMETER");
+/* 115 */     this.m_buttonGroup.selectButton(getWizardSelections().getMeterDevice(), "wizard.selections.SELECTION_DEVICE_MMLINKMETER");
 /*     */   }
 /*     */ 
 /*     */   protected void stepShown()
 /*     */   {
-/* 124 */     super.stepShown();
-/* 125 */     updateButtonStates();
+/* 125 */     super.stepShown();
+/* 126 */     updateButtonStates();
 /*     */   }
 /*     */ 
 /*     */   protected void nextRequest()
 /*     */   {
-/* 132 */     rememberUserSelections();
-/* 133 */     getWizard().showNextStep(getNextMiniMedClass());
+/* 133 */     rememberUserSelections();
+/* 134 */     getWizard().showNextStep(getNextMiniMedClass());
 /*     */   }
 /*     */ 
 /*     */   protected void rememberUserSelections()
 /*     */   {
-/* 141 */     getWizardSelections().setMeterDevice(this.m_buttonGroup.getSelectedButton());
+/* 142 */     getWizardSelections().setMeterDevice(this.m_buttonGroup.getSelectedButton());
 /*     */   }
 /*     */ 
 /*     */   protected void updateButtonStates()
 /*     */   {
-/* 148 */     rememberUserSelections();
-/* 149 */     getFinishButton().setEnabled(getWizard().canFinish());
+/* 149 */     rememberUserSelections();
+/* 150 */     getFinishButton().setEnabled(getWizard().canFinish());
 /*     */   }
 /*     */ 
 /*     */   private Class getNextMiniMedClass()
 /*     */   {
-/*     */     Class localClass;
-/* 160 */     if (getWizard().getConfig().isWindowsNT())
+/*     */     Object localObject;
+/* 161 */     if ((getWizard().getConfig().isWindowsNT()) || (OSInfo.isMac()))
 /*     */     {
-/* 162 */       getWizardSelections().setConnectionType("wizard.selections.SELECTION_CONN_TYPE_SERIAL");
+/* 163 */       getWizardSelections().setConnectionType("wizard.selections.SELECTION_CONN_TYPE_SERIAL");
 /*     */ 
-/* 164 */       localClass = MeterSelectSerialPortStep.class;
+/* 165 */       localObject = MeterSelectSerialPortStep.class;
 /*     */     } else {
-/* 166 */       localClass = SelectConnectionTypeStep.class;
+/* 167 */       localObject = SelectConnectionTypeStep.class;
 /*     */     }
 /*     */ 
-/* 170 */     return localClass;
+/* 171 */     return (Class)localObject;
 /*     */   }
 /*     */ }
 

@@ -1,20 +1,20 @@
-/*    */ package minimed.ddms.deviceportreader;
+/*    */ package minimed.ddms.A;
 /*    */ 
-/*    */ public abstract class DeviceCommand
+/*    */ public abstract class n
 /*    */ {
-/*    */   String m_description;
+/*    */   String A;
 /*    */ 
-/*    */   DeviceCommand(String paramString)
+/*    */   n(String paramString)
 /*    */   {
-/* 44 */     this.m_description = paramString;
+/* 44 */     this.A = paramString;
 /*    */   }
 /*    */ 
-/*    */   abstract void execute()
-/*    */     throws BadDeviceCommException, BadDeviceValueException;
+/*    */   abstract void A()
+/*    */     throws t, Z;
 /*    */ 
 /*    */   public String toString()
 /*    */   {
-/* 62 */     return "(" + this.m_description + ")";
+/* 62 */     return "(" + this.A + ")";
 /*    */   }
 /*    */ 
 /*    */   public int hashCode()
@@ -29,6 +29,6 @@
 /*    */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.DeviceCommand
+ * Qualified Name:     minimed.ddms.A.n
  * JD-Core Version:    0.6.0
  */

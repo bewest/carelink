@@ -1,6 +1,7 @@
 /*     */ package minimed.ddms.applet.dtw;
 /*     */ 
 /*     */ import java.io.ByteArrayInputStream;
+/*     */ import java.io.ByteArrayOutputStream;
 /*     */ import java.io.File;
 /*     */ import java.io.FileInputStream;
 /*     */ import java.io.FileNotFoundException;
@@ -121,15 +122,41 @@
 /* 175 */     return (File)localFile2;
 /*     */   }
 /*     */ 
+/*     */   public byte[] loadFile(String paramString1, String paramString2, PrintWriter paramPrintWriter) throws LoadFailedException {
+/* 191 */     ResourceBundle localResourceBundle = DTWApplet.getResourceBundle();
+/*     */ 
+/* 193 */     String str1 = paramString1 + File.separator + paramString2;
+/*     */     FileInputStream localFileInputStream;
+/*     */     try {
+/* 197 */       localFileInputStream = new FileInputStream(str1);
+/*     */     } catch (FileNotFoundException localFileNotFoundException) {
+/* 199 */       localFileNotFoundException.printStackTrace(paramPrintWriter);
+/* 200 */       String str2 = MessageHelper.format(localResourceBundle.getString("error.MSG_FILE_OPEN_ERROR"), new Object[] { getViewableName(str1) });
+/*     */ 
+/* 202 */       throw new LoadFailedException(str2);
+/*     */     }
+/*     */ 
+/* 205 */     ByteArrayOutputStream localByteArrayOutputStream = new ByteArrayOutputStream();
+/*     */     try {
+/* 207 */       writeToStream(localFileInputStream, localByteArrayOutputStream);
+/*     */     } catch (IOException localIOException) {
+/* 209 */       localIOException.printStackTrace(paramPrintWriter);
+/* 210 */       String str3 = MessageHelper.format(localResourceBundle.getString("error.MSG_FILE_WRITE_ERROR"), new Object[] { getViewableName(str1) });
+/*     */ 
+/* 212 */       throw new LoadFailedException(str3);
+/*     */     }
+/* 214 */     return localByteArrayOutputStream.toByteArray();
+/*     */   }
+/*     */ 
 /*     */   public String getViewableName(String paramString)
 /*     */   {
-/* 186 */     String str = paramString;
+/* 225 */     String str = paramString;
 /*     */     try {
-/* 188 */       str = new File(paramString).getCanonicalPath();
+/* 227 */       str = new File(paramString).getCanonicalPath();
 /*     */     }
 /*     */     catch (IOException localIOException) {
 /*     */     }
-/* 192 */     return str;
+/* 231 */     return str;
 /*     */   }
 /*     */ }
 

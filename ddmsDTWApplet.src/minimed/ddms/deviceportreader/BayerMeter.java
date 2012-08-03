@@ -1,4 +1,4 @@
-/*      */ package minimed.ddms.deviceportreader;
+/*      */ package minimed.ddms.A;
 /*      */ 
 /*      */ import java.io.IOException;
 /*      */ import java.text.ParsePosition;
@@ -11,673 +11,768 @@
 /*      */ import java.util.Vector;
 /*      */ import minimed.util.Contract;
 /*      */ 
-/*      */ abstract class BayerMeter extends MedicalDevice
+/*      */ abstract class Q extends O
 /*      */ {
-/*      */   public static final int SNAPSHOT_FORMAT_ID = 140;
-/*   39 */   static final String CMD_GET_DATA = String.valueOf('\006');
-/*      */   static final String CMD_GET_SETTINGS = "\rR|";
-/*      */   static final String CMD_GET_SETTINGS_DATA = "C|";
-/*   42 */   static final String CMD_END_SESSION = '\r' + String.valueOf('\004');
-/*      */   static final int LEN_ONE = 1;
-/*      */   static final int LEN_GET_SETTINGS = 7;
-/*      */   static final int METER_POWER_UP_DELAY_MS = 5000;
-/*      */   static final String DATE_PREFIX = "|P|1|";
-/*      */   static final String FIELD_DELIMITERS = "|\\^&\r\n";
-/*      */   private static final String CMD_INIT_COMMUNICATIONS = "X";
-/*      */   private static final int IO_DELAY_MS = 10;
-/*      */   private static final int READ_TO_MS = 2500;
-/*      */   private static final String HEADER_RECORD = "H";
-/*      */   CommandGetData m_cmdGetData;
-/*      */   private Command m_cmdGetSettings;
-/*      */   private Command m_cmdGetSettingsData;
-/*      */   private Command m_cmdBeginRemoteCmds;
-/*      */   private int m_totalBytesToRead;
-/*      */   private int m_bytesReadThusFar;
-/*      */   String m_currentSettings;
-/*      */   Set m_productCodes;
-/*      */   Boolean m_settingBeeperEnable;
-/*      */   Boolean m_settingDateFormatIsMD;
-/*      */   Boolean m_settingReferenceIsPlasma;
-/*      */   Boolean m_settingTempUnitsIsFahrenheit;
-/*      */   Boolean m_settingTimeFormatIsAMPM;
-/*      */   Boolean m_settingUnitsIsMGDL;
-/*      */   private int m_maxRecords;
-/*      */   private String m_dataUpload;
-/*      */   private String m_realTimeClock;
+/*      */   public static final int ϳ = 140;
+/*   39 */   static final String Ѕ = String.valueOf('\006');
+/*      */   static final String ϧ = "\rR|";
+/*      */   static final String Ϧ = "C|";
+/*   42 */   static final String Є = '\r' + String.valueOf('\004');
+/*      */   static final int Ј = 1;
+/*      */   static final int ϣ = 7;
+/*      */   static final int Ї = 5000;
+/*      */   static final String Ϛ = "|P|1|";
+/*      */   static final String Ѓ = "|\\^&\r\n";
+/*      */   private static final String Љ = "X";
+/*      */   private static final int І = 10;
+/*      */   private static final int Ϯ = 2500;
+/*      */   static final String ϥ = "H";
+/*      */   _B ϭ;
+/*      */   private _C ϱ;
+/*      */   private _C Ϫ;
+/*      */   private _C Ϣ;
+/*      */   private int ϩ;
+/*      */   private int Ϡ;
+/*      */   String Ϥ;
+/*      */   Set ϰ;
+/*      */   Boolean Ђ;
+/*      */   Boolean Ϩ;
+/*      */   Boolean ϲ;
+/*      */   Boolean Ϭ;
+/*      */   Boolean Ϝ;
+/*      */   Boolean Ϟ;
+/*      */   private int ϯ;
+/*      */   private String Ё;
+/*      */   String ϫ;
 /*      */ 
-/*      */   BayerMeter(int paramInt)
+/*      */   Q(int paramInt)
 /*      */   {
-/*  139 */     this.m_firmwareVersion = new String("x.xx");
-/*  140 */     this.m_serialNumber = new String("xxxx-xxxxxxx");
-/*  141 */     this.m_snapshotFormatID = 140;
-/*  142 */     this.m_snapshotCreator = new SnapshotCreator();
-/*  143 */     this.m_maxRecords = paramInt;
-/*  144 */     this.m_productCodes = new HashSet();
+/*  139 */     this.Ă = new String("x.xx");
+/*  140 */     this.ă = new String("xxxx-xxxxxxx");
+/*  141 */     this.Þ = 140;
+/*  142 */     this.Ė = new _A();
+/*  143 */     this.ϯ = paramInt;
+/*  144 */     this.ϰ = new HashSet();
 /*      */ 
-/*  147 */     createCommands();
+/*  147 */     y();
 /*      */   }
 /*      */ 
-/*      */   public void readData(DeviceListener paramDeviceListener, int paramInt, String paramString)
-/*      */     throws BadDeviceCommException, BadDeviceValueException, IOException
+/*      */   public void A(v paramv, String paramString1, String paramString2)
+/*      */     throws t, Z, IOException
 /*      */   {
-/*  169 */     logInfo(this, "readData: starting reader...");
-/*  170 */     setHaltRequested(false);
+/*  169 */     A(this, "readData: starting reader...");
+/*  170 */     B(false);
 /*      */ 
-/*  173 */     Vector localVector = createCommandList();
+/*  173 */     Vector localVector = w();
 /*      */ 
-/*  176 */     Reader localReader = new Reader(paramDeviceListener, paramInt, localVector, null);
-/*  177 */     localReader.acquireDataFromDevice();
+/*  176 */     _D local_D = new _D(paramv, paramString1, localVector, null);
+/*  177 */     _D.A(local_D);
 /*      */   }
 /*      */ 
-/*      */   int getDeviceType()
+/*      */   int Z()
 /*      */   {
 /*  186 */     return 3;
 /*      */   }
 /*      */ 
-/*      */   void initSerialPort(int paramInt)
+/*      */   void D(String paramString)
 /*      */     throws IOException
 /*      */   {
-/*  197 */     beginSerialPort(paramInt);
-/*  198 */     setRS232Port(new SerialPort(paramInt, 7));
-/*  199 */     getRS232Port().readUntilEmpty();
-/*  200 */     getRS232Port().setIODelay(10);
-/*  201 */     getRS232Port().setReadTimeOut(2500);
+/*  197 */     C(paramString);
+/*  198 */     A(new d(paramString, 7));
+/*  199 */     V().A();
+/*  200 */     V().A(10);
+/*  201 */     V().B(2500);
 /*      */   }
 /*      */ 
-/*      */   void shutDownSerialPort()
+/*      */   void _()
 /*      */     throws IOException
 /*      */   {
-/*  210 */     if (getRS232Port() != null)
+/*  210 */     if (V() != null)
 /*      */     {
-/*  212 */       getRS232Port().close();
-/*  213 */       setRS232Port(null);
+/*  212 */       V().B();
+/*  213 */       A(null);
 /*      */     }
 /*      */   }
 /*      */ 
-/*      */   void findDevice(DeviceListener paramDeviceListener)
-/*      */     throws BadDeviceCommException, IOException
+/*      */   void C(v paramv)
+/*      */     throws t, IOException
 /*      */   {
 /*      */     try
 /*      */     {
-/*  226 */       initCommunicationIO();
+/*  226 */       z();
 /*      */     }
-/*      */     catch (BadDeviceValueException localBadDeviceValueException) {
-/*  229 */       throw new BadDeviceCommException("Got reply, but format is bad.");
+/*      */     catch (Z localZ) {
+/*  229 */       throw new t("Got reply, but format is bad.");
 /*      */     }
 /*      */   }
 /*      */ 
-/*      */   void createCommands()
+/*      */   void y()
 /*      */   {
-/*  237 */     this.m_cmdGetSettings = new Command("\rR|", "Read Current Settings", 1, null);
+/*  237 */     this.ϱ = new _C("\rR|", "Read Current Settings", 1, null);
 /*      */ 
-/*  239 */     this.m_cmdGetSettingsData = new Command("C|", "Read Current Settings Data", 7, null);
+/*  239 */     this.Ϫ = new _C("C|", "Read Current Settings Data", 7, null);
 /*      */ 
-/*  241 */     this.m_cmdGetSettingsData.setDataHasCRC(false);
-/*  242 */     this.m_cmdBeginRemoteCmds = new Command(String.valueOf('\005'), "Begin Remote Commands", 1, null);
-/*  243 */     this.m_cmdGetData = new CommandGetData();
+/*  241 */     this.Ϫ.B(false);
+/*  242 */     this.Ϣ = new _C(String.valueOf('\005'), "Begin Remote Commands", 1, null);
+/*  243 */     this.ϭ = new _B();
 /*      */   }
 /*      */ 
-/*      */   Vector createCommandList()
+/*      */   Vector w()
 /*      */   {
 /*  252 */     Vector localVector = new Vector();
 /*      */ 
-/*  255 */     localVector.addElement(this.m_cmdGetData);
-/*  256 */     localVector.addElement(this.m_cmdBeginRemoteCmds);
-/*  257 */     localVector.addElement(this.m_cmdGetSettings);
-/*  258 */     localVector.addElement(this.m_cmdGetSettingsData);
+/*  255 */     localVector.addElement(this.ϭ);
+/*  256 */     localVector.addElement(this.Ϣ);
+/*  257 */     localVector.addElement(this.ϱ);
+/*  258 */     localVector.addElement(this.Ϫ);
 /*  259 */     return localVector;
 /*      */   }
 /*      */ 
-/*      */   void addCurrSettingsElementToSnapshot(int paramInt)
+/*      */   void L(int paramInt)
 /*      */   {
-/*  267 */     this.m_snapshot.addElement(paramInt, this.m_currentSettings);
+/*  267 */     this.Î.A(paramInt, this.Ϥ);
 /*      */   }
 /*      */ 
-/*      */   void initDeviceAfterSerialNumberKnown()
-/*      */     throws BadDeviceValueException
+/*      */   void ¤()
+/*      */     throws Z
 /*      */   {
 /*      */   }
 /*      */ 
-/*      */   void updateMaxRecordCount(int paramInt)
+/*      */   void M(int paramInt)
 /*      */   {
-/*  286 */     this.m_maxRecords = paramInt;
+/*  286 */     this.ϯ = paramInt;
 /*      */ 
-/*  288 */     this.m_totalBytesToRead = new CommandGetData().m_rawData.length;
+/*  288 */     this.ϩ = new _B().v.length;
 /*      */   }
 /*      */ 
-/*      */   abstract void decodeCurrentSettings()
-/*      */     throws BadDeviceValueException;
+/*      */   abstract void ¢()
+/*      */     throws Z;
 /*      */ 
-/*      */   private boolean verifyProductCode(String paramString)
+/*      */   boolean M(String paramString)
 /*      */   {
-/*  307 */     return this.m_productCodes.contains(paramString);
+/*  307 */     return this.ϰ.contains(paramString);
 /*      */   }
 /*      */ 
-/*      */   private final void initDevice()
-/*      */     throws BadDeviceCommException, BadDeviceValueException
+/*      */   void ¥()
+/*      */     throws t, Z
 /*      */   {
-/*  319 */     Contract.pre(getRS232Port() != null);
-/*  320 */     Contract.pre(getRS232Port().isOpen());
+/*  317 */     V().E();
 /*      */ 
-/*  322 */     setPhase(4);
-/*  323 */     initCommunicationIO();
+/*  319 */     E(4);
+/*  320 */     z();
 /*      */   }
 /*      */ 
-/*      */   private void initCommunicationIO()
-/*      */     throws BadDeviceCommException, BadDeviceValueException
+/*      */   private void z()
+/*      */     throws t, Z
 /*      */   {
-/*  334 */     MedicalDevice.Util.sleepMS(5000);
-/*  335 */     Command localCommand = new Command("X", "Initialize Communications", 2, null);
+/*  331 */     O._B.G(5000);
+/*  332 */     _C local_C = new _C("X", "Initialize Communications", 2, null);
 /*      */ 
-/*  337 */     localCommand.setDataHasCRC(false);
-/*  338 */     localCommand.execute();
+/*  334 */     local_C.B(false);
+/*  335 */     local_C.A();
 /*      */ 
-/*  341 */     int i = localCommand.m_rawData.length;
-/*  342 */     if (i < 2) {
-/*  343 */       throw new BadDeviceValueException("initCommunicationIO: got bad reply");
+/*  338 */     int i = local_C.v.length;
+/*  339 */     if (i < 2) {
+/*  340 */       throw new Z("initCommunicationIO: got bad reply");
 /*      */     }
-/*  345 */     if ((localCommand.m_rawData[(i - 2)] != 4) || (localCommand.m_rawData[(i - 1)] != 5))
+/*  342 */     if ((local_C.v[(i - 2)] != 4) || (local_C.v[(i - 1)] != 5))
 /*      */     {
-/*  347 */       throw new BadDeviceValueException("initCommunicationIO: got bad reply");
+/*  344 */       throw new Z("initCommunicationIO: got bad reply");
 /*      */     }
 /*      */   }
 /*      */ 
-/*      */   private final void shutDownMeter()
-/*      */     throws BadDeviceCommException, BadDeviceValueException
+/*      */   private final void v()
+/*      */     throws t, Z
 /*      */   {
-/*  360 */     if (getRS232Port() != null)
+/*  357 */     if (V() != null)
 /*      */     {
-/*  362 */       Command localCommand = new Command(CMD_END_SESSION, "End Session", 0, null);
-/*  363 */       localCommand.setDataHasCRC(false);
-/*  364 */       localCommand.execute();
+/*  359 */       _C local_C = new _C(Є, "End Session", 0, null);
+/*  360 */       local_C.B(false);
+/*  361 */       local_C.A();
 /*      */     }
 /*      */   }
 /*      */ 
-/*      */   private final void decodeReply(Command paramCommand)
-/*      */     throws BadDeviceValueException
+/*      */   private final void A(_C param_C)
+/*      */     throws Z
 /*      */   {
-/*  379 */     String str = MedicalDevice.Util.makeString(paramCommand.m_rawData);
+/*  376 */     String str = O._B.E(param_C.v);
 /*      */ 
-/*  381 */     if ((this.m_cmdGetSettingsData != null) && (paramCommand.m_command.equals(this.m_cmdGetSettingsData.m_command)))
+/*  378 */     if ((this.Ϫ != null) && (param_C.t.equals(this.Ϫ.t)))
 /*      */     {
-/*  384 */       this.m_currentSettings = str;
-/*  385 */       logInfo(this, "decodeReply: current settings is '" + this.m_currentSettings + "'");
+/*  381 */       this.Ϥ = str;
+/*  382 */       A(this, "decodeReply: current settings is '" + this.Ϥ + "'");
 /*      */ 
-/*  387 */       decodeCurrentSettings();
+/*  384 */       ¢();
 /*      */     }
-/*  389 */     else if (paramCommand.m_command.equals("X")) {
-/*  390 */       logInfo(this, "decodeReply: reply is initialization: '" + str + "'");
+/*  386 */     else if (param_C.t.equals("X")) {
+/*  387 */       A(this, "decodeReply: reply is initialization: '" + str + "'");
 /*      */     }
 /*      */   }
 /*      */ 
-/*      */   private void decodeDataUploadHeader(String paramString)
-/*      */     throws BadDeviceValueException
+/*      */   void L(String paramString)
+/*      */     throws Z
 /*      */   {
-/*  408 */     StringTokenizer localStringTokenizer = null;
-/*  409 */     String str1 = null;
+/*  405 */     StringTokenizer localStringTokenizer = null;
+/*  406 */     String str1 = null;
 /*      */ 
-/*  411 */     String str3 = "1";
+/*  408 */     String str3 = "1";
 /*      */ 
-/*  413 */     Contract.pre(paramString != null);
+/*  410 */     Contract.pre(paramString != null);
 /*      */     try
 /*      */     {
-/*  420 */       logInfo(this, "decodeDataUploadHeader: parsing dataUpload header: '" + paramString + '\'');
+/*  417 */       A(this, "decodeDataUploadHeader: parsing dataUpload header: '" + paramString + '\'');
 /*      */ 
-/*  423 */       localStringTokenizer = new StringTokenizer(paramString, "|\\^&\r\n");
+/*  420 */       localStringTokenizer = new StringTokenizer(paramString, "|\\^&\r\n");
 /*      */ 
-/*  427 */       str1 = localStringTokenizer.nextToken();
-/*  428 */       if (!str1.startsWith(str3 + "H")) {
-/*  429 */         throw new BadDeviceValueException("Bad header record type (last token='" + str1 + "')");
+/*  424 */       str1 = localStringTokenizer.nextToken();
+/*  425 */       if (!str1.startsWith(str3 + "H")) {
+/*  426 */         throw new Z("Bad header record type (last token='" + str1 + "')");
 /*      */       }
 /*      */ 
-/*  434 */       str1 = localStringTokenizer.nextToken();
-/*  435 */       String str2 = localStringTokenizer.nextToken();
+/*  431 */       str1 = localStringTokenizer.nextToken();
+/*  432 */       String str2 = localStringTokenizer.nextToken();
 /*      */ 
-/*  437 */       if (!verifyProductCode(str2)) {
-/*  438 */         throw new BadDeviceValueException("Product code '" + str2 + "' not found in list '" + this.m_productCodes + "' (last token='" + str1 + "')");
+/*  434 */       if (!M(str2)) {
+/*  435 */         throw new Z("Product code '" + str2 + "' not found in list '" + this.ϰ + "' (last token='" + str1 + "')");
 /*      */       }
 /*      */ 
-/*  444 */       this.m_firmwareVersion = localStringTokenizer.nextToken();
+/*  441 */       this.Ă = localStringTokenizer.nextToken();
 /*      */ 
-/*  447 */       str1 = localStringTokenizer.nextToken();
-/*  448 */       this.m_serialNumber = localStringTokenizer.nextToken();
+/*  444 */       str1 = localStringTokenizer.nextToken();
+/*  445 */       this.ă = localStringTokenizer.nextToken();
 /*      */ 
-/*  450 */       logInfo(this, "decodeDataUploadHeader: current firmware version for device is " + this.m_firmwareVersion);
+/*  447 */       A(this, "decodeDataUploadHeader: current firmware version for device is " + this.Ă);
 /*      */ 
-/*  452 */       logInfo(this, "decodeDataUploadHeader: current serial number for device is " + this.m_serialNumber);
+/*  449 */       A(this, "decodeDataUploadHeader: current serial number for device is " + this.ă);
 /*      */ 
-/*  456 */       str1 = localStringTokenizer.nextToken();
-/*  457 */       str1 = localStringTokenizer.nextToken();
-/*  458 */       this.m_realTimeClock = localStringTokenizer.nextToken();
-/*  459 */       decodeCurrentTimeStamp();
+/*  453 */       str1 = localStringTokenizer.nextToken();
+/*  454 */       str1 = localStringTokenizer.nextToken();
+/*  455 */       this.ϫ = localStringTokenizer.nextToken();
+/*  456 */       £();
 /*      */     } catch (NoSuchElementException localNoSuchElementException) {
-/*  461 */       throw new BadDeviceValueException("Bad dataUpload header field '" + paramString + "' received (last token='" + str1 + "')");
+/*  458 */       throw new Z("Bad dataUpload header field '" + paramString + "' received (last token='" + str1 + "')");
 /*      */     }
 /*      */     catch (NumberFormatException localNumberFormatException)
 /*      */     {
-/*  465 */       throw new BadDeviceValueException("Bad dataUpload header field number '" + paramString + "' received (last token='" + str1 + "')");
+/*  462 */       throw new Z("Bad dataUpload header field number '" + paramString + "' received (last token='" + str1 + "')");
 /*      */     }
 /*      */   }
 /*      */ 
-/*      */   private void decodeCurrentTimeStamp()
-/*      */     throws BadDeviceValueException
+/*      */   void £()
+/*      */     throws Z
 /*      */   {
-/*  481 */     this.m_timeStamp = createTimestamp(this.m_realTimeClock);
-/*  482 */     logInfo(this, "decodeCurrentTimeStamp: current time stamp for device is " + this.m_timeStamp);
+/*  478 */     this.ĕ = K(this.ϫ);
+/*  479 */     A(this, "decodeCurrentTimeStamp: current time stamp for device is " + this.ĕ);
 /*      */   }
 /*      */ 
-/*      */   private final Date createTimestamp(String paramString)
-/*      */     throws BadDeviceValueException
+/*      */   private final Date K(String paramString)
+/*      */     throws Z
 /*      */   {
-/*  500 */     String str = new String("yyyyMMddHHmm");
+/*  497 */     String str = new String("yyyyMMddHHmm");
 /*      */ 
-/*  502 */     Contract.pre(paramString != null);
-/*  503 */     Contract.pre(paramString.length() == str.length());
+/*  499 */     Contract.pre(paramString != null);
+/*  500 */     Contract.pre(paramString.length() == str.length());
 /*      */ 
-/*  505 */     SimpleDateFormat localSimpleDateFormat = new SimpleDateFormat(str);
-/*  506 */     Date localDate = localSimpleDateFormat.parse(paramString, new ParsePosition(0));
+/*  502 */     SimpleDateFormat localSimpleDateFormat = new SimpleDateFormat(str);
+/*  503 */     Date localDate = localSimpleDateFormat.parse(paramString, new ParsePosition(0));
 /*      */ 
-/*  508 */     if (localDate == null)
+/*  505 */     if (localDate == null)
 /*      */     {
-/*  510 */       throw new BadDeviceValueException("Bad device time string (null returned) '" + paramString + "' received");
+/*  507 */       throw new Z("Bad device time string (null returned) '" + paramString + "' received");
 /*      */     }
 /*      */ 
-/*  514 */     return localDate;
+/*  511 */     return localDate;
 /*      */   }
 /*      */ 
-/*      */   private final class SnapshotCreator extends MedicalDevice.SnapshotCreator
+/*      */   protected void A(long paramLong)
 /*      */   {
-/*      */     static final int SNAPCODE_DATAUPLOAD = 1;
-/*      */     static final int SNAPCODE_CURRENT_SETTINGS = 2;
-/*      */     static final int SNAPSHOT_BYTES = 80;
-/*      */     static final int LAST_SNAPCODE = 2;
-/*      */ 
-/*      */     SnapshotCreator()
+/*      */     try
 /*      */     {
-/* 1100 */       super(80);
-/* 1101 */       BayerMeter.this.m_snapshotFirmwareCount = 0;
-/* 1102 */       BayerMeter.this.m_snapshotSerialCount = 0;
-/* 1103 */       BayerMeter.this.m_snapshotTimeCount = 0;
+/*  524 */       V().B((int)paramLong);
 /*      */     }
-/*      */ 
-/*      */     void createSnapshotBody()
+/*      */     catch (IOException localIOException)
 /*      */     {
-/* 1113 */       String str1 = "";
-/* 1114 */       String str2 = "";
-/* 1115 */       String str3 = "";
-/* 1116 */       BayerMeter.this.m_snapshot = new Snapshot(BayerMeter.this.m_snapshotFormatID, 1, str1, str2, str3);
-/*      */ 
-/* 1119 */       MedicalDevice.logInfo(this, "createSnapshot: creating snapshot");
-/*      */ 
-/* 1123 */       BayerMeter.this.m_snapshot.addElement(1, BayerMeter.this.m_dataUpload);
-/*      */ 
-/* 1127 */       BayerMeter.this.addCurrSettingsElementToSnapshot(2);
 /*      */     }
 /*      */   }
 /*      */ 
-/*      */   final class CommandGetData extends BayerMeter.Command
+/*      */   protected long x()
 /*      */   {
-/*      */     private static final int HEADER_SIZE = 300;
-/*      */     private static final int AVG_REC_LEN = 55;
-/*      */     private static final int HEADER_READ_TO_MS = 10000;
-/*      */     private BayerMeter.Command m_cmdGetDataRecord;
-/*      */ 
-/*      */     CommandGetData()
+/*      */     try
 /*      */     {
-/*  989 */       super(BayerMeter.CMD_GET_DATA, "Read Data Records", 300 + BayerMeter.this.m_maxRecords * 55, null);
+/*  540 */       return V().D(); } catch (IOException localIOException) {
+/*      */     }
+/*  542 */     return 10L;
+/*      */   }
 /*      */ 
-/*  992 */       this.m_cmdGetDataRecord = new BayerMeter.Command(BayerMeter.this, BayerMeter.CMD_GET_DATA, "Read Data Record", 55, null);
+/*      */   protected class _A extends O._A
+/*      */   {
+/*      */     static final int h = 1;
+/*      */     static final int g = 2;
+/*      */     static final int k = 80;
+/*      */     static final int i = 2;
+/*      */     int j;
+/*      */ 
+/*      */     _A()
+/*      */     {
+/* 1226 */       this(1);
 /*      */     }
 /*      */ 
-/*      */     void execute()
-/*      */       throws BadDeviceCommException, BadDeviceValueException
+/*      */     _A(int arg2)
 /*      */     {
-/* 1010 */       int i = 0;
-/* 1011 */       int j = 0;
-/* 1012 */       this.m_rawData = new int[0];
+/* 1236 */       super(80);
+/*      */       int m;
+/* 1237 */       this.j = m;
+/* 1238 */       Q.this.e = 0;
+/* 1239 */       Q.this.ì = 0;
+/* 1240 */       Q.this.£ = 0;
+/*      */     }
 /*      */ 
-/* 1014 */       while (i == 0) {
-/* 1015 */         MedicalDevice.logInfo(this, "execute: ****** reading record " + j + " ******");
-/* 1016 */         int[] arrayOfInt = new int[0];
-/* 1017 */         if (j == 0)
+/*      */     void A()
+/*      */     {
+/* 1250 */       String str1 = "";
+/* 1251 */       String str2 = "";
+/* 1252 */       String str3 = "";
+/* 1253 */       Q.this.Î = new CA(Q.this.Þ, 1, str1, str2, str3);
+/*      */ 
+/* 1256 */       O.A(this, "createSnapshot: creating snapshot");
+/*      */ 
+/* 1260 */       Q.this.Î.A(this.j, Q.E(Q.this));
+/*      */ 
+/* 1264 */       Q.this.L(2);
+/*      */     }
+/*      */   }
+/*      */ 
+/*      */   final class _B extends Q._C
+/*      */   {
+/*      */     private static final int y = 300;
+/*      */     private static final int x = 55;
+/*      */     private static final int w = 10000;
+/*      */     static final int ¢ = 10;
+/*      */     private Q._C z;
+/*      */ 
+/*      */     _B()
+/*      */     {
+/* 1021 */       super(Q.Ѕ, "Read Data Records", 300 + Q.C(Q.this) * 55, null);
+/*      */     }
+/*      */ 
+/*      */     void A()
+/*      */       throws t, Z
+/*      */     {
+/* 1040 */       int i = 0;
+/* 1041 */       int j = 0;
+/* 1042 */       this.v = new int[0];
+/*      */ 
+/* 1044 */       while (i == 0) {
+/* 1045 */         O.A(this, "execute: ****** reading record " + j + " ******");
+/* 1046 */         int[] arrayOfInt = new int[0];
+/* 1047 */         if (j == 0)
 /*      */         {
-/* 1020 */           int k = 0;
-/* 1021 */           int m = 0;
+/* 1050 */           int k = 0;
+/* 1051 */           int m = 0;
 /*      */           try {
-/* 1023 */             k = BayerMeter.this.getRS232Port().getReadTimeOut();
-/* 1024 */             m = 1;
-/* 1025 */             BayerMeter.this.getRS232Port().setReadTimeOut(10000);
+/* 1053 */             k = Q.this.V().D();
+/* 1054 */             m = 1;
+/* 1055 */             Q.this.V().B(10000);
 /*      */ 
-/* 1028 */             arrayOfInt = readOneRecord();
+/* 1058 */             arrayOfInt = R();
 /*      */ 
-/* 1031 */             BayerMeter.this.decodeDataUploadHeader(MedicalDevice.Util.makeString(arrayOfInt).trim());
+/* 1061 */             Q.this.L(O._B.E(arrayOfInt).trim());
 /*      */ 
-/* 1034 */             BayerMeter.this.initDeviceAfterSerialNumberKnown();
-/*      */           } catch (IOException localIOException1) {
+/* 1064 */             Q.this.¤();
+/*      */           } catch (IOException localIOException3) {
 /*      */           }
 /*      */           finally {
-/* 1038 */             if (m != 0)
+/* 1068 */             if (m != 0)
 /*      */               try
 /*      */               {
-/* 1041 */                 BayerMeter.this.getRS232Port().setReadTimeOut(k);
+/* 1071 */                 Q.this.V().B(k);
 /*      */               }
-/*      */               catch (IOException localIOException2) {
+/*      */               catch (IOException localIOException4) {
 /*      */               }
 /*      */           }
 /*      */         }
 /*      */         else {
-/* 1048 */           arrayOfInt = readOneRecord();
+/* 1078 */           arrayOfInt = R();
 /*      */         }
 /*      */ 
-/* 1052 */         String str = MedicalDevice.Util.makeString(arrayOfInt);
-/* 1053 */         i = str.indexOf(4) >= 0 ? 1 : 0;
+/* 1082 */         String str = O._B.E(arrayOfInt);
+/* 1083 */         i = str.indexOf(4) >= 0 ? 1 : 0;
 /*      */ 
-/* 1055 */         j++;
+/* 1085 */         j++;
 /*      */       }
-/* 1057 */       BayerMeter.access$1302(BayerMeter.this, MedicalDevice.Util.makeString(this.m_rawData).trim());
+/* 1087 */       Q.A(Q.this, O._B.E(this.v).trim());
 /*      */     }
 /*      */ 
-/*      */     private int[] readOneRecord()
-/*      */       throws BadDeviceCommException, BadDeviceValueException
+/*      */     private int[] R()
+/*      */       throws t, Z
 /*      */     {
-/* 1069 */       this.m_cmdGetDataRecord.execute();
-/* 1070 */       int[] arrayOfInt = this.m_cmdGetDataRecord.m_rawData;
-/* 1071 */       this.m_rawData = MedicalDevice.Util.concat(this.m_rawData, arrayOfInt);
-/* 1072 */       return arrayOfInt;
+/* 1100 */       int[] arrayOfInt = new int[0];
+/*      */ 
+/* 1102 */       Q.this.V().E();
+/*      */       try
+/*      */       {
+/* 1107 */         arrayOfInt = P();
+/*      */       } catch (t localt) {
+/* 1109 */         Q.this.V().A();
+/* 1110 */         throw localt;
+/*      */       } catch (Z localZ) {
+/* 1112 */         Q.this.V().A();
+/* 1113 */         throw localZ;
+/*      */       }
+/*      */ 
+/* 1116 */       this.v = O._B.A(this.v, arrayOfInt);
+/* 1117 */       return arrayOfInt;
+/*      */     }
+/*      */ 
+/*      */     private String Q()
+/*      */       throws t, Z
+/*      */     {
+/* 1131 */       String str = "";
+/*      */ 
+/* 1133 */       Q.this.V().E();
+/*      */ 
+/* 1135 */       O.A(this, "readDeviceData: reading reply to cmd " + this.t + " (" + this.A + ")");
+/*      */ 
+/* 1138 */       long l = Q.this.x();
+/*      */       try
+/*      */       {
+/* 1141 */         int i = 1;
+/* 1142 */         while ((str.indexOf('\n') < 0) && (str.indexOf(4) < 0) && (i <= 10)) {
+/* 1143 */           Q.this.A(l * i);
+/* 1144 */           O.A(this, "Reading Buffer(" + str + ") - Attempt # " + i);
+/* 1145 */           str = str.concat(Q.this.V().C());
+/* 1146 */           i++;
+/*      */         }
+/*      */       } catch (IOException localIOException) {
+/* 1149 */         throw new t("readDeviceData: ERROR - an IOException  has occurred processing cmd " + this.t + " (" + this.A + ")");
+/*      */       }
+/*      */       finally
+/*      */       {
+/* 1153 */         Q.this.A(l);
+/*      */       }
+/*      */ 
+/* 1157 */       C(str);
+/*      */ 
+/* 1159 */       return str;
+/*      */     }
+/*      */ 
+/*      */     private int[] P()
+/*      */       throws t, Z
+/*      */     {
+/* 1174 */       int[] arrayOfInt = new int[0];
+/*      */ 
+/* 1178 */       if (Q.this.T() != 7) {
+/* 1179 */         Q.this.B(4);
+/*      */       }
+/* 1181 */       N();
+/*      */ 
+/* 1183 */       if (!Q.this.isHaltRequested())
+/*      */       {
+/* 1185 */         Q.this.B(5);
+/* 1186 */         arrayOfInt = O._B.D(Q());
+/*      */       }
+/*      */ 
+/* 1189 */       Q.D(Q.this, arrayOfInt.length);
+/*      */ 
+/* 1191 */       Q.this.A(Q.D(Q.this), Q.B(Q.this));
+/*      */ 
+/* 1193 */       if (!Q.this.isHaltRequested()) {
+/* 1194 */         Q.A(Q.this, this);
+/*      */       }
+/*      */ 
+/* 1197 */       return arrayOfInt;
 /*      */     }
 /*      */   }
 /*      */ 
-/*      */   private final class Reader
+/*      */   private final class _D
 /*      */   {
-/*      */     private int m_serialPortNum;
-/*      */     private Vector m_commandCollection;
-/*      */     private final BayerMeter this$0;
+/*      */     private String B;
+/*      */     private Vector C;
 /*      */ 
-/*      */     private Reader(DeviceListener paramInt, int paramVector, Vector arg4)
+/*      */     private _D(v paramString, String paramVector, Vector arg4)
 /*      */     {
-/*  821 */       this.this$0 = this$1;
-/*  822 */       this$1.addDeviceListener(paramInt);
-/*  823 */       this.m_serialPortNum = paramVector;
+/*  855 */       Q.this.B(paramString);
+/*  856 */       this.B = paramVector;
 /*      */       Object localObject;
-/*  824 */       this.m_commandCollection = localObject;
+/*  857 */       this.C = localObject;
 /*      */     }
 /*      */ 
-/*      */     private final void acquireDataFromDevice()
-/*      */       throws BadDeviceCommException, BadDeviceValueException, IOException
+/*      */     private final void B()
+/*      */       throws t, Z, IOException
 /*      */     {
-/*  840 */       int i = 0;
+/*  873 */       int i = 0;
 /*      */ 
-/*  842 */       Vector localVector = new Vector();
+/*  875 */       Vector localVector = new Vector();
 /*      */ 
-/*  846 */       this.this$0.m_firmwareVersion = "";
-/*  847 */       this.this$0.m_serialNumber = "";
-/*  848 */       BayerMeter.access$702(this.this$0, "");
+/*  879 */       Q.this.Ă = "";
+/*  880 */       Q.this.ă = "";
+/*  881 */       Q.this.ϫ = "";
 /*      */ 
-/*  852 */       BayerMeter.access$502(this.this$0, 0);
-/*  853 */       BayerMeter.access$402(this.this$0, 0);
-/*      */       BayerMeter.Command localCommand;
-/*  854 */       for (int j = 0; j < this.m_commandCollection.size(); j++) {
-/*  855 */         localCommand = (BayerMeter.Command)this.m_commandCollection.elementAt(j);
-/*  856 */         if (localCommand != null) {
-/*  857 */           BayerMeter.access$512(this.this$0, localCommand.m_rawData.length);
+/*  885 */       Q.A(Q.this, 0);
+/*  886 */       Q.B(Q.this, 0);
+/*      */       Q._C local_C;
+/*  887 */       for (int j = 0; j < this.C.size(); j++) {
+/*  888 */         local_C = (Q._C)this.C.elementAt(j);
+/*  889 */         if (local_C != null) {
+/*  890 */           Q.C(Q.this, local_C.v.length);
 /*      */         }
 /*      */       }
 /*      */ 
-/*  861 */       this.this$0.notifyDeviceUpdateProgress(0);
+/*  894 */       Q.this.C(0);
 /*      */       try
 /*      */       {
-/*  869 */         this.this$0.setState(2);
+/*  902 */         Q.this.B(2);
 /*      */         try
 /*      */         {
-/*  872 */           initCommunications(this.m_serialPortNum);
+/*  905 */           A(this.B);
 /*      */         } catch (IOException localIOException) {
-/*  874 */           if (!this.this$0.isHaltRequested()) {
-/*  875 */             MedicalDevice.logWarning(this, "acquireDataFromDevice: initCommunications failed with IOException; retrying... (exception = " + localIOException + ")");
+/*  907 */           if (!Q.this.isHaltRequested()) {
+/*  908 */             O.D(this, "acquireDataFromDevice: initCommunications failed with IOException; retrying... (exception = " + localIOException + ")");
 /*      */ 
-/*  878 */             initCommunications(this.m_serialPortNum);
+/*  911 */             A(this.B);
 /*      */           }
 /*      */         }
 /*      */ 
-/*  882 */         this.this$0.setPhase(5);
+/*  915 */         Q.this.E(5);
 /*      */ 
-/*  885 */         for (i = 0; (i < this.m_commandCollection.size()) && (!this.this$0.isHaltRequested()); )
+/*  918 */         for (i = 0; (i < this.C.size()) && (!Q.this.isHaltRequested()); )
 /*      */         {
-/*  887 */           localCommand = (BayerMeter.Command)this.m_commandCollection.elementAt(i);
-/*  888 */           if (localCommand != null)
+/*  920 */           local_C = (Q._C)this.C.elementAt(i);
+/*  921 */           if (local_C != null)
 /*      */           {
-/*  890 */             localCommand.execute();
-/*  891 */             if (!this.this$0.isHaltRequested())
+/*  923 */             local_C.A();
+/*  924 */             if (!Q.this.isHaltRequested())
 /*      */             {
-/*  893 */               int[] arrayOfInt = BayerMeter.Command.access$800(localCommand);
-/*  894 */               localVector.addElement(arrayOfInt);
+/*  926 */               int[] arrayOfInt = Q._C.A(local_C);
+/*  927 */               localVector.addElement(arrayOfInt);
 /*      */             }
 /*      */           }
-/*  886 */           i++;
+/*  919 */           i++;
 /*      */         }
 /*      */ 
 /*      */       }
 /*      */       finally
 /*      */       {
-/*      */       }
-/*      */ 
-/*  918 */       ret;
-/*      */     }
-/*      */ 
-/*      */     private final void initCommunications(int paramInt)
-/*      */       throws IOException, BadDeviceCommException, BadDeviceValueException
-/*      */     {
-/*  935 */       this.this$0.initSerialPort(paramInt);
-/*      */ 
-/*  938 */       this.this$0.initDevice();
-/*      */     }
-/*      */ 
-/*      */     private final void endCommunications()
-/*      */       throws BadDeviceValueException, BadDeviceCommException, IOException
-/*      */     {
-/*      */       try
-/*      */       {
-/*  952 */         MedicalDevice.logInfo(this, "endCommunications: shutting down meter communications.");
-/*  953 */         this.this$0.shutDownMeter();
-/*      */       } finally {
-/*  955 */         MedicalDevice.logInfo(this, "endCommunications: shutting down serial port.");
-/*  956 */         if (this.this$0.getRS232Port() != null)
+/*      */         try
 /*      */         {
-/*  958 */           this.this$0.getRS232Port().close();
-/*  959 */           this.this$0.setRS232Port(null);
+/*  938 */           O.A(this, "run: shutting down communications...");
+/*  939 */           Q.this.E(6);
+/*  940 */           A();
+/*      */         } finally {
+/*  942 */           O.A(this, "run: done!  Number of commands processed: " + i);
+/*      */ 
+/*  945 */           if (Q.this.isHaltRequested())
+/*  946 */             Q.this.B(9);
+/*      */           else {
+/*  948 */             Q.this.B(1);
+/*      */           }
+/*      */ 
+/*  951 */           Q.this.U();
 /*      */         }
 /*      */       }
 /*      */     }
 /*      */ 
-/*      */     Reader(DeviceListener paramInt, int paramVector, Vector param1, BayerMeter.1 arg5)
+/*      */     private final void A(String paramString)
+/*      */       throws IOException, t, Z
 /*      */     {
-/*  804 */       this(paramInt, paramVector, param1);
+/*  968 */       Q.this.D(paramString);
+/*      */ 
+/*  971 */       Q.this.¥();
+/*      */     }
+/*      */ 
+/*      */     private final void A()
+/*      */       throws Z, t, IOException
+/*      */     {
+/*      */       try
+/*      */       {
+/*  985 */         O.A(this, "endCommunications: shutting down meter communications.");
+/*  986 */         Q.A(Q.this);
+/*      */       } finally {
+/*  988 */         O.A(this, "endCommunications: shutting down serial port.");
+/*  989 */         Q.this._();
+/*      */       }
 /*      */     }
 /*      */   }
 /*      */ 
-/*      */   private class Command extends DeviceCommand
+/*      */   private class _C extends n
 /*      */   {
-/*      */     static final byte REPLY_TIMEOUT = -1;
-/*      */     static final int LEN_CHECKSUM = 2;
-/*      */     static final int RETRY_COUNT = 2;
-/*      */     static final int IO_DELAY_READ_RETRY_MS = 100;
-/*      */     int[] m_rawData;
-/*      */     String m_command;
-/*      */     private boolean m_dataHasCRC;
-/*      */     private final BayerMeter this$0;
+/*      */     static final byte q = -1;
+/*      */     static final int s = 2;
+/*      */     static final int u = 2;
+/*      */     static final int p = 100;
+/*      */     int[] v;
+/*      */     String t;
+/*      */     private boolean r;
 /*      */ 
-/*      */     private Command(String paramString1, String paramInt, int arg4)
+/*      */     private _C(String paramString1, String paramInt, int arg4)
 /*      */     {
-/*  553 */       super();
-/*      */ 
-/*  552 */       this.this$0 = this$1;
-/*      */ 
-/*  554 */       this.m_command = paramString1;
+/*  582 */       super();
+/*  583 */       this.t = paramString1;
 /*      */       int i;
-/*  555 */       this.m_rawData = new int[i];
-/*  556 */       this.m_dataHasCRC = true;
+/*  584 */       this.v = new int[i];
+/*  585 */       this.r = true;
 /*      */     }
 /*      */ 
-/*      */     void execute()
-/*      */       throws BadDeviceCommException, BadDeviceValueException
+/*      */     void A()
+/*      */       throws t, Z
 /*      */     {
-/*  572 */       int i = 0;
-/*  573 */       int j = 0;
+/*  599 */       int i = 0;
+/*  600 */       int j = 0;
 /*      */ 
-/*  575 */       Contract.pre(this.this$0.getRS232Port() != null);
-/*  576 */       Contract.pre(this.this$0.getRS232Port().isOpen());
+/*  602 */       Q.this.V().E();
 /*      */ 
-/*  578 */       MedicalDevice.m_lastCommandDescription = this.m_description;
+/*  604 */       O.Ã = this.A;
 /*      */       do
 /*      */       {
 /*      */         try
 /*      */         {
-/*  584 */           sendAndRead();
-/*  585 */           j = 1;
-/*      */         } catch (BadDeviceCommException localBadDeviceCommException) {
-/*  587 */           i++;
-/*  588 */           this.this$0.getRS232Port().readUntilEmpty();
-/*  589 */           if (i <= 2) {
-/*  590 */             MedicalDevice.logWarning(this, "execute: cmd failed with exception: " + localBadDeviceCommException + "; retrying (attempts = " + (i + 1) + ")");
+/*  610 */           M();
+/*  611 */           j = 1;
+/*      */         } catch (t localt) {
+/*  613 */           i++;
+/*  614 */           Q.this.V().A();
+/*  615 */           if (i <= 2) {
+/*  616 */             O.D(this, "execute: cmd failed with exception: " + localt + "; retrying (attempts = " + (i + 1) + ")");
 /*      */ 
-/*  592 */             this.this$0.setState(7);
+/*  618 */             Q.this.B(7);
 /*      */           } else {
-/*  594 */             MedicalDevice.logError(this, "cmd " + this.m_command + " (" + this.m_description + ") failed after " + i + " attempts" + "; exception = " + localBadDeviceCommException);
+/*  620 */             O.E(this, "cmd " + this.t + " (" + this.A + ") failed after " + i + " attempts" + "; exception = " + localt);
 /*      */ 
-/*  601 */             throw new BadDeviceCommException("execute: cmd " + this.m_command + " (" + this.m_description + ") failed after " + i + " attempts");
+/*  627 */             throw new t("execute: cmd " + this.t + " (" + this.A + ") failed after " + i + " attempts");
 /*      */           }
 /*      */         }
-/*      */         catch (BadDeviceValueException localBadDeviceValueException)
+/*      */         catch (Z localZ)
 /*      */         {
-/*  606 */           i++;
-/*  607 */           this.this$0.getRS232Port().readUntilEmpty();
-/*  608 */           if (i <= 2) {
-/*  609 */             MedicalDevice.logWarning(this, "execute: cmd failed with exception: " + localBadDeviceValueException + "; retrying (attempts = " + (i + 1) + ")");
+/*  632 */           i++;
+/*  633 */           Q.this.V().A();
+/*  634 */           if (i <= 2) {
+/*  635 */             O.D(this, "execute: cmd failed with exception: " + localZ + "; retrying (attempts = " + (i + 1) + ")");
 /*      */ 
-/*  611 */             this.this$0.setState(7);
+/*  637 */             Q.this.B(7);
 /*      */           } else {
-/*  613 */             MedicalDevice.logError(this, "cmd " + this.m_command + " (" + this.m_description + ") failed after " + i + " attempts" + "; exception = " + localBadDeviceValueException);
+/*  639 */             O.E(this, "cmd " + this.t + " (" + this.A + ") failed after " + i + " attempts" + "; exception = " + localZ);
 /*      */ 
-/*  620 */             throw new BadDeviceValueException("execute: cmd " + this.m_command + " (" + this.m_description + ") failed after " + i + " attempts");
+/*  646 */             throw new Z("execute: cmd " + this.t + " (" + this.A + ") failed after " + i + " attempts");
 /*      */           }
 /*      */         }
 /*      */ 
 /*      */       }
 /*      */ 
-/*  626 */       while ((j == 0) && (i <= 2));
+/*  652 */       while ((j == 0) && (i <= 2));
 /*      */     }
 /*      */ 
-/*      */     private final int[] getRawData()
+/*      */     private final int[] O()
 /*      */     {
-/*  635 */       return this.m_rawData;
+/*  661 */       return this.v;
 /*      */     }
 /*      */ 
-/*      */     private final String readDeviceData() throws BadDeviceCommException, BadDeviceValueException {
-/*  653 */       Contract.pre(this.this$0.getRS232Port() != null);
-/*  654 */       Contract.pre(this.this$0.getRS232Port().isOpen());
-/*      */ 
-/*  656 */       MedicalDevice.logInfo(this, "readDeviceData: reading reply to cmd " + this.m_command + " (" + this.m_description + ")");
-/*      */       String str;
-/*      */       try {
-/*  661 */         str = this.this$0.getRS232Port().readLine();
-/*      */       } catch (IOException localIOException) {
-/*  663 */         throw new BadDeviceCommException("readDeviceData: ERROR - an IOException  has occurred processing cmd " + this.m_command + " (" + this.m_description + ")");
+/*      */     protected final void C(String paramString)
+/*      */       throws t, Z
+/*      */     {
+/*  674 */       if (paramString.length() == 0)
+/*      */       {
+/*  676 */         throw new t("readDeviceData: ERROR - no reply for cmd " + this.t + " (" + this.A + ")");
 /*      */       }
 /*      */ 
-/*  669 */       if (str.length() == 0)
+/*  679 */       if (paramString.length() == 1)
 /*      */       {
-/*  671 */         throw new BadDeviceCommException("readDeviceData: ERROR - no reply for cmd " + this.m_command + " (" + this.m_description + ")");
-/*      */       }
-/*      */ 
-/*  674 */       if (str.length() == 1)
-/*      */       {
-/*  676 */         MedicalDevice.logInfo(this, "readDeviceData: control code received: " + MedicalDevice.Util.convertControlChars(str));
+/*  681 */         O.A(this, "readDeviceData: control code received: " + O._B.E(paramString));
 /*      */       }
 /*      */       else {
-/*  679 */         if (isDataHasCRC())
+/*  684 */         if (L())
 /*      */         {
-/*  681 */           boolean bool = false;
-/*  682 */           if (str.length() > 3) {
-/*  683 */             bool = MedicalDevice.Util.isCRC8E1381Valid(str);
+/*  686 */           boolean bool = false;
+/*  687 */           if (paramString.length() > 3) {
+/*  688 */             bool = O._B.C(paramString);
 /*      */           }
-/*  685 */           if (!bool) {
-/*  686 */             MedicalDevice.logError(this, "readDeviceData: ERROR - cmd " + this.m_command + " resulted in bad CRC reply of " + MedicalDevice.Util.convertControlChars(str));
+/*  690 */           if (!bool) {
+/*  691 */             O.E(this, "readDeviceData: ERROR - cmd " + this.t + " resulted in bad CRC reply of " + O._B.E(paramString));
 /*      */ 
-/*  689 */             throw new BadDeviceValueException("readDeviceData: ERROR - cmd " + this.m_command + " resulted in bad CRC reply of " + MedicalDevice.Util.convertControlChars(str));
+/*  694 */             throw new Z("readDeviceData: ERROR - cmd " + this.t + " resulted in bad CRC reply of " + O._B.E(paramString));
 /*      */           }
 /*      */ 
 /*      */         }
 /*      */ 
-/*  695 */         MedicalDevice.logInfo(this, "readDeviceData: cmd " + this.m_command + " (" + this.m_description + ") returned " + str.length() + " data bytes, with reply = <" + str + ">");
+/*  700 */         O.A(this, "readDeviceData: cmd " + this.t + " (" + this.A + ") returned " + paramString.length() + " data bytes, with reply = <" + paramString + ">");
 /*      */       }
-/*      */ 
-/*  700 */       return str;
 /*      */     }
 /*      */ 
-/*      */     private final void sendCommand()
-/*      */       throws BadDeviceCommException
+/*      */     private final String K() throws t, Z
 /*      */     {
-/*  713 */       Contract.pre(this.this$0.getRS232Port() != null);
-/*  714 */       Contract.pre(this.this$0.getRS232Port().isOpen());
+/*  719 */       Q.this.V().E();
 /*      */ 
-/*  716 */       MedicalDevice.logInfo(this, "sendCommand: sending cmd " + this.m_command + " (" + this.m_description + ")");
+/*  721 */       O.A(this, "readDeviceData: reading reply to cmd " + this.t + " (" + this.A + ")");
+/*      */       String str;
+/*      */       try {
+/*  726 */         str = Q.this.V().C();
+/*      */       } catch (IOException localIOException) {
+/*  728 */         throw new t("readDeviceData: ERROR - an IOException  has occurred processing cmd " + this.t + " (" + this.A + ")");
+/*      */       }
+/*      */ 
+/*  734 */       C(str);
+/*      */ 
+/*  736 */       return str;
+/*      */     }
+/*      */ 
+/*      */     protected final void N()
+/*      */       throws t
+/*      */     {
+/*  747 */       Q.this.V().E();
+/*      */ 
+/*  749 */       O.A(this, "sendCommand: sending cmd " + this.t + " (" + this.A + ")");
 /*      */       try
 /*      */       {
-/*  726 */         this.this$0.getRS232Port().write(this.m_command);
+/*  759 */         Q.this.V().A(this.t);
 /*      */       }
 /*      */       catch (IOException localIOException) {
-/*  729 */         throw new BadDeviceCommException("sendCommand: ERROR - an IOException  has occurred processing cmd " + this.m_command + " (" + this.m_description + ")");
+/*  762 */         throw new t("sendCommand: ERROR - an IOException  has occurred processing cmd " + this.t + " (" + this.A + ")");
 /*      */       }
 /*      */     }
 /*      */ 
-/*      */     private final void sendAndRead()
-/*      */       throws BadDeviceCommException, BadDeviceValueException
+/*      */     private final void M()
+/*      */       throws t, Z
 /*      */     {
-/*  748 */       if (this.this$0.getState() != 7) {
-/*  749 */         this.this$0.setState(4);
+/*  781 */       if (Q.this.T() != 7) {
+/*  782 */         Q.this.B(4);
 /*      */       }
-/*  751 */       sendCommand();
+/*  784 */       N();
 /*      */ 
-/*  753 */       if (this.m_rawData.length > 0)
+/*  786 */       if (this.v.length > 0)
 /*      */       {
-/*  755 */         if (!this.this$0.isHaltRequested())
+/*  788 */         if (!Q.this.isHaltRequested())
 /*      */         {
-/*  757 */           this.this$0.setState(5);
-/*  758 */           this.m_rawData = MedicalDevice.Util.makeIntArray(readDeviceData());
+/*  790 */           Q.this.B(5);
+/*  791 */           this.v = O._B.D(K());
 /*      */         }
 /*      */ 
-/*  762 */         if ((this.m_rawData.length == 0) && (!this.this$0.isHaltRequested()))
+/*  795 */         if ((this.v.length == 0) && (!Q.this.isHaltRequested()))
 /*      */         {
-/*  764 */           MedicalDevice.Util.sleepMS(100);
-/*  765 */           this.m_rawData = MedicalDevice.Util.makeIntArray(readDeviceData());
+/*  797 */           O._B.G(100);
+/*  798 */           this.v = O._B.D(K());
 /*      */         }
 /*      */ 
-/*  768 */         BayerMeter.access$412(this.this$0, this.m_rawData.length);
+/*  801 */         Q.D(Q.this, this.v.length);
 /*      */ 
-/*  771 */         this.this$0.notifyDeviceUpdateProgress(this.this$0.m_bytesReadThusFar, this.this$0.m_totalBytesToRead);
+/*  804 */         Q.this.A(Q.D(Q.this), Q.B(Q.this));
 /*      */ 
-/*  773 */         if (!this.this$0.isHaltRequested())
-/*  774 */           this.this$0.decodeReply(this);
+/*  806 */         if (!Q.this.isHaltRequested())
+/*  807 */           Q.A(Q.this, this);
 /*      */       }
 /*      */     }
 /*      */ 
-/*      */     private final boolean isDataHasCRC()
+/*      */     protected final boolean L()
 /*      */     {
-/*  785 */       return this.m_dataHasCRC;
+/*  818 */       return this.r;
 /*      */     }
 /*      */ 
-/*      */     private final void setDataHasCRC(boolean paramBoolean)
+/*      */     protected final void B(boolean paramBoolean)
 /*      */     {
-/*  795 */       this.m_dataHasCRC = paramBoolean;
-/*      */     }
-/*      */ 
-/*      */     Command(String paramString1, String paramInt, int param1, BayerMeter.1 arg5)
-/*      */     {
-/*  527 */       this(paramString1, paramInt, param1);
+/*  828 */       this.r = paramBoolean;
 /*      */     }
 /*      */   }
 /*      */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.BayerMeter
+ * Qualified Name:     minimed.ddms.A.Q
  * JD-Core Version:    0.6.0
  */

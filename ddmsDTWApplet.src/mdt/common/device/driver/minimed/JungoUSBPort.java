@@ -3,140 +3,155 @@
 /*     */ import java.io.File;
 /*     */ import java.io.IOException;
 /*     */ import java.util.ArrayList;
+/*     */ import minimed.util.OSInfo;
 /*     */ 
 /*     */ public class JungoUSBPort
+/*     */   implements USBPort
 /*     */ {
+/*     */   private static final int USB_XFER_LEN = 64;
 /*     */   private static final String JUNGO_JNI_LIB = "cl2_jni_wrapper.dll";
-/*  49 */   private static final String INSTALL_DLL_DIRECTORY = System.getProperty("user.home") + File.separator + "Medtronic" + File.separator + "ddmsDTWusb" + File.separator + "ComLink2" + File.separator;
-/*     */   private static final String INSTALL_DLL_FILENAME = "cl2_jni_wrapper.dll";
-/*  61 */   private static final String INSTALL_DLL_PATH = INSTALL_DLL_DIRECTORY + "cl2_jni_wrapper.dll";
+/*     */   private static final String JUNGO_JNI_LIB_64 = "cl2_jni_wrapper_64.dll";
+/*  56 */   private static final String APPLICATION_DATA_DIR = OSInfo.getUserData();
+/*     */   private static final String MEDTRONIC_DIR = "Medtronic";
+/*     */   private static final String DDMS_DTW_USB_DIR = "ddmsDTWusb";
+/*     */   private static final String COM_LINK2_DIR = "ComLink2";
+/*  64 */   private static final String INSTALL_DLL_DIRECTORY = OSInfo.getAllUserPath() + File.separator + APPLICATION_DATA_DIR + File.separator + "Medtronic" + File.separator + "ddmsDTWusb" + File.separator + "ComLink2" + File.separator;
 /*     */ 
-/*  64 */   private static final ArrayList HANDLES_IN_USE = new ArrayList();
-/*  65 */   private static final ArrayList PNP_LISTENERS = new ArrayList();
+/*  72 */   private static final String INSTALL_DLL_PATH = INSTALL_DLL_DIRECTORY + "cl2_jni_wrapper.dll";
 /*     */ 
-/*  77 */   private int handle = 0;
+/*  77 */   private static final String INSTALL_DLL_PATH_64 = INSTALL_DLL_DIRECTORY + "cl2_jni_wrapper_64.dll";
+/*     */ 
+/*  80 */   private static final ArrayList HANDLES_IN_USE = new ArrayList();
+/*  81 */   private static final ArrayList PNP_LISTENERS = new ArrayList();
+/*     */   private static final String VERSION = "10.10";
+/*  97 */   private int handle = 0;
 /*     */ 
 /*     */   public void initCommunications()
 /*     */     throws IOException
 /*     */   {
-/*  88 */     if (this.handle != 0) {
-/*  89 */       endCommunications();
+/* 105 */     if (this.handle != 0) {
+/* 106 */       endCommunications();
 /*     */     }
 /*     */ 
-/*  93 */     int[] arrayOfInt = getDeviceHandles();
+/* 110 */     int[] arrayOfInt = getDeviceHandles();
 /*     */ 
-/*  95 */     if (arrayOfInt.length == 0) {
-/*  96 */       throw new IOException("Available CareLink USB Device not found");
+/* 112 */     if (arrayOfInt.length == 0) {
+/* 113 */       throw new IOException("Available CareLink USB Device not found");
 /*     */     }
 /*     */ 
-/*  99 */     synchronized (HANDLES_IN_USE) {
-/* 100 */       for (int i = 0; i < arrayOfInt.length; i++) {
-/* 101 */         Integer localInteger = new Integer(arrayOfInt[i]);
-/* 102 */         if (HANDLES_IN_USE.contains(localInteger))
+/* 116 */     synchronized (HANDLES_IN_USE) {
+/* 117 */       for (int i = 0; i < arrayOfInt.length; i++) {
+/* 118 */         Integer localInteger = new Integer(arrayOfInt[i]);
+/* 119 */         if (HANDLES_IN_USE.contains(localInteger))
 /*     */           continue;
-/* 104 */         HANDLES_IN_USE.add(localInteger);
-/* 105 */         this.handle = arrayOfInt[i];
-/* 106 */         break;
+/* 121 */         HANDLES_IN_USE.add(localInteger);
+/* 122 */         this.handle = arrayOfInt[i];
+/* 123 */         break;
 /*     */       }
 /*     */     }
 /*     */   }
 /*     */ 
 /*     */   public boolean hasHandle()
 /*     */   {
-/* 118 */     return this.handle != 0;
+/* 133 */     return this.handle != 0;
 /*     */   }
 /*     */ 
 /*     */   public void clearBuffers()
 /*     */     throws IOException
 /*     */   {
-/* 126 */     resetPipes(this.handle);
+/* 140 */     resetPipes(this.handle);
 /*     */   }
 /*     */ 
 /*     */   public void endCommunications()
 /*     */   {
-/* 133 */     if (this.handle == 0) {
-/* 134 */       return;
+/* 147 */     if (this.handle == 0) {
+/* 148 */       return;
 /*     */     }
 /*     */ 
-/* 137 */     synchronized (HANDLES_IN_USE) {
-/* 138 */       HANDLES_IN_USE.remove(new Integer(this.handle));
-/* 139 */       this.handle = 0;
+/* 151 */     synchronized (HANDLES_IN_USE) {
+/* 152 */       HANDLES_IN_USE.remove(new Integer(this.handle));
+/* 153 */       this.handle = 0;
 /*     */     }
 /*     */   }
 /*     */ 
 /*     */   public byte[] read()
 /*     */     throws IOException
 /*     */   {
-/* 149 */     return read(64);
+/* 161 */     return read(64);
 /*     */   }
 /*     */ 
 /*     */   public byte[] read(int paramInt)
 /*     */     throws IOException
 /*     */   {
-/* 159 */     byte[] arrayOfByte = new byte[paramInt];
+/* 168 */     byte[] arrayOfByte = new byte[paramInt];
 /*     */ 
-/* 162 */     readNative(this.handle, arrayOfByte, 0, paramInt);
+/* 171 */     readNative(this.handle, arrayOfByte, 0, paramInt);
 /*     */ 
-/* 165 */     return arrayOfByte;
+/* 174 */     return arrayOfByte;
 /*     */   }
 /*     */ 
 /*     */   public void write(byte[] paramArrayOfByte, int paramInt1, int paramInt2)
 /*     */     throws IOException
 /*     */   {
-/* 176 */     byte[] arrayOfByte = new byte[paramInt2];
-/* 177 */     System.arraycopy(paramArrayOfByte, paramInt1, arrayOfByte, 0, paramInt2);
+/* 181 */     byte[] arrayOfByte = new byte[paramInt2];
+/* 182 */     System.arraycopy(paramArrayOfByte, paramInt1, arrayOfByte, 0, paramInt2);
 /*     */ 
-/* 179 */     write(arrayOfByte);
+/* 184 */     write(arrayOfByte);
 /*     */   }
 /*     */ 
 /*     */   public void write(byte[] paramArrayOfByte)
 /*     */     throws IOException
 /*     */   {
-/* 189 */     writeNative(this.handle, paramArrayOfByte);
+/* 192 */     writeNative(this.handle, paramArrayOfByte);
 /*     */   }
 /*     */ 
 /*     */   public static void addPnPListener(IDevicePnPListener paramIDevicePnPListener)
 /*     */   {
-/* 198 */     synchronized (PNP_LISTENERS) {
-/* 199 */       if (PNP_LISTENERS.contains(paramIDevicePnPListener)) {
-/* 200 */         return;
+/* 201 */     synchronized (PNP_LISTENERS) {
+/* 202 */       if (PNP_LISTENERS.contains(paramIDevicePnPListener)) {
+/* 203 */         return;
 /*     */       }
-/* 202 */       PNP_LISTENERS.add(paramIDevicePnPListener);
+/* 205 */       PNP_LISTENERS.add(paramIDevicePnPListener);
 /*     */     }
 /*     */   }
 /*     */ 
 /*     */   public static void removePnPListener(IDevicePnPListener paramIDevicePnPListener)
 /*     */   {
-/* 211 */     synchronized (PNP_LISTENERS) {
-/* 212 */       if (!PNP_LISTENERS.contains(paramIDevicePnPListener)) {
-/* 213 */         return;
+/* 214 */     synchronized (PNP_LISTENERS) {
+/* 215 */       if (!PNP_LISTENERS.contains(paramIDevicePnPListener)) {
+/* 216 */         return;
 /*     */       }
 /*     */ 
-/* 216 */       PNP_LISTENERS.remove(paramIDevicePnPListener);
+/* 219 */       PNP_LISTENERS.remove(paramIDevicePnPListener);
 /*     */     }
 /*     */   }
 /*     */ 
+/*     */   public String getVersion()
+/*     */   {
+/* 231 */     return "10.10";
+/*     */   }
+/*     */ 
 /*     */   protected void finalize() throws Throwable {
-/* 221 */     endCommunications();
-/* 222 */     super.finalize();
+/* 235 */     endCommunications();
+/* 236 */     super.finalize();
 /*     */   }
 /*     */ 
 /*     */   protected static void onAdd(int paramInt)
 /*     */   {
-/* 227 */     synchronized (PNP_LISTENERS) {
-/* 228 */       for (int i = 0; i < PNP_LISTENERS.size(); i++) {
-/* 229 */         IDevicePnPListener localIDevicePnPListener = (IDevicePnPListener)PNP_LISTENERS.get(i);
-/* 230 */         localIDevicePnPListener.deviceAttached(paramInt);
+/* 241 */     synchronized (PNP_LISTENERS) {
+/* 242 */       for (int i = 0; i < PNP_LISTENERS.size(); i++) {
+/* 243 */         IDevicePnPListener localIDevicePnPListener = (IDevicePnPListener)PNP_LISTENERS.get(i);
+/* 244 */         localIDevicePnPListener.deviceAttached(paramInt);
 /*     */       }
 /*     */     }
 /*     */   }
 /*     */ 
 /*     */   protected static void onRemove(int paramInt)
 /*     */   {
-/* 237 */     synchronized (PNP_LISTENERS) {
-/* 238 */       for (int i = 0; i < PNP_LISTENERS.size(); i++) {
-/* 239 */         IDevicePnPListener localIDevicePnPListener = (IDevicePnPListener)PNP_LISTENERS.get(i);
-/* 240 */         localIDevicePnPListener.deviceDetached(paramInt);
+/* 251 */     synchronized (PNP_LISTENERS) {
+/* 252 */       for (int i = 0; i < PNP_LISTENERS.size(); i++) {
+/* 253 */         IDevicePnPListener localIDevicePnPListener = (IDevicePnPListener)PNP_LISTENERS.get(i);
+/* 254 */         localIDevicePnPListener.deviceDetached(paramInt);
 /*     */       }
 /*     */     }
 /*     */   }
@@ -155,9 +170,12 @@
 /*     */   {
 /*     */     try
 /*     */     {
-/*  71 */       System.load(INSTALL_DLL_PATH);
+/*  88 */       System.load(INSTALL_DLL_PATH);
+/*     */     }
+/*     */     catch (UnsatisfiedLinkError localUnsatisfiedLinkError) {
+/*  91 */       System.load(INSTALL_DLL_PATH_64);
 /*     */     } catch (Throwable localThrowable) {
-/*  73 */       localThrowable.printStackTrace();
+/*  93 */       localThrowable.printStackTrace();
 /*     */     }
 /*     */   }
 /*     */ }

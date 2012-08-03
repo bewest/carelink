@@ -1,47 +1,47 @@
-/*     */ package minimed.ddms.deviceportreader;
+/*     */ package minimed.ddms.A;
 /*     */ 
 /*     */ import java.util.NoSuchElementException;
 /*     */ import java.util.StringTokenizer;
 /*     */ import java.util.Vector;
 /*     */ import minimed.util.Contract;
 /*     */ 
-/*     */ final class LSOneTouchUltra extends LSMeter
+/*     */ final class B extends w
 /*     */ {
-/*     */   public static final int SNAPSHOT_FORMAT_ID_ULTRA = 155;
-/*     */   public static final int SNAPSHOT_FORMAT_ID_ULTRA2 = 157;
-/*     */   public static final int SNAPSHOT_FORMAT_ID_ULTRALINK = 158;
-/*     */   static final String CMD_GET_TIME_SETTING = "DMST?";
-/*     */   static final String TIME_SETTING_REPLY = "ST?";
-/*     */   private static final String CMD_GET_UNITS_SETTING = "DMSU?";
-/*     */   private static final String CMD_INIT_COMMUNICATIONS = "DM?";
-/*     */   private static final String CMD_GET_RF_ID = "DMID\r";
-/*     */   private static final int ONE_SECOND = 1000;
-/*     */   private static final int LEN_GET_DATALOG_ULTRA2 = 31000;
-/*     */   private static final int SNAPSHOT_FORMAT_ID_UNKNOWN = -1;
-/*     */   private String m_rfID;
+/*     */   public static final int ӈ = 155;
+/*     */   public static final int Ӑ = 157;
+/*     */   public static final int ӑ = 158;
+/*     */   static final String Ӌ = "DMST?";
+/*     */   static final String Ӕ = "ST?";
+/*     */   private static final String Ӓ = "DMSU?";
+/*     */   private static final String ӓ = "DM?";
+/*     */   private static final String ӂ = "DMID\r";
+/*     */   private static final int Ӈ = 1000;
+/*     */   private static final int Ӄ = 31000;
+/*     */   private static final int ӌ = -1;
+/*     */   private String ӄ;
 /*     */ 
-/*     */   LSOneTouchUltra()
+/*     */   B()
 /*     */   {
-/*  78 */     this.m_description = "LifeScan One Touch Ultra / Ultra2 / UltraLink Meter";
-/*  79 */     logInfo(this, "creating interface to the '" + this.m_description + "', package version " + getPackageVersion());
+/*  78 */     this.ć = "LifeScan One Touch Ultra / Ultra2 / UltraLink Meter";
+/*  79 */     A(this, "creating interface to the '" + this.ć + "', package version " + K());
 /*     */ 
-/*  81 */     this.m_deviceClassID = 5;
-/*  82 */     this.m_snapshotFormatID = -1;
-/*  83 */     this.m_snapshotCreator = new SnapshotCreator(null);
+/*  81 */     this.ā = 5;
+/*  82 */     this.Þ = -1;
+/*  83 */     this.Ė = new _A(null);
 /*     */ 
-/*  86 */     this.m_cmdGetSettings = new LSMeter.Command(this, "DMSU?", "Read Current Units Settings", 50);
+/*  86 */     this.ѹ = new w._C(this, "DMSU?", "Read Current Units Settings", 50);
 /*     */ 
-/*  88 */     this.m_cmdGetSettings2 = new LSMeter.Command(this, "DMST?", "Read Current Time Settings", 50);
+/*  88 */     this.Ұ = new w._C(this, "DMST?", "Read Current Time Settings", 50);
 /*     */   }
 /*     */ 
-/*     */   void initDeviceAfterSerialNumberKnown()
-/*     */     throws BadDeviceValueException
+/*     */   void Î()
+/*     */     throws Z
 /*     */   {
-/* 100 */     boolean bool1 = getSerialNumber().endsWith("Y");
-/* 101 */     boolean bool2 = getSerialNumber().startsWith("H");
+/* 100 */     boolean bool1 = Q().endsWith("Y");
+/* 101 */     boolean bool2 = Q().startsWith("H");
 /*     */ 
 /* 104 */     if ((bool1) && (bool2)) {
-/* 105 */       throw new BadDeviceValueException("Meter is both Ultra2 and UltraLink: " + getSerialNumber());
+/* 105 */       throw new Z("Meter is both Ultra2 and UltraLink: " + Q());
 /*     */     }
 /*     */ 
 /* 109 */     int i = (!bool1) && (!bool2) ? 1 : 0;
@@ -49,135 +49,128 @@
 /* 112 */     Contract.invariant((i != 0) || (bool1) || (bool2));
 /*     */ 
 /* 114 */     if (i != 0)
-/* 115 */       this.m_snapshotFormatID = 155;
+/* 115 */       this.Þ = 155;
 /* 116 */     else if (bool1)
-/* 117 */       this.m_snapshotFormatID = 157;
+/* 117 */       this.Þ = 157;
 /*     */     else {
-/* 119 */       this.m_snapshotFormatID = 158;
+/* 119 */       this.Þ = 158;
 /*     */     }
-/* 121 */     logInfo(this, "initDeviceAfterSerialNumberKnown: meter model is " + (bool2 ? "ULTRALINK" : bool1 ? "ULTRA2" : "ULTRA"));
+/* 121 */     A(this, "initDeviceAfterSerialNumberKnown: meter model is " + (bool2 ? "ULTRALINK" : bool1 ? "ULTRA2" : "ULTRA"));
 /*     */ 
 /* 125 */     if ((bool1) || (bool2)) {
-/* 126 */       this.m_cmdGetDatalog.setRawData(new int[31000]);
+/* 126 */       this.ѵ.B(new int[31000]);
 /*     */     }
 /*     */ 
 /* 130 */     if (bool2) {
-/* 131 */       LSMeter.Command localCommand = new LSMeter.Command(this, "DMID\r", "Read RF ID", 50, new ReplyDecoder()
+/* 131 */       w._C local_C = new w._C(this, "DMID\r", "Read RF ID", 50, new D()
 /*     */       {
-/*     */         public void decodeReply(LSMeter.AbstractCommand paramAbstractCommand)
-/*     */           throws BadDeviceValueException
+/*     */         public void A(w._B param_B)
+/*     */           throws Z
 /*     */         {
-/* 142 */           LSOneTouchUltra.access$102(LSOneTouchUltra.this, MedicalDevice.Util.makeString(paramAbstractCommand.getRawData()));
-/* 143 */           MedicalDevice.logInfo(this, "decodeReply: RF ID is '" + LSOneTouchUltra.this.getRFID(LSOneTouchUltra.this.m_rfID) + "'");
+/* 142 */           B.A(B.this, O._B.E(param_B.d()));
+/* 143 */           O.A(this, "decodeReply: RF ID is '" + B.B(B.this, B.A(B.this)) + "'");
 /*     */         }
 /*     */       });
-/* 147 */       getCommandCollection().addElement(localCommand);
+/* 147 */       Ê().addElement(local_C);
 /*     */     }
 /*     */     else {
-/* 150 */       this.m_rfID = "";
+/* 150 */       this.ӄ = "";
 /*     */     }
 /*     */   }
 /*     */ 
-/*     */   void decodeCurrentSettings()
-/*     */     throws BadDeviceValueException
+/*     */   void Ë()
+/*     */     throws Z
 /*     */   {
-/* 165 */     Contract.pre(this.m_currentSettings != null);
+/* 165 */     Contract.pre(this.ѽ != null);
 /*     */ 
-/* 172 */     boolean bool = this.m_currentSettings.indexOf("MG/DL") >= 0;
-/* 173 */     int i = this.m_currentSettings.indexOf("MMOL/L") >= 0 ? 1 : 0;
+/* 172 */     boolean bool = this.ѽ.indexOf("MG/DL") >= 0;
+/* 173 */     int i = this.ѽ.indexOf("MMOL/L") >= 0 ? 1 : 0;
 /*     */ 
 /* 176 */     if (((!bool) && (i == 0)) || ((bool) && (i != 0))) {
-/* 177 */       throw new BadDeviceValueException("Bad current settings string received (units): '" + this.m_currentSettings);
+/* 177 */       throw new Z("Bad current settings string received (units): '" + this.ѽ);
 /*     */     }
 /*     */ 
-/* 181 */     this.m_settingUnitsIsMGDL = new Boolean(bool);
+/* 181 */     this.ҿ = new Boolean(bool);
 /*     */ 
-/* 183 */     logInfo(this, "decodeCurrentSettings: *** CURRENT SETTINGS ***");
-/* 184 */     logInfo(this, "decodeCurrentSettings: Units Is mm/dL = " + this.m_settingUnitsIsMGDL);
+/* 183 */     A(this, "decodeCurrentSettings: *** CURRENT SETTINGS ***");
+/* 184 */     A(this, "decodeCurrentSettings: Units Is mm/dL = " + this.ҿ);
 /*     */   }
 /*     */ 
-/*     */   void decodeCurrentSettings2()
-/*     */     throws BadDeviceValueException
+/*     */   void Ð()
+/*     */     throws Z
 /*     */   {
-/* 198 */     Contract.pre(this.m_currentSettings2 != null);
-/* 199 */     Contract.pre(this.m_currentSettings2.length() > 1);
+/* 198 */     Contract.pre(this.ҷ != null);
+/* 199 */     Contract.pre(this.ҷ.length() > 1);
 /*     */ 
-/* 206 */     boolean bool = this.m_currentSettings2.indexOf("AM/PM") >= 0;
-/* 207 */     int i = this.m_currentSettings2.indexOf("24:00") >= 0 ? 1 : 0;
+/* 206 */     boolean bool = this.ҷ.indexOf("AM/PM") >= 0;
+/* 207 */     int i = this.ҷ.indexOf("24:00") >= 0 ? 1 : 0;
 /*     */ 
 /* 210 */     if (((!bool) && (i == 0)) || ((bool) && (i != 0)))
 /*     */     {
-/* 212 */       throw new BadDeviceValueException("Bad current settings string received (time format): '" + this.m_currentSettings2);
+/* 212 */       throw new Z("Bad current settings string received (time format): '" + this.ҷ);
 /*     */     }
 /*     */ 
-/* 217 */     this.m_settingTimeFormatIsAMPM = new Boolean(bool);
+/* 217 */     this.ҟ = new Boolean(bool);
 /*     */ 
-/* 219 */     logInfo(this, "decodeCurrentSettings: *** CURRENT SETTINGS2 ***");
-/* 220 */     logInfo(this, "decodeCurrentSettings: Time Format is AM/PM = " + this.m_settingTimeFormatIsAMPM);
+/* 219 */     A(this, "decodeCurrentSettings: *** CURRENT SETTINGS2 ***");
+/* 220 */     A(this, "decodeCurrentSettings: Time Format is AM/PM = " + this.ҟ);
 /*     */   }
 /*     */ 
-/*     */   void initDevice()
-/*     */     throws BadDeviceCommException, BadDeviceValueException
+/*     */   void Ñ()
+/*     */     throws t, Z
 /*     */   {
-/* 234 */     Contract.pre(getRS232Port() != null);
-/* 235 */     Contract.pre(getRS232Port().isOpen());
+/* 232 */     Y().E();
 /*     */ 
-/* 237 */     setPhase(4);
-/* 238 */     LSMeter.Command localCommand = new LSMeter.Command(this, "DM?", "Initialize Communications", 0);
+/* 234 */     E(4);
+/* 235 */     w._C local_C = new w._C(this, "DM?", "Initialize Communications", 0);
 /*     */ 
-/* 240 */     localCommand.execute();
-/* 241 */     MedicalDevice.Util.sleepMS(1000);
+/* 237 */     local_C.A();
+/* 238 */     O._B.G(1000);
 /*     */   }
 /*     */ 
-/*     */   private String getRFID(String paramString) throws BadDeviceValueException
+/*     */   private String R(String paramString) throws Z
 /*     */   {
-/* 253 */     Contract.preNonNull(paramString);
+/* 250 */     Contract.preNonNull(paramString);
 /*     */     String str;
 /*     */     try
 /*     */     {
-/* 258 */       StringTokenizer localStringTokenizer = new StringTokenizer(paramString, "\"");
-/* 259 */       localStringTokenizer.nextToken();
-/* 260 */       str = localStringTokenizer.nextToken();
+/* 255 */       StringTokenizer localStringTokenizer = new StringTokenizer(paramString, "\"");
+/* 256 */       localStringTokenizer.nextToken();
+/* 257 */       str = localStringTokenizer.nextToken();
 /*     */     } catch (NoSuchElementException localNoSuchElementException) {
-/* 262 */       throw new BadDeviceValueException("RF ID reply '" + paramString + "'");
+/* 259 */       throw new Z("RF ID reply '" + paramString + "'");
 /*     */     }
 /*     */ 
-/* 265 */     return str; } 
-/*     */   private final class SnapshotCreator extends LSMeter.SnapshotCreator { static final int SNAPCODE_CURRENT_UNITS_SETTING = 1;
-/*     */     static final int SNAPCODE_CURRENT_TIMEFORMAT_SETTING = 2;
-/*     */     static final int SNAPCODE_DATALOG = 3;
-/*     */     static final int SNAPCODE_RFID = 4;
-/*     */     static final int LAST_SNAPCODE = 4;
-/*     */     private static final String ULTRA2_ID = "Y";
-/*     */     private static final String ULTRALINK_ID = "H";
-/*     */     private final LSOneTouchUltra this$0;
+/* 262 */     return str; } 
+/*     */   private final class _A extends w._A { static final int ë = 1;
+/*     */     static final int î = 2;
+/*     */     static final int é = 3;
+/*     */     static final int ê = 4;
+/*     */     static final int ç = 4;
+/*     */     private static final String í = "Y";
+/*     */     private static final String ì = "H";
 /*     */ 
-/* 273 */     private SnapshotCreator() { super(); this.this$0 = this$1;
+/* 270 */     private _A() { super();
 /*     */     }
 /*     */ 
-/*     */     void createSnapshotBody()
+/*     */     void A()
 /*     */     {
-/* 303 */       this.this$0.m_snapshot = new Snapshot(this.this$0.m_snapshotFormatID, 1, pad(this.this$0.m_firmwareVersion), pad(this.this$0.m_serialNumber), pad(this.this$0.m_realTimeClock));
+/* 300 */       B.this.Î = new CA(B.this.Þ, 1, B(B.this.Ă), B(B.this.ă), B(B.this.ѻ));
 /*     */ 
-/* 306 */       MedicalDevice.logInfo(this, "createSnapshot: creating snapshot");
+/* 303 */       O.A(this, "createSnapshot: creating snapshot");
 /*     */ 
-/* 310 */       this.this$0.m_snapshot.addElement(1, this.this$0.m_currentSettings);
-/* 311 */       this.this$0.m_snapshot.addElement(2, this.this$0.m_currentSettings2);
+/* 307 */       B.this.Î.A(1, B.this.ѽ);
+/* 308 */       B.this.Î.A(2, B.this.ҷ);
 /*     */ 
-/* 315 */       this.this$0.m_snapshot.addElement(3, this.this$0.m_datalog);
+/* 312 */       B.this.Î.A(3, B.this.Ҟ);
 /*     */ 
-/* 318 */       if (this.this$0.m_snapshotFormatID == 158)
-/* 319 */         this.this$0.m_snapshot.addElement(4, pad('\r' + this.this$0.m_rfID.trim()));
-/*     */     }
-/*     */ 
-/*     */     SnapshotCreator(LSOneTouchUltra.1 arg2)
-/*     */     {
-/* 273 */       this();
+/* 315 */       if (B.this.Þ == 158)
+/* 316 */         B.this.Î.A(4, B('\r' + B.A(B.this).trim()));
 /*     */     }
 /*     */   }
 /*     */ }
 
 /* Location:           /home/bewest/Documents/bb/carelink/ddmsDTWApplet.jar
- * Qualified Name:     minimed.ddms.deviceportreader.LSOneTouchUltra
+ * Qualified Name:     minimed.ddms.A.B
  * JD-Core Version:    0.6.0
  */

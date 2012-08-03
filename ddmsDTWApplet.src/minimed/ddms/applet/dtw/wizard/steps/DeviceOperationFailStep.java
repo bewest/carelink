@@ -12,18 +12,18 @@
 /*     */ import javax.swing.JPanel;
 /*     */ import javax.swing.JProgressBar;
 /*     */ import javax.swing.border.EmptyBorder;
+/*     */ import minimed.ddms.A.P;
+/*     */ import minimed.ddms.A.W;
+/*     */ import minimed.ddms.A.Z;
+/*     */ import minimed.ddms.A.t;
 /*     */ import minimed.ddms.applet.dtw.CaptureResult;
 /*     */ import minimed.ddms.applet.dtw.MessageHelper;
 /*     */ import minimed.ddms.applet.dtw.wizard.Wizard;
 /*     */ import minimed.ddms.applet.dtw.wizard.WizardConfig;
 /*     */ import minimed.ddms.applet.dtw.wizard.WizardSelections;
 /*     */ import minimed.ddms.applet.dtw.wizard.WizardStep;
-/*     */ import minimed.ddms.deviceportreader.BadDeviceCommException;
-/*     */ import minimed.ddms.deviceportreader.BadDeviceValueException;
-/*     */ import minimed.ddms.deviceportreader.ConnectToPumpException;
-/*     */ import minimed.ddms.deviceportreader.DevicePortReader;
-/*     */ import minimed.ddms.deviceportreader.SerialIOHaltedException;
 /*     */ import minimed.util.Contract;
+/*     */ import minimed.util.OSInfo;
 /*     */ 
 /*     */ public abstract class DeviceOperationFailStep extends WizardStep
 /*     */ {
@@ -39,6 +39,7 @@
 /*     */   private static final int INDEX_PROBLEM_WITH_COMLINK = 9;
 /*     */   private static final int INDEX_PUMP_MODEL_UNSUPPORTED = 10;
 /*     */   private static final int INDEX_WRONG_DEVICE_SELECTION = 11;
+/*     */   private static final int INDEX_PROBLEM_WITH_PORT_ON_MAC = 12;
 /*     */   private static final int INSET_MAIN_LEFT = 5;
 /*     */   private static final int INSET_MAIN_RIGHT = 5;
 /*     */   private final JLabel m_suggestionMsgLabel;
@@ -49,224 +50,238 @@
 /*     */ 
 /*     */   protected DeviceOperationFailStep(Wizard paramWizard, String paramString1, Class paramClass, String paramString2)
 /*     */   {
-/*  77 */     super(paramWizard, paramClass);
+/*  80 */     super(paramWizard, paramClass);
 /*     */ 
-/*  80 */     this.m_errorMsgLabel = getLeftBannerLabel();
-/*  81 */     Object localObject = new ImageIcon(getImage(paramString1));
-/*  82 */     getRightBannerLabel().setIcon((Icon)localObject);
+/*  83 */     this.m_errorMsgLabel = getLeftBannerLabel();
+/*  84 */     Object localObject = new ImageIcon(getImage(paramString1));
+/*  85 */     getRightBannerLabel().setIcon((Icon)localObject);
 /*     */ 
-/*  85 */     localObject = getErrorIcon();
-/*  86 */     getTopImageLabel().setIcon((Icon)localObject);
-/*  87 */     getTopImageLabel().setHorizontalAlignment(0);
+/*  88 */     localObject = getErrorIcon();
+/*  89 */     getTopImageLabel().setIcon((Icon)localObject);
+/*  90 */     getTopImageLabel().setHorizontalAlignment(0);
 /*     */ 
-/*  90 */     getBottomImageLabel().setVisible(false);
+/*  93 */     getBottomImageLabel().setVisible(false);
 /*     */ 
-/*  93 */     JPanel localJPanel1 = new JPanel();
-/*  94 */     setCustomColors(localJPanel1);
-/*  95 */     localJPanel1.setLayout(new BorderLayout());
+/*  96 */     JPanel localJPanel1 = new JPanel();
+/*  97 */     setCustomColors(localJPanel1);
+/*  98 */     localJPanel1.setLayout(new BorderLayout());
 /*     */ 
-/*  97 */     this.m_suggestionMsgLabel = new JLabel();
-/*  98 */     this.m_suggestionMsgLabel.setHorizontalAlignment(0);
-/*  99 */     localJPanel1.add(this.m_suggestionMsgLabel, "Center");
+/* 100 */     this.m_suggestionMsgLabel = new JLabel();
+/* 101 */     this.m_suggestionMsgLabel.setHorizontalAlignment(0);
+/* 102 */     localJPanel1.add(this.m_suggestionMsgLabel, "Center");
 /*     */ 
-/* 102 */     JPanel localJPanel2 = new JPanel();
-/* 103 */     setCustomColors(localJPanel2);
-/* 104 */     localJPanel2.setLayout(new BorderLayout());
+/* 105 */     JPanel localJPanel2 = new JPanel();
+/* 106 */     setCustomColors(localJPanel2);
+/* 107 */     localJPanel2.setLayout(new BorderLayout());
 /*     */ 
-/* 106 */     this.m_progressBarText = this.m_resources.getString(paramString2);
-/* 107 */     this.m_progressBarLabel = new JLabel();
-/* 108 */     this.m_progressBarLabel.setHorizontalAlignment(0);
-/* 109 */     localJPanel2.add(this.m_progressBarLabel, "Center");
+/* 109 */     this.m_progressBarText = this.m_resources.getString(paramString2);
+/* 110 */     this.m_progressBarLabel = new JLabel();
+/* 111 */     this.m_progressBarLabel.setHorizontalAlignment(0);
+/* 112 */     localJPanel2.add(this.m_progressBarLabel, "Center");
 /*     */ 
-/* 111 */     this.m_progressBar = new JProgressBar();
+/* 114 */     this.m_progressBar = new JProgressBar();
 /*     */ 
-/* 113 */     this.m_progressBar.setBackground(paramWizard.getConfig().getBackgroundColor());
-/* 114 */     this.m_progressBar.setBorder(BorderFactory.createLineBorder(paramWizard.getConfig().getBorderColor()));
+/* 116 */     this.m_progressBar.setBackground(paramWizard.getConfig().getBackgroundColor());
+/* 117 */     this.m_progressBar.setBorder(BorderFactory.createLineBorder(paramWizard.getConfig().getBorderColor()));
 /*     */ 
-/* 116 */     localJPanel2.add(this.m_progressBar, "South");
+/* 119 */     localJPanel2.add(this.m_progressBar, "South");
 /*     */ 
-/* 118 */     localJPanel1.add(localJPanel2, "South");
+/* 121 */     localJPanel1.add(localJPanel2, "South");
 /*     */ 
-/* 120 */     JPanel localJPanel3 = getContentArea();
-/* 121 */     localJPanel3.setLayout(new BorderLayout());
-/* 122 */     localJPanel3.add(localJPanel1);
-/* 123 */     localJPanel3.setBorder(new EmptyBorder(new Insets(0, 5, 0, 5)));
+/* 123 */     JPanel localJPanel3 = getContentArea();
+/* 124 */     localJPanel3.setLayout(new BorderLayout());
+/* 125 */     localJPanel3.add(localJPanel1);
+/* 126 */     localJPanel3.setBorder(new EmptyBorder(new Insets(0, 5, 0, 5)));
 /*     */   }
 /*     */ 
 /*     */   protected final void backRequest()
 /*     */   {
-/* 134 */     Wizard localWizard = getWizard();
-/* 135 */     localWizard.showPreviousStep(2);
+/* 137 */     Wizard localWizard = getWizard();
+/* 138 */     localWizard.showPreviousStep(2);
 /*     */   }
 /*     */ 
 /*     */   protected final void finishRequest()
 /*     */   {
-/* 142 */     retryRequest();
+/* 145 */     retryRequest();
 /*     */   }
 /*     */ 
 /*     */   protected final void retryRequest()
 /*     */   {
-/* 150 */     getBottomImageLabel().setVisible(false);
-/* 151 */     getBottomImageLabel().setText("");
+/* 153 */     getBottomImageLabel().setVisible(false);
+/* 154 */     getBottomImageLabel().setText("");
 /*     */ 
-/* 154 */     Wizard localWizard = getWizard();
-/* 155 */     localWizard.showPreviousStep();
+/* 157 */     Wizard localWizard = getWizard();
+/* 158 */     localWizard.showPreviousStep();
 /*     */   }
 /*     */ 
 /*     */   protected final void cancelRequest()
 /*     */   {
-/* 162 */     super.cancelRequest();
-/* 163 */     getWizard().showNextStep(SelectDeviceStep.class);
+/* 165 */     super.cancelRequest();
+/* 166 */     getWizard().showNextStep(SelectDeviceStep.class);
 /*     */   }
 /*     */ 
 /*     */   protected final void stepShown()
 /*     */   {
-/* 171 */     super.stepShown();
+/* 174 */     super.stepShown();
 /*     */ 
-/* 174 */     getCancelButton().setEnabled(true);
-/* 175 */     enableWithFocus(getFinishButton());
+/* 177 */     getCancelButton().setEnabled(true);
+/* 178 */     enableWithFocus(getFinishButton());
 /*     */ 
-/* 177 */     getFinishButton().setText(this.m_resources.getString("wizard.finishButton.retryText"));
-/* 178 */     getNextButton().setEnabled(false);
-/* 179 */     DeviceOperationStep localDeviceOperationStep = (DeviceOperationStep)getWizard().getPreviousStep();
-/* 180 */     this.m_progressBar.setValue(localDeviceOperationStep.getCaptureResult().getPercentComplete());
+/* 180 */     getFinishButton().setText(this.m_resources.getString("wizard.finishButton.retryText"));
+/* 181 */     getNextButton().setEnabled(false);
+/* 182 */     logInfo("stepshown " + this);
 /*     */ 
-/* 183 */     getBottomImageLabel().setVisible(false);
-/* 184 */     getBottomImageLabel().setText("");
+/* 184 */     WizardStep localWizardStep = getWizard().getPreviousStep();
+/* 185 */     this.m_progressBar.setValue(getWizard().getCaptureResult().getPercentComplete());
 /*     */ 
-/* 187 */     String[] arrayOfString = decodeMessages(localDeviceOperationStep);
+/* 188 */     getBottomImageLabel().setVisible(false);
+/* 189 */     getBottomImageLabel().setText("");
 /*     */ 
-/* 190 */     this.m_errorMsgLabel.setText("<html>" + arrayOfString[0] + "</html>");
+/* 192 */     String[] arrayOfString = decodeMessages(localWizardStep);
 /*     */ 
-/* 193 */     String str = MessageHelper.format(this.m_resources.getString("wizard.suggestion.message"), new Object[] { arrayOfString[1] });
+/* 195 */     this.m_errorMsgLabel.setText("<html>" + arrayOfString[0] + "</html>");
 /*     */ 
-/* 195 */     this.m_suggestionMsgLabel.setText(str);
+/* 198 */     String str = MessageHelper.format(this.m_resources.getString("wizard.suggestion.message"), new Object[] { arrayOfString[1] });
 /*     */ 
-/* 197 */     setProgressBarText(this.m_progressBarText);
+/* 200 */     this.m_suggestionMsgLabel.setText(str);
+/*     */ 
+/* 202 */     setProgressBarText(this.m_progressBarText);
+/* 203 */     logInfo("stepshown complete" + this);
 /*     */   }
 /*     */ 
-/*     */   protected abstract String[] getErrorMessages();
+/*     */   public abstract String[] getErrorMessages();
 /*     */ 
-/*     */   protected abstract String[] getSuggestionMessages();
+/*     */   public abstract String[] getSuggestionMessages();
 /*     */ 
 /*     */   private void setProgressBarText(String paramString)
 /*     */   {
-/* 222 */     String str = MessageHelper.format(this.m_resources.getString("wizard.progressbar.message"), new Object[] { paramString, Integer.toString(this.m_progressBar.getValue()) });
+/* 229 */     String str = MessageHelper.format(this.m_resources.getString("wizard.progressbar.message"), new Object[] { paramString, Integer.toString(this.m_progressBar.getValue()) });
 /*     */ 
-/* 225 */     this.m_progressBarLabel.setText(str);
+/* 232 */     this.m_progressBarLabel.setText(str);
 /*     */   }
 /*     */ 
-/*     */   private String[] decodeMessages(DeviceOperationStep paramDeviceOperationStep)
+/*     */   private String[] decodeMessages(WizardStep paramWizardStep)
 /*     */   {
-/* 236 */     CaptureResult localCaptureResult = paramDeviceOperationStep.getCaptureResult();
-/* 237 */     Exception localException = localCaptureResult.getDeviceException();
-/* 238 */     logInfo("decodeMessages: device exception = " + localException + " prev step cancelled = " + localCaptureResult.wasCancelled());
+/* 243 */     CaptureResult localCaptureResult = getWizard().getCaptureResult();
+/* 244 */     Exception localException = localCaptureResult.getDeviceException();
+/* 245 */     logInfo("decodeMessages: device exception = " + localException + " prev step cancelled = " + localCaptureResult.wasCancelled());
 /*     */     String[] arrayOfString;
-/* 242 */     if (localCaptureResult.wasCancelled()) {
-/* 243 */       int i = 6;
-/* 244 */       arrayOfString = new String[] { getErrorMessages()[i], getSuggestionMessages()[i] };
+/* 249 */     if (localCaptureResult.wasCancelled()) {
+/* 250 */       int i = 6;
+/* 251 */       arrayOfString = new String[] { getErrorMessages()[i], getSuggestionMessages()[i] };
 /*     */     }
-/* 248 */     else if ((localException instanceof ConnectToPumpException)) {
-/* 249 */       arrayOfString = mapConnectToPumpException(paramDeviceOperationStep);
+/* 255 */     else if ((localException instanceof P)) {
+/* 256 */       arrayOfString = mapConnectToPumpException(paramWizardStep);
 /*     */     }
-/* 253 */     else if (((localException instanceof BadDeviceCommException)) || ((localException instanceof IOException)) || ((localException instanceof BadDeviceValueException)) || ((localException instanceof SerialIOHaltedException)))
+/* 260 */     else if (((localException instanceof t)) || ((localException instanceof IOException)) || ((localException instanceof Z)) || ((localException instanceof W)))
 /*     */     {
-/* 257 */       arrayOfString = mapGeneralDeviceException(paramDeviceOperationStep);
+/* 264 */       arrayOfString = mapGeneralDeviceException(paramWizardStep);
 /*     */     }
 /*     */     else
 /*     */     {
-/* 261 */       Contract.unreachable();
-/* 262 */       arrayOfString = null;
+/* 268 */       Contract.unreachable();
+/* 269 */       arrayOfString = null;
 /*     */     }
 /*     */ 
-/* 266 */     return arrayOfString;
+/* 273 */     return arrayOfString;
 /*     */   }
 /*     */ 
-/*     */   private final String[] mapConnectToPumpException(DeviceOperationStep paramDeviceOperationStep)
+/*     */   private final String[] mapConnectToPumpException(WizardStep paramWizardStep)
 /*     */   {
-/* 277 */     CaptureResult localCaptureResult = paramDeviceOperationStep.getCaptureResult();
-/* 278 */     ConnectToPumpException localConnectToPumpException = (ConnectToPumpException)localCaptureResult.getDeviceException();
+/* 284 */     CaptureResult localCaptureResult = getWizard().getCaptureResult();
+/* 285 */     P localP = (P)localCaptureResult.getDeviceException();
 /*     */     int i;
-/* 281 */     switch (localConnectToPumpException.getReasonCode()) {
+/* 288 */     switch (localP.B()) {
 /*     */     case 2:
-/* 283 */       i = 7;
-/* 284 */       break;
+/* 290 */       i = 7;
+/* 291 */       break;
 /*     */     case 3:
-/* 286 */       i = 8;
-/* 287 */       break;
+/* 293 */       i = 8;
+/* 294 */       break;
 /*     */     case 1000:
-/* 289 */       i = 10;
-/* 290 */       break;
+/* 296 */       i = 10;
+/* 297 */       break;
 /*     */     case 2000:
-/* 292 */       i = 11;
-/* 293 */       break;
+/* 299 */       i = 11;
+/* 300 */       break;
 /*     */     default:
-/* 295 */       Contract.unreachable();
-/* 296 */       i = 0;
+/* 302 */       Contract.unreachable();
+/* 303 */       i = 0;
 /*     */     }
 /*     */ 
-/* 301 */     String str1 = paramDeviceOperationStep.updateDynamicText(getSuggestionMessages()[i]);
-/* 302 */     String str2 = paramDeviceOperationStep.updateDynamicText(getErrorMessages()[i]);
+/* 307 */     String str1 = getSuggestionMessages()[i];
+/* 308 */     String str2 = getErrorMessages()[i];
 /*     */ 
-/* 304 */     return new String[] { str2, str1 };
+/* 310 */     if ((paramWizardStep instanceof DeviceOperationStep)) {
+/* 311 */       str1 = ((DeviceOperationStep)paramWizardStep).updateDynamicText(str1);
+/* 312 */       str2 = ((DeviceOperationStep)paramWizardStep).updateDynamicText(str2);
+/*     */     }
+/*     */ 
+/* 315 */     return new String[] { str2, str1 };
 /*     */   }
 /*     */ 
-/*     */   private final String[] mapGeneralDeviceException(DeviceOperationStep paramDeviceOperationStep)
+/*     */   private final String[] mapGeneralDeviceException(WizardStep paramWizardStep)
 /*     */   {
-/* 316 */     CaptureResult localCaptureResult = paramDeviceOperationStep.getCaptureResult();
-/* 317 */     int j = localCaptureResult.getLastOperationalPhase();
+/* 327 */     CaptureResult localCaptureResult = getWizard().getCaptureResult();
+/* 328 */     int j = localCaptureResult.getLastOperationalPhase();
 /*     */     int i;
-/* 319 */     switch (j)
+/* 330 */     switch (j)
 /*     */     {
 /*     */     case 1:
 /*     */     case 2:
-/* 323 */       i = 1;
-/* 324 */       break;
+/* 334 */       if (OSInfo.isMac())
+/* 335 */         i = 12;
+/*     */       else {
+/* 337 */         i = 1;
+/*     */       }
+/* 339 */       break;
 /*     */     case 3:
 /*     */     case 7:
-/* 331 */       str1 = getWizardSelections().getLinkDevice();
-/* 332 */       if (str1.equals("wizard.selections.SELECTION_LINK_DEVICE_PARADIGMLINK"))
+/* 346 */       str1 = getWizardSelections().getLinkDevice();
+/* 347 */       if (str1.equals("wizard.selections.SELECTION_LINK_DEVICE_PARADIGMLINK"))
 /*     */       {
-/* 334 */         i = 2;
+/* 349 */         i = 2;
 /*     */       }
-/* 336 */       else if ((str1.equals("wizard.selections.SELECTION_LINK_DEVICE_COMLINK")) || (str1.equals("wizard.selections.SELECTION_LINK_DEVICE_COMLINKUSB")))
+/* 351 */       else if ((str1.equals("wizard.selections.SELECTION_LINK_DEVICE_COMLINK")) || (str1.equals("wizard.selections.SELECTION_LINK_DEVICE_COMLINKUSB")) || (str1.equals("wizard.selections.SELECTION_LINK_DEVICE_XTLINKUSB")))
 /*     */       {
-/* 340 */         i = 9;
+/* 357 */         i = 9;
 /*     */       } else {
-/* 342 */         Contract.unreachable();
-/* 343 */         i = 0;
+/* 359 */         Contract.unreachable();
+/* 360 */         i = 0;
 /*     */       }
 /*     */ 
-/* 346 */       break;
+/* 363 */       break;
 /*     */     case 4:
-/* 350 */       i = 3;
-/* 351 */       break;
+/* 367 */       i = 3;
+/* 368 */       break;
 /*     */     case 5:
-/* 356 */       if (localCaptureResult.wasAnyDeviceDataRead())
+/* 373 */       if (localCaptureResult.wasAnyDeviceDataRead())
 /*     */       {
-/* 360 */         i = localCaptureResult.getRetryCount() <= localCaptureResult.getDevicePortReader().getMaxRetryCount() * 2 ? 4 : 5;
+/* 377 */         i = localCaptureResult.getRetryCount() <= localCaptureResult.getMaxRetryCount() * 2 ? 4 : 5;
 /*     */       }
 /*     */       else
 /*     */       {
-/* 365 */         i = 3;
+/* 382 */         i = 3;
 /*     */       }
-/* 367 */       break;
+/* 384 */       break;
 /*     */     case 0:
-/* 371 */       i = 0;
-/* 372 */       break;
+/* 388 */       i = 0;
+/* 389 */       break;
 /*     */     case 6:
 /*     */     default:
-/* 376 */       Contract.unreachable();
-/* 377 */       i = 0;
+/* 393 */       Contract.unreachable();
+/* 394 */       i = 0;
 /*     */     }
 /*     */ 
-/* 381 */     String str1 = getErrorMessages()[i];
-/* 382 */     String str2 = getSuggestionMessages()[i];
+/* 398 */     String str1 = getErrorMessages()[i];
+/* 399 */     String str2 = getSuggestionMessages()[i];
 /*     */ 
-/* 385 */     str2 = paramDeviceOperationStep.updateDynamicText(str2);
-/* 386 */     str1 = paramDeviceOperationStep.updateDynamicText(str1);
+/* 402 */     if ((paramWizardStep instanceof DeviceOperationStep)) {
+/* 403 */       str2 = ((DeviceOperationStep)paramWizardStep).updateDynamicText(str2);
+/* 404 */       str1 = ((DeviceOperationStep)paramWizardStep).updateDynamicText(str1);
+/*     */     }
 /*     */ 
-/* 388 */     return new String[] { str1, str2 };
+/* 407 */     return new String[] { str1, str2 };
 /*     */   }
 /*     */ }
 
