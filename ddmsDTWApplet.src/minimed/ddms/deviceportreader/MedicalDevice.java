@@ -1,5 +1,5 @@
-/*      */ package minimed.ddms.A;
-/*      */ 
+/*      */ package minimed.ddms.deviceportreader;
+/*      */
 /*      */ import java.io.FileNotFoundException;
 /*      */ import java.io.IOException;
 /*      */ import java.io.InputStream;
@@ -10,328 +10,328 @@
 /*      */ import java.util.GregorianCalendar;
 /*      */ import java.util.Vector;
 /*      */ import minimed.util.Contract;
-/*      */ 
-/*      */ abstract class O
-/*      */   implements G, v
+/*      */
+/*      */ abstract class MedicalDevice
+/*      */   implements DevicePortReader, DeviceListener
 /*      */ {
-/*      */   public static final String f = "Incorrect product code";
-/*      */   static final String ç = "10.0.0";
-/*      */   static final int Ā = 1;
-/*      */   static final int ÿ = 2;
-/*      */   static final int º = 1;
-/*      */   static final int µ = 2;
-/*      */   static final int ý = 15;
-/*      */   static final int r = 255;
-/*      */   static final int Ê = 65535;
-/*      */   static final int ª = 16777215;
-/*      */   static final long č = 4294967295L;
-/*      */   static final byte ą = 3;
-/*      */   static final byte Á = 4;
-/*      */   static final byte v = 8;
+/*      */   public static final String PRODUCT_CODE_ERROR_MSG = "Incorrect product code";
+/*      */   static final String PACKAGE_VERSION = "10.0.0";
+/*      */   static final int SNAPLENGTH_1 = 1;
+/*      */   static final int SNAPLENGTH_2 = 2;
+/*      */   static final int SNAPSHOT_VERSION1 = 1;
+/*      */   static final int SNAPSHOT_VERSION2 = 2;
+/*      */   static final int MAX_NIBBLE = 15;
+/*      */   static final int MAX_BYTE = 255;
+/*      */   static final int MAX_WORD = 65535;
+/*      */   static final int MAX_BYTE_3 = 16777215;
+/*      */   static final long MAX_DWORD = 4294967295L;
+/*      */   static final byte BITS_MODULO4 = 3;
+/*      */   static final byte BITS_PER_NIBBLE = 4;
+/*      */   static final byte BITS_PER_BYTE = 8;
 /*      */   static final byte Ô = 16;
-/*      */   static final int ¥ = 128;
-/*      */   static final int k = 64;
-/*      */   static final int Đ = 32;
-/*      */   static final int ú = 16;
-/*      */   static final int ë = 8;
-/*      */   static final int Ý = 4;
-/*      */   static final int Ä = 2;
-/*      */   static final int q = 1;
-/*      */   static final byte i = 3;
-/*      */   static final byte Ü = 7;
-/*      */   static final byte ó = 15;
-/*      */   static final byte Ë = 31;
-/*      */   static final byte Å = 63;
-/*      */   static final byte s = 127;
-/*      */   static final int ė = 32768;
-/*      */   static final int ä = 2000;
-/*      */   static final int ď = 16;
-/*      */   static final int á = 0;
-/*      */   static final int Ě = 1;
-/*      */   static final short g = 4129;
-/*  218 */   static final Integer Í = null;
+/*      */   static final int BIT_7_MASK = 128;
+/*      */   static final int BIT_6_MASK = 64;
+/*      */   static final int BIT_5_MASK = 32;
+/*      */   static final int BIT_4_MASK = 16;
+/*      */   static final int BIT_3_MASK = 8;
+/*      */   static final int BIT_2_MASK = 4;
+/*      */   static final int BIT_1_MASK = 2;
+/*      */   static final int BIT_0_MASK = 1;
+/*      */   static final byte TWO_LSB = 3;
+/*      */   static final byte THREE_LSB = 7;
+/*      */   static final byte FOUR_LSB = 15;
+/*      */   static final byte FIVE_LSB = 31;
+/*      */   static final byte SIX_LSB = 63;
+/*      */   static final byte SEVEN_LSB = 127;
+/*      */   static final int WORD_SIGN_BIT = 32768;
+/*      */   static final int BASE_YEAR = 2000;
+/*      */   static final int BASE16 = 16;
+/*      */   static final int HIGH_BYTE = 0;
+/*      */   static final int LOW_BYTE = 1;
+/*      */   static final short CRC16_MASK = 4129;
+/*  218 */   static final Integer NO_DOW = null;
+/*      */
+/*  217 */   static final Integer NO_CHECKSUM = null;
+/*      */   static final int SUBSTRING_NOT_FOUND = -1;
+/*      */   static final char NUL = '\000';
+/*      */   static final char STH = '\001';
+/*      */   static final char STX = '\002';
+/*      */   static final char ETX = '\003';
+/*      */   static final char EOT = '\004';
+/*      */   static final char ENQ = '\005';
+/*      */   static final char ACK = '\006';
+/*      */   static final char TAB = '\t';
+/*      */   static final char LF = '\n';
+/*      */   static final char CR = '\r';
+/*      */   static final char DLE = '\020';
+/*      */   static final char DC1 = '\021';
+/*      */   static final char NAK = '\025';
+/*      */   static final char ETB = '\027';
+/*      */   static final char CAN = '\030';
+/*      */   static final char SPACE = ' ';
+/*      */   static final char ASCII_ZERO = '0';
+/*      */   static final char FIRST_PRINT_CHAR = ' ';
+/*      */   static final char LAST_PRINT_CHAR = '';
+/*      */   static final String DEVICE_CR_STR = "\r";
+/*      */   static final String DEVICE_LF_STR = "\n";
+/*      */   static final int HOURS_IN_DAY = 24;
+/*      */   static final int MINUTES_IN_HOUR = 60;
+/*      */   static final int SECONDS_IN_MINUTE = 60;
+/*      */   static final int MS_IN_SECOND = 1000;
+/*      */   static final int MONTHS_IN_YEAR = 12;
+/*      */   static final int MAX_DAYS_IN_MONTH = 31;
+/*      */   static final char SINGLE_QUOTE_CHAR = '\'';
+/*      */   static final String UNITS_MGDL = "MG/DL";
+/*      */   static final String UNITS_MMOLL = "MMOL/L";
+/*      */   static final String TIMEFORMAT_12H = "AM/PM";
+/*      */   static final String TIMEFORMAT_24H = "24:00";
+/*  353 */   static final int[] CRC8_LOOKUP_TABLE = { 0, 155, 173, 54, 193, 90, 108, 247, 25, 130, 180, 47, 216, 67, 117, 238, 50, 169, 159, 4, 243, 104, 94, 197, 43, 176, 134, 29, 234, 113, 71, 220, 100, 255, 201, 82, 165, 62, 8, 147, 125, 230, 208, 75, 188, 39, 17, 138, 86, 205, 251, 96, 151, 12, 58, 161, 79, 212, 226, 121, 142, 21, 35, 184, 200, 83, 101, 254, 9, 146, 164, 63, 209, 74, 124, 231, 16, 139, 189, 38, 250, 97, 87, 204, 59, 160, 150, 13, 227, 120, 78, 213, 34, 185, 143, 20, 172, 55, 1, 154, 109, 246, 192, 91, 181, 46, 24, 131, 116, 239, 217, 66, 158, 5, 51, 168, 95, 196, 242, 105, 135, 28, 42, 177, 70, 221, 235, 112, 11, 144, 166, 61, 202, 81, 103, 252, 18, 137, 191, 36, 211, 72, 126, 229, 57, 162, 148, 15, 248, 99, 85, 206, 32, 187, 141, 22, 225, 122, 76, 215, 111, 244, 194, 89, 174, 53, 3, 152, 118, 237, 219, 64, 183, 44, 26, 129, 93, 198, 240, 107, 156, 7, 49, 170, 68, 223, 233, 114, 133, 30, 40, 179, 195, 88, 110, 245, 2, 153, 175, 52, 218, 65, 119, 236, 27, 128, 182, 45, 241, 106, 92, 199, 48, 171, 157, 6, 232, 115, 69, 222, 41, 178, 132, 31, 167, 60, 10, 145, 102, 253, 203, 80, 190, 37, 19, 136, 127, 228, 210, 73, 149, 14, 56, 163, 84, 207, 249, 98, 140, 23, 33, 186, 77, 214, 224, 123 };
+/*      */
+/*  391 */   static final int[] CRC8_LOOKUP_TABLE_BD = { 0, 94, 188, 226, 97, 63, 221, 131, 194, 156, 126, 32, 163, 253, 31, 65, 157, 195, 33, 127, 252, 162, 64, 30, 95, 1, 227, 189, 62, 96, 130, 220, 35, 125, 159, 193, 66, 28, 254, 160, 225, 191, 93, 3, 128, 222, 60, 98, 190, 224, 2, 92, 223, 129, 99, 61, 124, 34, 192, 158, 29, 67, 161, 255, 70, 24, 250, 164, 39, 121, 155, 197, 132, 218, 56, 102, 229, 187, 89, 7, 219, 133, 103, 57, 186, 228, 6, 88, 25, 71, 165, 251, 120, 38, 196, 154, 101, 59, 217, 135, 4, 90, 184, 230, 167, 249, 27, 69, 198, 152, 122, 36, 248, 166, 68, 26, 153, 199, 37, 123, 58, 100, 134, 216, 91, 5, 231, 185, 140, 210, 48, 110, 237, 179, 81, 15, 78, 16, 242, 172, 47, 113, 147, 205, 17, 79, 173, 243, 112, 46, 204, 146, 211, 141, 111, 49, 178, 236, 14, 80, 175, 241, 19, 77, 206, 144, 114, 44, 109, 51, 209, 143, 12, 82, 176, 238, 50, 108, 142, 208, 83, 13, 239, 177, 240, 174, 76, 18, 145, 207, 45, 115, 202, 148, 118, 40, 171, 245, 23, 73, 8, 86, 180, 234, 105, 55, 213, 139, 87, 9, 235, 181, 54, 104, 138, 212, 149, 203, 41, 119, 244, 170, 72, 22, 233, 183, 85, 11, 136, 214, 52, 106, 43, 117, 151, 201, 74, 20, 246, 168, 116, 42, 200, 150, 21, 75, 169, 247, 182, 232, 10, 84, 215, 137, 107, 53 };
 /*      */ 
-/*  223 */   static final Integer Ċ = null;
-/*      */   static final int Ú = -1;
-/*      */   static final char Õ = '\000';
-/*      */   static final char Ø = '\001';
-/*      */   static final char É = '\002';
-/*      */   static final char û = '\003';
-/*      */   static final char ê = '\004';
-/*      */   static final char þ = '\005';
-/*      */   static final char ô = '\006';
-/*      */   static final char ß = '\t';
-/*      */   static final char È = '\n';
-/*      */   static final char õ = '\r';
-/*      */   static final char z = '\020';
-/*      */   static final char ù = '\021';
-/*      */   static final char ï = '\025';
-/*      */   static final char ċ = '\027';
-/*      */   static final char Ē = '\030';
-/*      */   static final char ¢ = ' ';
-/*      */   static final char å = '0';
-/*      */   static final char ö = ' ';
-/*      */   static final char Č = '';
-/*      */   static final String ð = "\r";
-/*      */   static final String Ç = "\n";
-/*      */   static final int é = 24;
-/*      */   static final int Æ = 60;
-/*      */   static final int ò = 60;
-/*      */   static final int Ï = 1000;
-/*      */   static final int í = 12;
-/*      */   static final int ñ = 31;
-/*      */   static final char ã = '\'';
-/*      */   static final String h = "MG/DL";
-/*      */   static final String â = "MMOL/L";
-/*      */   static final String Ò = "AM/PM";
-/*      */   static final String Ę = "24:00";
-/*  353 */   static final int[] m = { 0, 155, 173, 54, 193, 90, 108, 247, 25, 130, 180, 47, 216, 67, 117, 238, 50, 169, 159, 4, 243, 104, 94, 197, 43, 176, 134, 29, 234, 113, 71, 220, 100, 255, 201, 82, 165, 62, 8, 147, 125, 230, 208, 75, 188, 39, 17, 138, 86, 205, 251, 96, 151, 12, 58, 161, 79, 212, 226, 121, 142, 21, 35, 184, 200, 83, 101, 254, 9, 146, 164, 63, 209, 74, 124, 231, 16, 139, 189, 38, 250, 97, 87, 204, 59, 160, 150, 13, 227, 120, 78, 213, 34, 185, 143, 20, 172, 55, 1, 154, 109, 246, 192, 91, 181, 46, 24, 131, 116, 239, 217, 66, 158, 5, 51, 168, 95, 196, 242, 105, 135, 28, 42, 177, 70, 221, 235, 112, 11, 144, 166, 61, 202, 81, 103, 252, 18, 137, 191, 36, 211, 72, 126, 229, 57, 162, 148, 15, 248, 99, 85, 206, 32, 187, 141, 22, 225, 122, 76, 215, 111, 244, 194, 89, 174, 53, 3, 152, 118, 237, 219, 64, 183, 44, 26, 129, 93, 198, 240, 107, 156, 7, 49, 170, 68, 223, 233, 114, 133, 30, 40, 179, 195, 88, 110, 245, 2, 153, 175, 52, 218, 65, 119, 236, 27, 128, 182, 45, 241, 106, 92, 199, 48, 171, 157, 6, 232, 115, 69, 222, 41, 178, 132, 31, 167, 60, 10, 145, 102, 253, 203, 80, 190, 37, 19, 136, 127, 228, 210, 73, 149, 14, 56, 163, 84, 207, 249, 98, 140, 23, 33, 186, 77, 214, 224, 123 };
+/*  415 */   static final int[] CRC16_CCITT_LOOKUP_TABLE = { 0, 4129, 8258, 12387, 16516, 20645, 24774, 28903, 33032, 37161, 41290, 45419, 49548, 53677, 57806, 61935, 4657, 528, 12915, 8786, 21173, 17044, 29431, 25302, 37689, 33560, 45947, 41818, 54205, 50076, 62463, 58334, 9314, 13379, 1056, 5121, 25830, 29895, 17572, 21637, 42346, 46411, 34088, 38153, 58862, 62927, 50604, 54669, 13907, 9842, 5649, 1584, 30423, 26358, 22165, 18100, 46939, 42874, 38681, 34616, 63455, 59390, 55197, 51132, 18628, 22757, 26758, 30887, 2112, 6241, 10242, 14371, 51660, 55789, 59790, 63919, 35144, 39273, 43274, 47403, 23285, 19156, 31415, 27286, 6769, 2640, 14899, 10770, 56317, 52188, 64447, 60318, 39801, 35672, 47931, 43802, 27814, 31879, 19684, 23749, 11298, 15363, 3168, 7233, 60846, 64911, 52716, 56781, 44330, 48395, 36200, 40265, 32407, 28342, 24277, 20212, 15891, 11826, 7761, 3696, 65439, 61374, 57309, 53244, 48923, 44858, 40793, 36728, 37256, 33193, 45514, 41451, 53516, 49453, 61774, 57711, 4224, 161, 12482, 8419, 20484, 16421, 28742, 24679, 33721, 37784, 41979, 46042, 49981, 54044, 58239, 62302, 689, 4752, 8947, 13010, 16949, 21012, 25207, 29270, 46570, 42443, 38312, 34185, 62830, 58703, 54572, 50445, 13538, 9411, 5280, 1153, 29798, 25671, 21540, 17413, 42971, 47098, 34713, 38840, 59231, 63358, 50973, 55100, 9939, 14066, 1681, 5808, 26199, 30326, 17941, 22068, 55628, 51565, 63758, 59695, 39368, 35305, 47498, 43435, 22596, 18533, 30726, 26663, 6336, 2273, 14466, 10403, 52093, 56156, 60223, 64286, 35833, 39896, 43963, 48026, 19061, 23124, 27191, 31254, 2801, 6864, 10931, 14994, 64814, 60687, 56684, 52557, 48554, 44427, 40424, 36297, 31782, 27655, 23652, 19525, 15522, 11395, 7392, 3265, 61215, 65342, 53085, 57212, 44955, 49082, 36825, 40952, 28183, 32310, 20053, 24180, 11923, 16050, 3793, 7920 };
 /*      */ 
-/*  391 */   static final int[] o = { 0, 94, 188, 226, 97, 63, 221, 131, 194, 156, 126, 32, 163, 253, 31, 65, 157, 195, 33, 127, 252, 162, 64, 30, 95, 1, 227, 189, 62, 96, 130, 220, 35, 125, 159, 193, 66, 28, 254, 160, 225, 191, 93, 3, 128, 222, 60, 98, 190, 224, 2, 92, 223, 129, 99, 61, 124, 34, 192, 158, 29, 67, 161, 255, 70, 24, 250, 164, 39, 121, 155, 197, 132, 218, 56, 102, 229, 187, 89, 7, 219, 133, 103, 57, 186, 228, 6, 88, 25, 71, 165, 251, 120, 38, 196, 154, 101, 59, 217, 135, 4, 90, 184, 230, 167, 249, 27, 69, 198, 152, 122, 36, 248, 166, 68, 26, 153, 199, 37, 123, 58, 100, 134, 216, 91, 5, 231, 185, 140, 210, 48, 110, 237, 179, 81, 15, 78, 16, 242, 172, 47, 113, 147, 205, 17, 79, 173, 243, 112, 46, 204, 146, 211, 141, 111, 49, 178, 236, 14, 80, 175, 241, 19, 77, 206, 144, 114, 44, 109, 51, 209, 143, 12, 82, 176, 238, 50, 108, 142, 208, 83, 13, 239, 177, 240, 174, 76, 18, 145, 207, 45, 115, 202, 148, 118, 40, 171, 245, 23, 73, 8, 86, 180, 234, 105, 55, 213, 139, 87, 9, 235, 181, 54, 104, 138, 212, 149, 203, 41, 119, 244, 170, 72, 22, 233, 183, 85, 11, 136, 214, 52, 106, 43, 117, 151, 201, 74, 20, 246, 168, 116, 42, 200, 150, 21, 75, 169, 247, 182, 232, 10, 84, 215, 137, 107, 53 };
-/*      */ 
-/*  415 */   static final int[] ĉ = { 0, 4129, 8258, 12387, 16516, 20645, 24774, 28903, 33032, 37161, 41290, 45419, 49548, 53677, 57806, 61935, 4657, 528, 12915, 8786, 21173, 17044, 29431, 25302, 37689, 33560, 45947, 41818, 54205, 50076, 62463, 58334, 9314, 13379, 1056, 5121, 25830, 29895, 17572, 21637, 42346, 46411, 34088, 38153, 58862, 62927, 50604, 54669, 13907, 9842, 5649, 1584, 30423, 26358, 22165, 18100, 46939, 42874, 38681, 34616, 63455, 59390, 55197, 51132, 18628, 22757, 26758, 30887, 2112, 6241, 10242, 14371, 51660, 55789, 59790, 63919, 35144, 39273, 43274, 47403, 23285, 19156, 31415, 27286, 6769, 2640, 14899, 10770, 56317, 52188, 64447, 60318, 39801, 35672, 47931, 43802, 27814, 31879, 19684, 23749, 11298, 15363, 3168, 7233, 60846, 64911, 52716, 56781, 44330, 48395, 36200, 40265, 32407, 28342, 24277, 20212, 15891, 11826, 7761, 3696, 65439, 61374, 57309, 53244, 48923, 44858, 40793, 36728, 37256, 33193, 45514, 41451, 53516, 49453, 61774, 57711, 4224, 161, 12482, 8419, 20484, 16421, 28742, 24679, 33721, 37784, 41979, 46042, 49981, 54044, 58239, 62302, 689, 4752, 8947, 13010, 16949, 21012, 25207, 29270, 46570, 42443, 38312, 34185, 62830, 58703, 54572, 50445, 13538, 9411, 5280, 1153, 29798, 25671, 21540, 17413, 42971, 47098, 34713, 38840, 59231, 63358, 50973, 55100, 9939, 14066, 1681, 5808, 26199, 30326, 17941, 22068, 55628, 51565, 63758, 59695, 39368, 35305, 47498, 43435, 22596, 18533, 30726, 26663, 6336, 2273, 14466, 10403, 52093, 56156, 60223, 64286, 35833, 39896, 43963, 48026, 19061, 23124, 27191, 31254, 2801, 6864, 10931, 14994, 64814, 60687, 56684, 52557, 48554, 44427, 40424, 36297, 31782, 27655, 23652, 19525, 15522, 11395, 7392, 3265, 61215, 65342, 53085, 57212, 44955, 49082, 36825, 40952, 28183, 32310, 20053, 24180, 11923, 16050, 3793, 7920 };
-/*      */ 
-/*  457 */   static final int[] Â = { 0, 26, 52, 46, 104, 114, 92, 70, 93, 71, 105, 115, 53, 47, 1, 27, 55, 45, 3, 25, 95, 69, 107, 113, 106, 112, 94, 68, 2, 24, 54, 44, 110, 116, 90, 64, 6, 28, 50, 40, 51, 41, 7, 29, 91, 65, 111, 117, 89, 67, 109, 119, 49, 43, 5, 31, 4, 30, 48, 42, 108, 118, 88, 66, 81, 75, 101, 127, 57, 35, 13, 23, 12, 22, 56, 34, 100, 126, 80, 74, 102, 124, 82, 72, 14, 20, 58, 32, 59, 33, 15, 21, 83, 73, 103, 125, 63, 37, 11, 17, 87, 77, 99, 121, 98, 120, 86, 76, 10, 16, 62, 36, 8, 18, 60, 38, 96, 122, 84, 78, 85, 79, 97, 123, 61, 39, 9, 19, 47, 53, 27, 1, 71, 93, 115, 105, 114, 104, 70, 92, 26, 0, 46, 52, 24, 2, 44, 54, 112, 106, 68, 94, 69, 95, 113, 107, 45, 55, 25, 3, 65, 91, 117, 111, 41, 51, 29, 7, 28, 6, 40, 50, 116, 110, 64, 90, 118, 108, 66, 88, 30, 4, 42, 48, 43, 49, 31, 5, 67, 89, 119, 109, 126, 100, 74, 80, 22, 12, 34, 56, 35, 57, 23, 13, 75, 81, 127, 101, 73, 83, 125, 103, 33, 59, 21, 15, 20, 14, 32, 58, 124, 102, 72, 82, 16, 10, 36, 62, 120, 98, 76, 86, 77, 87, 121, 99, 37, 63, 17, 11, 39, 61, 19, 9, 79, 85, 123, 97, 122, 96, 78, 84, 18, 8, 38, 60 };
-/*      */   static final int Ĉ = 16;
-/*  483 */   private static final String[] t = { "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "usbserial", "usbserial1", "usbserial2", "usbserial3", "usbserial4", "usbserial5", "usbserial6", "usbserial7", "usbserial8", "usbserial9" };
-/*      */   private static final int Û = 1997;
-/*      */   private static final int Ö = 2096;
+/*  457 */   static final int[] CRC7_LOOKUP_TABLE = { 0, 26, 52, 46, 104, 114, 92, 70, 93, 71, 105, 115, 53, 47, 1, 27, 55, 45, 3, 25, 95, 69, 107, 113, 106, 112, 94, 68, 2, 24, 54, 44, 110, 116, 90, 64, 6, 28, 50, 40, 51, 41, 7, 29, 91, 65, 111, 117, 89, 67, 109, 119, 49, 43, 5, 31, 4, 30, 48, 42, 108, 118, 88, 66, 81, 75, 101, 127, 57, 35, 13, 23, 12, 22, 56, 34, 100, 126, 80, 74, 102, 124, 82, 72, 14, 20, 58, 32, 59, 33, 15, 21, 83, 73, 103, 125, 63, 37, 11, 17, 87, 77, 99, 121, 98, 120, 86, 76, 10, 16, 62, 36, 8, 18, 60, 38, 96, 122, 84, 78, 85, 79, 97, 123, 61, 39, 9, 19, 47, 53, 27, 1, 71, 93, 115, 105, 114, 104, 70, 92, 26, 0, 46, 52, 24, 2, 44, 54, 112, 106, 68, 94, 69, 95, 113, 107, 45, 55, 25, 3, 65, 91, 117, 111, 41, 51, 29, 7, 28, 6, 40, 50, 116, 110, 64, 90, 118, 108, 66, 88, 30, 4, 42, 48, 43, 49, 31, 5, 67, 89, 119, 109, 126, 100, 74, 80, 22, 12, 34, 56, 35, 57, 23, 13, 75, 81, 127, 101, 73, 83, 125, 103, 33, 59, 21, 15, 20, 14, 32, 58, 124, 102, 72, 82, 16, 10, 36, 62, 120, 98, 76, 86, 77, 87, 121, 99, 37, 63, 17, 11, 39, 61, 19, 9, 79, 85, 123, 97, 122, 96, 78, 84, 18, 8, 38, 60 };
+/*      */   static final int MAX_AUTO_OFF_DUR = 16;
+/*  483 */   private static final String[] MAX_PORT_LIST = { "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "usbserial", "usbserial1", "usbserial2", "usbserial3", "usbserial4", "usbserial5", "usbserial6", "usbserial7", "usbserial8", "usbserial9" };
+/*      */   private static final int MIN_YEAR = 1997;
+/*      */   private static final int MAX_YEAR = 2096;
 /*      */   private static final String w = "USB";
-/*  496 */   private static boolean Ć = false;
+/*  496 */   private static boolean m_createSnapshotTextFile = false;
 /*      */ 
-/*  501 */   private static PrintWriter p = null;
+/*  501 */   private static PrintWriter m_messageLevel = null;
 /*      */ 
-/*  506 */   private static int ę = 0;
+/*  506 */   private static int m_messageLevel = 0;
 /*      */ 
-/*  511 */   private static SimpleDateFormat l = null;
-/*      */   static final int ü = 100;
-/*  518 */   static String Ã = " ";
+/*  511 */   private static SimpleDateFormat m_dateFormatter = null;
+/*      */   static final int PERCENT_100 = 100;
+/*  518 */   static String m_lastCommandDescription = " ";
 /*      */ 
-/*  523 */   static boolean n = false;
+/*  523 */   static boolean m_haltRequested = false;
 /*      */ 
-/*  528 */   static int Ì = 0;
+/*  528 */   static int m_state = 0;
 /*      */ 
-/*  533 */   static String ē = "0";
+/*  533 */   static String m_stateText = "0";
 /*      */ 
-/*  538 */   static int ø = 0;
+/*  538 */   static int m_phase = 0;
 /*      */ 
-/*  543 */   static String Ď = "0";
-/*      */   static final int æ = 2;
-/*      */   private z Ó;
-/*      */   static final int Ù = 1;
-/*      */   static final int Ą = 2;
-/*      */   static final int î = 3;
-/*      */   EA è;
+/*  543 */   static String m_phaseText = "0";
+/*      */   static final int DEFAULT_MAX_RETRIES = 2;
+/*      */   private CommunicationsLink m_communicationsLink;
+/*      */   static final int DEVICE_TYPE_PUMP = 1;
+/*      */   static final int DEVICE_TYPE_MONITOR = 2;
+/*      */   static final int DEVICE_TYPE_METER = 3;
+/*      */   TraceHistorySet m_traceHistorySet;
 /*      */   String u;
-/*  574 */   int đ = 0;
-/*      */   String ć;
-/*      */   _A Ė;
-/*      */   CA Î;
-/*      */   private int Ĕ;
-/*      */   int e;
-/*      */   int ì;
-/*      */   int £;
-/*      */   String ă;
-/*      */   String Ă;
-/*      */   Date ĕ;
-/*      */   int à;
-/*      */   int Ð;
-/*      */   int ā;
-/*      */   int Þ;
-/*      */   long ¤;
-/*      */   long Ñ;
-/*      */   String À;
-/*  668 */   private final Vector j = new Vector(10);
+/*  574 */   int m_linkDevice = 0;
+/*      */   String m_description;
+/*      */   SnapshotCreator m_snapshotCreator;
+/*      */   Snapshot m_snapshot;
+/*      */   private int m_snapshotByteCount;
+/*      */   int m_snapshotFirmwareCount;
+/*      */   int m_snapshotSerialCount;
+/*      */   int m_snapshotTimeCount;
+/*      */   String m_serialNumber;
+/*      */   String m_firmwareVersion;
+/*      */   Date m_timeStamp;
+/*      */   int m_minYear;
+/*      */   int m_maxYear;
+/*      */   int m_deviceClassID;
+/*      */   int m_snapshotFormatID;
+/*      */   long m_lastHistoryPageNumber;
+/*      */   long m_lastGlucoseHistoryPageNumber;
+/*      */   String m_modelNumber;
+/*  668 */   private final Vector m_listeners = new Vector(10);
 /*      */ 
-/*      */   O()
+/*      */   MedicalDevice()
 /*      */   {
-/*  679 */     this.à = 1997;
-/*  680 */     this.Ð = 2096;
-/*  681 */     this.è = null;
+/*  679 */     this.m_minYear = 1997;
+/*  680 */     this.m_maxYear = 2096;
+/*  681 */     this.m_traceHistorySet = null;
 /*      */ 
-/*  684 */     A(new K(this, this.ă));
+/*  684 */     setCommunicationsLink(new CommunicationsLinkRS232(this, this.m_serialNumber));
 /*      */   }
-/*      */ 
+/*      */
 /*      */   public String toString()
 /*      */   {
-/*  701 */     return "description = " + this.ć + ", modelNumber = " + this.À + ", device type = " + (H() ? "meter" : A() ? "monitor" : M() ? "pump" : null) + ", serialNumber = " + this.ă + ", firmwareVersion = " + this.Ă + ", timeStamp = " + this.ĕ + ", communicationsLink = '" + W() + "'" + ", linkDevice ID = " + this.đ + ", PACKAGE_VERSION = " + "10.0.0";
+/*  701 */     return "description = " + this.m_description + ", modelNumber = " + this.m_modelNumber + ", device type = " + (isDeviceMeter() ? "meter" : isDeviceMonitor() ? "monitor" : isDevicePump() ? "pump" : null) + ", serialNumber = " + this.m_serialNumber + ", firmwareVersion = " + this.m_firmwareVersion + ", timeStamp = " + this.m_timeStamp + ", communicationsLink = '" + getCommunicationsLink() + "'" + ", linkDevice ID = " + this.m_linkDevice + ", PACKAGE_VERSION = " + "10.0.0";
 /*      */   }
-/*      */ 
-/*      */   public void B(v paramv, String paramString1, String paramString2, Date paramDate1, Date paramDate2)
-/*      */     throws t, Z, IOException, P
+/*      */   // B(v paramv, String paramString1, String paramString2, Date paramDate1, Date paramDate2)
+/*      */   public void readGlucoseDataRange(DeviceListener paramDeviceListener, int paramInt, String paramString, Date paramDate1, Date paramDate2)
+/*      */     throws BadDeviceCommException, BadDeviceValueException, IOException, ConnectToPumpException
 /*      */   {
 /*  746 */     Contract.unreachable();
 /*      */   }
-/*      */ 
-/*      */   public void A(v paramv, String paramString1, String paramString2, Date paramDate1, Date paramDate2)
-/*      */     throws t, Z, IOException, P
+/*      */   // A(v paramv, String paramString1, String paramString2, Date paramDate1, Date paramDate2)
+/*      */   public void readIsigDataRange(DeviceListener paramDeviceListener, int paramInt, String paramString, Date paramDate1, Date paramDate2)
+/*      */     throws BadDeviceCommException, BadDeviceValueException, IOException, ConnectToPumpException
 /*      */   {
 /*  782 */     Contract.unreachable();
 /*      */   }
-/*      */ 
-/*      */   public void B(v paramv, String paramString1, String paramString2)
-/*      */     throws t, Z, IOException, P
+/*      */   // B(v paramv, String paramString1, String paramString2)
+/*      */   public void readClock(DeviceListener paramDeviceListener, int paramInt, String paramString)
+/*      */     throws BadDeviceCommException, BadDeviceValueException, IOException, ConnectToPumpException
 /*      */   {
 /*  806 */     Contract.unreachable();
 /*      */   }
-/*      */ 
-/*      */   public void A(v paramv, String paramString1, String paramString2, boolean paramBoolean)
-/*      */     throws t, Z, IOException, P
+/*      */   // A(v paramv, String paramString1, String paramString2, boolean paramBoolean)
+/*      */   public void readData(DeviceListener paramDeviceListener, int paramInt, String paramString, boolean paramBoolean)
+/*      */     throws BadDeviceCommException, BadDeviceValueException, IOException, ConnectToPumpException
 /*      */   {
-/*  836 */     A(paramv, paramString1, paramString2);
+/*  836 */     readData(paramDeviceListener, paramInt, paramString);
 /*      */   }
-/*      */ 
-/*      */   public EA J()
+/*      */   // EA J()
+/*      */   public TraceHistorySet getTraceHistorySet()
 /*      */   {
-/*  847 */     return this.è;
+/*  847 */     return this.m_traceHistorySet;
 /*      */   }
-/*      */ 
-/*      */   public String A(v paramv)
-/*      */     throws t, IOException
+/*      */   // A(v paramv)
+/*      */   public String autoDetectDevice(DeviceListener paramDeviceListener)
+/*      */     throws BadDeviceCommException, IOException
 /*      */   {
 /*      */     String str;
-/*  867 */     if ((this.đ == 19) || ((this instanceof k)) || ((this instanceof j)))
+/*  867 */     if ((this.m_linkDevice == 19) || ((this instanceof k)) || ((this instanceof j)))
 /*      */     {
 /*  869 */       str = "USB";
 /*      */     }
 /*      */     else {
 /*      */       try {
 /*      */         try {
-/*  874 */           str = A(paramv, d.M());
+/*  874 */           str = autoDetectDeviceIO(paramDeviceListener, SerialPort.getPortList());
 /*      */         }
-/*      */         catch (t localt) {
+/*      */         catch (BadDeviceCommException localBadDeviceCommException) {
 /*  877 */           if (!isHaltRequested()) {
-/*  878 */             D(this, "autoDetectDevice: system list failed; trying max port list.");
+/*  878 */             logWarning(this, "autoDetectDevice: system list failed; trying max port list.");
 /*      */ 
-/*  880 */             str = A(paramv, t);
+/*  880 */             str = autoDetectDeviceIO(paramDeviceListener, MAX_PORT_LIST);
 /*      */           } else {
-/*  882 */             throw localt;
+/*  882 */             throw localBadDeviceCommException;
 /*      */           }
 /*      */         }
 /*      */       }
 /*      */       finally
 /*      */       {
-/*  888 */         _();
+/*  888 */         shutDownSerialPort();
 /*      */       }
 /*      */     }
 /*      */ 
 /*  892 */     return str;
 /*      */   }
-/*      */ 
-/*      */   public InputStream C()
-/*      */     throws Z, IOException
+/*      */   // InputStream C()
+/*      */   public InputStream createSnapshot()
+/*      */     throws BadDeviceValueException, IOException
 /*      */   {
-/*  908 */     return this.Ė.B();
+/*  908 */     return this.m_snapshotCreator.createSnapshot();
 /*      */   }
-/*      */ 
-/*      */   public void A(String paramString)
+/*      */   // void A(String paramString)
+/*      */   public void storeSnapshot(String paramString)
 /*      */     throws FileNotFoundException, IOException
 /*      */   {
-/*  922 */     this.Î.B(paramString);
+/*  922 */     this.m_snapshot.store(paramString);
 /*      */   }
-/*      */ 
-/*      */   public void P()
+/*      */   // void P()
+/*      */   public void halt()
 /*      */   {
-/*  930 */     A(this, "halt: STOPPING UPLOAD...");
-/*  931 */     B(true);
+/*  930 */     logInfo(this, "halt: STOPPING UPLOAD...");
+/*  931 */     setHaltRequested(true);
 /*      */ 
-/*  933 */     if ((W() != null) && 
-/*  934 */       (W().C() != null)) {
-/*  935 */       W().C().A(false);
+/*  933 */     if ((getCommunicationsLink() != null) && 
+/*  934 */       (getCommunicationsLink().getCommPort() != null)) {
+/*  935 */       getCommunicationsLink().getCommPort().setContinueIO(false);
 /*      */     }
 /*      */ 
-/*  939 */     B(8);
+/*  939 */     setState(8);
 /*      */   }
-/*      */ 
-/*      */   public String D()
+/*      */   // String D()
+/*      */   public String getLastCommandDescription()
 /*      */   {
-/*  948 */     return Ã;
+/*  948 */     return m_lastCommandDescription;
 /*      */   }
-/*      */ 
-/*      */   public String R()
+/*      */   // String R()
+/*      */   public String getDescription()
 /*      */   {
-/*  957 */     return this.ć;
+/*  957 */     return this.m_description;
 /*      */   }
-/*      */ 
-/*      */   public synchronized int I()
+/*      */   // synchronized int I()
+/*      */   public synchronized int getPhase()
 /*      */   {
-/*  966 */     return ø;
+/*  966 */     return m_phase;
 /*      */   }
-/*      */ 
-/*      */   public String O()
+/*      */   // String O()
+/*      */   public String getPhaseText()
 /*      */   {
-/*  975 */     return Ď;
+/*  975 */     return m_phaseText;
 /*      */   }
-/*      */ 
-/*      */   public String Q()
+/*      */   // String Q()
+/*      */   public String getSerialNumber()
 /*      */   {
-/*  984 */     return this.ă;
+/*  984 */     return this.m_serialNumber;
 /*      */   }
-/*      */ 
-/*      */   public int F()
+/*      */   // int F()
+/*      */   public int getSnapshotVersion()
 /*      */   {
-/*  993 */     return this.Î.B();
+/*  993 */     return this.m_snapshot.getSnapshotVersion();
 /*      */   }
-/*      */ 
-/*      */   public Date N()
+/*      */   // Date N()
+/*      */   public Date getClock()
 /*      */   {
-/* 1002 */     return this.ĕ;
+/* 1002 */     return this.m_timeStamp;
 /*      */   }
-/*      */ 
-/*      */   public int B()
+/*      */   // int B()
+/*      */   public int getMaxRetryCount()
 /*      */   {
 /* 1013 */     return 2;
 /*      */   }
-/*      */ 
-/*      */   public String L()
+/*      */   // String L()
+/*      */   public int getSerialPortNumber()
 /*      */   {
-/* 1022 */     return this.u;
+/* 1022 */     return this.m_serialPortNumber;
 /*      */   }
-/*      */ 
-/*      */   public long E()
+/*      */   // long E()
+/*      */   public long getLastHistoryPageNumber()
 /*      */   {
-/* 1033 */     return this.¤;
+/* 1033 */     return this.m_lastHistoryPageNumber;
 /*      */   }
-/*      */ 
-/*      */   public long G()
+/*      */   // long G()
+/*      */   public long getLastGlucoseHistoryPageNumber()
 /*      */   {
-/* 1044 */     return this.Ñ;
+/* 1044 */     return this.m_lastGlucoseHistoryPageNumber;
 /*      */   }
 /*      */ 
 /*      */   public void A(int paramInt)
 /*      */   {
 /* 1056 */     D(paramInt);
 /*      */   }
-/*      */ 
-/*      */   public static void D(int paramInt)
+/*      */   // static void D(int paramInt)
+/*      */   public void setMessageLevel(int paramInt)
 /*      */   {
 /* 1068 */     Contract.pre((paramInt >= 0) && (paramInt <= 3));
-/* 1069 */     ę = paramInt;
+/* 1069 */     m_messageLevel = paramInt;
 /*      */   }
-/*      */ 
-/*      */   public final String K()
+/*      */   // final String K()
+/*      */   public final String getPackageVersion()
 /*      */   {
 /* 1078 */     return "10.0.0";
 /*      */   }
-/*      */ 
-/*      */   public String S()
+/*      */   // String S()
+/*      */   public String getModelNumber()
 /*      */   {
-/* 1087 */     return this.À;
+/* 1087 */     return this.m_modelNumber;
 /*      */   }
-/*      */ 
-/*      */   public boolean M()
+/*      */   // boolean M()
+/*      */   public boolean isDevicePump()
 /*      */   {
-/* 1096 */     return Z() == 1;
+/* 1096 */     return getDeviceType() == 1;
 /*      */   }
-/*      */ 
-/*      */   public boolean A()
+/*      */   // boolean A()
+/*      */   public boolean isDeviceMonitor()
 /*      */   {
-/* 1105 */     return Z() == 2;
+/* 1105 */     return getDeviceType() == 2;
 /*      */   }
-/*      */ 
-/*      */   public boolean H()
+/*      */   // boolean H()
+/*      */   public boolean isDeviceMeter()
 /*      */   {
-/* 1114 */     return Z() == 3;
+/* 1114 */     return getDeviceType() == 3;
 /*      */   }
 /*      */ 
 /*      */   public final long getLastHistoryPageNumber(String paramString1, String paramString2)
@@ -345,93 +345,93 @@
 /* 1145 */     Contract.unreachable();
 /* 1146 */     return 0L;
 /*      */   }
-/*      */ 
-/*      */   public void allowDeviceOperation(G paramG)
-/*      */     throws P
+/*      */   // void allowDeviceOperation(G paramG)
+/*      */   public void allowDeviceOperation(DevicePortReader paramDevicePortReader)
+/*      */     throws ConnectToPumpException
 /*      */   {
 /*      */   }
 /*      */ 
 /*      */   public void deviceUpdateProgress(int paramInt)
 /*      */   {
-/* 1168 */     C(paramInt);
+/* 1168 */     notifyDeviceUpdateProgress(paramInt);
 /*      */   }
 /*      */ 
 /*      */   public void deviceUpdateState(int paramInt, String paramString)
 /*      */   {
 /* 1180 */     if ((paramInt != 1) && (paramInt != 2))
 /*      */     {
-/* 1182 */       B(paramInt);
+/* 1182 */       setState(paramInt);
 /*      */     }
 /*      */   }
 /*      */ 
 /*      */   public void deviceUpdatePhase(int paramInt, String paramString)
 /*      */   {
 /*      */   }
-/*      */ 
-/*      */   private String A(v paramv, String[] paramArrayOfString)
-/*      */     throws t
+/*      */   // String A(v paramv, String[] paramArrayOfString)
+/*      */   private String autoDetectDeviceIO(DeviceListener paramDeviceListener, String[] paramArrayOfString)
+/*      */     throws BadDeviceCommException
 /*      */   {
 /* 1210 */     String str1 = null;
 /* 1211 */     StringBuffer localStringBuffer = new StringBuffer();
-/* 1212 */     int i1 = 0;
+/* 1212 */     int i = 0;
 /*      */ 
-/* 1214 */     B(false);
-/* 1215 */     B(paramv);
-/* 1216 */     E(1);
+/* 1214 */     setHaltRequested(false);
+/* 1215 */     addDeviceListener(paramDeviceListener);
+/* 1216 */     setPhase(1);
 /*      */ 
-/* 1220 */     String str2 = I.A(this.đ);
+/* 1220 */     String str2 = DevicePortReaderFactory.mapLinkDeviceID(this.m_linkDevice);
 /* 1221 */     if (str2.equals("UNKNOWN")) {
-/* 1222 */       str2 = this.ć;
+/* 1222 */       str2 = this.m_description;
 /*      */     }
 /*      */ 
-/* 1226 */     for (int i2 = 0; (i2 < paramArrayOfString.length) && (i1 == 0) && (!isHaltRequested()); i2++)
+/* 1226 */     for (int j = 0; (j < paramArrayOfString.length) && (i == 0) && (!isHaltRequested()); j++)
 /*      */     {
 /*      */       try
 /*      */       {
-/* 1230 */         str1 = paramArrayOfString[(paramArrayOfString.length - i2 - 1)];
-/* 1231 */         if (i2 > 0)
+/* 1230 */         str1 = paramArrayOfString[(paramArrayOfString.length - j - 1)];
+/* 1231 */         if (j > 0)
 /*      */         {
 /* 1233 */           localStringBuffer.append(", ");
 /*      */         }
 /*      */ 
 /* 1236 */         localStringBuffer.append(str1);
-/* 1237 */         A(this, "autoDetectDeviceIO: testing port '" + str1 + "'");
+/* 1237 */         logInfo(this, "autoDetectDeviceIO: testing port '" + str1 + "'");
 /*      */ 
 /* 1240 */         String str3 = str1;
 /* 1241 */         D(str3);
 /*      */         try
 /*      */         {
 /* 1245 */           if (!isHaltRequested()) {
-/* 1246 */             E(7);
-/* 1247 */             C(paramv);
+/* 1246 */             setPhase(7);
+/* 1247 */             findDevice(paramDeviceListener);
 /*      */ 
-/* 1249 */             i1 = 1;
-/* 1250 */             A(this, "autoDetectDeviceIO: " + str2 + " found on port '" + str1 + "'");
+/* 1249 */             i = 1;
+/* 1250 */             logInfo(this, "autoDetectDeviceIO: " + str2 + " found on port '" + str1 + "'");
 /*      */           }
 /*      */         }
-/*      */         catch (t localt)
+/*      */         catch (BadDeviceCommException localBadDeviceCommException)
 /*      */         {
 /*      */         }
 /*      */       }
 /*      */       catch (IOException localIOException)
 /*      */       {
-/* 1259 */         A(this, "autoDetectDeviceIO: " + str2 + " NOT found on port '" + str1 + "'; " + "e=" + localIOException);
+/* 1259 */         logInfo(this, "autoDetectDeviceIO: " + str2 + " NOT found on port '" + str1 + "'; " + "e=" + localIOException);
 /*      */       }
-/*      */       catch (W localW) {
-/* 1262 */         U();
-/* 1263 */         throw new t("autoDetectDeviceIO: detection has been Halted...");
+/*      */       catch (BadDeviceValueException localBadDeviceValueException)
+/* 1262 */         removeAllDeviceListeners();
+/* 1263 */         throw new BadDeviceCommException("autoDetectDeviceIO: detection has been Halted...");
 /*      */       }
 /*      */ 
 /*      */     }
 /*      */ 
-/* 1268 */     U();
+/* 1268 */     removeAllDeviceListeners();
 /*      */ 
 /* 1270 */     if (isHaltRequested()) {
-/* 1271 */       throw new t("autoDetectDeviceIO: detection has been Halted...");
+/* 1271 */       throw new BadDeviceCommException("autoDetectDeviceIO: detection has been Halted...");
 /*      */     }
 /*      */ 
-/* 1275 */     if (i1 == 0) {
-/* 1276 */       throw new t("autoDetectDeviceIO: could not find " + str2 + " on any port in list '" + localStringBuffer + "'.");
+/* 1275 */     if (i == 0) {
+/* 1276 */       throw new BadDeviceCommException("autoDetectDeviceIO: could not find " + str2 + " on any port in list '" + localStringBuffer + "'.");
 /*      */     }
 /*      */ 
 /* 1281 */     return str1;
@@ -440,8 +440,8 @@
 /*      */   void C(String paramString)
 /*      */     throws IOException
 /*      */   {
-/* 1292 */     this.u = paramString;
-/* 1293 */     E(2);
+/* 1292 */     this.m_serialPortNumber = paramString;
+/* 1293 */     setPhase(2);
 /*      */ 
 /* 1295 */     if (Y() != null)
 /* 1296 */       Y().B();
@@ -454,239 +454,239 @@
 /*      */ 
 /*      */   abstract void D(String paramString)
 /*      */     throws IOException;
-/*      */ 
-/*      */   abstract void _()
+/*      */   // abstract void _()
+/*      */   abstract void shutDownSerialPort()
 /*      */     throws IOException;
-/*      */ 
-/*      */   final synchronized void E(int paramInt)
+/*      */   // final synchronized void E(int paramInt)
+/*      */   final synchronized void setPhase(int paramInt)
 /*      */   {
 /* 1341 */     Contract.pre((paramInt >= 1) && (paramInt <= 7));
 /*      */ 
-/* 1344 */     if (paramInt != ø) {
-/* 1345 */       ø = paramInt;
-/* 1346 */       Ď = B(K[ø]);
-/* 1347 */       A(ø, Ď);
-/* 1348 */       C(this, "setPhase: phase is now " + ø + " (" + Ď + ")");
+/* 1344 */     if (paramInt != m_phase) {
+/* 1345 */       m_phase = paramInt;
+/* 1346 */       m_phaseText = updateDynamicText(DeviceListener.PHASE_TEXT[m_phase]);
+/* 1347 */       notifyDeviceUpdatePhase(m_phase, m_phaseText);
+/* 1348 */       logInfoLow(this, "setPhase: phase is now " + ø + " (" + Ď + ")");
 /*      */     }
 /*      */   }
-/*      */ 
-/*      */   final synchronized void B(int paramInt)
+/*      */   // final synchronized void B(int paramInt)
+/*      */   final synchronized void setState(int paramInt)
 /*      */   {
 /* 1360 */     Contract.pre((paramInt >= 1) && (paramInt <= 9));
 /*      */ 
-/* 1362 */     if (paramInt != Ì) {
-/* 1363 */       Ì = paramInt;
-/* 1364 */       ē = H[Ì];
-/* 1365 */       B(Ì, ē);
-/* 1366 */       A(this, "setState: state is now " + Ì + " (" + ē + ")");
+/* 1362 */     if (paramInt != m_state) {
+/* 1363 */       m_state = paramInt;
+/* 1364 */       m_stateText = DeviceListener.STATE_TEXT[m_state];
+/* 1365 */       notifyDeviceUpdateState(m_state, m_stateText);
+/* 1366 */       logInfo(this, "setState: state is now " + Ì + " (" + ē + ")");
 /*      */     }
 /*      */   }
-/*      */ 
-/*      */   final synchronized int T()
+/*      */   // final synchronized int T()
+/*      */   final synchronized int getState()
 /*      */   {
-/* 1376 */     return Ì;
+/* 1376 */     return m_state;
 /*      */   }
-/*      */ 
-/*      */   final CA X()
+/*      */   // final CA X()
+/*      */   final Snapshot getSnapshot()
 /*      */   {
-/* 1385 */     return this.Î;
+/* 1385 */     return this.m_snapshot;
 /*      */   }
-/*      */ 
-/*      */   static void A(Object paramObject, String paramString)
+/*      */   // static void A(Object paramObject, String paramString)
+/*      */   static void logInfo(Object paramObject, String paramString)
 /*      */   {
-/* 1396 */     if (ę >= 2)
-/* 1397 */       A(paramObject, paramString, "INFO");
+/* 1396 */     if (m_messageLevel >= 2)
+/* 1397 */       logMessage(paramObject, paramString, "INFO");
 /*      */   }
-/*      */ 
-/*      */   static void B(Object paramObject, String paramString)
+/*      */   // static void B(Object paramObject, String paramString)
+/*      */   static void logInfoHigh(Object paramObject, String paramString)
 /*      */   {
-/* 1409 */     if (ę >= 3)
-/* 1410 */       A(paramObject, paramString, "INFO");
+/* 1409 */     if (m_messageLevel >= 3)
+/* 1410 */       logMessage(paramObject, paramString, "INFO");
 /*      */   }
-/*      */ 
-/*      */   static void C(Object paramObject, String paramString)
+/*      */   // static void C(Object paramObject, String paramString)
+/*      */   static void logInfoLow(Object paramObject, String paramString)
 /*      */   {
-/* 1422 */     if (ę >= 1)
-/* 1423 */       A(paramObject, paramString, "INFO");
+/* 1422 */     if (m_messageLevel >= 1)
+/* 1423 */       logMessage(paramObject, paramString, "INFO");
 /*      */   }
-/*      */ 
-/*      */   static void D(Object paramObject, String paramString)
+/*      */   // static void D(Object paramObject, String paramString)
+/*      */   static void logWarning(Object paramObject, String paramString)
 /*      */   {
-/* 1434 */     if (ę >= 2)
-/* 1435 */       A(paramObject, paramString, "WARNING");
+/* 1434 */     if (m_messageLevel >= 2)
+/* 1435 */       logMessage(paramObject, paramString, "WARNING");
 /*      */   }
-/*      */ 
-/*      */   static void E(Object paramObject, String paramString)
+/*      */   // static void E(Object paramObject, String paramString)
+/*      */   static void logError(Object paramObject, String paramString)
 /*      */   {
-/* 1446 */     if (ę >= 1)
-/* 1447 */       A(paramObject, paramString, "ERROR");
+/* 1446 */     if (m_messageLevel >= 1)
+/* 1447 */       logMessage(paramObject, paramString, "ERROR");
 /*      */   }
-/*      */ 
-/*      */   static void A(boolean paramBoolean)
+/*      */   // static void A(boolean paramBoolean)
+/*      */   static void setCreateSnapshotTextFile(boolean paramBoolean)
 /*      */   {
-/* 1460 */     Ć = paramBoolean;
+/* 1460 */     m_createSnapshotTextFile = paramBoolean;
 /*      */   }
-/*      */ 
-/*      */   static void A(PrintWriter paramPrintWriter)
+/*      */   // static void A(PrintWriter paramPrintWriter)
+/*      */   static void setLogBuffer(PrintWriter paramPrintWriter)
 /*      */   {
-/* 1469 */     p = paramPrintWriter;
+/* 1469 */     m_logBuffer = paramPrintWriter;
 /*      */   }
-/*      */ 
-/*      */   final Date A(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6)
-/*      */     throws Z
+/*      */   // final Date A(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6)
+/*      */   final Date createTimestamp(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6)
+/*      */     throws BadDeviceValueException
 /*      */   {
-/* 1488 */     B(paramInt1, paramInt2, paramInt3, paramInt4, paramInt5, paramInt6);
-/* 1489 */     GregorianCalendar localGregorianCalendar = new GregorianCalendar(_B.E(paramInt3), paramInt2 - 1, paramInt1, paramInt4, paramInt5, paramInt6);
+/* 1488 */     verifyDeviceTimeStamp(paramInt1, paramInt2, paramInt3, paramInt4, paramInt5, paramInt6);
+/* 1489 */     GregorianCalendar localGregorianCalendar = new GregorianCalendar(Util.convertYear(paramInt3), paramInt2 - 1, paramInt1, paramInt4, paramInt5, paramInt6);
 /*      */ 
 /* 1492 */     return localGregorianCalendar.getTime();
 /*      */   }
-/*      */ 
-/*      */   void B(v paramv)
+/*      */   // void B(v paramv)
+/*      */   void addDeviceListener(DeviceListener paramDeviceListener)
 /*      */   {
 /* 1503 */     Contract.pre(paramv != null);
 /*      */ 
-/* 1505 */     this.j.addElement(paramv);
+/* 1505 */     this.m_listeners.addElement(paramv);
 /*      */   }
-/*      */ 
-/*      */   void U()
+/*      */   // void U()
+/*      */   void removeAllDeviceListeners()
 /*      */   {
-/* 1514 */     this.j.removeAllElements();
+/* 1514 */     this.m_listeners.removeAllElements();
 /*      */   }
-/*      */ 
-/*      */   void C(int paramInt)
+/*      */   // void C(int paramInt)
+/*      */   void notifyDeviceUpdateProgress(int paramInt)
 /*      */   {
 /* 1526 */     if ((ø != 4) && 
 /* 1527 */       (paramInt >= 0) && (paramInt <= 100))
-/* 1528 */       for (int i1 = 0; i1 < this.j.size(); i1++) {
-/* 1529 */         v localv = (v)this.j.elementAt(i1);
+/* 1528 */       for (int i1 = 0; i1 < this.m_listeners.size(); i1++) {
+/* 1529 */         v localv = (v)this.m_listeners.elementAt(i1);
 /* 1530 */         localv.deviceUpdateProgress(paramInt);
 /*      */       }
 /*      */   }
-/*      */ 
-/*      */   void A(int paramInt1, int paramInt2)
+/*      */   // void A(int paramInt1, int paramInt2)
+/*      */   void notifyDeviceUpdateProgress(int paramInt1, int paramInt2)
 /*      */   {
 /* 1545 */     double d = paramInt1 / paramInt2 * 100.0D;
 /*      */ 
 /* 1547 */     C((int)d);
 /*      */   }
-/*      */ 
-/*      */   void B(int paramInt, String paramString)
+/*      */   // void B(int paramInt, String paramString)
+/*      */   void notifyDeviceUpdateState(int paramInt, String paramString)
 /*      */   {
-/* 1557 */     for (int i1 = 0; i1 < this.j.size(); i1++) {
-/* 1558 */       v localv = (v)this.j.elementAt(i1);
-/* 1559 */       localv.deviceUpdateState(paramInt, paramString);
+/* 1557 */     for (int i = 0; i < this.m_listeners.size(); i++) {
+/* 1558 */       DeviceListener localDeviceListener = (DeviceListener)this.m_listeners.elementAt(i);
+/* 1559 */       localDeviceListener.deviceUpdateState(paramInt, paramString);
 /*      */     }
 /*      */   }
-/*      */ 
-/*      */   void A(int paramInt, String paramString)
+/*      */   // void A(int paramInt, String paramString)
+/*      */   void notifyDeviceUpdatePhase(int paramInt, String paramString)
 /*      */   {
-/* 1570 */     for (int i1 = 0; i1 < this.j.size(); i1++) {
-/* 1571 */       v localv = (v)this.j.elementAt(i1);
-/* 1572 */       localv.deviceUpdatePhase(paramInt, paramString);
+/* 1570 */     for (int i = 0; i < this.m_listeners.size(); i++) {
+/* 1571 */       DeviceListener localDeviceListener = (DeviceListener)this.m_listeners.elementAt(i);
+/* 1572 */       localDeviceListener.deviceUpdatePhase(paramInt, paramString);
 /*      */     }
 /*      */   }
-/*      */ 
-/*      */   final String B(String paramString)
+/*      */   // final String B(String paramString)
+/*      */   final String updateDynamicText(String paramString)
 /*      */   {
-/* 1583 */     String str1 = (this.đ == 15) || (this.đ == 14) ? this.u : "USB";
+/* 1583 */     String str1 = (this.m_linkDevice == 15) || (this.m_linkDevice == 14) ? this.m_serialPortNumber : "USB";
 /*      */ 
-/* 1587 */     String str2 = I.A(this.đ);
+/* 1587 */     String str2 = DevicePortReaderFactory.mapLinkDeviceID(this.m_linkDevice);
 /*      */ 
 /* 1589 */     paramString = paramString.replaceAll("@commport", str1);
 /* 1590 */     paramString = paramString.replaceAll("@linkdevice", str2 == null ? "?" : str2);
-/* 1591 */     paramString = paramString.replaceAll("@serialnumber", this.ă == null ? "?" : this.ă);
+/* 1591 */     paramString = paramString.replaceAll("@serialnumber", this.m_serialNumber == null ? "?" : this.m_serialNumber);
 /* 1592 */     return paramString;
 /*      */   }
-/*      */ 
-/*      */   void A(int[] paramArrayOfInt)
+/*      */   // void A(int[] paramArrayOfInt)
+/*      */   void decodeSerialNumber(int[] paramArrayOfInt)
 /*      */   {
 /* 1603 */     Contract.pre(paramArrayOfInt != null);
 /*      */ 
-/* 1605 */     this.ă = new String(_B.B(paramArrayOfInt));
-/* 1606 */     this.ă = this.ă.trim();
-/* 1607 */     A(this, "decodeSerialNumber: serial number is " + this.ă);
+/* 1605 */     this.m_serialNumber = new String(Util.makeByteArray(paramArrayOfInt));
+/* 1606 */     this.m_serialNumber = this.m_serialNumber.trim();
+/* 1607 */     logInfo(this, "decodeSerialNumber: serial number is " + this.m_serialNumber);
 /*      */   }
-/*      */ 
-/*      */   void B(int[] paramArrayOfInt)
+/*      */   // void B(int[] paramArrayOfInt)
+/*      */   void decodeFirmwareVersion(int[] paramArrayOfInt)
 /*      */   {
 /* 1618 */     Contract.pre(paramArrayOfInt != null);
 /*      */ 
-/* 1620 */     this.Ă = new String(_B.B(paramArrayOfInt));
-/* 1621 */     this.Ă = this.Ă.trim();
-/* 1622 */     A(this, "decodeFirmwareVersion: firmware version is " + this.Ă);
+/* 1620 */     this.m_firmwareVersion = new String(Util.makeByteArray(paramArrayOfInt));
+/* 1621 */     this.m_firmwareVersion = this.m_firmwareVersion.trim();
+/* 1622 */     logInfo(this, "decodeFirmwareVersion: firmware version is " + this.m_firmwareVersion
 /*      */   }
-/*      */ 
-/*      */   final z W()
+/*      */   // z W()
+/*      */   final CommunicationsLink getCommunicationsLink()
 /*      */   {
-/* 1631 */     return this.Ó;
+/* 1631 */     return this.m_communicationsLink;
 /*      */   }
-/*      */ 
-/*      */   final void A(z paramz)
+/*      */   // void A(z paramz)
+/*      */   final void setCommunicationsLink(CommunicationsLink paramCommunicationsLink)
 /*      */   {
-/* 1640 */     this.Ó = paramz;
+/* 1640 */     this.m_communicationsLink� = paramCommunicationsLink;
 /*      */   }
-/*      */ 
-/*      */   private void B(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6)
-/*      */     throws Z
+/*      */   // void B(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6)
+/*      */   private void verifyDeviceTimeStamp(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6)
+/*      */     throws BadDeviceValueException
 /*      */   {
-/* 1659 */     _B.A(paramInt1, 1, 31, "day");
-/* 1660 */     _B.A(paramInt2, 1, 12, "month");
-/* 1661 */     _B.A(paramInt3, this.à, this.Ð, "year");
-/* 1662 */     _B.A(paramInt4, 0, 23, "hour");
-/* 1663 */     _B.A(paramInt5, 0, 59, "minute");
-/* 1664 */     _B.A(paramInt6, 0, 59, "second");
+/* 1659 */     Util.verifyDeviceValue(paramInt1, 1, 31, "day");
+/* 1660 */     Util.verifyDeviceValue(paramInt2, 1, 12, "month");
+/* 1661 */     Util.verifyDeviceValue(paramInt3, this.m_minYear, this.m_maxYear, "year");
+/* 1662 */     Util.verifyDeviceValue(paramInt4, 0, 23, "hour");
+/* 1663 */     Util.verifyDeviceValue(paramInt5, 0, 59, "minute");
+/* 1664 */     Util.verifyDeviceValue(paramInt6, 0, 59, "second");
 /*      */   }
-/*      */ 
-/*      */   private static synchronized void A(Object paramObject, String paramString1, String paramString2)
+/*      */   // void A(Object paramObject, String paramString1, String paramString2)
+/*      */   private static synchronized void logMessage(Object paramObject, String paramString1, String paramString2)
 /*      */   {
-/* 1678 */     String str1 = _B.E(paramString1);
-/* 1679 */     if (p != null) {
+/* 1678 */     String str1 = Util.convertControlChars(paramString1);
+/* 1679 */     if (m_logBuffer != null) {
 /* 1680 */       Date localDate = new Date();
-/* 1681 */       String str2 = l.format(localDate);
-/* 1682 */       p.println(str2 + " " + paramString2 + " " + paramObject.getClass().getName() + "-" + str1);
+/* 1681 */       String str2 = m_dateFormatter.format(localDate);
+/* 1682 */       m_logBuffer.println(str2 + " " + paramString2 + " " + paramObject.getClass().getName() + "-" + str1);
 /*      */     }
 /*      */   }
-/*      */ 
-/*      */   final synchronized void B(boolean paramBoolean)
+/*      */   // void B(boolean paramBoolean)
+/*      */   final synchronized void setHaltRequested(boolean paramBoolean)
 /*      */   {
-/* 1694 */     n = paramBoolean;
+/* 1694 */     m_haltRequested = paramBoolean;
 /*      */   }
 /*      */ 
 /*      */   public final synchronized boolean isHaltRequested()
 /*      */   {
-/* 1704 */     return n;
+/* 1704 */     return m_haltRequested;
 /*      */   }
-/*      */ 
-/*      */   void A(d paramd)
+/*      */   // void A(d paramd)
+/*      */   void setRS232Port(SerialPort paramSerialPort)
 /*      */   {
-/* 1713 */     W().A(paramd);
+/* 1713 */     getCommunicationsLink().setCommPort(paramSerialPort);
 /*      */   }
-/*      */ 
-/*      */   d Y()
+/*      */   // d Y()
+/*      */   SerialPort getRS232Port()
 /*      */   {
-/* 1722 */     return (d)W().C();
+/* 1722 */     return (SerialPort)getCommunicationsLink().getCommPort()
 /*      */   }
 /*      */ 
 /*      */   void A(c paramc)
 /*      */   {
 /* 1731 */     W().A(paramc);
 /*      */   }
-/*      */ 
-/*      */   c V()
+/*      */   // c V()
+/*      */   CommPort V()
 /*      */   {
 /* 1740 */     return W().C();
 /*      */   }
 /*      */ 
 /*      */   static
 /*      */   {
-/*  690 */     l = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss:SSSS");
+/*  690 */     m_dateFormatter = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss:SSSS");
 /*      */   }
 /*      */ 
-/*      */   static final class _B
+/*      */   static final class Util
 /*      */   {
-/* 1809 */     private static final Calendar A = Calendar.getInstance();
-/*      */ 
-/*      */     static int[] C(int[] paramArrayOfInt)
+/* 1809 */     private static final Calendar CAL = Calendar.getInstance(); // A
+/*      */     // int[] C(int[] paramArrayOfInt)
+/*      */     static int[] clone(int[] paramArrayOfInt)
 /*      */     {
 /* 1824 */       int[] arrayOfInt = new int[paramArrayOfInt.length];
 /* 1825 */       for (int i = 0; i < arrayOfInt.length; i++) {
@@ -694,8 +694,8 @@
 /*      */       }
 /* 1828 */       return arrayOfInt;
 /*      */     }
-/*      */ 
-/*      */     static void G(int paramInt)
+/*      */     // void G(int paramInt)
+/*      */     static void sleepMS(int paramInt)
 /*      */     {
 /*      */       try
 /*      */       {
@@ -705,44 +705,44 @@
 /*      */       {
 /*      */       }
 /*      */     }
-/*      */ 
-/*      */     static int D(int paramInt)
+/*      */     // int D(int paramInt)
+/*      */     static int getLowNibble(int paramInt)
 /*      */     {
 /* 1852 */       Contract.pre((paramInt >= 0) && (paramInt <= 255));
 /*      */ 
 /* 1854 */       return paramInt & 0xF;
 /*      */     }
-/*      */ 
-/*      */     static int M(int paramInt)
+/*      */     // int M(int paramInt)
+/*      */     static int getHighNibble(int paramInt)
 /*      */     {
 /* 1866 */       Contract.pre((paramInt >= 0) && (paramInt <= 255));
 /*      */ 
 /* 1868 */       return paramInt >> 4 & 0xF;
 /*      */     }
-/*      */ 
-/*      */     static int K(int paramInt)
+/*      */     // int K(int paramInt)
+/*      */     static int getLowByte(int paramInt)
 /*      */     {
 /* 1878 */       return paramInt & 0xFF;
 /*      */     }
-/*      */ 
-/*      */     static int J(int paramInt)
+/*      */     // int J(int paramInt)
+/*      */     static int getHighByte(int paramInt)
 /*      */     {
 /* 1889 */       return paramInt >>> 8 & 0xFF;
 /*      */     }
-/*      */ 
-/*      */     static int A(String paramString)
+/*      */     // int A(String paramString)
+/*      */     static int convertHexToDec(String paramString)
 /*      */     {
 /* 1901 */       return Integer.valueOf(paramString, 16).intValue();
 /*      */     }
-/*      */ 
-/*      */     static int L(int paramInt)
+/*      */     // int L(int paramInt)
+/*      */     static int convertHexToASCII(int paramInt)
 /*      */     {
 /* 1913 */       Contract.pre((paramInt >= 0) && (paramInt <= 15));
 /*      */ 
 /* 1915 */       return paramInt < 10 ? paramInt + 48 : paramInt - 10 + 65;
 /*      */     }
-/*      */ 
-/*      */     static String E(String paramString)
+/*      */     // String E(String paramString)
+/*      */     static String convertControlChars(String paramString)
 /*      */     {
 /* 1926 */       StringBuffer localStringBuffer = new StringBuffer();
 /*      */ 
@@ -822,25 +822,25 @@
 /*      */       }
 /* 1987 */       return new String(localStringBuffer);
 /*      */     }
-/*      */ 
-/*      */     static boolean A(int paramInt, String paramString)
-/*      */       throws Z
+/*      */     // boolean A(int paramInt, String paramString)
+/*      */     static boolean parseEnable(int paramInt, String paramString)
+/*      */       throws BadDeviceValueException
 /*      */     {
-/* 2000 */       A(paramInt, 0, 1, paramString);
+/* 2000 */       verifyDeviceValue(paramInt, 0, 1, paramString);
 /* 2001 */       return paramInt == 1;
 /*      */     }
-/*      */ 
-/*      */     static int[] B(String paramString)
+/*      */     // int[] B(String paramString)
+/*      */     static int[] makePackedBCD(String paramString)
 /*      */     {
 /* 2016 */       Contract.preNonNull(paramString);
-/* 2017 */       Contract.pre(C(paramString.length()));
+/* 2017 */       Contract.pre(isEven(paramString.length()));
 /* 2018 */       paramString = paramString.toLowerCase();
 /* 2019 */       for (int i = 0; i < paramString.length(); i++) {
 /* 2020 */         char c1 = paramString.charAt(i);
 /* 2021 */         Contract.pre((Character.isDigit(c1)) || ((c1 >= 'a') && (c1 <= 'f')));
 /*      */       }
 /*      */ 
-/* 2024 */       int[] arrayOfInt1 = D(paramString);
+/* 2024 */       int[] arrayOfInt1 = makeIntArray(paramString);
 /* 2025 */       int[] arrayOfInt2 = new int[arrayOfInt1.length / 2];
 /*      */ 
 /* 2027 */       for (int j = 0; j < arrayOfInt2.length; j++) {
@@ -848,13 +848,13 @@
 /* 2029 */         char c3 = (char)arrayOfInt1[(j * 2 + 1)];
 /* 2030 */         int k = c2 - (Character.isDigit(c2) ? '0' : 'W');
 /* 2031 */         int m = c3 - (Character.isDigit(c3) ? '0' : 'W');
-/* 2032 */         arrayOfInt2[j] = C(k, m);
+/* 2032 */         arrayOfInt2[j] = makeByte(k, m);
 /*      */       }
 /*      */ 
 /* 2035 */       return arrayOfInt2;
 /*      */     }
-/*      */ 
-/*      */     static int C(int paramInt1, int paramInt2)
+/*      */     // int C(int paramInt1, int paramInt2)
+/*      */     static int makeByte(int paramInt1, int paramInt2)
 /*      */     {
 /* 2051 */       Contract.pre((paramInt1 >= 0) && (paramInt1 <= 15));
 /* 2052 */       Contract.pre((paramInt2 >= 0) && (paramInt2 <= 15));
@@ -865,8 +865,8 @@
 /*      */ 
 /* 2058 */       return i;
 /*      */     }
-/*      */ 
-/*      */     static long A(int paramInt1, int paramInt2, int paramInt3, int paramInt4)
+/*      */     // long A(int paramInt1, int paramInt2, int paramInt3, int paramInt4)
+/*      */     static long makeLong(int paramInt1, int paramInt2, int paramInt3, int paramInt4)
 /*      */     {
 /* 2077 */       Contract.pre((paramInt1 >= 0) && (paramInt1 <= 255));
 /* 2078 */       Contract.pre((paramInt2 >= 0) && (paramInt2 <= 255));
@@ -879,23 +879,23 @@
 /*      */ 
 /* 2090 */       return l;
 /*      */     }
-/*      */ 
-/*      */     static int D(long paramLong)
+/*      */     // int D(long paramLong)
+/*      */     static int getLowWord(long paramLong)
 /*      */     {
 /* 2100 */       return (int)(paramLong & 0xFFFF);
 /*      */     }
-/*      */ 
-/*      */     static int C(long paramLong)
+/*      */     // int C(long paramLong)
+/*      */     static int getHighWord(long paramLong)
 /*      */     {
 /* 2111 */       return (int)(paramLong >>> 16) & 0xFFFF;
 /*      */     }
-/*      */ 
-/*      */     static double B(int paramInt)
+/*      */     // double B(int paramInt)
+/*      */     static double toWholeUnits(int paramInt)
 /*      */     {
 /* 2121 */       return paramInt / 10.0D;
 /*      */     }
-/*      */ 
-/*      */     static int A(int paramInt1, int paramInt2)
+/*      */     // int A(int paramInt1, int paramInt2)
+/*      */     static int makeInt(int paramInt1, int paramInt2)
 /*      */     {
 /* 2135 */       Contract.pre((paramInt1 >= 0) && (paramInt1 <= 255));
 /* 2136 */       Contract.pre((paramInt2 >= 0) && (paramInt2 <= 255));
@@ -905,8 +905,8 @@
 /* 2140 */       Contract.post((i >= 0) && (i <= 65535));
 /* 2141 */       return i;
 /*      */     }
-/*      */ 
-/*      */     static int A(int paramInt1, int paramInt2, int paramInt3)
+/*      */     // int A(int paramInt1, int paramInt2, int paramInt3)
+/*      */     static int makeInt(int paramInt1, int paramInt2, int paramInt3)
 /*      */     {
 /* 2158 */       Contract.pre((paramInt1 >= 0) && (paramInt1 <= 255));
 /* 2159 */       Contract.pre((paramInt2 >= 0) && (paramInt2 <= 255));
@@ -918,18 +918,18 @@
 /*      */ 
 /* 2167 */       return i;
 /*      */     }
-/*      */ 
-/*      */     static int C(byte paramByte)
+/*      */     // int C(byte paramByte)
+/*      */     static int convertUnsignedByteToInt(byte paramByte)
 /*      */     {
 /* 2180 */       return paramByte & 0xFF;
 /*      */     }
-/*      */ 
-/*      */     static long A(int paramInt)
+/*      */     // long A(int paramInt)
+/*      */     static long convertUnsignedIntToLong(int paramInt)
 /*      */     {
 /* 2193 */       return paramInt & 0xFFFFFFFF;
 /*      */     }
-/*      */ 
-/*      */     static byte[] A(int[] paramArrayOfInt)
+/*      */     // byte[] A(int[] paramArrayOfInt)
+/*      */     static byte[] convertIntsToBytes(int[] paramArrayOfInt)
 /*      */     {
 /* 2205 */       Contract.preNonNull(paramArrayOfInt);
 /* 2206 */       byte[] arrayOfByte = new byte[paramArrayOfInt.length];
@@ -940,8 +940,8 @@
 /*      */       }
 /* 2213 */       return arrayOfByte;
 /*      */     }
-/*      */ 
-/*      */     static int B(int paramInt1, int paramInt2)
+/*      */     // int B(int paramInt1, int paramInt2)
+/*      */     static int makeUnsignedShort(int paramInt1, int paramInt2)
 /*      */     {
 /* 2227 */       Contract.pre((paramInt1 >= 0) && (paramInt1 <= 255));
 /* 2228 */       Contract.pre((paramInt2 >= 0) && (paramInt2 <= 255));
@@ -951,8 +951,8 @@
 /* 2232 */       Contract.post((i >= 0) && (i <= 65535));
 /* 2233 */       return i;
 /*      */     }
-/*      */ 
-/*      */     static byte[] B(int[] paramArrayOfInt)
+/*      */     // byte[] B(int[] paramArrayOfInt)
+/*      */     static byte[] makeByteArray(int[] paramArrayOfInt)
 /*      */     {
 /* 2244 */       if (paramArrayOfInt != null) {
 /* 2245 */         byte[] arrayOfByte = new byte[paramArrayOfInt.length];
@@ -965,8 +965,8 @@
 /*      */       }
 /* 2253 */       return null;
 /*      */     }
-/*      */ 
-/*      */     static int[] C(byte[] paramArrayOfByte)
+/*      */     // int[] C(byte[] paramArrayOfByte)
+/*      */     static int[] makeIntArray(byte[] paramArrayOfByte)
 /*      */     {
 /* 2264 */       Contract.preNonNull(paramArrayOfByte);
 /* 2265 */       int[] arrayOfInt = new int[paramArrayOfByte.length];
@@ -976,13 +976,13 @@
 /*      */       }
 /* 2271 */       return arrayOfInt;
 /*      */     }
-/*      */ 
-/*      */     static String E(int[] paramArrayOfInt)
+/*      */     // String E(int[] paramArrayOfInt)
+/*      */     static String makeString(int[] paramArrayOfInt)
 /*      */     {
-/* 2282 */       return B(paramArrayOfInt, 0, paramArrayOfInt.length);
+/* 2282 */       return makeString(paramArrayOfInt, 0, paramArrayOfInt.length);
 /*      */     }
-/*      */ 
-/*      */     static String B(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*      */     // String B(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*      */     static String makeString(int[] paramArrayOfInt, int paramInt1, int paramInt2)
 /*      */     {
 /* 2296 */       Contract.pre(paramArrayOfInt.length >= paramInt1 + paramInt2);
 /* 2297 */       if (paramArrayOfInt != null) {
@@ -999,8 +999,8 @@
 /*      */       }
 /* 2309 */       return null;
 /*      */     }
-/*      */ 
-/*      */     static int[] D(String paramString)
+/*      */     // static int[] D(String paramString)
+/*      */     static int[] makeIntArray(String paramString)
 /*      */     {
 /* 2320 */       if (paramString != null) {
 /* 2321 */         int[] arrayOfInt = new int[paramString.length()];
@@ -1012,8 +1012,8 @@
 /*      */       }
 /* 2328 */       return null;
 /*      */     }
-/*      */ 
-/*      */     static int[] A(int[] paramArrayOfInt1, int[] paramArrayOfInt2)
+/*      */     // static int[] A(int[] paramArrayOfInt1, int[] paramArrayOfInt2) // concat
+/*      */     static int[] concat(int[] paramArrayOfInt1, int[] paramArrayOfInt2)
 /*      */     {
 /* 2343 */       Contract.pre(paramArrayOfInt1 != null);
 /* 2344 */       Contract.pre(paramArrayOfInt2 != null);
@@ -1023,9 +1023,9 @@
 /* 2348 */       System.arraycopy(paramArrayOfInt2, 0, arrayOfInt, paramArrayOfInt1.length, paramArrayOfInt2.length);
 /* 2349 */       return arrayOfInt;
 /*      */     }
-/*      */ 
-/*      */     static String A(String paramString1, String paramString2)
-/*      */       throws Z
+/*      */     // static String A(String paramString1, String paramString2)
+/*      */     static String remainderOf(String paramString1, String paramString2)
+/*      */       throws BadDeviceValueException
 /*      */     {
 /* 2365 */       int i = paramString1.indexOf(paramString2);
 /*      */ 
@@ -1034,13 +1034,13 @@
 /* 2369 */         if (paramString1.length() > j) {
 /* 2370 */           return paramString1.substring(j);
 /*      */         }
-/* 2372 */         throw new Z("Nothing following '" + paramString2 + "' in string '" + paramString1 + "'");
+/* 2372 */         throw new BadDeviceValueException("Nothing following '" + paramString2 + "' in string '" + paramString1 + "'");
 /*      */       }
 /*      */ 
-/* 2376 */       throw new Z("Can't find '" + paramString2 + "' in string '" + paramString1 + "'");
+/* 2376 */       throw new BadDeviceValueException("Can't find '" + paramString2 + "' in string '" + paramString1 + "'");
 /*      */     }
-/*      */ 
-/*      */     static int E(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*      */     // static int E(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*      */     static int computeCRC7(int[] paramArrayOfInt, int paramInt1, int paramInt2)
 /*      */     {
 /* 2394 */       int i = 127;
 /*      */ 
@@ -1048,13 +1048,13 @@
 /* 2397 */       Contract.pre(paramArrayOfInt.length >= paramInt1 + paramInt2);
 /*      */ 
 /* 2399 */       for (int j = 0; j < paramInt2; j++) {
-/* 2400 */         i = O.Â[i] ^ paramArrayOfInt[(j + paramInt1)];
+/* 2400 */         i = MedicalDevice.CRC7_LOOKUP_TABLE[i] ^ paramArrayOfInt[(j + paramInt1)];
 /*      */       }
 /*      */ 
 /* 2403 */       return i;
 /*      */     }
-/*      */ 
-/*      */     static int F(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*      */     // static int F(int[] paramArrayOfInt, int paramInt1, int paramInt2) // computeCRC8
+/*      */     static int computeCRC8(int[] paramArrayOfInt, int paramInt1, int paramInt2)
 /*      */     {
 /* 2422 */       int i = 0;
 /*      */ 
@@ -1062,13 +1062,15 @@
 /* 2425 */       Contract.pre(paramArrayOfInt.length >= paramInt1 + paramInt2);
 /*      */ 
 /* 2427 */       for (int j = 0; j < paramInt2; j++) {
-/* 2428 */         i = O.m[((i ^ paramArrayOfInt[(j + paramInt1)]) & 0xFF)];
+/* 2428 */         i = MedicalDevice.CRC8_LOOKUP_TABLE[((i ^ paramArrayOfInt[(j + paramInt1)]) & 0xFF)];
 /*      */       }
 /*      */ 
 /* 2431 */       return i;
 /*      */     }
 /*      */ 
-/*      */     static int G(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*      */     // static int G(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*      */     // Calculate low byte of adding paramInt1 ints of paramArrayOfInt starting at paramInt2 !!!!!
+/*      */     static int computeSUM(int[] paramArrayOfInt, int paramInt1, int paramInt2)
 /*      */     {
 /* 2445 */       Contract.pre(paramArrayOfInt != null);
 /* 2446 */       Contract.pre(paramArrayOfInt.length >= paramInt1 + paramInt2);
@@ -1080,8 +1082,8 @@
 /*      */       }
 /* 2453 */       return i;
 /*      */     }
-/*      */ 
-/*      */     static int A(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*      */     // int A(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*      */     static int computeCRC8BD(int[] paramArrayOfInt, int paramInt1, int paramInt2)
 /*      */     {
 /* 2474 */       int i = 0;
 /*      */ 
@@ -1089,13 +1091,13 @@
 /* 2477 */       Contract.pre(paramArrayOfInt.length >= paramInt1 + paramInt2);
 /*      */ 
 /* 2479 */       for (int j = 0; j < paramInt2; j++) {
-/* 2480 */         i = O.o[((i ^ paramArrayOfInt[(j + paramInt1)]) & 0xFF)];
+/* 2480 */         i = MedicalDevice.CRC8_LOOKUP_TABLE_BD[((i ^ paramArrayOfInt[(j + paramInt1)]) & 0xFF)];
 /*      */       }
 /*      */ 
 /* 2483 */       return i;
 /*      */     }
-/*      */ 
-/*      */     static int H(int[] paramArrayOfInt)
+/*      */     // static int H(int[] paramArrayOfInt)
+/*      */     static int computeCRC8E1381(int[] paramArrayOfInt)
 /*      */     {
 /* 2499 */       int i = 0;
 /*      */ 
@@ -1137,8 +1139,8 @@
 /*      */ 
 /* 2537 */       return i;
 /*      */     }
-/*      */ 
-/*      */     static int C(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*      */     // static int C(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*      */     static int computeCRC16CCITT(int[] paramArrayOfInt, int paramInt1, int paramInt2)
 /*      */     {
 /* 2553 */       Contract.pre(paramArrayOfInt != null);
 /* 2554 */       Contract.pre(paramArrayOfInt.length >= paramInt1 + paramInt2);
@@ -1152,8 +1154,8 @@
 /*      */ 
 /* 2564 */       return i;
 /*      */     }
-/*      */ 
-/*      */     static int D(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*      */     // static int D(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*      */     static int computeCRC16sum(int[] paramArrayOfInt, int paramInt1, int paramInt2)
 /*      */     {
 /* 2579 */       Contract.pre(paramArrayOfInt != null);
 /* 2580 */       Contract.pre(paramArrayOfInt.length >= paramInt1 + paramInt2);
@@ -1166,8 +1168,8 @@
 /*      */ 
 /* 2588 */       return i;
 /*      */     }
-/*      */ 
-/*      */     static int A(int paramInt1, String paramString, int paramInt2, int paramInt3)
+/*      */     // static int A(int paramInt1, String paramString, int paramInt2, int paramInt3)
+/*      */     static int computeCRC8XOR(int paramInt1, String paramString, int paramInt2, int paramInt3)
 /*      */     {
 /* 2604 */       Contract.preNonNull(paramString);
 /* 2605 */       Contract.pre(paramString.length() >= paramInt2 + paramInt3);
@@ -1179,8 +1181,8 @@
 /*      */       }
 /* 2612 */       return i;
 /*      */     }
-/*      */ 
-/*      */     static boolean C(String paramString)
+/*      */     // static boolean C(String paramString)
+/*      */     static boolean isCRC8E1381Valid(String paramString)
 /*      */     {
 /* 2626 */       int i = 0;
 /*      */ 
@@ -1188,12 +1190,12 @@
 /* 2629 */       Contract.pre(paramString.length() >= 2);
 /*      */       String str;
 /*      */       try {
-/* 2636 */         str = A(paramString, String.valueOf('\003'));
+/* 2636 */         str = remainderOf(paramString, String.valueOf('\003'));
 /*      */       }
-/*      */       catch (Z localZ1) {
+/*      */       catch (BadDeviceValueException localBadDeviceValueException1) {
 /*      */         try {
-/* 2640 */           str = A(paramString, String.valueOf('\027'));
-/*      */         } catch (Z localZ2) {
+/* 2640 */           str = remainderOf(paramString, String.valueOf('\027'));
+/*      */         } catch (BadDeviceValueException localBadDeviceValueException2) {
 /* 2642 */           return i;
 /*      */         }
 /*      */       }
@@ -1201,9 +1203,9 @@
 /* 2646 */       if (str.length() > 1) {
 /* 2647 */         int j = str.charAt(0);
 /* 2648 */         int k = str.charAt(1);
-/* 2649 */         int m = H(D(paramString));
-/* 2650 */         int n = L(M(m));
-/* 2651 */         int i1 = L(D(m));
+/* 2649 */         int m = computeCRC8E1381(makeIntArray(paramString));
+/* 2650 */         int n = convertHexToASCII(getHighNibble(m));
+/* 2651 */         int i1 = convertHexToASCII(getLowNibble(m));
 /*      */ 
 /* 2653 */         if ((n == j) && (i1 == k)) {
 /* 2654 */           i = 1;
@@ -1212,18 +1214,18 @@
 /*      */ 
 /* 2658 */       return i;
 /*      */     }
-/*      */ 
-/*      */     static boolean C(int paramInt)
+/*      */     // static boolean C(int paramInt)
+/*      */     static boolean isEven(int paramInt)
 /*      */     {
 /* 2668 */       return paramInt % 2 == 0;
 /*      */     }
-/*      */ 
-/*      */     static boolean I(int paramInt)
+/*      */     // static boolean I(int paramInt)
+/*      */     static boolean isOdd(int paramInt)
 /*      */     {
-/* 2678 */       return !C(paramInt);
+/* 2678 */       return !isEven(paramInt);
 /*      */     }
-/*      */ 
-/*      */     static boolean F(int[] paramArrayOfInt)
+/*      */     // static boolean F(int[] paramArrayOfInt)
+/*      */     static boolean isZeros(int[] paramArrayOfInt)
 /*      */     {
 /* 2689 */       if (paramArrayOfInt != null) {
 /* 2690 */         for (int i = 0; i < paramArrayOfInt.length; i++) {
@@ -1235,30 +1237,30 @@
 /*      */       }
 /* 2697 */       return false;
 /*      */     }
-/*      */ 
-/*      */     static void A(int paramInt1, int paramInt2, int paramInt3, String paramString)
-/*      */       throws Z
+/*      */     // static void A(int paramInt1, int paramInt2, int paramInt3, String paramString)
+/*      */     static void verifyDeviceValue(int paramInt1, int paramInt2, int paramInt3, String paramString)
+/*      */       throws BadDeviceValueException
 /*      */     {
 /* 2712 */       if ((paramInt1 < paramInt2) || (paramInt1 > paramInt3))
-/* 2713 */         throw new Z("The value of " + paramInt1 + " for '" + paramString + "' is out of range; " + "must be " + paramInt2 + " to " + paramInt3);
+/* 2713 */         throw new BadDeviceValueException("The value of " + paramInt1 + " for '" + paramString + "' is out of range; " + "must be " + paramInt2 + " to " + paramInt3);
 /*      */     }
-/*      */ 
-/*      */     static void A(double paramDouble1, double paramDouble2, double paramDouble3, String paramString)
-/*      */       throws Z
+/*      */     // static void A(double paramDouble1, double paramDouble2, double paramDouble3, String paramString)
+/*      */     static void verifyDeviceValue(double paramDouble1, double paramDouble2, double paramDouble3, String paramString)
+    /*      */       throws BadDeviceValueException
 /*      */     {
 /* 2731 */       if ((paramDouble1 < paramDouble2) || (paramDouble1 > paramDouble3))
-/* 2732 */         throw new Z("The value of " + paramDouble1 + " for '" + paramString + "' is out of range; " + "must be " + paramDouble2 + " to " + paramDouble3);
+/* 2732 */         throw new BadDeviceValueException("The value of " + paramDouble1 + " for '" + paramString + "' is out of range; " + "must be " + paramDouble2 + " to " + paramDouble3);
 /*      */     }
-/*      */ 
-/*      */     static void A(boolean paramBoolean, String paramString)
-/*      */       throws Z
+/*      */     // static void A(boolean paramBoolean, String paramString)
+/*      */     static void verifyDeviceValue(boolean paramBoolean, String paramString)
+/*      */       throws BadDeviceValueException
 /*      */     {
 /* 2748 */       if (!paramBoolean)
 /* 2749 */         throw new Z("Condition failed: '" + paramString + "'");
 /*      */     }
-/*      */ 
-/*      */     static int E(int paramInt)
-/*      */       throws Z
+/*      */     // static int E(int paramInt)
+/*      */     static int convertYear(int paramInt)
+/*      */       throws BadDeviceValueException
 /*      */     {
 /* 2763 */       A(paramInt, 0, 9999, "year");
 /*      */ 
@@ -1267,8 +1269,8 @@
 /*      */       }
 /* 2768 */       return paramInt > 1000 ? paramInt : paramInt + 2000;
 /*      */     }
-/*      */ 
-/*      */     static Date B(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6)
+/*      */     // static Date B(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6)
+/*      */     static Date createDate(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6)
 /*      */     {
 /* 2790 */       Contract.pre(paramInt1, 1, 31);
 /* 2791 */       Contract.pre(paramInt2, 1, 12);
@@ -1277,43 +1279,43 @@
 /* 2794 */       Contract.pre(paramInt5, 0, 59);
 /* 2795 */       Contract.pre(paramInt6, 0, 59);
 /*      */ 
-/* 2797 */       return A(paramInt1, paramInt2, paramInt3, paramInt4, paramInt5, paramInt6);
+/* 2797 */       return createDateSync(paramInt1, paramInt2, paramInt3, paramInt4, paramInt5, paramInt6);
 /*      */     }
-/*      */ 
-/*      */     static long A()
+/*      */     // static long A()
+/*      */     static long getCurrentTimeMillis()
 /*      */     {
 /* 2806 */       return System.currentTimeMillis();
 /*      */     }
-/*      */ 
-/*      */     static long F(long paramLong)
+/*      */     // static long F(long paramLong)
+/*      */     static long getElapsedTimeSecs(long paramLong)
 /*      */     {
 /* 2816 */       return A(paramLong) / 1000L;
 /*      */     }
-/*      */ 
-/*      */     static long A(long paramLong)
+/*      */     // static long A(long paramLong)
+/*      */     static long getElapsedTimeMillis(long paramLong)
 /*      */     {
 /* 2826 */       return System.currentTimeMillis() - paramLong;
 /*      */     }
-/*      */ 
-/*      */     static String E(long paramLong)
+/*      */     // static String E(long paramLong)
+/*      */     static String getHex(long paramLong)
 /*      */     {
 /* 2839 */       String str = paramLong == -1L ? "" : "0x";
 /* 2840 */       return str + B(paramLong);
 /*      */     }
-/*      */ 
-/*      */     static String H(int paramInt)
+/*      */     // static String H(int paramInt)
+/*      */     static String getHex(int paramInt)
 /*      */     {
 /* 2853 */       String str = paramInt == -1 ? "" : "0x";
 /* 2854 */       return str + F(paramInt);
 /*      */     }
-/*      */ 
-/*      */     static String B(byte paramByte)
+/*      */     // static String B(byte paramByte)
+/*      */     static String getHex(byte paramByte)
 /*      */     {
 /* 2867 */       String str = paramByte == -1 ? "" : "0x";
 /* 2868 */       return str + A(paramByte);
 /*      */     }
-/*      */ 
-/*      */     static String B(byte[] paramArrayOfByte, int paramInt)
+/*      */     // static String B(byte[] paramArrayOfByte, int paramInt)
+/*      */     static String getHex(byte[] paramArrayOfByte, int paramInt)
 /*      */     {
 /* 2880 */       StringBuffer localStringBuffer = new StringBuffer();
 /*      */ 
@@ -1332,8 +1334,8 @@
 /*      */ 
 /* 2895 */       return new String(localStringBuffer);
 /*      */     }
-/*      */ 
-/*      */     static String A(int[] paramArrayOfInt, int paramInt)
+/*      */     // static String A(int[] paramArrayOfInt, int paramInt)
+/*      */     static String getHex(int[] paramArrayOfInt, int paramInt)
 /*      */     {
 /* 2909 */       StringBuffer localStringBuffer = new StringBuffer();
 /*      */ 
@@ -1352,38 +1354,38 @@
 /*      */ 
 /* 2924 */       return new String(localStringBuffer);
 /*      */     }
-/*      */ 
-/*      */     static String A(byte[] paramArrayOfByte)
+/*      */     // static String A(byte[] paramArrayOfByte)
+/*      */     static String getHex(byte[] paramArrayOfByte)
 /*      */     {
 /* 2935 */       return paramArrayOfByte == null ? null : B(paramArrayOfByte, paramArrayOfByte.length);
 /*      */     }
-/*      */ 
-/*      */     static String D(int[] paramArrayOfInt)
+/*      */     // static String D(int[] paramArrayOfInt)
+/*      */     static String getHex(int[] paramArrayOfInt)
 /*      */     {
 /* 2946 */       return paramArrayOfInt == null ? null : A(paramArrayOfInt, paramArrayOfInt.length);
 /*      */     }
-/*      */ 
-/*      */     static String B(long paramLong)
+/*      */     // static String B(long paramLong)
+/*      */     static String getHexCompact(long paramLong)
 /*      */     {
 /* 2959 */       String str1 = Long.toHexString(paramLong).toUpperCase();
 /*      */ 
-/* 2961 */       String str2 = I(str1.length()) ? "0" : "";
+/* 2961 */       String str2 = isOdd(str1.length()) ? "0" : "";
 /* 2962 */       return str2 + str1;
 /*      */     }
-/*      */ 
-/*      */     static String F(int paramInt)
+/*      */     // static String F(int paramInt)
+/*      */     static String getHexCompact(int paramInt)
 /*      */     {
 /* 2975 */       long l = paramInt == -1 ? paramInt : A(paramInt);
 /* 2976 */       return B(l);
 /*      */     }
-/*      */ 
-/*      */     static String A(byte paramByte)
+/*      */     // static String A(byte paramByte)
+/*      */     static String getHexCompact(byte paramByte)
 /*      */     {
 /* 2989 */       int i = paramByte == -1 ? paramByte : C(paramByte);
 /* 2990 */       return F(i);
 /*      */     }
-/*      */ 
-/*      */     static String A(byte[] paramArrayOfByte, int paramInt)
+/*      */     // static String A(byte[] paramArrayOfByte, int paramInt)
+/*      */     static String getHexCompact(byte[] paramArrayOfByte, int paramInt)
 /*      */     {
 /* 3002 */       StringBuffer localStringBuffer = new StringBuffer();
 /*      */ 
@@ -1402,8 +1404,8 @@
 /*      */ 
 /* 3017 */       return new String(localStringBuffer);
 /*      */     }
-/*      */ 
-/*      */     static String B(int[] paramArrayOfInt, int paramInt)
+/*      */     // static String B(int[] paramArrayOfInt, int paramInt)
+/*      */     static String getHexCompact(int[] paramArrayOfInt, int paramInt)
 /*      */     {
 /* 3031 */       StringBuffer localStringBuffer = new StringBuffer();
 /*      */ 
@@ -1422,55 +1424,55 @@
 /*      */ 
 /* 3046 */       return new String(localStringBuffer);
 /*      */     }
-/*      */ 
-/*      */     static String B(byte[] paramArrayOfByte)
+/*      */     // static String B(byte[] paramArrayOfByte)
+/*      */     static String getHexCompact(byte[] paramArrayOfByte)
 /*      */     {
 /* 3057 */       if (paramArrayOfByte != null) {
-/* 3058 */         return A(paramArrayOfByte, paramArrayOfByte.length);
+/* 3058 */         return getHexCompact(paramArrayOfByte, paramArrayOfByte.length);
 /*      */       }
 /* 3060 */       return null;
 /*      */     }
-/*      */ 
-/*      */     static String G(int[] paramArrayOfInt)
+/*      */     // static String G(int[] paramArrayOfInt)
+/*      */     static String getHexCompact(int[] paramArrayOfInt)
 /*      */     {
 /* 3071 */       if (paramArrayOfInt != null) {
-/* 3072 */         return B(paramArrayOfInt, paramArrayOfInt.length);
+/* 3072 */         return getHexCompact(paramArrayOfInt, paramArrayOfInt.length);
 /*      */       }
 /* 3074 */       return null;
 /*      */     }
-/*      */ 
-/*      */     private static synchronized Date A(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6)
+/*      */     // private static synchronized Date A(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6)
+/*      */     private static synchronized Date createDateSync(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6)
 /*      */     {
-/* 3092 */       A.clear();
-/* 3093 */       A.set(paramInt3, paramInt2 - 1, paramInt1, paramInt4, paramInt5, paramInt6);
-/* 3094 */       return A.getTime();
+/* 3092 */       CAL.clear();
+/* 3093 */       CAL.set(paramInt3, paramInt2 - 1, paramInt1, paramInt4, paramInt5, paramInt6);
+/* 3094 */       return CAL.getTime();
 /*      */     }
 /*      */   }
 /*      */ 
-/*      */   abstract class _A
+/*      */   abstract class SnapshotCreator
 /*      */   {
-/*      */     _A(int arg2)
+/*      */     SnapshotCreator(int arg2)
 /*      */     {
 /*      */       int i;
-/* 1763 */       O.A(O.this, i);
+/* 1763 */       MedicalDevice.A(MedicalDevice.this, i);
 /*      */     }
 /*      */ 
 /*      */     InputStream B()
-/*      */       throws Z, IOException
+/*      */       throws BadDeviceValueException, IOException
 /*      */     {
-/* 1782 */       A();
+/* 1782 */       createSnapshotBody();
 /*      */ 
-/* 1785 */       int i = O.this.Î.D();
-/* 1786 */       O.A(this, "createSnapshot: wrote " + i + " bytes.");
+/* 1785 */       int i = MedicalDevice.this.m_lastCommandDescription.D();
+/* 1786 */       MedicalDevice.logInfo(this, "createSnapshot: wrote " + i + " bytes.");
 /*      */ 
-/* 1788 */       if (i < O.A(O.this)) {
+/* 1788 */       if (i < MedicalDevice.A(MedicalDevice.this)) {
 /* 1789 */         throw new Z("Resulting snapshot size is invalid: " + i + "; must be at least " + O.A(O.this) + " bytes.");
 /*      */       }
 /*      */ 
-/* 1793 */       return O.this.Î.E();
+/* 1793 */       return MedicalDevice.this.m_lastCommandDescription.E();
 /*      */     }
 /*      */ 
-/*      */     abstract void A();
+/*      */     abstract void createSnapshotBody();
 /*      */   }
 /*      */ }
 

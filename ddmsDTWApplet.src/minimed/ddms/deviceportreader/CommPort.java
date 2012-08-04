@@ -1,52 +1,52 @@
-/*     */ package minimed.ddms.A;
+/*     */ package minimed.ddms.deviceportreader;
 /*     */ 
 /*     */ import java.io.IOException;
 /*     */ 
-/*     */ abstract class c
+/*     */ abstract class CommPort // c
 /*     */ {
-/*  35 */   private boolean B = true;
-/*     */   private int C;
-/*     */   private int A;
-/*     */ 
-/*     */   final void G()
-/*     */     throws W
+/*  35 */   private boolean m_continueIO = true; // B
+/*     */   private int m_readTimeOut; // C
+/*     */   private int m_ioDelay; // A
+/*     */   // final void G()
+/*     */   final void checkForSerialIOHalted()
+/*     */     throws SerialIOHaltedException
 /*     */   {
-/*  52 */     if (!this.B) {
-/*  53 */       O.B(this, "checkForSerialIOHalted: serial IO has been halted.");
-/*  54 */       throw new W("Serial IO has been halted.");
+/*  52 */     if (!this.m_continueIO) {
+/*  53 */       MedicalDevice.logInfoHigh(this, "checkForSerialIOHalted: serial IO has been halted.");
+/*  54 */       throw new SerialIOHaltedException("Serial IO has been halted.");
 /*     */     }
 /*     */   }
-/*     */ 
-/*     */   final void A(boolean paramBoolean)
+/*     */   // final void A(boolean paramBoolean)
+/*     */   final void setContinueIO(boolean paramBoolean)
 /*     */   {
-/*  64 */     O.B(this, "setContinueIO: continueIO = " + paramBoolean);
-/*  65 */     this.B = paramBoolean;
+/*  64 */     MedicalDevice.logInfoHigh(this, "setContinueIO: continueIO = " + paramBoolean);
+/*  65 */     this.m_continueIO = paramBoolean;
 /*     */   }
 /*     */ 
 /*     */   void A()
 /*     */   {
 /*     */   }
-/*     */ 
-/*     */   final void A(int paramInt)
+/*     */   // final void A(int paramInt)
+/*     */   final void setIoDelay(int paramInt)
 /*     */   {
-/*  82 */     this.A = paramInt;
+/*  82 */     this.m_ioDelay = paramInt;
 /*     */   }
-/*     */ 
-/*     */   final int F()
+/*     */   // final int F()
+/*     */   final int getIoDelay()
 /*     */   {
-/*  91 */     return this.A;
+/*  91 */     return this.m_ioDelay;
 /*     */   }
-/*     */ 
-/*     */   void B(int paramInt)
+/*     */   // void B(int paramInt)
+/*     */   final void setReadTimeOut(int paramInt)
 /*     */     throws IOException
 /*     */   {
-/* 102 */     this.C = paramInt;
+/* 102 */     this.m_readTimeOut = paramInt;
 /*     */   }
-/*     */ 
-/*     */   final int D()
+/*     */   // final int D()
+/*     */   final int getReadTimeOut()
 /*     */     throws IOException
 /*     */   {
-/* 113 */     return this.C;
+/* 113 */     return this.m_readTimeOut;
 /*     */   }
 /*     */ 
 /*     */   void B()
