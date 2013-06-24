@@ -458,7 +458,7 @@
 /*      */ 
 /* 1323 */     if (paramInt != m_phase) {
 /* 1324 */       m_phase = paramInt;
-/* 1325 */       m_phaseText = updateDynamicText(DeviceListener.PHASE_TEXT[m_phase]);
+/* 1325 */       m_phaseText = updateDynamicText(PHASE_TEXT[m_phase]);
 /* 1326 */       notifyDeviceUpdatePhase(m_phase, m_phaseText);
 /* 1327 */       logInfoLow(this, "setPhase: phase is now " + m_phase + " (" + m_phaseText + ")");
 /*      */     }

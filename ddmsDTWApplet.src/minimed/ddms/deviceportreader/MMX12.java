@@ -43,24 +43,24 @@
 /*     */   {
 /* 147 */     super(paramInt1, paramString, paramInt2, paramInt3, paramInt4);
 /*     */ 
-/* 150 */     this.m_strokesPerBasalUnit = 40;
-/* 151 */     this.m_strokesPerBolusUnit = 10;
+/* 150 */     this.m_strokesPerBasalUnit = STROKES_PER_BASAL_UNIT;
+/* 151 */     this.m_strokesPerBolusUnit = STROKES_PER_BOLUS_UNIT;
 /*     */ 
-/* 158 */     this.m_cmdReadCurrentSettings1 = new MM511.Command(this, 145, "Read Current Settings");
+/* 158 */     this.m_cmdReadCurrentSettings1 = new MM511.Command(CMD_READ_SETTINGS, "Read Current Settings");
 /*     */ 
-/* 160 */     this.m_cmdReadTempBasal = new MM511.Command(this, 152, "Read Temporary Basal");
+/* 160 */     this.m_cmdReadTempBasal = new MM511.Command(CMD_READ_TEMP_BASAL, "Read Temporary Basal");
 /*     */ 
-/* 163 */     this.m_cmdReadCurrBasalDataSTD = new MM511.Command(this, 146, "Read Standard Profiles Data", 192, 1, 8);
+/* 163 */     this.m_cmdReadCurrBasalDataSTD = new MM511.Command(CMD_READ_STD_PROFILES, "Read Standard Profiles Data", 192, 1, 8);
 /*     */ 
-/* 172 */     this.m_cmdReadCurrBasalDataA = new MM511.Command(this, 147, "Read Profiles A Data", 192, 1, 9);
+/* 172 */     this.m_cmdReadCurrBasalDataA = new MM511.Command(CMD_READ_A_PROFILES, "Read Profiles A Data", 192, 1, 9);
 /*     */ 
-/* 181 */     this.m_cmdReadCurrBasalDataB = new MM511.Command(this, 148, "Read Profiles B Data", 192, 1, 10);
+/* 181 */     this.m_cmdReadCurrBasalDataB = new MM511.Command(CMD_READ_B_PROFILES, "Read Profiles B Data", 192, 1, 10);
 /*     */ 
 /* 189 */     this.m_cmdReadHistoryData = new MM511.CommandHistoryData(this, 36);
 /*     */ 
-/* 194 */     this.m_cmdReadPumpModelNumber = new MM511.Command(this, 141, "Read Pump Model");
+/* 194 */     this.m_cmdReadPumpModelNumber = new MM511.Command(CMD_READ_PUMP_MODEL_NUMBER, "Read Pump Model");
 /*     */ 
-/* 197 */     this.m_cmdReadBGAlarmClocks = new MM511.Command(this, 142, "Read BG Alarm Clocks");
+/* 197 */     this.m_cmdReadBGAlarmClocks = new MM511.Command(CMD_READ_BG_ALARM_CLOCKS, "Read BG Alarm Clocks");
 /*     */ 
 /* 200 */     this.m_cmdReadBGAlarmEnable = new MM511.Command(this, 151, "Read BG Alarm Enable");
 /*     */ 

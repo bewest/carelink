@@ -229,7 +229,7 @@
 /*     */ 
 /*     */     SnapshotCreator(int arg2)
 /*     */     {
-/* 714 */       super(i);
+/* 714 */       super(arg2);
 /*     */ 
 /* 713 */       this.this$0 = this$1;
 /*     */     }
@@ -347,12 +347,12 @@
 /*     */   {
 /*     */     CommandReadSensorHistoryData(int paramString, String paramInt1, int paramInt2, int arg5)
 /*     */     {
-/* 488 */       super(paramString, paramInt1, paramInt2, i);
+/* 488 */       super(paramString, paramInt1, paramInt2, arg5);
 /*     */     }
 /*     */ 
 /*     */     CommandReadSensorHistoryData(int arg2)
 /*     */     {
-/* 497 */       super(i);
+/* 497 */       super(arg2);
 /*     */     }
 /*     */ 
 /*     */     void setupCommandParameters(int paramInt)

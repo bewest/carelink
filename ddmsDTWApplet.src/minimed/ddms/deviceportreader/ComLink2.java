@@ -119,7 +119,7 @@
 /*     */     throws BadDeviceCommException, IOException, SerialIOHaltedException
 /*     */   {
 /* 641 */     MedicalDevice.logInfoHigh(this, "readProductInfo: obtaining product info...");
-/* 642 */     int[] arrayOfInt = sendComLink2Command(4);
+/* 642 */     int[] arrayOfInt = sendComLink2Command(CMD_READ_PRODUCT_INFO);
 /* 643 */     String str1 = arrayOfInt[5] == 1 ? "868.35Mhz" : (arrayOfInt[5] == 0) || (arrayOfInt[5] == 255) ? "916.5Mhz" : "UNKNOWN";
 /*     */ 
 /* 645 */     String str2 = MedicalDevice.Util.makeString(arrayOfInt, 6, 10);
@@ -284,10 +284,10 @@
 /*     */     throws IOException, BadDeviceCommException
 /*     */   {
 /* 918 */     MedicalDevice.logInfo(this, "checkAck: retrieving ComLink2 ACK packet...");
-/* 919 */     MedicalDevice.Util.sleepMS(100);
+/* 919 */     MedicalDevice.Util.sleepMS(IO_DELAY_MS);
 /* 920 */     int[] arrayOfInt1 = getUSBPort().read();
 /*     */ 
-/* 922 */     if (arrayOfInt1.length != 64) {
+/* 922 */     if (arrayOfInt1.length != REC_SIZE_MIN) {
 /* 923 */       throw new BadDeviceCommException("checkAck: incorrect comLinkReply length: " + arrayOfInt1.length);
 /*     */     }
 /*     */ 
@@ -313,8 +313,8 @@
 /*     */ 
 /*     */   private int calcRecordsRequired(int paramInt)
 /*     */   {
-/* 959 */     int i = paramInt / 64;
-/* 960 */     int j = paramInt % 64;
+/* 959 */     int i = paramInt / REC_SIZE_MIN;
+/* 960 */     int j = paramInt % REC_SIZE_MIN;
 /* 961 */     int k = i + (j > 0 ? 1 : 0);
 /* 962 */     return k;
 /*     */   }
@@ -466,14 +466,14 @@
 /*     */ 
 /* 415 */       int i = MedicalDevice.Util.makeInt(0x7F & arrayOfInt[5], arrayOfInt[6]);
 /*     */ 
-/* 418 */       if (i < 64) {
-/* 419 */         localObject = "readDeviceDataIO: ERROR - cmd " + this + " resulted in low " + "data byte count of " + i;
+/* 418 */       if (i < REC_SIZE_MIN) {
+/* 419 */         String errorMessage = "readDeviceDataIO: ERROR - cmd " + this + " resulted in low " + "data byte count of " + i;
 /*     */ 
-/* 421 */         MedicalDevice.logError(this, (String)localObject);
-/* 422 */         throw new BadDeviceCommException((String)localObject);
+/* 421 */         MedicalDevice.logError(this, errorMessage);
+/* 422 */         throw new BadDeviceCommException(errorMessage);
 /*     */       }
 /*     */ 
-/* 426 */       Object localObject = new int[i];
+/* 426 */       int[] localObject = new int[i];
 /* 427 */       System.arraycopy(arrayOfInt, 13, localObject, 0, i);
 /*     */ 
 /* 430 */       int j = arrayOfInt[(arrayOfInt.length - 1)];
@@ -549,7 +549,7 @@
 /*     */ 
 /* 531 */       while ((i == 0) && (this.this$0.getClockMS() < 1000L)) {
 /* 532 */         i = this.this$0.readStatus();
-/* 533 */         MedicalDevice.Util.sleepMS(100);
+/* 533 */         MedicalDevice.Util.sleepMS(IO_DELAY_MS);
 /*     */       }
 /*     */ 
 /* 536 */       return i;

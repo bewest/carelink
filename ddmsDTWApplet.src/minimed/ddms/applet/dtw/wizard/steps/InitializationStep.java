@@ -78,9 +78,9 @@
 /*     */ 
 /* 139 */     disableCursor();
 /*     */ 
-/* 142 */     1 local1 = new Runnable(localLogWriter)
+/* 142 */     Runnable local1 = new Runnable(localLogWriter)
 /*     */     {
-/*     */       private final LogWriter val$log;
+/*     */       private final LogWriter log;
 /*     */ 
 /*     */       public void run()
 /*     */       {
@@ -104,7 +104,7 @@
 /* 170 */             InitializationStep.this.getWizard().showNextStep(InitializationFailStep.class);
 /*     */           }
 /*     */         } catch (RuntimeException localRuntimeException) {
-/* 173 */           localRuntimeException.printStackTrace(this.val$log);
+/* 173 */           localRuntimeException.printStackTrace(this.log);
 /* 174 */           InitializationStep.this.getWizard().setFailureReason(InitializationStep.this.m_unexpectedErrorMsg);
 /* 175 */           InitializationStep.this.getWizard().showNextStep(UnrecoverableErrorStep.class);
 /*     */         }
@@ -151,7 +151,7 @@
 /* 246 */       localRuntimeException.printStackTrace(localLogWriter);
 /* 247 */       getWizard().setFailureReason(this.m_msgBadJavaToJavascriptComm);
 /*     */     }
-/* 249 */     return i;
+/* 249 */     return i == 1;
 /*     */   }
 /*     */ 
 /*     */   private boolean nativeLibrarySanityCheck()
@@ -167,7 +167,7 @@
 /*     */     catch (UnsatisfiedLinkError localUnsatisfiedLinkError) {
 /* 272 */       getWizard().setFailureReason(this.m_msgNativeLibrarySanityCheckFailed);
 /*     */     }
-/* 274 */     return i;
+/* 274 */     return i == 1;
 /*     */   }
 /*     */ 
 /*     */   private boolean compatibleWithProtocolCheck()

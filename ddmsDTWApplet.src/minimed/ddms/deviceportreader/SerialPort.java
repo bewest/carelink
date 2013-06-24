@@ -96,8 +96,11 @@
 /*     */ 
 /*     */   final void setIODelay(int paramInt)
 /*     */   {
-/* 182 */     this.m_ioDelay = paramInt; } 
-/* 196 */   final String readLine() throws IOException, SerialIOHaltedException { int i = 65535;
+/* 182 */     this.m_ioDelay = paramInt;
+            }
+
+/* 196 */   final String readLine() throws IOException, SerialIOHaltedException {
+              int i = 65535;
 /*     */ 
 /* 199 */     int m = 0;
 /* 200 */     StringBuffer localStringBuffer = new StringBuffer("");
