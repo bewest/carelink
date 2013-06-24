@@ -140,11 +140,11 @@
 /*      */ 
 /*  373 */     this.m_cmdReadHistoryData = new CommandHistoryData();
 /*      */ 
-/*  377 */     this.m_cmdPowerControl = new Command(93, "Set RF Power On", 2);
-/*  378 */     this.m_cmdPowerControl.m_commandParameters[0] = 1;
-/*  379 */     this.m_cmdPowerControl.m_commandParameters[1] = 10;
+/*  377 */     this.m_cmdPowerControl = new Command(CMD_POWER_CTRL, "Set RF Power On", 2);
+/*  378 */     this.m_cmdPowerControl.m_commandParameters[0] = RF_TO_ON;
+/*  379 */     this.m_cmdPowerControl.m_commandParameters[1] = RF_ON_MINUTES;
 /*  380 */     this.m_cmdPowerControl.m_maxRetries = 0;
-/*  381 */     this.m_cmdPowerControl.setEffectTime(17000);
+/*  381 */     this.m_cmdPowerControl.setEffectTime(RF_ON_DELAY);
 /*      */ 
 /*  384 */     this.m_cmdSetSuspend = new Command(77, "Set Suspend", 1);
 /*  385 */     this.m_cmdSetSuspend.m_commandParameters[0] = 1;
@@ -860,28 +860,26 @@
 /*      */   {
 /*      */     Command(int paramString, String arg3)
 /*      */     {
-/* 1295 */       super(paramString, str, 64, 1, 0);
+/* 1295 */       super(paramString, arg3, 64, 1, 0);
 /*      */     }
 /*      */ 
 /*      */     Command(int paramString, String paramArrayOfInt, int[] paramInt1, int arg5)
 /*      */     {
 /* 1313 */       super(paramString, paramArrayOfInt, 0, 1, 11);
 /* 1314 */       this.m_commandParameters = paramInt1;
-/*      */       int i;
-/* 1315 */       this.m_commandParameterCount = i;
+/* 1315 */       this.m_commandParameterCount = arg5;
 /*      */     }
 /*      */ 
 /*      */     Command(int paramString, String paramInt1, int paramInt2, int paramInt3, int arg6)
 /*      */     {
-/* 1333 */       super(paramString, paramInt1, paramInt2, paramInt3, i);
+/* 1333 */       super(paramString, paramInt1, paramInt2, paramInt3, arg6);
 /*      */     }
 /*      */ 
 /*      */     Command(int paramString, String paramInt1, int arg4)
 /*      */     {
 /* 1346 */       super(paramString, paramInt1, 0, 1, 11);
-/*      */       int i;
-/* 1347 */       this.m_commandParameterCount = i;
-/* 1348 */       int j = i / 64 + 1;
+/* 1347 */       this.m_commandParameterCount = arg4;
+/* 1348 */       int j = arg4 / 64 + 1;
 /* 1349 */       this.m_commandParameters = new int[64 * j];
 /*      */     }
 /*      */ 

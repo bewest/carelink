@@ -298,11 +298,11 @@
 /*     */     }
 /*     */ 
 /* 936 */     j = arrayOfInt1[(i++)];
-/* 937 */     if (j == 102)
+/* 937 */     if (j == NAK)
 /*     */     {
 /* 939 */       throw new BadDeviceCommException("checkAck: NAK received; reason code=" + MedicalDevice.Util.getHex(j) + " - " + getComLink2NAKDescription(arrayOfInt1[(i++)]));
 /*     */     }
-/* 941 */     if (j != 85) {
+/* 941 */     if (j != ACK) {
 /* 942 */       throw new BadDeviceCommException("checkAck: bad ACK/NAK value received: " + MedicalDevice.Util.getHex(j));
 /*     */     }
 /*     */ 
@@ -487,7 +487,7 @@
 /*     */ 
 /* 441 */       MedicalDevice.logInfoHigh(this, "readDeviceDataIO: done=" + this.m_eodSet + ", device data[" + localObject.length + "]=<" + MedicalDevice.Util.getHexCompact(localObject) + ">");
 /*     */ 
-/* 445 */       return (I)localObject;
+/* 445 */       return localObject;
 /*     */     }
 /*     */ 
 /*     */     private int[] readData()
@@ -524,15 +524,15 @@
 /*     */       }
 /*     */ 
 /* 499 */       k = arrayOfInt2[(j++)];
-/* 500 */       if (k == 5) {
+/* 500 */       if (k == RESPONSE_TYPE_TIMEOUT) {
 /* 501 */         throw new BadDeviceCommException("readData: timeout occurred: " + MedicalDevice.Util.getHex(k));
 /*     */       }
 /*     */ 
-/* 504 */       if (k == 2) {
+/* 504 */       if (k == RESPONSE_TYPE_DEVICE_NAK) {
 /* 505 */         throw new BadDeviceCommException("readData: device NAK received: " + MedicalDevice.Util.getHex(k));
 /*     */       }
 /*     */ 
-/* 508 */       if ((k != 1) && (k != 3) && (k != 4))
+/* 508 */       if ((k != RESPONSE_TYPE_DEVICE_ACK) && (k != RESPONSE_TYPE_DEVICE_DATA_SINGLE) && (k != RESPONSE_TYPE_DEVICE_DATA_MULTIPLE))
 /*     */       {
 /* 510 */         throw new BadDeviceCommException("readData: ERROR - unknown Response Type received: " + MedicalDevice.Util.getHex(k));
 /*     */       }
@@ -581,7 +581,7 @@
 /* 579 */       arrayOfInt1[(j++)] = (0x80 | MedicalDevice.Util.getHighByte(i));
 /* 580 */       arrayOfInt1[(j++)] = MedicalDevice.Util.getLowByte(i);
 /*     */ 
-/* 583 */       arrayOfInt1[(j++)] = (this.m_deviceCommand.m_commandCode == 93 ? 85 : 0);
+/* 583 */       arrayOfInt1[(j++)] = (this.m_deviceCommand.m_commandCode == MM511.CMD_POWER_CTRL ? RF_REPEAT_PWR_ON : RF_REPEAT_NONE);
 /*     */ 
 /* 587 */       arrayOfInt1[(j++)] = this.m_deviceCommand.m_maxRetries;
 /*     */ 
@@ -611,7 +611,7 @@
 /* 627 */       return MedicalDevice.Util.makePackedBCD(this.this$0.getDeviceSerialNumber());
 /*     */     }
 /*     */ 
-/*     */     USBCommand(MM511.Command param1, ComLink2.1 arg3)
+/*     */     USBCommand(MM511.Command param1, ComLink2 arg3)
 /*     */     {
 /* 221 */       this(param1);
 /*     */     }
