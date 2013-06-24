@@ -30,35 +30,35 @@
 /*     */   private final SerialConfig m_serialConfig;
 /*     */   private final String m_commPortName;
 /*     */   private long m_startTimeMS;
-/*  63 */   private int m_ioDelay = 250;
+/*  63 */   private int m_ioDelay = IO_DELAY_MS;
 /*     */ 
-/*     */   SerialPort(int paramInt1, int paramInt2, int paramInt3)
+/*     */   SerialPort(int serialPortNumber, int baudRate, int parity)
 /*     */     throws IOException
 /*     */   {
-/*  80 */     Contract.pre(paramInt3, 0, 4);
-/*  81 */     this.m_commPortName = ("COM" + paramInt1);
+/*  80 */     Contract.pre(parity, PY_NONE, PY_SPACE);
+/*  81 */     this.m_commPortName = ("COM" + serialPortNumber);
 /*     */ 
 /*  84 */     this.m_serialConfig = new SerialConfig(this.m_commPortName);
-/*  85 */     setDefaultCommParameters(paramInt2);
-/*  86 */     this.m_serialConfig.setParity(paramInt3);
+/*  85 */     setDefaultCommParameters(baudRate);
+/*  86 */     this.m_serialConfig.setParity(parity);
 /*     */ 
 /*  88 */     MedicalDevice.logInfoHigh(this, "creating port '" + this.m_commPortName + "' with parameters (rate/parity/data/stop/handshake): " + this.m_serialConfig.getSettingsString());
 /*     */ 
 /*  93 */     this.m_serialPortLocal = new SerialPortLocal(this.m_serialConfig);
-/*  94 */     this.m_serialPortLocal.setTimeoutRx(250);
-/*  95 */     this.m_serialPortLocal.setTimeoutTx(250);
+/*  94 */     this.m_serialPortLocal.setTimeoutRx(RECEIVE_TIMEOUT_MS);
+/*  95 */     this.m_serialPortLocal.setTimeoutTx(TRANSMIT_TIMEOUT_MS);
 /*  96 */     this.m_serialPortLocal.setDTR(true);
 /*  97 */     this.m_serialPortLocal.setRTS(true);
 /*  98 */     this.m_startTimeMS = System.currentTimeMillis();
 /*  99 */     this.m_serialPortLocal.setPortName(this.m_commPortName);
-/* 100 */     MedicalDevice.Util.sleepMS(500);
+/* 100 */     MedicalDevice.Util.sleepMS(HALF_SECOND);
 /* 101 */     dumpSerialStatus();
 /*     */   }
 /*     */ 
-/*     */   SerialPort(int paramInt1, int paramInt2)
+/*     */   SerialPort(int serialPortNum, int baudRate)
 /*     */     throws IOException
 /*     */   {
-/* 115 */     this(paramInt1, paramInt2, 0);
+/* 115 */     this(serialPortNum, baudRate, PY_NONE);
 /*     */   }
 /*     */ 
 /*     */   public String toString()
@@ -100,9 +100,9 @@
             }
 
 /* 196 */   final String readLine() throws IOException, SerialIOHaltedException {
-              int i = 65535;
+              int next = 65535;
 /*     */ 
-/* 199 */     int m = 0;
+/* 199 */     int shouldExit = 0;
 /* 200 */     StringBuffer localStringBuffer = new StringBuffer("");
 /*     */ 
 /* 202 */     Contract.pre(this.m_serialPortLocal != null);
@@ -112,19 +112,20 @@
 /*     */ 
 /* 207 */     MedicalDevice.Util.sleepMS(this.m_ioDelay);
 /*     */     int k;
-/*     */     do { int j = i;
+/*     */     do {
+                int previous = next;
 /* 210 */       k = this.m_serialPortLocal.getByte();
-/* 211 */       i = (char)k;
+/* 211 */       next = (char)k;
 /*     */ 
-/* 213 */       if (k != -1) {
-/* 214 */         localStringBuffer.append(i);
+/* 213 */       if (k != BYTE_NOT_AVAILABLE) {
+/* 214 */         localStringBuffer.append(next);
 /*     */       }
 /*     */ 
-/* 218 */       if ((j == 13) && (i == 10)) {
-/* 219 */         m = 1;
+/* 218 */       if ((previous == LF) && (next == CR)) {
+/* 219 */         shouldExit = 1;
 /*     */       }
 /*     */     }
-/* 222 */     while ((k != -1) && (m == 0));
+/* 222 */     while ((k != BYTE_NOT_AVAILABLE) && (shouldExit == 0));
 /*     */ 
 /* 225 */     long l = System.currentTimeMillis() - this.m_startTimeMS;
 /* 226 */     MedicalDevice.logInfoHigh(this, "readLine(" + l + "MS): read <" + localStringBuffer + ">");
@@ -136,15 +137,13 @@
 /*     */   final int read()
 /*     */     throws IOException, SerialIOHaltedException
 /*     */   {
-/* 244 */     int i = -1;
-/*     */ 
 /* 246 */     Contract.pre(this.m_serialPortLocal != null);
 /* 247 */     Contract.pre(this.m_serialPortLocal.isOpen());
 /*     */ 
 /* 249 */     checkForSerialIOHalted();
 /*     */ 
 /* 251 */     MedicalDevice.Util.sleepMS(this.m_ioDelay);
-/* 252 */     i = this.m_serialPortLocal.getByte();
+/* 252 */     int i = this.m_serialPortLocal.getByte();
 /*     */ 
 /* 255 */     long l = System.currentTimeMillis() - this.m_startTimeMS;
 /* 256 */     MedicalDevice.logInfoHigh(this, "read()(" + l + "MS): read <" + MedicalDevice.Util.getHex(i) + ">");
@@ -153,49 +152,49 @@
 /* 259 */     return i;
 /*     */   }
 /*     */ 
-/*     */   private final int read(byte[] paramArrayOfByte)
+/*     */   private final int read(byte[] input)
 /*     */     throws IOException, SerialIOHaltedException
 /*     */   {
 /* 275 */     Contract.pre(this.m_serialPortLocal != null);
 /* 276 */     Contract.pre(this.m_serialPortLocal.isOpen());
-/* 277 */     Contract.pre(paramArrayOfByte != null);
+/* 277 */     Contract.pre(input != null);
 /*     */ 
 /* 279 */     checkForSerialIOHalted();
 /* 280 */     MedicalDevice.Util.sleepMS(this.m_ioDelay);
 /* 281 */     int i = 0;
 /*     */ 
-/* 286 */     for (int j = 0; j < paramArrayOfByte.length; j++) {
+/* 286 */     for (int j = 0; j < input.length; j++) {
 /* 287 */       int k = this.m_serialPortLocal.getByte();
 /*     */ 
-/* 289 */       if (k == -1) {
+/* 289 */       if (k == BYTE_NOT_AVAILABLE) {
 /*     */         break;
 /*     */       }
-/* 292 */       paramArrayOfByte[j] = (byte)k;
+/* 292 */       input[j] = (byte)k;
 /* 293 */       i++;
 /*     */     }
 /*     */ 
 /* 297 */     long l = System.currentTimeMillis() - this.m_startTimeMS;
-/* 298 */     MedicalDevice.logInfoHigh(this, "read(byte[])(" + l + "MS): read <" + MedicalDevice.Util.getHex(paramArrayOfByte, i) + ">");
+/* 298 */     MedicalDevice.logInfoHigh(this, "read(byte[])(" + l + "MS): read <" + MedicalDevice.Util.getHex(input, i) + ">");
 /*     */ 
 /* 300 */     this.m_startTimeMS = System.currentTimeMillis();
 /*     */ 
 /* 302 */     return i;
 /*     */   }
 /*     */ 
-/*     */   final int read(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*     */   final int read(int[] input, int startIndex, int length)
 /*     */     throws IOException, SerialIOHaltedException
 /*     */   {
-/* 319 */     Contract.pre(paramInt1, 0, paramArrayOfInt.length);
-/* 320 */     Contract.pre((paramInt2 >= 0) && (paramInt1 + paramInt2 <= paramArrayOfInt.length));
+/* 319 */     Contract.pre(startIndex, 0, input.length);
+/* 320 */     Contract.pre((length >= 0) && (startIndex + length <= input.length));
 /*     */ 
-/* 322 */     byte[] arrayOfByte = new byte[paramInt2];
+/* 322 */     byte[] arrayOfByte = new byte[length];
 /*     */ 
 /* 324 */     checkForSerialIOHalted();
 /*     */ 
 /* 327 */     int i = read(arrayOfByte);
 /*     */ 
 /* 330 */     for (int j = 0; j < i; j++) {
-/* 331 */       paramArrayOfInt[(paramInt1 + j)] = (arrayOfByte[j] & 0xFF);
+/* 331 */       input[(startIndex + j)] = (arrayOfByte[j] & MedicalDevice.MAX_BYTE);
 /*     */     }
 /*     */ 
 /* 334 */     return i;
@@ -230,7 +229,7 @@
 /*     */ 
 /*     */   final int readUntilEmpty()
 /*     */   {
-/* 393 */     int i = 0;
+/* 393 */     int numRead = 0;
 /*     */ 
 /* 396 */     Contract.pre(this.m_serialPortLocal != null);
 /*     */     try
@@ -240,18 +239,18 @@
 /* 400 */         byte[] arrayOfByte = new byte[j];
 /*     */ 
 /* 403 */         MedicalDevice.Util.sleepMS(this.m_ioDelay);
-/* 404 */         i += this.m_serialPortLocal.getData(arrayOfByte);
+/* 404 */         numRead += this.m_serialPortLocal.getData(arrayOfByte);
 /*     */       }
 /*     */     }
 /*     */     catch (IOException localIOException)
 /*     */     {
 /*     */     }
 /*     */ 
-/* 411 */     if (i > 0) {
-/* 412 */       MedicalDevice.logInfoHigh(this, "readUntilEmpty: dumped " + i + (i > 1 ? " bytes." : " byte."));
+/* 411 */     if (numRead > 0) {
+/* 412 */       MedicalDevice.logInfoHigh(this, "readUntilEmpty: dumped " + numRead + (numRead > 1 ? " bytes." : " byte."));
 /*     */     }
 /*     */ 
-/* 416 */     return i;
+/* 416 */     return numRead;
 /*     */   }
 /*     */ 
 /*     */   final void write(byte paramByte)
@@ -391,7 +390,7 @@
 /*     */ 
 /*     */   final void setBaudRate(int paramInt)
 /*     */   {
-/* 633 */     Contract.pre((paramInt == 7) || (paramInt == 8) || (paramInt == 9) || (paramInt == 10));
+/* 633 */     Contract.pre((paramInt == BAUD_9600) || (paramInt == BAUD_19200) || (paramInt == BAUD_38400) || (paramInt == BAUD_57600));
 /*     */ 
 /* 635 */     this.m_serialConfig.setBitRate(paramInt);
 /*     */   }
@@ -433,14 +432,14 @@
 /* 692 */     return this.m_commPortName;
 /*     */   }
 /*     */ 
-/*     */   private void setDefaultCommParameters(int paramInt)
+/*     */   private void setDefaultCommParameters(int baudRate)
 /*     */   {
-/* 702 */     setReceiveBufferSize(16384);
-/* 703 */     setTransmitBufferSize(2048);
-/* 704 */     setBaudRate(paramInt);
+/* 702 */     setReceiveBufferSize(RECEIVE_BUFFER_SIZE);
+/* 703 */     setTransmitBufferSize(TRANSMIT_BUFFER_SIZE);
+/* 704 */     setBaudRate(baudRate);
 /* 705 */     this.m_serialConfig.setDataBits(3);
 /* 706 */     this.m_serialConfig.setStopBits(0);
-/* 707 */     this.m_serialConfig.setParity(0);
+/* 707 */     this.m_serialConfig.setParity(PY_NONE);
 /*     */ 
 /* 709 */     this.m_serialConfig.setHandshake(0);
 /*     */   }

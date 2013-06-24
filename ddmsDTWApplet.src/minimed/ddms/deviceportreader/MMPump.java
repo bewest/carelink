@@ -201,22 +201,22 @@
 /*  420 */     readData(paramDeviceListener, paramInt, paramString, true, false);
 /*      */   }
 /*      */ 
-/*      */   void readData(DeviceListener paramDeviceListener, int paramInt, String paramString, boolean paramBoolean1, boolean paramBoolean2)
+/*      */   void readData(DeviceListener paramDeviceListener, int serialPortNum, String deviceSerialNumber, boolean firstRun, boolean withTraceCommands)
 /*      */     throws BadDeviceCommException, BadDeviceValueException, IOException, ConnectToPumpException
 /*      */   {
 /*  447 */     logInfo(this, "readData: starting reader...");
-/*  448 */     this.m_serialNumber = paramString;
+/*  448 */     this.m_serialNumber = deviceSerialNumber;
 /*  449 */     setHaltRequested(false);
 /*      */ 
-/*  452 */     this.m_commandCollection = createCommandList(paramBoolean2);
+/*  452 */     this.m_commandCollection = createCommandList(withTraceCommands);
 /*      */ 
-/*  455 */     Reader localReader = new Reader(paramDeviceListener, paramInt, paramString, null);
-/*  456 */     localReader.acquireDataFromDevice(paramBoolean1, true);
+/*  455 */     Reader localReader = new Reader(paramDeviceListener, serialPortNum, deviceSerialNumber);
+/*  456 */     localReader.acquireDataFromDevice(firstRun, true);
 /*      */ 
 /*  459 */     this.m_lastHistoryPageNumber = this.m_currentHistoryPageNumber;
 /*  460 */     this.m_lastGlucoseHistoryPageNumber = this.m_currentGlucoseHistoryPageNumber;
 /*      */ 
-/*  463 */     if ((!isHaltRequested()) && (paramBoolean2))
+/*  463 */     if ((!isHaltRequested()) && (withTraceCommands))
 /*  464 */       this.m_traceHistorySet = new TraceHistorySet(this.m_serialNumber, this.m_firmwareVersion, new Date(), this.m_cmdReadPumpTrace.m_rawData, this.m_cmdReadDetailTrace.m_rawData, this.m_cmdReadNewAlarmTrace.m_rawData, this.m_cmdReadOldAlarmTrace.m_rawData);
 /*      */   }
 /*      */ 
@@ -229,7 +229,7 @@
 /*      */ 
 /*  497 */     this.m_commandCollection.addElement(this.m_cmdReadRealTimeClock);
 /*      */ 
-/*  500 */     Reader localReader = new Reader(paramDeviceListener, paramInt, paramString, null);
+/*  500 */     Reader localReader = new Reader(paramDeviceListener, paramInt, paramString);
 /*  501 */     localReader.acquireDataFromDevice();
 /*      */   }
 /*      */ 
@@ -242,7 +242,7 @@
 /*      */ 
 /*  528 */     this.m_commandCollection.addElement(this.m_cmdReadPumpModelNumber);
 /*      */ 
-/*  531 */     Reader localReader = new Reader(paramDeviceListener, paramInt, paramString, null);
+/*  531 */     Reader localReader = new Reader(paramDeviceListener, paramInt, paramString);
 /*  532 */     localReader.acquireDataFromDevice(true, false);
 /*  533 */     return this.m_modelNumber;
 /*      */   }
@@ -266,7 +266,7 @@
 /*      */ 
 /*  584 */     this.m_commandCollection.addElement(this.m_cmdFilterGlucoseHistoryData);
 /*      */ 
-/*  587 */     Reader localReader = new Reader(paramDeviceListener, paramInt, paramString, null);
+/*  587 */     Reader localReader = new Reader(paramDeviceListener, paramInt, paramString);
 /*  588 */     localReader.acquireDataFromDevice(true, false);
 /*      */ 
 /*  591 */     this.m_cmdReadGlucoseHistoryData.m_rawData = this.m_cmdFilterGlucoseHistoryData.m_rawData;
@@ -291,7 +291,7 @@
 /*      */ 
 /*  642 */     this.m_commandCollection.addElement(this.m_cmdFilterIsigHistoryData);
 /*      */ 
-/*  645 */     Reader localReader = new Reader(paramDeviceListener, paramInt, paramString, null);
+/*  645 */     Reader localReader = new Reader(paramDeviceListener, paramInt, paramString);
 /*  646 */     localReader.acquireDataFromDevice(true, false);
 /*      */ 
 /*  649 */     this.m_cmdReadIsigHistoryData.m_rawData = this.m_cmdFilterIsigHistoryData.m_rawData;
@@ -327,7 +327,7 @@
 /*      */   static void verifyConcentration(int paramInt)
 /*      */     throws BadDeviceValueException
 /*      */   {
-/*  721 */     MedicalDevice.Util.verifyDeviceValue((paramInt == 40) || (paramInt == 50) || (paramInt == 100), "The Insulin Concentration value of " + paramInt + " is invalid; must be " + 40 + " or " + 50 + " or " + 100);
+/*  721 */     MedicalDevice.Util.verifyDeviceValue((paramInt == CONCENTRATION_U40) || (paramInt == CONCENTRATION_U50) || (paramInt == CONCENTRATION_U100), "The Insulin Concentration value of " + paramInt + " is invalid; must be " + CONCENTRATION_U40 + " or " + CONCENTRATION_U50 + " or " + CONCENTRATION_U100);
 /*      */   }
 /*      */ 
 /*      */   static void verifyValue(int paramInt1, int paramInt2, int paramInt3, String paramString)
@@ -337,12 +337,12 @@
 /*      */ 
 /*      */   long toBasalStrokes(double paramDouble)
 /*      */   {
-/*  757 */     return ()(paramDouble * this.m_strokesPerBasalUnit);
+/*  757 */     return (long)(paramDouble * this.m_strokesPerBasalUnit);
 /*      */   }
 /*      */ 
 /*      */   long toBolusStrokes(double paramDouble)
 /*      */   {
-/*  767 */     return ()(paramDouble * this.m_strokesPerBolusUnit);
+/*  767 */     return (long)(paramDouble * this.m_strokesPerBolusUnit);
 /*      */   }
 /*      */ 
 /*      */   double toBasalInsulin(int paramInt)
@@ -414,7 +414,7 @@
 /*  889 */     return 1;
 /*      */   }
 /*      */ 
-/*      */   private Vector createCommandList(boolean paramBoolean)
+/*      */   private Vector createCommandList(boolean withTraceCommands)
 /*      */   {
 /*  899 */     Vector localVector = new Vector();
 /*      */ 
@@ -492,7 +492,7 @@
 /*  978 */     localVector.addElement(this.m_cmdReadIsigHistoryData);
 /*  979 */     localVector.addElement(this.m_cmdReadVcntrHistoryData);
 /*      */ 
-/*  981 */     if (paramBoolean)
+/*  981 */     if (withTraceCommands)
 /*      */     {
 /*  983 */       localVector.addElement(this.m_cmdReadPumpTrace);
 /*      */ 
@@ -512,109 +512,93 @@
 /*      */     private int m_serialPortNum;
 /*      */     private String m_deviceSerialNum;
 /*      */     private DeviceListener m_listener;
-/*      */     private final MMPump this$0;
-/*      */ 
-/*      */     private Reader(DeviceListener paramInt, int paramString, String arg4)
+/*      */
+/*      */     private Reader(DeviceListener listener, int serialPortNum, String deviceSerialNum)
 /*      */     {
-/* 1283 */       this.this$0 = this$1;
-/* 1284 */       this.m_listener = paramInt;
-/* 1285 */       this$1.addDeviceListener(this.m_listener);
-/* 1286 */       this.m_serialPortNum = paramString;
-/*      */       Object localObject;
-/* 1287 */       this.m_deviceSerialNum = localObject;
+/* 1284 */       this.m_listener = listener;
+/* 1285 */       addDeviceListener(this.m_listener);
+/* 1286 */       this.m_serialPortNum = serialPortNum;
+/* 1287 */       this.m_deviceSerialNum = deviceSerialNum;
 /*      */     }
 /*      */ 
-/*      */     private void acquireDataFromDevice(boolean paramBoolean1, boolean paramBoolean2)
+/*      */     private void acquireDataFromDevice(boolean firstRun, boolean setPhase)
 /*      */       throws BadDeviceCommException, BadDeviceValueException, IOException, ConnectToPumpException
 /*      */     {
-/* 1307 */       int i = 0;
+/* 1307 */       int i;
 /*      */ 
-/* 1309 */       Vector localVector = new Vector(this.this$0.m_commandCollection.size());
-/* 1310 */       int j = 0;
-/* 1311 */       int k = 0;
+/* 1309 */       Vector localVector = new Vector(m_commandCollection.size());
 /*      */ 
-/* 1313 */       if (paramBoolean1) {
-/* 1314 */         this.this$0.m_bytesReadThusFar = 0;
-/* 1315 */         this.this$0.m_serialPortInitialized = false;
-/* 1316 */         this.this$0.m_comStationInitialized = false;
-/* 1317 */         this.this$0.m_pumpInitialized = false;
+/* 1313 */       if (firstRun) {
+/* 1314 */         m_bytesReadThusFar = 0;
+/* 1315 */         m_serialPortInitialized = false;
+/* 1316 */         m_comStationInitialized = false;
+/* 1317 */         m_pumpInitialized = false;
 /*      */       }
 /*      */       else {
-/* 1320 */         this.this$0.m_serialPortInitialized = true;
-/* 1321 */         this.this$0.m_comStationInitialized = true;
-/* 1322 */         this.this$0.m_pumpInitialized = true;
+/* 1320 */         m_serialPortInitialized = true;
+/* 1321 */         m_comStationInitialized = true;
+/* 1322 */         m_pumpInitialized = true;
 /*      */       }
 /*      */ 
-/* 1325 */       this.this$0.calcTotalBytesToRead();
-/* 1326 */       this.this$0.notifyDeviceUpdateProgress(0);
+/* 1325 */       calcTotalBytesToRead();
+/* 1326 */       notifyDeviceUpdateProgress(0);
 /*      */       try
 /*      */       {
-/* 1334 */         if (paramBoolean1)
+/* 1334 */         if (firstRun)
 /*      */         {
-/* 1336 */           this.this$0.setState(2);
+/* 1336 */           setState(STATE_INITIALIZING);
 /* 1337 */           initCommunications(this.m_serialPortNum);
 /*      */         }
 /*      */ 
-/* 1340 */         if (paramBoolean2) {
-/* 1341 */           this.this$0.setPhase(5);
+/* 1340 */         if (setPhase) {
+/* 1341 */           setPhase(PHASE_ACQUIRE_DATA);
 /*      */         }
 /*      */ 
-/* 1344 */         if (!this.this$0.isHaltRequested())
+/* 1344 */         if (!isHaltRequested())
 /*      */         {
 /* 1347 */           i = 0;
-/* 1348 */           while ((i < this.this$0.m_commandCollection.size()) && (!this.this$0.isHaltRequested()))
+/* 1348 */           while ((i < m_commandCollection.size()) && (!isHaltRequested()))
 /*      */           {
-/* 1350 */             MMPump.Command localCommand = (MMPump.Command)this.this$0.m_commandCollection.elementAt(i);
+/* 1350 */             MMPump.Command localCommand = (MMPump.Command)m_commandCollection.elementAt(i);
 /* 1351 */             if (localCommand != null)
 /*      */             {
 /* 1353 */               localCommand.execute();
 /*      */ 
-/* 1356 */               if (localCommand.equals(this.this$0.m_cmdSetSuspend))
+/* 1356 */               if (localCommand.equals(m_cmdSetSuspend))
 /*      */               {
-/* 1358 */                 MedicalDevice.Util.sleepMS(4000);
+/* 1358 */                 MedicalDevice.Util.sleepMS(SUSPEND_DELAY_MS);
 /*      */               }
 /*      */ 
-/* 1361 */               if (localCommand.equals(this.this$0.m_cmdCancelSuspend))
+/* 1361 */               if (localCommand.equals(m_cmdCancelSuspend))
 /*      */               {
-/* 1363 */                 MedicalDevice.Util.sleepMS(1000);
+/* 1363 */                 MedicalDevice.Util.sleepMS(RESUME_DELAY_MS);
 /*      */               }
 /*      */ 
-/* 1366 */               if (!this.this$0.isHaltRequested())
+/* 1366 */               if (!isHaltRequested())
 /*      */               {
 /* 1368 */                 int[] arrayOfInt = localCommand.m_rawData;
 /* 1369 */                 localVector.addElement(arrayOfInt);
-/* 1370 */                 this.this$0.decodeReply(localCommand);
+/* 1370 */                 decodeReply(localCommand);
 /*      */               }
 /*      */             }
 /* 1349 */             i++;
 /*      */           }
 /*      */ 
-/* 1376 */           this.this$0.executeSecondaryCommands(this.m_listener, this.m_serialPortNum, this.m_deviceSerialNum);
-/*      */ 
-/* 1379 */           if (this.this$0.isHaltRequested())
-/* 1380 */             j = 2;
-/*      */           else
-/* 1382 */             j = 1;
+/* 1376 */           executeSecondaryCommands(this.m_listener, this.m_serialPortNum, this.m_deviceSerialNum);
 /*      */         }
 /*      */       }
 /*      */       catch (IOException localIOException) {
-/* 1386 */         k = 1;
 /* 1387 */         throw localIOException;
 /*      */       } catch (BadDeviceCommException localBadDeviceCommException) {
-/* 1389 */         k = 1;
 /* 1390 */         throw localBadDeviceCommException;
 /*      */       } catch (BadDeviceValueException localBadDeviceValueException) {
-/* 1392 */         k = 1;
 /* 1393 */         throw localBadDeviceValueException;
 /*      */       } catch (ConnectToPumpException localConnectToPumpException) {
-/* 1395 */         k = 1;
 /* 1396 */         throw localConnectToPumpException;
 /*      */       }
 /*      */       finally
 /*      */       {
 /*      */       }
-/*      */ 
-/* 1435 */       ret;
 /*      */     }
 /*      */ 
 /*      */     private void acquireDataFromDevice()
@@ -626,19 +610,19 @@
 /*      */     private void initCommunications(int paramInt)
 /*      */       throws IOException, BadDeviceCommException, ConnectToPumpException
 /*      */     {
-/* 1471 */       this.this$0.initSerialPort(paramInt);
-/* 1472 */       this.this$0.m_serialPortInitialized = true;
+/* 1471 */       initSerialPort(paramInt);
+/* 1472 */       m_serialPortInitialized = true;
 /*      */       try
 /*      */       {
-/* 1476 */         this.this$0.initComStation();
+/* 1476 */         initComStation();
 /*      */       }
 /*      */       catch (IOException localIOException) {
-/* 1479 */         this.this$0.initComStation();
+/* 1479 */         initComStation();
 /*      */       }
-/* 1481 */       this.this$0.m_comStationInitialized = true;
+/* 1481 */       m_comStationInitialized = true;
 /*      */ 
-/* 1484 */       this.this$0.initDevice();
-/* 1485 */       this.this$0.m_pumpInitialized = true;
+/* 1484 */       initDevice();
+/* 1485 */       m_pumpInitialized = true;
 /*      */     }
 /*      */ 
 /*      */     private void endCommunications()
@@ -646,22 +630,15 @@
 /*      */     {
 /* 1495 */       MedicalDevice.logInfo(this, "endCommunications: shutting down...");
 /*      */       try {
-/* 1497 */         if (this.this$0.m_pumpInitialized) {
+/* 1497 */         if (m_pumpInitialized) {
 /* 1498 */           MedicalDevice.logInfo(this, "endCommunications: shutting down pump communications.");
-/* 1499 */           this.this$0.shutDownPump();
+/* 1499 */           shutDownPump();
 /*      */         }
-/*      */ 
+/*      */
 /*      */       }
 /*      */       finally
 /*      */       {
 /*      */       }
-/*      */ 
-/* 1512 */       ret;
-/*      */     }
-/*      */ 
-/*      */     Reader(DeviceListener paramInt, int paramString, String param1, MMPump.1 arg5)
-/*      */     {
-/* 1261 */       this(paramInt, paramString, param1);
 /*      */     }
 /*      */   }
 /*      */ 
@@ -696,34 +673,33 @@
 /*      */ 
 /* 1080 */     int m_effectTime = 0;
 /*      */ 
-/*      */     Command(int paramString, String paramInt1, int paramInt2, int paramInt3, int arg6)
+/*      */     Command(int commandCode, String description, int bytesPerRecord, int maxRecords, int commandType)
 /*      */     {
-/* 1095 */       this(paramString, paramInt1, paramInt2, paramInt3, 0, 0, i);
+/* 1095 */       this(commandCode, description, bytesPerRecord, maxRecords, 0, 0, commandType);
 /* 1096 */       this.m_dataOffset = 0;
 /* 1097 */       this.m_cmdLength = 2;
 /* 1098 */       setUseMultiXmitMode(false);
 /*      */     }
 /*      */ 
-/*      */     Command(int paramString, String paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int arg8)
+/*      */     Command(int commandCode, String description, int bytesPerRecord, int maxRecords, int address, int addressLength, int commandType)
 /*      */     {
-/* 1115 */       super();
-/* 1116 */       this.m_commandCode = paramString;
-/* 1117 */       this.m_bytesPerRecord = paramInt2;
-/* 1118 */       this.m_maxRecords = paramInt3;
+/* 1115 */       super(description);
+/* 1116 */       this.m_commandCode = commandCode;
+/* 1117 */       this.m_bytesPerRecord = bytesPerRecord;
+/* 1118 */       this.m_maxRecords = maxRecords;
 /* 1119 */       allocateRawData();
-/* 1120 */       this.m_address = paramInt4;
-/* 1121 */       this.m_addressLength = paramInt5;
+/* 1120 */       this.m_address = address;
+/* 1121 */       this.m_addressLength = addressLength;
 /* 1122 */       this.m_dataOffset = 2;
 /*      */ 
-/* 1124 */       if (paramInt5 == 1)
-/* 1125 */         this.m_cmdLength = (2 + paramInt5);
+/* 1124 */       if (addressLength == 1)
+/* 1125 */         this.m_cmdLength = (2 + addressLength);
 /*      */       else {
-/* 1127 */         this.m_cmdLength = (2 + paramInt5 + 1);
+/* 1127 */         this.m_cmdLength = (2 + addressLength + 1);
 /*      */       }
 /*      */ 
 /* 1130 */       this.m_packet = new int[0];
-/*      */       int i;
-/* 1131 */       this.m_commandType = i;
+/* 1131 */       this.m_commandType = commandType;
 /* 1132 */       this.m_commandParameterCount = 0;
 /* 1133 */       this.m_commandParameters = new int[64];
 /* 1134 */       setUseMultiXmitMode(false);

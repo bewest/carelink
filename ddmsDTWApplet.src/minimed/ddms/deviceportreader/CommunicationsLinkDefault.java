@@ -22,7 +22,7 @@
 /*  65 */     this.m_deviceListener = paramDeviceListener;
 /*  66 */     this.m_deviceSerialNumber = paramString1;
 /*  67 */     this.m_linkDeviceDescription = paramString2;
-/*  68 */     setState(1);
+/*  68 */     setState(DevicePortReader.STATE_IDLE);
 /*  69 */     MedicalDevice.logInfo(this, "Created link device " + toString());
 /*     */   }
 /*     */ 
@@ -39,30 +39,30 @@
 /*     */   public final void initCommunications()
 /*     */     throws BadDeviceCommException, IOException, SerialIOHaltedException
 /*     */   {
-/* 101 */     setState(2);
-/* 102 */     int i = 0;
+/* 101 */     setState(DevicePortReader.STATE_INITIALIZING);
+/* 102 */     int initialized = 0;
 /*     */ 
-/* 104 */     for (int j = 0; (j <= 4) && (i == 0); j++) {
+/* 104 */     for (int numRetries = 0; (numRetries <= COMM_RETRIES) && (initialized == 0); numRetries++) {
 /*     */       try {
 /* 106 */         initCommunicationsIO();
-/* 107 */         i = 1;
+/* 107 */         initialized = 1;
 /*     */       } catch (IOException localIOException) {
 /* 109 */         MedicalDevice.logWarning(this, "initCommunications: got error " + localIOException);
-/* 110 */         if (j == 4)
+/* 110 */         if (numRetries == COMM_RETRIES)
 /*     */         {
 /* 112 */           throw localIOException;
 /*     */         }
 /* 114 */         MedicalDevice.logWarning(this, "initCommunications: retrying...");
 /*     */       }
 /*     */     }
-/* 117 */     setState(1);
+/* 117 */     setState(DevicePortReader.STATE_IDLE);
 /*     */   }
 /*     */ 
 /*     */   public final void endCommunications()
 /*     */     throws IOException
 /*     */   {
 /* 126 */     endCommunicationsIO();
-/* 127 */     setState(1);
+/* 127 */     setState(DevicePortReader.STATE_IDLE);
 /*     */   }
 /*     */ 
 /*     */   public final void resetTotalReadByteCount()
@@ -103,7 +103,7 @@
 /*     */ 
 /*     */   String getPortDescription()
 /*     */   {
-/* 205 */     return getCommPort() != null ? getCommPort().toString() : "DISCONNNECTED";
+/* 205 */     return getCommPort() != null ? getCommPort().toString() : DISCONNNECTED;
 /*     */   }
 /*     */ 
 /*     */   void notifyDeviceUpdateProgress()
@@ -115,7 +115,7 @@
 /*     */ 
 /*     */   void setState(int paramInt)
 /*     */   {
-/* 226 */     Contract.pre((paramInt >= 1) && (paramInt <= 9));
+/* 226 */     Contract.pre((paramInt >= DevicePortReader.STATE_IDLE) && (paramInt <= DevicePortReader.STATE_LAST));
 /*     */ 
 /* 229 */     if (paramInt != this.m_state) {
 /* 230 */       this.m_state = paramInt;
@@ -125,7 +125,7 @@
 /*     */ 
 /*     */   void setPhase(int paramInt)
 /*     */   {
-/* 243 */     Contract.pre((paramInt >= 1) && (paramInt <= 7));
+/* 243 */     Contract.pre((paramInt >= DevicePortReader.PHASE_AUTO_DETECT_PORT) && (paramInt <= DevicePortReader.PHASE_AUTO_DETECT_DEVICE));
 /*     */ 
 /* 247 */     if (paramInt != this.m_phase) {
 /* 248 */       this.m_phase = paramInt;

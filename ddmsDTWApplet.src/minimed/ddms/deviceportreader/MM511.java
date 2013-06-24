@@ -95,8 +95,8 @@
 /*      */   {
 /*  298 */     Contract.pre(paramInt1, 14, 19);
 /*      */ 
-/*  301 */     this.m_strokesPerBasalUnit = 10;
-/*  302 */     this.m_strokesPerBolusUnit = 10;
+/*  301 */     this.m_strokesPerBasalUnit = STROKES_PER_BASAL_UNIT;
+/*  302 */     this.m_strokesPerBolusUnit = STROKES_PER_BOLUS_UNIT;
 /*      */ 
 /*  305 */     this.m_description = paramString;
 /*  306 */     this.m_linkDevice = paramInt1;
@@ -105,8 +105,8 @@
 /*  310 */     this.m_deviceClassID = paramInt2;
 /*  311 */     this.m_snapshotFormatID = paramInt3;
 /*  312 */     this.m_normalPumpStateCode = paramInt4;
-/*  313 */     this.m_minYear = 2000;
-/*  314 */     this.m_maxYear = 2099;
+/*  313 */     this.m_minYear = MIN_YEAR;
+/*  314 */     this.m_maxYear = MAX_YEAR;
 /*      */ 
 /*  316 */     this.m_cmdReadFirmwareVersion = new Command(116, "Read Firmware Version");
 /*      */ 
@@ -147,37 +147,37 @@
 /*  381 */     this.m_cmdPowerControl.setEffectTime(RF_ON_DELAY);
 /*      */ 
 /*  384 */     this.m_cmdSetSuspend = new Command(77, "Set Suspend", 1);
-/*  385 */     this.m_cmdSetSuspend.m_commandParameters[0] = 1;
+/*  385 */     this.m_cmdSetSuspend.m_commandParameters[0] = RF_TO_ON;
 /*      */ 
 /*  388 */     this.m_cmdCancelSuspend = new Command(77, "Cancel Suspend", 1);
-/*  389 */     this.m_cmdCancelSuspend.m_commandParameters[0] = 0;
+/*  389 */     this.m_cmdCancelSuspend.m_commandParameters[0] = RF_TO_OFF;
 /*      */ 
 /*  392 */     this.m_cmdDetectBolus = new Command(75, "Set Temp Basal Rate (bolus detection only)", 3);
 /*      */ 
-/*  394 */     this.m_cmdDetectBolus.m_commandParameters[0] = 0;
+/*  394 */     this.m_cmdDetectBolus.m_commandParameters[0] = RF_TO_OFF;
 /*  395 */     this.m_cmdDetectBolus.m_commandParameters[1] = 0;
 /*  396 */     this.m_cmdDetectBolus.m_commandParameters[2] = 0;
 /*  397 */     this.m_cmdDetectBolus.m_maxRetries = 0;
 /*      */ 
 /*  400 */     this.m_cmdEnableDetailTrace = new Command(160, "Enable Detail Trace", 1);
 /*      */ 
-/*  402 */     this.m_cmdEnableDetailTrace.m_commandParameters[0] = 1;
+/*  402 */     this.m_cmdEnableDetailTrace.m_commandParameters[0] = RF_TO_ON;
 /*      */ 
 /*  404 */     this.m_cmdDisableDetailTrace = new Command(160, "Disable Detail Trace", 1);
 /*      */ 
-/*  406 */     this.m_cmdDisableDetailTrace.m_commandParameters[0] = 0;
+/*  406 */     this.m_cmdDisableDetailTrace.m_commandParameters[0] = RF_TO_OFF;
 /*      */ 
-/*  408 */     this.m_cmdReadPumpTrace = new Command(163, "Read Pump Trace", 1024, 49, 0);
+/*  408 */     this.m_cmdReadPumpTrace = new Command(163, "Read Pump Trace", REC_SIZE_HISTORY, LARGE_TRACE_REC_COUNT, 0);
 /*      */ 
-/*  410 */     this.m_cmdReadDetailTrace = new Command(164, "Read Detail Trace", 1024, 11, 0);
+/*  410 */     this.m_cmdReadDetailTrace = new Command(164, "Read Detail Trace", REC_SIZE_HISTORY, SMALL_TRACE_REC_COUNT, 0);
 /*      */ 
-/*  412 */     this.m_cmdReadNewAlarmTrace = new Command(166, "Read New Alarm Trace", 1024, 11, 0);
+/*  412 */     this.m_cmdReadNewAlarmTrace = new Command(166, "Read New Alarm Trace", REC_SIZE_HISTORY, SMALL_TRACE_REC_COUNT, 0);
 /*      */ 
-/*  414 */     this.m_cmdReadOldAlarmTrace = new Command(167, "Read Old Alarm Trace", 1024, 11, 0);
+/*  414 */     this.m_cmdReadOldAlarmTrace = new Command(167, "Read Old Alarm Trace", REC_SIZE_HISTORY, SMALL_TRACE_REC_COUNT, 0);
 /*      */ 
 /*  417 */     this.m_snapshotCreator = new SnapshotCreator();
 /*  418 */     m_baudRate = 10;
-/*  419 */     m_ioDelayMS = 4;
+/*  419 */     m_ioDelayMS = IO_DELAY_MS;
 /*  420 */     setState(1);
 /*      */   }
 /*      */ 

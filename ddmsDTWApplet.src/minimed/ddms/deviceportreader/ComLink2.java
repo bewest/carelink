@@ -1,6 +1,5 @@
 /*     */ package minimed.ddms.deviceportreader;
 /*     */ 
-/*     */ import I;
 /*     */ import java.io.IOException;
 /*     */ import minimed.util.Contract;
 /*     */ 
@@ -58,8 +57,7 @@
 /*     */   {
 /* 141 */     int[] arrayOfInt = readSignalStrength();
 /*     */ 
-/* 143 */     int i = (byte)arrayOfInt[0];
-/* 144 */     return i;
+/* 143 */     return (byte)arrayOfInt[0];
 /*     */   }
 /*     */ 
 /*     */   void initCommunicationsIO()
@@ -122,7 +120,7 @@
 /* 642 */     int[] arrayOfInt = sendComLink2Command(CMD_READ_PRODUCT_INFO);
 /* 643 */     String str1 = arrayOfInt[5] == 1 ? "868.35Mhz" : (arrayOfInt[5] == 0) || (arrayOfInt[5] == 255) ? "916.5Mhz" : "UNKNOWN";
 /*     */ 
-/* 645 */     String str2 = MedicalDevice.Util.makeString(arrayOfInt, 6, 10);
+/* 645 */     String productDescription = MedicalDevice.Util.makeString(arrayOfInt, 6, 10);
 /*     */ 
 /* 647 */     int i = arrayOfInt[18];
 /* 648 */     StringBuffer localStringBuffer = new StringBuffer();
@@ -136,7 +134,7 @@
 /* 656 */       localStringBuffer.append("; ");
 /*     */     }
 /*     */ 
-/* 659 */     MedicalDevice.logInfo(this, "readProductInfo: Serial #=" + arrayOfInt[0] + arrayOfInt[1] + arrayOfInt[2] + ", Product Version=" + arrayOfInt[3] + "." + arrayOfInt[4] + ", RF Freq=" + str1 + ", Product Description=" + str2 + ", Software Version=" + arrayOfInt[16] + "." + arrayOfInt[17] + ", #Interfaces=" + i + ": " + localStringBuffer);
+/* 659 */     MedicalDevice.logInfo(this, "readProductInfo: Serial #=" + arrayOfInt[0] + arrayOfInt[1] + arrayOfInt[2] + ", Product Version=" + arrayOfInt[3] + "." + arrayOfInt[4] + ", RF Freq=" + str1 + ", Product Description=" + productDescription + ", Software Version=" + arrayOfInt[16] + "." + arrayOfInt[17] + ", #Interfaces=" + i + ": " + localStringBuffer);
 /*     */ 
 /* 668 */     return arrayOfInt;
 /*     */   }
@@ -145,11 +143,11 @@
 /*     */     throws BadDeviceCommException, IOException, SerialIOHaltedException
 /*     */   {
 /* 681 */     MedicalDevice.logInfoHigh(this, "readInterfaceStatistics: obtaining interface stats...");
-/* 682 */     int[] arrayOfInt1 = sendComLink2Command(5, 0);
+/* 682 */     int[] arrayOfInt1 = sendComLink2Command(CMD_READ_INTERFACE_STATS, INTERFACE_NUMBER_PARADIGM_RF);
 /*     */ 
 /* 684 */     MedicalDevice.logInfoHigh(this, "readInterfaceStatistics:  RF stats = " + decodeInterfaceStatistics(arrayOfInt1));
 /*     */ 
-/* 687 */     int[] arrayOfInt2 = sendComLink2Command(5, 1);
+/* 687 */     int[] arrayOfInt2 = sendComLink2Command(CMD_READ_INTERFACE_STATS, INTERFACE_NUMBER_PARADIGM_USB);
 /*     */ 
 /* 689 */     MedicalDevice.logInfoHigh(this, "readInterfaceStatistics: USB stats = " + decodeInterfaceStatistics(arrayOfInt2));
 /*     */ 
@@ -174,7 +172,7 @@
 /*     */   {
 /* 729 */     int[] arrayOfInt = new int[2];
 /* 730 */     arrayOfInt[0] = paramInt;
-/* 731 */     arrayOfInt[1] = 0;
+/* 731 */     arrayOfInt[1] = INTERFACE_NUMBER_PARADIGM_RF;
 /* 732 */     return sendComLink2Command(arrayOfInt);
 /*     */   }
 /*     */ 
@@ -184,7 +182,7 @@
 /* 747 */     int[] arrayOfInt = new int[3];
 /* 748 */     arrayOfInt[0] = paramInt1;
 /* 749 */     arrayOfInt[1] = paramInt2;
-/* 750 */     arrayOfInt[2] = 0;
+/* 750 */     arrayOfInt[2] = INTERFACE_NUMBER_PARADIGM_RF;
 /* 751 */     return sendComLink2Command(arrayOfInt);
 /*     */   }
 /*     */ 
@@ -210,7 +208,7 @@
 /*     */     throws BadDeviceCommException, IOException, SerialIOHaltedException
 /*     */   {
 /* 788 */     MedicalDevice.logInfoHigh(this, "readSignalStrength: obtaining signal strength...");
-/* 789 */     int[] arrayOfInt = sendComLink2Command(6, 0);
+/* 789 */     int[] arrayOfInt = sendComLink2Command(CMD_READ_SIGNAL_STRENGTH, INTERFACE_NUMBER_PARADIGM_RF);
 /*     */ 
 /* 792 */     int i = (byte)arrayOfInt[0];
 /* 793 */     MedicalDevice.logInfo(this, "readSignalStrength: Signal Strength= " + i + " dBm");
@@ -221,18 +219,18 @@
 /*     */     throws BadDeviceCommException, IOException, SerialIOHaltedException
 /*     */   {
 /* 807 */     MedicalDevice.logInfo(this, "readStatus: obtaining status...");
-/* 808 */     int[] arrayOfInt = sendComLink2Command(3);
+/* 808 */     int[] arrayOfInt = sendComLink2Command(CMD_READ_STATUS);
 /*     */ 
-/* 811 */     int i = arrayOfInt[0];
+/* 811 */     int commModuleStatus = arrayOfInt[0];
 /*     */ 
 /* 817 */     this.m_genericStatus = arrayOfInt[2];
 /*     */ 
-/* 820 */     int j = MedicalDevice.Util.makeInt(arrayOfInt[3], arrayOfInt[4]);
+/* 820 */     int rfBytesAvailable = MedicalDevice.Util.makeInt(arrayOfInt[3], arrayOfInt[4]);
 /*     */ 
-/* 824 */     MedicalDevice.logInfoHigh(this, "readStatus: ComLink2 status follows: commModuleStatus=" + MedicalDevice.Util.getHex(i) + ", genericStatus=" + MedicalDevice.Util.getHex(this.m_genericStatus) + ", rfBytesAvailable=" + j + ", receivedData=" + isStatusReceivedData() + ", RX in progress=" + isStatusReceiveInProgress() + ", TX in progess=" + isStatusTransmitInProgress() + ", Interface Error=" + isStatusInterfaceError() + ", RX overflow=" + isStatusReceiveOverflow() + ", TX overflow=" + isStatusTransmitOverflow());
+/* 824 */     MedicalDevice.logInfoHigh(this, "readStatus: ComLink2 status follows: commModuleStatus=" + MedicalDevice.Util.getHex(commModuleStatus) + ", genericStatus=" + MedicalDevice.Util.getHex(this.m_genericStatus) + ", rfBytesAvailable=" + rfBytesAvailable + ", receivedData=" + isStatusReceivedData() + ", RX in progress=" + isStatusReceiveInProgress() + ", TX in progess=" + isStatusTransmitInProgress() + ", Interface Error=" + isStatusInterfaceError() + ", RX overflow=" + isStatusReceiveOverflow() + ", TX overflow=" + isStatusTransmitOverflow());
 /*     */ 
-/* 836 */     if (i != 0) {
-/* 837 */       throw new BadDeviceCommException("readStatus: comm module error is set: " + MedicalDevice.Util.getHex(i));
+/* 836 */     if (commModuleStatus != 0) {
+/* 837 */       throw new BadDeviceCommException("readStatus: comm module error is set: " + MedicalDevice.Util.getHex(commModuleStatus));
 /*     */     }
 /*     */ 
 /* 841 */     if (isStatusInterfaceError()) {
@@ -247,7 +245,7 @@
 /* 850 */       throw new BadDeviceCommException("readStatus: ComLink1 has TX OVERFLOW ERROR");
 /*     */     }
 /*     */ 
-/* 853 */     return isStatusReceivedData() ? j : 0;
+/* 853 */     return isStatusReceivedData() ? rfBytesAvailable : 0;
 /*     */   }
 /*     */ 
 /*     */   private boolean isStatusReceivedData()
@@ -285,38 +283,37 @@
 /*     */   {
 /* 918 */     MedicalDevice.logInfo(this, "checkAck: retrieving ComLink2 ACK packet...");
 /* 919 */     MedicalDevice.Util.sleepMS(IO_DELAY_MS);
-/* 920 */     int[] arrayOfInt1 = getUSBPort().read();
+/* 920 */     int[] comLinkReply = getUSBPort().read();
 /*     */ 
-/* 922 */     if (arrayOfInt1.length != REC_SIZE_MIN) {
-/* 923 */       throw new BadDeviceCommException("checkAck: incorrect comLinkReply length: " + arrayOfInt1.length);
+/* 922 */     if (comLinkReply.length != REC_SIZE_MIN) {
+/* 923 */       throw new BadDeviceCommException("checkAck: incorrect comLinkReply length: " + comLinkReply.length);
 /*     */     }
 /*     */ 
 /* 928 */     int i = 0;
-/* 929 */     int j = arrayOfInt1[(i++)];
-/* 930 */     if (j != 1) {
+/* 929 */     int j = comLinkReply[(i++)];
+/* 930 */     if (j != INTERNAL_RESPONSE_CODE) {
 /* 931 */       throw new BadDeviceCommException("checkAck: bad response code: " + MedicalDevice.Util.getHex(j));
 /*     */     }
 /*     */ 
-/* 936 */     j = arrayOfInt1[(i++)];
+/* 936 */     j = comLinkReply[(i++)];
 /* 937 */     if (j == NAK)
 /*     */     {
-/* 939 */       throw new BadDeviceCommException("checkAck: NAK received; reason code=" + MedicalDevice.Util.getHex(j) + " - " + getComLink2NAKDescription(arrayOfInt1[(i++)]));
+/* 939 */       throw new BadDeviceCommException("checkAck: NAK received; reason code=" + MedicalDevice.Util.getHex(j) + " - " + getComLink2NAKDescription(comLinkReply[(i++)]));
 /*     */     }
 /* 941 */     if (j != ACK) {
 /* 942 */       throw new BadDeviceCommException("checkAck: bad ACK/NAK value received: " + MedicalDevice.Util.getHex(j));
 /*     */     }
 /*     */ 
-/* 947 */     int[] arrayOfInt2 = new int[arrayOfInt1.length - 3];
-/* 948 */     System.arraycopy(arrayOfInt1, 3, arrayOfInt2, 0, arrayOfInt2.length);
-/* 949 */     return arrayOfInt2;
+/* 947 */     int[] payload = new int[comLinkReply.length - 3];
+/* 948 */     System.arraycopy(comLinkReply, 3, payload, 0, payload.length);
+/* 949 */     return payload;
 /*     */   }
 /*     */ 
-/*     */   private int calcRecordsRequired(int paramInt)
+/*     */   private int calcRecordsRequired(int numBytes)
 /*     */   {
-/* 959 */     int i = paramInt / REC_SIZE_MIN;
-/* 960 */     int j = paramInt % REC_SIZE_MIN;
-/* 961 */     int k = i + (j > 0 ? 1 : 0);
-/* 962 */     return k;
+/* 959 */     int i = numBytes / REC_SIZE_MIN;
+/* 960 */     int j = numBytes % REC_SIZE_MIN;
+/* 961 */     return i + (j > 0 ? 1 : 0);
 /*     */   }
 /*     */ 
 /*     */   private void resetClock()
@@ -364,8 +361,7 @@
 /*     */     private USBCommand(MM511.Command arg2)
 /*     */     {
 /* 253 */       this.this$0 = this$1;
-/*     */       Object localObject;
-/* 254 */       this.m_deviceCommand = localObject;
+/* 254 */       this.m_deviceCommand = arg2;
 /*     */     }
 /*     */ 
 /*     */     public String toString()
@@ -386,37 +382,37 @@
 /*     */     private void sendAndRead()
 /*     */       throws BadDeviceCommException
 /*     */     {
-/* 297 */       if (this.this$0.getState() != 7) {
-/* 298 */         this.this$0.setState(4);
+/* 297 */       if (getState() != DevicePortReader.STATE_RETRYING) {
+/* 298 */         setState(DevicePortReader.STATE_SENDING_COMMAND);
 /*     */       }
 /* 300 */       sendDeviceCommand();
 /*     */ 
-/* 303 */       if ((this.m_deviceCommand.m_rawData.length > 0) && (!this.this$0.getDeviceListener().isHaltRequested())) {
-/* 304 */         this.this$0.setState(5);
+/* 303 */       if ((this.m_deviceCommand.m_rawData.length > 0) && (!getDeviceListener().isHaltRequested())) {
+/* 304 */         setState(DevicePortReader.STATE_GETTING_DATA);
 /* 305 */         this.m_deviceCommand.m_rawData = readDeviceData();
 /*     */ 
-/* 308 */         this.this$0.notifyDeviceUpdateProgress();
+/* 308 */         notifyDeviceUpdateProgress();
 /*     */       }
 /*     */ 
-/* 312 */       if (this.this$0.getState() == 7)
-/* 313 */         this.this$0.setState(4);
+/* 312 */       if (getState() == DevicePortReader.STATE_RETRYING)
+/* 313 */         setState(DevicePortReader.STATE_SENDING_COMMAND);
 /*     */     }
 /*     */ 
 /*     */     private void sendDeviceCommand()
 /*     */       throws BadDeviceCommException, SerialIOHaltedException
 /*     */     {
-/* 326 */       MedicalDevice.logInfo(this, "sendDeviceCommand: SENDING CMD " + this.m_deviceCommand + "for device #" + this.this$0.getDeviceSerialNumber());
+/* 326 */       MedicalDevice.logInfo(this, "sendDeviceCommand: SENDING CMD " + this.m_deviceCommand + "for device #" + getDeviceSerialNumber());
 /*     */       try
 /*     */       {
 /* 330 */         int[] arrayOfInt = buildTransmitPacket();
 /*     */ 
-/* 332 */         this.this$0.getUSBPort().write(arrayOfInt);
+/* 332 */         getUSBPort().write(arrayOfInt);
 /*     */ 
 /* 335 */         MedicalDevice.Util.sleepMS(this.m_deviceCommand.getEffectTime());
 /*     */ 
-/* 338 */         if ((this.m_deviceCommand.m_commandCode != 93) || (this.m_deviceCommand.m_commandParameters[0] != 0))
+/* 338 */         if ((this.m_deviceCommand.m_commandCode != MM511.CMD_POWER_CTRL) || (this.m_deviceCommand.m_commandParameters[0] != 0))
 /*     */         {
-/* 340 */           this.this$0.checkAck();
+/* 340 */           checkAck();
 /*     */         }
 /*     */       } catch (IOException localIOException) {
 /* 343 */         throw new BadDeviceCommException("sendDeviceCommand: ERROR - an IOException  has occurred processing cmd " + MedicalDevice.Util.getHex(this.m_deviceCommand.m_commandCode) + " (" + this.m_deviceCommand.m_description + "); exception=" + localIOException);
@@ -431,30 +427,29 @@
 /*     */     private int[] readDeviceData()
 /*     */       throws BadDeviceCommException, SerialIOHaltedException
 /*     */     {
-/* 366 */       int[] arrayOfInt1 = new int[0];
+/* 366 */       int[] allData = new int[0];
 /*     */       try
 /*     */       {
 /*     */         do
 /*     */         {
-/* 371 */           int[] arrayOfInt2 = readDeviceDataIO();
-/* 372 */           arrayOfInt1 = MedicalDevice.Util.concat(arrayOfInt1, arrayOfInt2);
+/* 371 */           int[] data = readDeviceDataIO();
+/* 372 */           allData = MedicalDevice.Util.concat(allData, data);
 /*     */ 
-/* 374 */           this.this$0.incTotalReadByteCount(arrayOfInt2.length);
+/* 374 */           incTotalReadByteCount(data.length);
 /*     */ 
-/* 376 */           this.this$0.notifyDeviceUpdateProgress();
+/* 376 */           notifyDeviceUpdateProgress();
 /* 377 */           if (!this.m_eodSet) {
-/* 378 */             this.this$0.setState(6);
-/* 379 */             MedicalDevice.logInfo(this, "readDeviceData: just read " + arrayOfInt2.length + " bytes, total bytes=" + arrayOfInt1.length);
+/* 378 */             setState(DevicePortReader.STATE_GETTING_BLOCK_DATA);
+/* 379 */             MedicalDevice.logInfo(this, "readDeviceData: just read " + data.length + " bytes, total bytes=" + allData.length);
 /*     */           }
-/*     */         }
-/* 382 */         while ((!this.m_eodSet) && (!this.this$0.getDeviceListener().isHaltRequested()));
+/*     */         } while ((!this.m_eodSet) && (!getDeviceListener().isHaltRequested()));
 /*     */ 
-/* 384 */         MedicalDevice.logInfo(this, "readDeviceData: read " + arrayOfInt1.length + " bytes");
+/* 384 */         MedicalDevice.logInfo(this, "readDeviceData: read " + allData.length + " bytes");
 /*     */       } catch (IOException localIOException) {
 /* 386 */         throw new BadDeviceCommException("readDeviceData: ERROR - an IOException  has occurred processing cmd " + MedicalDevice.Util.getHex(this.m_deviceCommand.m_commandCode) + " (" + this.m_deviceCommand.m_description + "); exception=" + localIOException);
 /*     */       }
 /*     */ 
-/* 390 */       return arrayOfInt1;
+/* 390 */       return allData;
 /*     */     }
 /*     */ 
 /*     */     private int[] readDeviceDataIO()
@@ -462,7 +457,7 @@
 /*     */     {
 /* 409 */       int[] arrayOfInt = readData();
 /*     */ 
-/* 412 */       this.m_eodSet = ((arrayOfInt[5] & 0x80) > 0);
+/* 412 */       this.m_eodSet = ((arrayOfInt[5] & END_OF_DATA_BIT) > 0);
 /*     */ 
 /* 415 */       int i = MedicalDevice.Util.makeInt(0x7F & arrayOfInt[5], arrayOfInt[6]);
 /*     */ 
@@ -473,21 +468,21 @@
 /* 422 */         throw new BadDeviceCommException(errorMessage);
 /*     */       }
 /*     */ 
-/* 426 */       int[] localObject = new int[i];
-/* 427 */       System.arraycopy(arrayOfInt, 13, localObject, 0, i);
+/* 426 */       int[] payload = new int[i];
+/* 427 */       System.arraycopy(arrayOfInt, 13, payload, 0, i);
 /*     */ 
-/* 430 */       int j = arrayOfInt[(arrayOfInt.length - 1)];
-/* 431 */       int k = MedicalDevice.Util.computeCRC8(localObject, 0, localObject.length);
-/* 432 */       if (k != j) {
-/* 433 */         String str = "readDeviceDataIO: ERROR - cmd " + this + " resulted in bad CRC " + "reply of '" + MedicalDevice.Util.getHexCompact(localObject) + "'; crcCalc=" + MedicalDevice.Util.getHex(k) + " crcDevice=" + MedicalDevice.Util.getHex(j);
+/* 430 */       int crcDevice = arrayOfInt[(arrayOfInt.length - 1)];
+/* 431 */       int crcCalc = MedicalDevice.Util.computeCRC8(payload, 0, payload.length);
+/* 432 */       if (crcCalc != crcDevice) {
+/* 433 */         String str = "readDeviceDataIO: ERROR - cmd " + this + " resulted in bad CRC " + "reply of '" + MedicalDevice.Util.getHexCompact(payload) + "'; crcCalc=" + MedicalDevice.Util.getHex(crcCalc) + " crcDevice=" + MedicalDevice.Util.getHex(crcDevice);
 /*     */ 
 /* 437 */         MedicalDevice.logError(this, str);
 /* 438 */         throw new BadDeviceCommException(str);
 /*     */       }
 /*     */ 
-/* 441 */       MedicalDevice.logInfoHigh(this, "readDeviceDataIO: done=" + this.m_eodSet + ", device data[" + localObject.length + "]=<" + MedicalDevice.Util.getHexCompact(localObject) + ">");
+/* 441 */       MedicalDevice.logInfoHigh(this, "readDeviceDataIO: done=" + this.m_eodSet + ", device data[" + payload.length + "]=<" + MedicalDevice.Util.getHexCompact(payload) + ">");
 /*     */ 
-/* 445 */       return localObject;
+/* 445 */       return payload;
 /*     */     }
 /*     */ 
 /*     */     private int[] readData()
@@ -495,15 +490,15 @@
 /*     */     {
 /* 459 */       int i = getNumBytesAvailable();
 /*     */ 
-/* 462 */       int[] arrayOfInt1 = new int[5];
+/* 462 */       int[] readCommand = new int[5];
 /* 463 */       int j = 0;
-/* 464 */       arrayOfInt1[(j++)] = 12;
-/* 465 */       arrayOfInt1[(j++)] = 0;
-/* 466 */       arrayOfInt1[(j++)] = MedicalDevice.Util.getHighByte(i);
-/* 467 */       arrayOfInt1[(j++)] = MedicalDevice.Util.getLowByte(i);
-/* 468 */       arrayOfInt1[(j++)] = MedicalDevice.Util.computeCRC8(arrayOfInt1, 0, j - 1);
+/* 464 */       readCommand[(j++)] = CMD_READ_DATA;
+/* 465 */       readCommand[(j++)] = INTERFACE_NUMBER_PARADIGM_RF;
+/* 466 */       readCommand[(j++)] = MedicalDevice.Util.getHighByte(i);
+/* 467 */       readCommand[(j++)] = MedicalDevice.Util.getLowByte(i);
+/* 468 */       readCommand[(j++)] = MedicalDevice.Util.computeCRC8(readCommand, 0, j - 1);
 /*     */ 
-/* 471 */       int[] arrayOfInt2 = this.this$0.getUSBPort().writeAndRead(arrayOfInt1, i);
+/* 471 */       int[] arrayOfInt2 = this.this$0.getUSBPort().writeAndRead(readCommand, i);
 /* 472 */       Contract.invariant(arrayOfInt2.length == i);
 /*     */ 
 /* 474 */       if (arrayOfInt2.length < 14) {
@@ -543,12 +538,12 @@
 /*     */     private int getNumBytesAvailable()
 /*     */       throws BadDeviceCommException, IOException
 /*     */     {
-/* 525 */       this.this$0.resetClock();
+/* 525 */       resetClock();
 /*     */ 
-/* 529 */       int i = this.this$0.readStatus();
+/* 529 */       int i = readStatus();
 /*     */ 
-/* 531 */       while ((i == 0) && (this.this$0.getClockMS() < 1000L)) {
-/* 532 */         i = this.this$0.readStatus();
+/* 531 */       while ((i == 0) && (getClockMS() < 1000L)) {
+/* 532 */         i = readStatus();
 /* 533 */         MedicalDevice.Util.sleepMS(IO_DELAY_MS);
 /*     */       }
 /*     */ 
@@ -559,56 +554,56 @@
 /*     */     {
 /* 548 */       int i = this.m_deviceCommand.m_commandParameterCount;
 /*     */ 
-/* 552 */       Contract.pre(i <= 1024);
+/* 552 */       Contract.pre(i <= MAX_DATA_SIZE);
 /* 553 */       Contract.pre(this.m_deviceCommand.m_cmdLength > 0);
 /*     */ 
 /* 555 */       int j = 0;
-/* 556 */       int[] arrayOfInt1 = new int[i + 16];
+/* 556 */       int[] packet = new int[i + TRANSMIT_PACKET_HEADER_LEN];
 /*     */ 
-/* 559 */       arrayOfInt1[(j++)] = 1;
+/* 559 */       packet[(j++)] = CMD_TRANSMIT_PACKET;
 /*     */ 
-/* 562 */       arrayOfInt1[(j++)] = 0;
+/* 562 */       packet[(j++)] = 0;
 /*     */ 
-/* 565 */       arrayOfInt1[(j++)] = 167;
+/* 565 */       packet[(j++)] = DEVICE_TYPE_EXTERNAL;
 /*     */ 
-/* 568 */       arrayOfInt1[(j++)] = 1;
+/* 568 */       packet[(j++)] = 1;
 /*     */ 
-/* 571 */       int[] arrayOfInt2 = packSerialNumber();
-/* 572 */       arrayOfInt1[(j++)] = arrayOfInt2[0];
-/* 573 */       arrayOfInt1[(j++)] = arrayOfInt2[1];
-/* 574 */       arrayOfInt1[(j++)] = arrayOfInt2[2];
+/* 571 */       int[] packedSerialNumber = packSerialNumber();
+/* 572 */       packet[(j++)] = packedSerialNumber[0];
+/* 573 */       packet[(j++)] = packedSerialNumber[1];
+/* 574 */       packet[(j++)] = packedSerialNumber[2];
 /*     */ 
-/* 579 */       arrayOfInt1[(j++)] = (0x80 | MedicalDevice.Util.getHighByte(i));
-/* 580 */       arrayOfInt1[(j++)] = MedicalDevice.Util.getLowByte(i);
+/* 579 */       packet[(j++)] = (0x80 | MedicalDevice.Util.getHighByte(i));
+/* 580 */       packet[(j++)] = MedicalDevice.Util.getLowByte(i);
 /*     */ 
-/* 583 */       arrayOfInt1[(j++)] = (this.m_deviceCommand.m_commandCode == MM511.CMD_POWER_CTRL ? RF_REPEAT_PWR_ON : RF_REPEAT_NONE);
+/* 583 */       packet[(j++)] = (this.m_deviceCommand.m_commandCode == MM511.CMD_POWER_CTRL ? RF_REPEAT_PWR_ON : RF_REPEAT_NONE);
 /*     */ 
-/* 587 */       arrayOfInt1[(j++)] = this.m_deviceCommand.m_maxRetries;
+/* 587 */       packet[(j++)] = this.m_deviceCommand.m_maxRetries;
 /*     */ 
-/* 592 */       int k = this.this$0.calcRecordsRequired(this.m_deviceCommand.m_rawData.length);
-/* 593 */       arrayOfInt1[(j++)] = (k > 1 ? 2 : k);
+/* 592 */       int recordsRequired = calcRecordsRequired(this.m_deviceCommand.m_rawData.length);
+/* 593 */       packet[(j++)] = (recordsRequired > 1 ? 2 : recordsRequired);
 /*     */ 
-/* 596 */       arrayOfInt1[(j++)] = 0;
-/* 597 */       arrayOfInt1[(j++)] = this.m_deviceCommand.m_commandCode;
+/* 596 */       packet[(j++)] = 0;
+/* 597 */       packet[(j++)] = this.m_deviceCommand.m_commandCode;
 /*     */ 
-/* 600 */       arrayOfInt1[(j++)] = MedicalDevice.Util.computeCRC8(arrayOfInt1, 0, j - 1);
+/* 600 */       packet[(j++)] = MedicalDevice.Util.computeCRC8(packet, 0, j - 1);
 /*     */ 
-/* 603 */       System.arraycopy(this.m_deviceCommand.m_commandParameters, 0, arrayOfInt1, j, i);
+/* 603 */       System.arraycopy(this.m_deviceCommand.m_commandParameters, 0, packet, j, i);
 /*     */ 
 /* 605 */       j += i;
 /*     */ 
-/* 608 */       arrayOfInt1[(j++)] = MedicalDevice.Util.computeCRC8(this.m_deviceCommand.m_commandParameters, 0, i);
+/* 608 */       packet[(j++)] = MedicalDevice.Util.computeCRC8(this.m_deviceCommand.m_commandParameters, 0, i);
 /*     */ 
-/* 611 */       this.m_deviceCommand.m_packet = arrayOfInt1;
-/* 612 */       return arrayOfInt1;
+/* 611 */       this.m_deviceCommand.m_packet = packet;
+/* 612 */       return packet;
 /*     */     }
 /*     */ 
 /*     */     private int[] packSerialNumber()
 /*     */     {
-/* 624 */       Contract.pre(this.this$0.getDeviceSerialNumber() != null);
-/* 625 */       Contract.pre(this.this$0.getDeviceSerialNumber().length() == 6);
+/* 624 */       Contract.pre(getDeviceSerialNumber() != null);
+/* 625 */       Contract.pre(getDeviceSerialNumber().length() == 6);
 /*     */ 
-/* 627 */       return MedicalDevice.Util.makePackedBCD(this.this$0.getDeviceSerialNumber());
+/* 627 */       return MedicalDevice.Util.makePackedBCD(getDeviceSerialNumber());
 /*     */     }
 /*     */ 
 /*     */     USBCommand(MM511.Command param1, ComLink2 arg3)

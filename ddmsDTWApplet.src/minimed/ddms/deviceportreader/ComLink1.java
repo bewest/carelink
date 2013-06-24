@@ -44,7 +44,7 @@
 /*      */   public void execute(DeviceCommand paramDeviceCommand)
 /*      */     throws BadDeviceValueException, BadDeviceCommException, SerialIOHaltedException
 /*      */   {
-/*  149 */     RS232Command localRS232Command = new RS232Command(paramDeviceCommand, null);
+/*  149 */     RS232Command localRS232Command = new RS232Command(paramDeviceCommand);
 /*  150 */     localRS232Command.execute();
 /*      */   }
 /*      */ 

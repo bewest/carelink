@@ -143,8 +143,8 @@
 /*      */ 
 /*      */   MedicalDevice()
 /*      */   {
-/*  670 */     this.m_minYear = 1997;
-/*  671 */     this.m_maxYear = 2096;
+/*  670 */     this.m_minYear = MIN_YEAR;
+/*  671 */     this.m_maxYear = MAX_YEAR;
 /*  672 */     this.m_traceHistorySet = null;
 /*      */ 
 /*  675 */     setCommunicationsLink(new CommunicationsLinkRS232(this, this.m_serialNumber));
@@ -152,7 +152,7 @@
 /*      */ 
 /*      */   public String toString()
 /*      */   {
-/*  692 */     return "description = " + this.m_description + ", modelNumber = " + this.m_modelNumber + ", device type = " + (isDeviceMeter() ? "meter" : isDeviceMonitor() ? "monitor" : isDevicePump() ? "pump" : null) + ", serialNumber = " + this.m_serialNumber + ", firmwareVersion = " + this.m_firmwareVersion + ", timeStamp = " + this.m_timeStamp + ", communicationsLink = '" + getCommunicationsLink() + "'" + ", linkDevice ID = " + this.m_linkDevice + ", PACKAGE_VERSION = " + "9.0.0";
+/*  692 */     return "description = " + this.m_description + ", modelNumber = " + this.m_modelNumber + ", device type = " + (isDeviceMeter() ? "meter" : isDeviceMonitor() ? "monitor" : isDevicePump() ? "pump" : null) + ", serialNumber = " + this.m_serialNumber + ", firmwareVersion = " + this.m_firmwareVersion + ", timeStamp = " + this.m_timeStamp + ", communicationsLink = '" + getCommunicationsLink() + "'" + ", linkDevice ID = " + this.m_linkDevice + ", PACKAGE_VERSION = " + PACKAGE_VERSION;
 /*      */   }
 /*      */ 
 /*      */   public void readGlucoseDataRange(DeviceListener paramDeviceListener, int paramInt, String paramString, Date paramDate1, Date paramDate2)
@@ -274,7 +274,7 @@
 /*      */ 
 /*      */   public int getMaxRetryCount()
 /*      */   {
-/*  999 */     return 2;
+/*  999 */     return DEFAULT_MAX_RETRIES;
 /*      */   }
 /*      */ 
 /*      */   public int getSerialPortNumber()
@@ -301,7 +301,7 @@
 /*      */ 
 /*      */   public final String getPackageVersion()
 /*      */   {
-/* 1053 */     return "9.0.0";
+/* 1053 */     return PACKAGE_VERSION;
 /*      */   }
 /*      */ 
 /*      */   public String getModelNumber()
@@ -311,17 +311,17 @@
 /*      */ 
 /*      */   public boolean isDevicePump()
 /*      */   {
-/* 1071 */     return getDeviceType() == 1;
+/* 1071 */     return getDeviceType() == DEVICE_TYPE_PUMP;
 /*      */   }
 /*      */ 
 /*      */   public boolean isDeviceMonitor()
 /*      */   {
-/* 1080 */     return getDeviceType() == 2;
+/* 1080 */     return getDeviceType() == DEVICE_TYPE_MONITOR;
 /*      */   }
 /*      */ 
 /*      */   public boolean isDeviceMeter()
 /*      */   {
-/* 1089 */     return getDeviceType() == 3;
+/* 1089 */     return getDeviceType() == DEVICE_TYPE_METER;
 /*      */   }
 /*      */ 
 /*      */   public final long getLastHistoryPageNumber(String paramString1, String paramString2)
@@ -470,7 +470,7 @@
 /*      */ 
 /* 1341 */     if (paramInt != m_state) {
 /* 1342 */       m_state = paramInt;
-/* 1343 */       m_stateText = DeviceListener.STATE_TEXT[m_state];
+/* 1343 */       m_stateText = STATE_TEXT[m_state];
 /* 1344 */       notifyDeviceUpdateState(m_state, m_stateText);
 /* 1345 */       logInfo(this, "setState: state is now " + m_state + " (" + m_stateText + ")");
 /*      */     }
@@ -550,7 +550,7 @@
 /*      */   void notifyDeviceUpdateProgress(int paramInt)
 /*      */   {
 /* 1505 */     if ((m_phase != 4) && 
-/* 1506 */       (paramInt >= 0) && (paramInt <= 100))
+/* 1506 */       (paramInt >= 0) && (paramInt <= PERCENT_100))
 /* 1507 */       for (int i = 0; i < this.m_listeners.size(); i++) {
 /* 1508 */         DeviceListener localDeviceListener = (DeviceListener)this.m_listeners.elementAt(i);
 /* 1509 */         localDeviceListener.deviceUpdateProgress(paramInt);
@@ -623,8 +623,8 @@
 /*      */   private void verifyDeviceTimeStamp(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6)
 /*      */     throws BadDeviceValueException
 /*      */   {
-/* 1636 */     Util.verifyDeviceValue(paramInt1, 1, 31, "day");
-/* 1637 */     Util.verifyDeviceValue(paramInt2, 1, 12, "month");
+/* 1636 */     Util.verifyDeviceValue(paramInt1, 1, MAX_DAYS_IN_MONTH, "day");
+/* 1637 */     Util.verifyDeviceValue(paramInt2, 1, MONTHS_IN_YEAR, "month");
 /* 1638 */     Util.verifyDeviceValue(paramInt3, this.m_minYear, this.m_maxYear, "year");
 /* 1639 */     Util.verifyDeviceValue(paramInt4, 0, 23, "hour");
 /* 1640 */     Util.verifyDeviceValue(paramInt5, 0, 59, "minute");
@@ -692,38 +692,38 @@
 /*      */ 
 /*      */     static int getLowNibble(int paramInt)
 /*      */     {
-/* 1811 */       Contract.pre((paramInt >= 0) && (paramInt <= 255));
+/* 1811 */       Contract.pre((paramInt >= 0) && (paramInt <= MAX_BYTE));
 /*      */ 
-/* 1813 */       return paramInt & 0xF;
+/* 1813 */       return paramInt & MAX_NIBBLE;
 /*      */     }
 /*      */ 
 /*      */     static int getHighNibble(int paramInt)
 /*      */     {
-/* 1825 */       Contract.pre((paramInt >= 0) && (paramInt <= 255));
+/* 1825 */       Contract.pre((paramInt >= 0) && (paramInt <= MAX_BYTE));
 /*      */ 
-/* 1827 */       return paramInt >> 4 & 0xF;
+/* 1827 */       return paramInt >> BITS_PER_NIBBLE & MAX_NIBBLE;
 /*      */     }
 /*      */ 
 /*      */     static int getLowByte(int paramInt)
 /*      */     {
-/* 1837 */       return paramInt & 0xFF;
+/* 1837 */       return paramInt & MAX_BYTE;
 /*      */     }
 /*      */ 
 /*      */     static int getHighByte(int paramInt)
 /*      */     {
-/* 1848 */       return paramInt >>> 8 & 0xFF;
+/* 1848 */       return paramInt >>> BITS_PER_BYTE & MAX_BYTE;
 /*      */     }
 /*      */ 
 /*      */     static int convertHexToDec(String paramString)
 /*      */     {
-/* 1860 */       return Integer.valueOf(paramString, 16).intValue();
+/* 1860 */       return Integer.valueOf(paramString, BASE16).intValue();
 /*      */     }
 /*      */ 
 /*      */     static int convertHexToASCII(int paramInt)
 /*      */     {
-/* 1872 */       Contract.pre((paramInt >= 0) && (paramInt <= 15));
+/* 1872 */       Contract.pre((paramInt >= 0) && (paramInt <= MAX_NIBBLE));
 /*      */ 
-/* 1874 */       return paramInt < 10 ? paramInt + 48 : paramInt - 10 + 65;
+/* 1874 */       return paramInt < LF ? paramInt + ASCII_ZERO : paramInt - LF + 'A';
 /*      */     }
 /*      */ 
 /*      */     static String convertControlChars(String paramString)
@@ -801,7 +801,7 @@
 /* 1939 */           localStringBuffer.append(str);
 /* 1940 */           continue;
 /*      */ 
-/* 1943 */           localStringBuffer.append(paramString.charAt(j));
+/* 1943 */           //localStringBuffer.append(paramString.charAt(j));
 /*      */         }
 /*      */       }
 /* 1946 */       return new String(localStringBuffer);
@@ -840,26 +840,26 @@
 /*      */ 
 /*      */     static int makeByte(int paramInt1, int paramInt2)
 /*      */     {
-/* 2010 */       Contract.pre((paramInt1 >= 0) && (paramInt1 <= 15));
-/* 2011 */       Contract.pre((paramInt2 >= 0) && (paramInt2 <= 15));
+/* 2010 */       Contract.pre((paramInt1 >= 0) && (paramInt1 <= MAX_NIBBLE));
+/* 2011 */       Contract.pre((paramInt2 >= 0) && (paramInt2 <= MAX_NIBBLE));
 /*      */ 
-/* 2013 */       int i = paramInt1 << 4 | paramInt2 & 0xF;
+/* 2013 */       int i = paramInt1 << BITS_PER_NIBBLE | paramInt2 & MAX_NIBBLE;
 /*      */ 
-/* 2015 */       Contract.post((i >= 0) && (i <= 255));
+/* 2015 */       Contract.post((i >= 0) && (i <= MAX_BYTE));
 /*      */ 
 /* 2017 */       return i;
 /*      */     }
 /*      */ 
 /*      */     static long makeLong(int paramInt1, int paramInt2, int paramInt3, int paramInt4)
 /*      */     {
-/* 2036 */       Contract.pre((paramInt1 >= 0) && (paramInt1 <= 255));
-/* 2037 */       Contract.pre((paramInt2 >= 0) && (paramInt2 <= 255));
-/* 2038 */       Contract.pre((paramInt3 >= 0) && (paramInt3 <= 255));
-/* 2039 */       Contract.pre((paramInt4 >= 0) && (paramInt4 <= 255));
+/* 2036 */       Contract.pre((paramInt1 >= 0) && (paramInt1 <= MAX_BYTE));
+/* 2037 */       Contract.pre((paramInt2 >= 0) && (paramInt2 <= MAX_BYTE));
+/* 2038 */       Contract.pre((paramInt3 >= 0) && (paramInt3 <= MAX_BYTE));
+/* 2039 */       Contract.pre((paramInt4 >= 0) && (paramInt4 <= MAX_BYTE));
 /*      */ 
-/* 2042 */       long l = paramInt1 << 24 | paramInt2 << 16 | paramInt3 << 8 | paramInt4;
+/* 2042 */       long l = paramInt1 << (BITS_PER_BYTE * 3) | paramInt2 << (BITS_PER_BYTE * 2) | paramInt3 << BITS_PER_BYTE | paramInt4;
 /*      */ 
-/* 2047 */       Contract.post((l >= 0L) && (l <= 4294967295L));
+/* 2047 */       Contract.post((l >= 0L) && (l <= MAX_DWORD));
 /*      */ 
 /* 2049 */       return l;
 /*      */     }
@@ -871,31 +871,31 @@
 /*      */ 
 /*      */     static int makeInt(int paramInt1, int paramInt2)
 /*      */     {
-/* 2073 */       Contract.pre((paramInt1 >= 0) && (paramInt1 <= 255));
-/* 2074 */       Contract.pre((paramInt2 >= 0) && (paramInt2 <= 255));
+/* 2073 */       Contract.pre((paramInt1 >= 0) && (paramInt1 <= MAX_BYTE));
+/* 2074 */       Contract.pre((paramInt2 >= 0) && (paramInt2 <= MAX_BYTE));
 /*      */ 
-/* 2076 */       int i = (paramInt1 & 0xFF) << 8 | paramInt2 & 0xFF;
+/* 2076 */       int i = (paramInt1 & MAX_BYTE) << BITS_PER_BYTE | paramInt2 & MAX_BYTE;
 /*      */ 
-/* 2078 */       Contract.post((i >= 0) && (i <= 65535));
+/* 2078 */       Contract.post((i >= 0) && (i <= MAX_WORD));
 /* 2079 */       return i;
 /*      */     }
 /*      */ 
 /*      */     static int makeInt(int paramInt1, int paramInt2, int paramInt3)
 /*      */     {
-/* 2096 */       Contract.pre((paramInt1 >= 0) && (paramInt1 <= 255));
-/* 2097 */       Contract.pre((paramInt2 >= 0) && (paramInt2 <= 255));
-/* 2098 */       Contract.pre((paramInt3 >= 0) && (paramInt3 <= 255));
+/* 2096 */       Contract.pre((paramInt1 >= 0) && (paramInt1 <= MAX_BYTE));
+/* 2097 */       Contract.pre((paramInt2 >= 0) && (paramInt2 <= MAX_BYTE));
+/* 2098 */       Contract.pre((paramInt3 >= 0) && (paramInt3 <= MAX_BYTE));
 /*      */ 
-/* 2100 */       int i = (paramInt1 & 0xFF) << 16 | (paramInt2 & 0xFF) << 8 | paramInt3 & 0xFF;
+/* 2100 */       int i = (paramInt1 & MAX_BYTE) << (2 * BITS_PER_BYTE) | (paramInt2 & MAX_BYTE) << BITS_PER_BYTE | paramInt3 & MAX_BYTE;
 /*      */ 
-/* 2103 */       Contract.post((i >= 0) && (i <= 16777215));
+/* 2103 */       Contract.post((i >= 0) && (i <= MAX_BYTE_3));
 /*      */ 
 /* 2105 */       return i;
 /*      */     }
 /*      */ 
 /*      */     static int convertUnsignedByteToInt(byte paramByte)
 /*      */     {
-/* 2118 */       return paramByte & 0xFF;
+/* 2118 */       return paramByte & MAX_BYTE;
 /*      */     }
 /*      */ 
 /*      */     static long convertUnsignedIntToLong(int paramInt)
@@ -909,20 +909,20 @@
 /* 2144 */       byte[] arrayOfByte = new byte[paramArrayOfInt.length];
 /*      */ 
 /* 2147 */       for (int i = 0; i < paramArrayOfInt.length; i++) {
-/* 2148 */         Contract.pre(paramArrayOfInt[i] >> 8 == 0);
-/* 2149 */         arrayOfByte[i] = (byte)(paramArrayOfInt[i] & 0xFF);
+/* 2148 */         Contract.pre(paramArrayOfInt[i] >> BITS_PER_BYTE == 0);
+/* 2149 */         arrayOfByte[i] = (byte)(paramArrayOfInt[i] & MAX_BYTE);
 /*      */       }
 /* 2151 */       return arrayOfByte;
 /*      */     }
 /*      */ 
 /*      */     static int makeUnsignedShort(int paramInt1, int paramInt2)
 /*      */     {
-/* 2165 */       Contract.pre((paramInt1 >= 0) && (paramInt1 <= 255));
-/* 2166 */       Contract.pre((paramInt2 >= 0) && (paramInt2 <= 255));
+/* 2165 */       Contract.pre((paramInt1 >= 0) && (paramInt1 <= MAX_BYTE));
+/* 2166 */       Contract.pre((paramInt2 >= 0) && (paramInt2 <= MAX_BYTE));
 /*      */ 
-/* 2168 */       int i = (paramInt1 & 0xFF) << 8 | paramInt2 & 0xFF;
+/* 2168 */       int i = (paramInt1 & MAX_BYTE) << BITS_PER_BYTE | paramInt2 & MAX_BYTE;
 /*      */ 
-/* 2170 */       Contract.post((i >= 0) && (i <= 65535));
+/* 2170 */       Contract.post((i >= 0) && (i <= MAX_WORD));
 /* 2171 */       return i;
 /*      */     }
 /*      */ 
@@ -946,7 +946,7 @@
 /* 2203 */       int[] arrayOfInt = new int[paramArrayOfByte.length];
 /*      */ 
 /* 2206 */       for (int i = 0; i < paramArrayOfByte.length; i++) {
-/* 2207 */         paramArrayOfByte[i] &= 255;
+/* 2207 */         paramArrayOfByte[i] &= MAX_BYTE;
 /*      */       }
 /* 2209 */       return arrayOfInt;
 /*      */     }
@@ -1003,7 +1003,7 @@
 /*      */     {
 /* 2303 */       int i = paramString1.indexOf(paramString2);
 /*      */ 
-/* 2305 */       if (i != -1) {
+/* 2305 */       if (i != SUBSTRING_NOT_FOUND) {
 /* 2306 */         int j = i + paramString2.length();
 /* 2307 */         if (paramString1.length() > j) {
 /* 2308 */           return paramString1.substring(j);
@@ -1014,43 +1014,43 @@
 /* 2314 */       throw new BadDeviceValueException("Can't find '" + paramString2 + "' in string '" + paramString1 + "'");
 /*      */     }
 /*      */ 
-/*      */     static int computeCRC7(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*      */     static int computeCRC7(int[] paramArrayOfInt, int startIndex, int length)
 /*      */     {
-/* 2332 */       int i = 127;
+/* 2332 */       int i = SEVEN_LSB;
 /*      */ 
 /* 2334 */       Contract.pre(paramArrayOfInt != null);
-/* 2335 */       Contract.pre(paramArrayOfInt.length >= paramInt1 + paramInt2);
+/* 2335 */       Contract.pre(paramArrayOfInt.length >= startIndex + length);
 /*      */ 
-/* 2337 */       for (int j = 0; j < paramInt2; j++) {
-/* 2338 */         i = MedicalDevice.CRC7_LOOKUP_TABLE[i] ^ paramArrayOfInt[(j + paramInt1)];
+/* 2337 */       for (int j = 0; j < length; j++) {
+/* 2338 */         i = MedicalDevice.CRC7_LOOKUP_TABLE[i] ^ paramArrayOfInt[(j + startIndex)];
 /*      */       }
 /*      */ 
 /* 2341 */       return i;
 /*      */     }
 /*      */ 
-/*      */     static int computeCRC8(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*      */     static int computeCRC8(int[] paramArrayOfInt, int startIndex, int length)
 /*      */     {
 /* 2360 */       int i = 0;
 /*      */ 
 /* 2362 */       Contract.pre(paramArrayOfInt != null);
-/* 2363 */       Contract.pre(paramArrayOfInt.length >= paramInt1 + paramInt2);
+/* 2363 */       Contract.pre(paramArrayOfInt.length >= startIndex + length);
 /*      */ 
-/* 2365 */       for (int j = 0; j < paramInt2; j++) {
-/* 2366 */         i = MedicalDevice.CRC8_LOOKUP_TABLE[((i ^ paramArrayOfInt[(j + paramInt1)]) & 0xFF)];
+/* 2365 */       for (int j = 0; j < length; j++) {
+/* 2366 */         i = MedicalDevice.CRC8_LOOKUP_TABLE[((i ^ paramArrayOfInt[(j + startIndex)]) & MAX_BYTE)];
 /*      */       }
 /*      */ 
 /* 2369 */       return i;
 /*      */     }
 /*      */ 
-/*      */     static int computeCRC8BD(int[] paramArrayOfInt, int paramInt1, int paramInt2)
+/*      */     static int computeCRC8BD(int[] paramArrayOfInt, int startIndex, int length)
 /*      */     {
 /* 2390 */       int i = 0;
 /*      */ 
 /* 2392 */       Contract.pre(paramArrayOfInt != null);
-/* 2393 */       Contract.pre(paramArrayOfInt.length >= paramInt1 + paramInt2);
+/* 2393 */       Contract.pre(paramArrayOfInt.length >= startIndex + length);
 /*      */ 
-/* 2395 */       for (int j = 0; j < paramInt2; j++) {
-/* 2396 */         i = MedicalDevice.CRC8_LOOKUP_TABLE_BD[((i ^ paramArrayOfInt[(j + paramInt1)]) & 0xFF)];
+/* 2395 */       for (int j = 0; j < length; j++) {
+/* 2396 */         i = MedicalDevice.CRC8_LOOKUP_TABLE_BD[((i ^ paramArrayOfInt[(j + startIndex)]) & MAX_BYTE)];
 /*      */       }
 /*      */ 
 /* 2399 */       return i;
@@ -1104,11 +1104,11 @@
 /* 2469 */       Contract.pre(paramArrayOfInt != null);
 /* 2470 */       Contract.pre(paramArrayOfInt.length >= paramInt1 + paramInt2);
 /*      */ 
-/* 2472 */       int i = 65535;
+/* 2472 */       int i = MAX_WORD;
 /*      */ 
 /* 2474 */       for (int k = paramInt1; k < paramInt1 + paramInt2; k++) {
 /* 2475 */         int j = paramArrayOfInt[k] ^ i >> 8;
-/* 2476 */         i = (MedicalDevice.CRC16_CCITT_LOOKUP_TABLE[j] ^ i << 8) & 0xFFFF;
+/* 2476 */         i = (MedicalDevice.CRC16_CCITT_LOOKUP_TABLE[j] ^ i << 8) & MAX_WORD;
 /*      */       }
 /*      */ 
 /* 2480 */       return i;
@@ -1226,7 +1226,7 @@
 /* 2681 */       if ((paramInt == 97) || (paramInt == 98) || (paramInt == 99)) {
 /* 2682 */         paramInt += 1900;
 /*      */       }
-/* 2684 */       return paramInt > 1000 ? paramInt : paramInt + 2000;
+/* 2684 */       return paramInt > 1000 ? paramInt : paramInt + BASE_YEAR;
 /*      */     }
 /*      */ 
 /*      */     static Date createDate(int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5, int paramInt6)

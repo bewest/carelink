@@ -56,7 +56,7 @@
 /*     */ 
 /* 181 */     this.m_cmdReadCurrBasalDataB = new MM511.Command(CMD_READ_B_PROFILES, "Read Profiles B Data", 192, 1, 10);
 /*     */ 
-/* 189 */     this.m_cmdReadHistoryData = new MM511.CommandHistoryData(this, 36);
+/* 189 */     this.m_cmdReadHistoryData = new MM511.CommandHistoryData(HISTORY_REC_COUNT);
 /*     */ 
 /* 194 */     this.m_cmdReadPumpModelNumber = new MM511.Command(CMD_READ_PUMP_MODEL_NUMBER, "Read Pump Model");
 /*     */ 
@@ -101,7 +101,7 @@
 /*     */ 
 /*     */   static boolean isModelNumberSupported(String paramString)
 /*     */   {
-/* 263 */     return ("512".equals(paramString)) || ("712".equals(paramString));
+/* 263 */     return (MODEL_NUMBER1.equals(paramString)) || (MODEL_NUMBER2.equals(paramString));
 /*     */   }
 /*     */ 
 /*     */   void decodeReply(MMPump.Command paramCommand)
@@ -148,7 +148,7 @@
 /* 363 */     MedicalDevice.Util.verifyDeviceValue(this.m_tempBasalType, 0, 1, "Temp Basal Type");
 /*     */ 
 /* 366 */     this.m_tempBasalPercent = paramArrayOfInt[15];
-/* 367 */     MedicalDevice.Util.verifyDeviceValue(this.m_tempBasalPercent, 0, 200, "Temp Basal Percent");
+/* 367 */     MedicalDevice.Util.verifyDeviceValue(this.m_tempBasalPercent, 0, MAX_TEMP_BASAL_PERCENT, "Temp Basal Percent");
 /*     */ 
 /* 371 */     int i = paramArrayOfInt[16];
 /* 372 */     MedicalDevice.Util.verifyDeviceValue(i, 0, 1, "ParadigmLink Enable");
@@ -227,7 +227,8 @@
 /*     */     private static final int SNAPCODE_BG_ALARM = 25;
 /*     */     private static final int SNAPSHOT_BYTES = 2152;
 /*     */ 
-/* 512 */     SnapshotCreator() { super(2152);
+/* 512 */     SnapshotCreator() {
+                super(SNAPSHOT_BYTES);
 /* 513 */       MMX12.this.m_snapshotFirmwareCount = 64;
 /* 514 */       MMX12.this.m_snapshotSerialCount = 64;
 /* 515 */       MMX12.this.m_snapshotTimeCount = 64;

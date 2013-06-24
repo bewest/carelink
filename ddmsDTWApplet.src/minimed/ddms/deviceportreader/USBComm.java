@@ -92,7 +92,7 @@
 /*     */   int[] read()
 /*     */     throws IOException, SerialIOHaltedException
 /*     */   {
-/* 214 */     return read(64);
+/* 214 */     return read(FIFO_SIZE);
 /*     */   }
 /*     */ 
 /*     */   int[] read(int paramInt)
@@ -103,8 +103,7 @@
 /* 232 */     int[] arrayOfInt1 = readIO();
 /*     */ 
 /* 235 */     while (arrayOfInt1.length < paramInt) {
-/* 236 */       arrayOfInt2 = readIO();
-/* 237 */       arrayOfInt1 = MedicalDevice.Util.concat(arrayOfInt1, arrayOfInt2);
+/* 237 */       arrayOfInt1 = MedicalDevice.Util.concat(arrayOfInt1, readIO());
 /*     */     }
 /*     */ 
 /* 241 */     int[] arrayOfInt2 = new int[paramInt];
